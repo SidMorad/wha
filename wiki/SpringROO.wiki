@@ -1,0 +1,35 @@
+= Introduction =
+
+This page contains brief information about [http://www.springsource.org/roo Spring-roo] in this project.<br/> 
+
+= Details =
+== 1.Spring-roo 1.0.0.RC2 {rev 329}==
+
+== 2.Commands History==
+{{{
+mkdir hmm
+cd hmm
+roo
+roo> project --topLevelPackage com.hmm
+roo> persistence setup --provider HIBERNATE --database HYPERSONIC_PERSISTENT
+roo> entity --name ~.domain.Employee
+roo> field string firstname --notNull --sizeMin 2 --sizeMax 30
+roo> field string lastname --notNull --sizeMin 2 --sizeMax 30
+roo> field date birthday --type java.util.Date
+roo> field string email --sizeMax 30
+roo> test integration 
+roo> controller scaffold ~.web.EmployeeController
+roo> selenium test --controller ~.web.EmployeeController
+roo> perform tests 
+roo> quit
+mvn tomcat:run
+}}}
+then you need to open another console and run selenium test
+{{{
+mvn selenium:selenese
+}}}
+
+== 3.Useful Resources ==
+1.[http://blog.springsource.com/2009/05/01/roo-part-1/ Jump into Roo for extreme Java productivity]<br/> 
+2.[http://blog.springsource.com/2009/05/27/roo-part-2/ Getting Started with Spring Roo] <br/>
+3.[http://blog.springsource.com/2009/06/18/roo-part-3/ Exploring Roo's Architecture]<br/>
