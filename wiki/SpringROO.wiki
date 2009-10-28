@@ -1,4 +1,5 @@
-#summery brief info about Spring-roo
+#summary brief info about Spring-roo
+
 = Introduction =
 
 This page contains brief information about [http://www.springsource.org/roo Spring-roo] in this project.<br/> 
