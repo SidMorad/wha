@@ -9,10 +9,10 @@ This page contains brief information about [http://www.springsource.org/roo Spri
 
 == 2.Commands History==
 {{{
-mkdir hmm
-cd hmm
+mkdir wha
+cd wha
 roo
-roo> project --topLevelPackage com.hmm
+roo> project --topLevelPackage nl.hajari.wha
 roo> persistence setup --provider HIBERNATE --database HYPERSONIC_PERSISTENT
 roo> entity --name ~.domain.Employee
 roo> field string firstname --notNull --sizeMin 2 --sizeMax 30
@@ -26,7 +26,8 @@ roo> perform tests
 roo> quit
 mvn tomcat:run
 }}}
-then you need to open another console and run selenium test
+you could check project on http://localhost:8080/wha
+then is good to open another console and run selenium test
 {{{
 mvn selenium:selenese
 }}}
