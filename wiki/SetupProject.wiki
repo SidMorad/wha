@@ -20,7 +20,7 @@ http://subclipse.tigris.org/servlets/ProjectProcess?pageID=p4wYuA
 
 Install this plugin is quite easy add below URL in Eclipse3.2+ update manager <br/>
 http://subclipse.tigris.org/update_1.6.x
-and check all packages for install from this update manager .
+and click all packages for install from this update manager .
 
 
 ==2. Maven Commands==
