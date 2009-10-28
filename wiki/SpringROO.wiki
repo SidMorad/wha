@@ -27,7 +27,7 @@ roo> quit
 mvn tomcat:run
 }}}
 you could check project on http://localhost:8080/wha
-then is good to open another console and run selenium test
+<br/>and is good to open another console and run selenium test
 {{{
 mvn selenium:selenese
 }}}
