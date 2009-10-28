@@ -1,0 +1,34 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:form="http://www.springframework.org/tags/form" xmlns:spring="http://www.springframework.org/tags">
+    <script type="text/javascript">dojo.require("dijit.TitlePane");</script>
+    <div id="_title" style="width: 100%">
+        <spring:message arguments="Employee" code="entity.show" var="title"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title}'}})); </script>
+        <c:if test="${not empty employee}">
+            <div id="roo_employee_firstname">
+                <label for="_firstname">Firstname:</label>
+                <div class="box" id="_firstname">${employee.firstname}</div>
+            </div>
+            <br/>
+            <div id="roo_employee_lastname">
+                <label for="_lastname">Lastname:</label>
+                <div class="box" id="_lastname">${employee.lastname}</div>
+            </div>
+            <br/>
+            <div id="roo_employee_birthday">
+                <label for="_birthday">Birthday:</label>
+                <div class="box" id="_birthday">
+                    <fmt:formatDate pattern="d/MM/yy" type="DATE" value="${employee.birthday}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_employee_email">
+                <label for="_email">Email:</label>
+                <div class="box" id="_email">${employee.email}</div>
+            </div>
+            <br/>
+        </c:if>
+        <c:if test="${empty employee}">
+            <spring:message arguments="Employee" code="entity.not.found.single"/>
+        </c:if>
+    </div>
+</div>
