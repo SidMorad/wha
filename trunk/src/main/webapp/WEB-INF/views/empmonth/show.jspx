@@ -1,0 +1,27 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:form="http://www.springframework.org/tags/form" xmlns:spring="http://www.springframework.org/tags">
+    <script type="text/javascript">dojo.require("dijit.TitlePane");</script>
+    <div id="_title" style="width: 100%">
+        <spring:message arguments="EmpMonth" code="entity.show" var="title"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title}'}})); </script>
+        <c:if test="${not empty empmonth}">
+            <div id="roo_empmonth_number">
+                <label for="_number">Number:</label>
+                <div class="box" id="_number">${empmonth.number}</div>
+            </div>
+            <br/>
+            <div id="roo_empmonth_employee">
+                <label for="_employee">Employee:</label>
+                <div class="box" id="_employee">${empmonth.employee}</div>
+            </div>
+            <br/>
+            <div id="roo_empmonth_monthStatus">
+                <label for="_monthStatus">Month Status:</label>
+                <div class="box" id="_monthStatus">${empmonth.monthStatus}</div>
+            </div>
+            <br/>
+        </c:if>
+        <c:if test="${empty empmonth}">
+            <spring:message arguments="EmpMonth" code="entity.not.found.single"/>
+        </c:if>
+    </div>
+</div>

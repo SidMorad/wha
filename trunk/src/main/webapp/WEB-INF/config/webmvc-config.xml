@@ -32,7 +32,9 @@
 			<list>
 				<value>/WEB-INF/layouts/layouts.xml</value>
 				<value>/WEB-INF/views/views.xml</value>
-            <value>/WEB-INF/views//employee/views.xml</value>
+            	<value>/WEB-INF/views/admin/views.xml</value>
+            	<value>/WEB-INF/views//employee/views.xml</value>
+            <value>/WEB-INF/views//empmonth/views.xml</value>
             </list>
 		</property>
 	</bean>

@@ -1,18 +1,18 @@
 package nl.hajari.wha.domain;
 
-import javax.persistence.Entity;
-import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.tostring.RooToString;
-import org.springframework.roo.addon.entity.RooEntity;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Date;
+
+import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.roo.addon.entity.RooEntity;
+import org.springframework.roo.addon.javabean.RooJavaBean;
 
 @Entity
 @RooJavaBean
-@RooToString
 @RooEntity
 public class Employee {
 
@@ -29,4 +29,9 @@ public class Employee {
 
     @Size(max = 30)
     private String email;
+
+    @Override
+    public String toString() {
+    	return firstname + " " + lastname;
+    }
 }
