@@ -27,4 +27,33 @@
             </li>
         </ul>
     </li>
+<li id="web_mvc_jsp_empmonth_category">
+        <h2>empmonth</h2>
+        <ul>
+            <li id="web_mvc_jsp_create_empmonth_menu_item">
+                <c:url value="/admin/empmonth/form" var="web_mvc_jsp_create_empmonth_menu_item_url"/>
+                <a href="${web_mvc_jsp_create_empmonth_menu_item_url}">
+                    <spring:message arguments="EmpMonth" code="global.menu.new"/>
+                </a>
+            </li>
+        <li id="web_mvc_jsp_list_empmonth_menu_item">
+                <c:url value="/empmonth?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_empmonth_menu_item_url"/>
+                <a href="${web_mvc_jsp_list_empmonth_menu_item_url}">
+                    <spring:message arguments="EmpMonths" code="global.menu.list"/>
+                </a>
+            </li>
+        <li id="finder_findempmonthsbynumberequals_menu_item">
+                <c:url value="/empmonth/find/ByNumberEquals/form" var="finder_findempmonthsbynumberequals_menu_item_url"/>
+                <a href="${finder_findempmonthsbynumberequals_menu_item_url}">
+                    <spring:message arguments="Number Equals" code="global.menu.find"/>
+                </a>
+            </li>
+        <li id="finder_findempmonthsbyemployeeandnumberequals_menu_item">
+                <c:url value="/empmonth/find/ByEmployeeAndNumberEquals/form" var="finder_findempmonthsbyemployeeandnumberequals_menu_item_url"/>
+                <a href="${finder_findempmonthsbyemployeeandnumberequals_menu_item_url}">
+                    <spring:message arguments="Employee And Number Equals" code="global.menu.find"/>
+                </a>
+            </li>
+        </ul>
+    </li>
 </ul>

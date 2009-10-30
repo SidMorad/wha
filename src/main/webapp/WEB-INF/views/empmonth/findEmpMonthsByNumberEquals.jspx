@@ -1,0 +1,23 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="http://www.springframework.org/tags/form" xmlns:spring="http://www.springframework.org/tags">
+    <script type="text/javascript">dojo.require("dijit.TitlePane");</script>
+    <div id="_title" style="width: 100%">
+        <spring:message arguments="Find Emp Months By Number Equals" code="entity.find" var="title"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title}'}})); </script>
+        <c:url value="/empmonth/find/ByNumberEquals" var="form_url"/>
+        <form:form action="${form_url}" method="GET">
+            <div id="roo_empmonth_number">
+                <label for="_number">Number:</label>
+                <input id="_number" name="number" size="0" style="width:250px"/>
+                <spring:message code="field.required" var="required"/>
+                <spring:message argumentSeparator="," arguments="Number,(${required})" code="field.simple.validation" var="validation_required"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_number', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${validation_required}', required : true}})); </script>
+            </div>
+            <br/>
+            <div class="submit" id="roo_empmonth_submit">
+                <spring:message code="button.find" var="find_button"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
+                <input id="proceed" type="submit" value="${find_button}"/>
+            </div>
+        </form:form>
+    </div>
+</div>
