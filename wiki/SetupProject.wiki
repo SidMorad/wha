@@ -34,3 +34,13 @@ After run {{{mvn tomcat:run}}} then you could check http://localhost:8080/wha in
 
 ==3. Eclipse ==
 I am using SpringSource Tool Suite(STS) Version: 2.0.2 , looks perfect IDE for this project ;-)
+<br/>update : I've update STS to 2.2.0 and my JDK to 1.6.0_16 , every things looks better .
+<br/>and this is output of {{{mvn -v}}} command:<br/>
+{{{
+Colorizing console...
+Apache Maven 2.1.0 (r755702; 2009-03-19 06:10:27+1100)
+Java version: 1.6.0_16
+Java home: /opt/dev/SDKs/jdk1.6.0_16/jre
+Default locale: en_AU, platform encoding: UTF-8
+OS name: "linux" version: "2.6.24-25-generic" arch: "amd64" Family: "unix"
+}}}
