@@ -11,6 +11,7 @@
 
 = Features =
 
-  * Administrator can view list, add, edit, and delete customer, project, and employee.
+  * Administrator can view list, add, edit, and delete customer, project, user, and employee.
   * Each human actor of the system should be assigned a user with specific roles in the system. Each user may have several roles.
   * Employee can only login to system and update the current month time sheet, or view the past time sheets he had had in the system.
+  * There is a simple notification mechanism in the system through e-mail to notify the employees at the end of each month
