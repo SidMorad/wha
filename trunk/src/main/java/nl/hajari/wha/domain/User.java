@@ -2,7 +2,7 @@ package nl.hajari.wha.domain;
 
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.Embedded;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -13,14 +13,14 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.security.GrantedAuthority;
 import org.springframework.security.userdetails.UserDetails;
-import nl.hajari.wha.domain.Address;
 
 @Entity
-@Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = { "username" }))
+@Table(name = "app_user", uniqueConstraints = @UniqueConstraint(columnNames = { "username" }))
 @RooJavaBean
 @RooEntity
 public class User implements UserDetails {

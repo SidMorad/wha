@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <table name="app_user">
+        <column>id</column>
+        <column>version</column>
+        <column>username</column>
+        <column>password</column>
+        <column>first_name</column>
+        <column>last_name</column>
+        <column>email</column>
+        <column>phone</column>
+        <column>enabled</column>
+        <column>account_expired</column>
+        <column>account_locked</column>
+        <column>credentials_expired</column>
+        <row>
+            <value description="id">-1</value>
+            <value description="version">1</value>
+            <value description="username">user</value>
+            <value description="password">12dea96fec20593566ab75692c9949596833adc9</value>
+            <value description="first_name">Tomcat</value>
+            <value description="last_name">Rock</value>
+            <value description="email">saeid33mr@yahoo.com</value>
+            <value description="phone">0421782194</value>
+            <value description="enabled">1</value>
+            <value description="account_expired">0</value>
+            <value description="account_locked">0</value>
+            <value description="credentials_expired">0</value>
+        </row>
+        <row>
+            <value description="id">-2</value>
+            <value description="version">1</value>
+            <value description="username">admin</value>
+            <value description="password">d033e22ae348aeb5660fc2140aec35850c4da997</value>
+            <value description="first_name">Jetty</value>
+            <value description="last_name">Fast</value>
+            <value description="email">saeid3@gmail.com</value>
+            <value description="phone">0266555555</value>
+            <value description="enabled">1</value>
+            <value description="account_expired">0</value>
+            <value description="account_locked">0</value>
+            <value description="credentials_expired">1</value>
+        </row>
+    </table>
+    <table name="role">
+        <column>id</column>
+        <column>name</column>
+        <column>description</column>
+        <row>
+            <value description="id">-1</value>
+            <value description="name">ROLE_ADMIN</value>
+            <value description="description"><![CDATA[Administrator role (can edit Users)]]></value>
+        </row>
+        <row>
+            <value description="id">-2</value>
+            <value description="name">ROLE_USER</value>
+            <value description="description"><![CDATA[Default role for all Users]]></value>
+        </row>
+    </table>
+    <table name="user_role">
+        <column>user_id</column>
+        <column>role_id</column>
+        <row>
+            <value description="user_id">-1</value>
+            <value description="role_id">-2</value>
+        </row>
+        <row>
+            <value description="user_id">-2</value>
+            <value description="role_id">-1</value>
+        </row>
+    </table>
+    <!-- //TODO: add data to below tables will break the default integration-test for related entities . 
+	<table name="employee">
+		<column>id</column>	
+		<column>user</column>	
+		<column>birthday</column>
+		<row>
+			<value description="id">-1</value>
+			<value description="user">-1</value>
+			<value description="birthday">1983-03-11</value>
+		</row>	
+	</table>
+	<table name="emp_month">
+		<column>id</column>
+		<column>employee</column>
+		<column>number</column>
+		<column>month_status</column>
+		<row>
+			<value description="id">-1</value>
+			<value description="employee">-1</value>
+			<value description="number">200911</value>
+			<value description="month_status">NEW</value>
+		</row>
+	</table>
+     -->
+</dataset>
