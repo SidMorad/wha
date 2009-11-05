@@ -56,4 +56,38 @@
             </li>
         </ul>
     </li>
+<li id="web_mvc_jsp_role_category">
+        <h2>role</h2>
+        <ul>
+            <li id="web_mvc_jsp_create_role_menu_item">
+                <c:url value="/role/form" var="web_mvc_jsp_create_role_menu_item_url"/>
+                <a href="${web_mvc_jsp_create_role_menu_item_url}">
+                    <spring:message arguments="Role" code="global.menu.new"/>
+                </a>
+            </li>
+        <li id="web_mvc_jsp_list_role_menu_item">
+                <c:url value="/role?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_role_menu_item_url"/>
+                <a href="${web_mvc_jsp_list_role_menu_item_url}">
+                    <spring:message arguments="Roles" code="global.menu.list"/>
+                </a>
+            </li>
+        </ul>
+    </li>
+<li id="web_mvc_jsp_user_category">
+        <h2>user</h2>
+        <ul>
+            <li id="web_mvc_jsp_create_user_menu_item">
+                <c:url value="/user/form" var="web_mvc_jsp_create_user_menu_item_url"/>
+                <a href="${web_mvc_jsp_create_user_menu_item_url}">
+                    <spring:message arguments="User" code="global.menu.new"/>
+                </a>
+            </li>
+        <li id="web_mvc_jsp_list_user_menu_item">
+                <c:url value="/user?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_user_menu_item_url"/>
+                <a href="${web_mvc_jsp_list_user_menu_item_url}">
+                    <spring:message arguments="Users" code="global.menu.list"/>
+                </a>
+            </li>
+        </ul>
+    </li>
 </ul>
