@@ -18,8 +18,6 @@ privileged aspect EmployeeDataOnDemand_Roo_DataOnDemand {
     
     public Employee EmployeeDataOnDemand.getNewTransientEmployee(int index) {    
         nl.hajari.wha.domain.Employee obj = new nl.hajari.wha.domain.Employee();        
-        obj.setFirstname("firstname_" + index);        
-        obj.setLastname("lastname_" + index);        
         return obj;        
     }    
     

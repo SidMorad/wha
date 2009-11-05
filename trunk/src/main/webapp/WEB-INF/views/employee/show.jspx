@@ -4,14 +4,9 @@
         <spring:message arguments="Employee" code="entity.show" var="title"/>
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title}'}})); </script>
         <c:if test="${not empty employee}">
-            <div id="roo_employee_firstname">
-                <label for="_firstname">Firstname:</label>
-                <div class="box" id="_firstname">${employee.firstname}</div>
-            </div>
-            <br/>
-            <div id="roo_employee_lastname">
-                <label for="_lastname">Lastname:</label>
-                <div class="box" id="_lastname">${employee.lastname}</div>
+            <div id="roo_employee_user">
+                <label for="_user">User:</label>
+                <div class="box" id="_user">${employee.user}</div>
             </div>
             <br/>
             <div id="roo_employee_birthday">
@@ -19,11 +14,6 @@
                 <div class="box" id="_birthday">
                     <fmt:formatDate pattern="d/MM/yy" type="DATE" value="${employee.birthday}"/>
                 </div>
-            </div>
-            <br/>
-            <div id="roo_employee_email">
-                <label for="_email">Email:</label>
-                <div class="box" id="_email">${employee.email}</div>
             </div>
             <br/>
         </c:if>

@@ -5,6 +5,7 @@ import java.lang.String;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import nl.hajari.wha.domain.Employee;
+import nl.hajari.wha.domain.User;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -26,6 +27,7 @@ privileged aspect EmployeeController_Roo_Controller {
         if (result.hasErrors()) {        
             modelMap.addAllAttributes(result.getAllErrors());            
             modelMap.addAttribute("employee", employee);            
+            modelMap.addAttribute("users", User.findAllUsers());            
             return "employee/create";            
         }        
         employee.persist();        
@@ -35,6 +37,7 @@ privileged aspect EmployeeController_Roo_Controller {
     @RequestMapping(value = "/employee/form", method = RequestMethod.GET)    
     public String EmployeeController.createForm(ModelMap modelMap) {    
         modelMap.addAttribute("employee", new Employee());        
+        modelMap.addAttribute("users", User.findAllUsers());        
         return "employee/create";        
     }    
     
@@ -67,6 +70,7 @@ privileged aspect EmployeeController_Roo_Controller {
         if (result.hasErrors()) {        
             modelMap.addAllAttributes(result.getAllErrors());            
             modelMap.addAttribute("employee", employee);            
+            modelMap.addAttribute("users", User.findAllUsers());            
             return "employee/update";            
         }        
         employee.merge();        
@@ -77,6 +81,7 @@ privileged aspect EmployeeController_Roo_Controller {
     public String EmployeeController.updateForm(@PathVariable("id") Long id, ModelMap modelMap) {    
         if (id == null) throw new IllegalArgumentException("An Identifier is required");        
         modelMap.addAttribute("employee", Employee.findEmployee(id));        
+        modelMap.addAttribute("users", User.findAllUsers());        
         return "employee/update";        
     }    
     

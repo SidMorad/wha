@@ -1,24 +1,16 @@
 package nl.hajari.wha.domain;
 
-import java.lang.String;
 import java.util.Date;
+import nl.hajari.wha.domain.User;
 
 privileged aspect Employee_Roo_JavaBean {
     
-    public String Employee.getFirstname() {    
-        return this.firstname;        
+    public User Employee.getUser() {    
+        return this.user;        
     }    
     
-    public void Employee.setFirstname(String firstname) {    
-        this.firstname = firstname;        
-    }    
-    
-    public String Employee.getLastname() {    
-        return this.lastname;        
-    }    
-    
-    public void Employee.setLastname(String lastname) {    
-        this.lastname = lastname;        
+    public void Employee.setUser(User user) {    
+        this.user = user;        
     }    
     
     public Date Employee.getBirthday() {    
@@ -27,14 +19,6 @@ privileged aspect Employee_Roo_JavaBean {
     
     public void Employee.setBirthday(Date birthday) {    
         this.birthday = birthday;        
-    }    
-    
-    public String Employee.getEmail() {    
-        return this.email;        
-    }    
-    
-    public void Employee.setEmail(String email) {    
-        this.email = email;        
     }    
     
 }
