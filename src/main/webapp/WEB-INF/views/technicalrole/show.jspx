@@ -1,17 +1,22 @@
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:form="http://www.springframework.org/tags/form" xmlns:spring="http://www.springframework.org/tags">
     <script type="text/javascript">dojo.require("dijit.TitlePane");</script>
     <div id="_title" style="width: 100%">
-        <spring:message arguments="Role" code="entity.show" var="title"/>
+        <spring:message arguments="TechnicalRole" code="entity.show" var="title"/>
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title}'}})); </script>
-        <c:if test="${not empty role}">
-            <div id="roo_role_name">
+        <c:if test="${not empty technicalrole}">
+            <div id="roo_technicalrole_name">
                 <label for="_name">Name:</label>
-                <div class="box" id="_name">${role.name}</div>
+                <div class="box" id="_name">${technicalrole.name}</div>
+            </div>
+            <br/>
+            <div id="roo_technicalrole_payRate">
+                <label for="_payRate">Pay Rate:</label>
+                <div class="box" id="_payRate">${technicalrole.payRate}</div>
             </div>
             <br/>
         </c:if>
-        <c:if test="${empty role}">
-            <spring:message arguments="Role" code="entity.not.found.single"/>
+        <c:if test="${empty technicalrole}">
+            <spring:message arguments="TechnicalRole" code="entity.not.found.single"/>
         </c:if>
     </div>
 </div>

@@ -1,9 +1,35 @@
 package nl.hajari.wha.domain;
 
-import java.util.Date;
+import java.lang.String;
+import java.math.BigDecimal;
+import nl.hajari.wha.domain.TechnicalRole;
 import nl.hajari.wha.domain.User;
 
 privileged aspect Employee_Roo_JavaBean {
+    
+    public String Employee.getFirstName() {    
+        return this.firstName;        
+    }    
+    
+    public void Employee.setFirstName(String firstName) {    
+        this.firstName = firstName;        
+    }    
+    
+    public String Employee.getLastName() {    
+        return this.lastName;        
+    }    
+    
+    public void Employee.setLastName(String lastName) {    
+        this.lastName = lastName;        
+    }    
+    
+    public String Employee.getEmployeeId() {    
+        return this.employeeId;        
+    }    
+    
+    public void Employee.setEmployeeId(String employeeId) {    
+        this.employeeId = employeeId;        
+    }    
     
     public User Employee.getUser() {    
         return this.user;        
@@ -13,12 +39,20 @@ privileged aspect Employee_Roo_JavaBean {
         this.user = user;        
     }    
     
-    public Date Employee.getBirthday() {    
-        return this.birthday;        
+    public BigDecimal Employee.getPayRate() {    
+        return this.payRate;        
     }    
     
-    public void Employee.setBirthday(Date birthday) {    
-        this.birthday = birthday;        
+    public void Employee.setPayRate(BigDecimal payRate) {    
+        this.payRate = payRate;        
+    }    
+    
+    public TechnicalRole Employee.getTechRole() {    
+        return this.techRole;        
+    }    
+    
+    public void Employee.setTechRole(TechnicalRole techRole) {    
+        this.techRole = techRole;        
     }    
     
 }

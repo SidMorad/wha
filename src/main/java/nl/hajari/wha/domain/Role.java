@@ -22,9 +22,6 @@ public class Role implements GrantedAuthority {
     @Size(max = 20)
     private String name;
 
-    @Size(max = 64)
-    private String description;
-
 	@Override
 	public String getAuthority() {
 		return name;

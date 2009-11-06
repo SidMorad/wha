@@ -4,16 +4,34 @@
         <spring:message arguments="Employee" code="entity.show" var="title"/>
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title}'}})); </script>
         <c:if test="${not empty employee}">
+            <div id="roo_employee_firstName">
+                <label for="_firstName">First Name:</label>
+                <div class="box" id="_firstName">${employee.firstName}</div>
+            </div>
+            <br/>
+            <div id="roo_employee_lastName">
+                <label for="_lastName">Last Name:</label>
+                <div class="box" id="_lastName">${employee.lastName}</div>
+            </div>
+            <br/>
+            <div id="roo_employee_employeeId">
+                <label for="_employeeId">Employee Id:</label>
+                <div class="box" id="_employeeId">${employee.employeeId}</div>
+            </div>
+            <br/>
             <div id="roo_employee_user">
                 <label for="_user">User:</label>
                 <div class="box" id="_user">${employee.user}</div>
             </div>
             <br/>
-            <div id="roo_employee_birthday">
-                <label for="_birthday">Birthday:</label>
-                <div class="box" id="_birthday">
-                    <fmt:formatDate pattern="d/MM/yy" type="DATE" value="${employee.birthday}"/>
-                </div>
+            <div id="roo_employee_payRate">
+                <label for="_payRate">Pay Rate:</label>
+                <div class="box" id="_payRate">${employee.payRate}</div>
+            </div>
+            <br/>
+            <div id="roo_employee_techRole">
+                <label for="_techRole">Tech Role:</label>
+                <div class="box" id="_techRole">${employee.techRole}</div>
             </div>
             <br/>
         </c:if>

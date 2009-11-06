@@ -5,11 +5,10 @@ import java.lang.String;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import nl.hajari.wha.domain.Employee;
+import nl.hajari.wha.domain.TechnicalRole;
 import nl.hajari.wha.domain.User;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +26,7 @@ privileged aspect EmployeeController_Roo_Controller {
         if (result.hasErrors()) {        
             modelMap.addAllAttributes(result.getAllErrors());            
             modelMap.addAttribute("employee", employee);            
+            modelMap.addAttribute("technicalroles", TechnicalRole.findAllTechnicalRoles());            
             modelMap.addAttribute("users", User.findAllUsers());            
             return "employee/create";            
         }        
@@ -37,6 +37,7 @@ privileged aspect EmployeeController_Roo_Controller {
     @RequestMapping(value = "/employee/form", method = RequestMethod.GET)    
     public String EmployeeController.createForm(ModelMap modelMap) {    
         modelMap.addAttribute("employee", new Employee());        
+        modelMap.addAttribute("technicalroles", TechnicalRole.findAllTechnicalRoles());        
         modelMap.addAttribute("users", User.findAllUsers());        
         return "employee/create";        
     }    
@@ -70,6 +71,7 @@ privileged aspect EmployeeController_Roo_Controller {
         if (result.hasErrors()) {        
             modelMap.addAllAttributes(result.getAllErrors());            
             modelMap.addAttribute("employee", employee);            
+            modelMap.addAttribute("technicalroles", TechnicalRole.findAllTechnicalRoles());            
             modelMap.addAttribute("users", User.findAllUsers());            
             return "employee/update";            
         }        
@@ -81,6 +83,7 @@ privileged aspect EmployeeController_Roo_Controller {
     public String EmployeeController.updateForm(@PathVariable("id") Long id, ModelMap modelMap) {    
         if (id == null) throw new IllegalArgumentException("An Identifier is required");        
         modelMap.addAttribute("employee", Employee.findEmployee(id));        
+        modelMap.addAttribute("technicalroles", TechnicalRole.findAllTechnicalRoles());        
         modelMap.addAttribute("users", User.findAllUsers());        
         return "employee/update";        
     }    
@@ -90,11 +93,6 @@ privileged aspect EmployeeController_Roo_Controller {
         if (id == null) throw new IllegalArgumentException("An Identifier is required");        
         Employee.findEmployee(id).remove();        
         return "redirect:/employee";        
-    }    
-    
-    @InitBinder    
-    public void EmployeeController.initBinder(WebDataBinder binder) {    
-        binder.registerCustomEditor(java.util.Date.class, new org.springframework.beans.propertyeditors.CustomDateEditor(new java.text.SimpleDateFormat("d/MM/yy"), true));        
     }    
     
 }
