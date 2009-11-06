@@ -33,20 +33,6 @@ public class User implements UserDetails {
     private String password;
 
     private transient String confirmPassword;
-
-    @NotNull
-    @Size(max = 30)
-    private String firstName;
-
-    @NotNull
-    @Size(max = 30)
-    private String lastName;
-
-    @NotNull
-    private String email;
-
-    @Size(max = 20)
-    private String phone;
     
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = @JoinColumn(name = "role_id"))

@@ -37,6 +37,8 @@
             <value>/WEB-INF/views//empmonth/views.xml</value>
             <value>/WEB-INF/views//role/views.xml</value>
             <value>/WEB-INF/views//user/views.xml</value>
+            <value>/WEB-INF/views//technicalrole/views.xml</value>
+            <value>/WEB-INF/views//constants/views.xml</value>
             </list>
 		</property>
 	</bean>

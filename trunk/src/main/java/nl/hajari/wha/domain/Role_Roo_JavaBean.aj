@@ -12,12 +12,4 @@ privileged aspect Role_Roo_JavaBean {
         this.name = name;        
     }    
     
-    public String Role.getDescription() {    
-        return this.description;        
-    }    
-    
-    public void Role.setDescription(String description) {    
-        this.description = description;        
-    }    
-    
 }

@@ -19,26 +19,6 @@
                 <div class="box" id="_enabled">${user.enabled}</div>
             </div>
             <br/>
-            <div id="roo_user_firstName">
-                <label for="_firstName">First Name:</label>
-                <div class="box" id="_firstName">${user.firstName}</div>
-            </div>
-            <br/>
-            <div id="roo_user_lastName">
-                <label for="_lastName">Last Name:</label>
-                <div class="box" id="_lastName">${user.lastName}</div>
-            </div>
-            <br/>
-            <div id="roo_user_email">
-                <label for="_email">Email:</label>
-                <div class="box" id="_email">${user.email}</div>
-            </div>
-            <br/>
-            <div id="roo_user_phone">
-                <label for="_phone">Phone:</label>
-                <div class="box" id="_phone">${user.phone}</div>
-            </div>
-            <br/>
             <div id="roo_user_roles">
                 <label for="_roles">Roles:</label>
                 <div class="box" id="_roles">${user.roles}</div>

@@ -11,9 +11,9 @@
                         <th>Username</th>
                         <th>Password</th>
                         <th>Enabled</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
+                        <th>Roles</th>
+                        <th>Account Expired</th>
+                        <th>Account Locked</th>
                         <th/>
                         <th/>
                         <th/>
@@ -25,9 +25,9 @@
                         <td>${fn:substring(user.username, 0, 10)}</td>
                         <td>${fn:substring(user.password, 0, 10)}</td>
                         <td>${fn:substring(user.enabled, 0, 10)}</td>
-                        <td>${fn:substring(user.firstName, 0, 10)}</td>
-                        <td>${fn:substring(user.lastName, 0, 10)}</td>
-                        <td>${fn:substring(user.email, 0, 10)}</td>
+                        <td>${fn:length(user.roles)}</td>
+                        <td>${fn:substring(user.accountExpired, 0, 10)}</td>
+                        <td>${fn:substring(user.accountLocked, 0, 10)}</td>
                         <td>
                             <c:url value="/user/${user.id}" var="show_form_url"/>
                             <c:url value="/static/images/show.png" var="show_image_url"/>
@@ -55,7 +55,7 @@
                     </tr>
                 </c:forEach>
                 <tr class="footer">
-                    <td colspan="10">
+                    <td colspan="11">
                         <span class="new">
                             <c:url value="/user/form" var="create_url"/>
                             <a href="${create_url}">

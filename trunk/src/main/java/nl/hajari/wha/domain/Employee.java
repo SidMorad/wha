@@ -1,27 +1,38 @@
 package nl.hajari.wha.domain;
 
-import java.util.Date;
 import javax.persistence.Entity;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
-import nl.hajari.wha.domain.User;
-import javax.persistence.ManyToOne;
-import javax.persistence.JoinColumn;
+import java.math.BigDecimal;
 
 @Entity
 @RooJavaBean
 @RooEntity
 public class Employee {
 
-	@ManyToOne(targetEntity = User.class)
-	@JoinColumn
-	private User user;
+    @NotNull
+    @Size(max = 30)
+    private String firstName;
 
-	@Temporal(TemporalType.TIMESTAMP)
-    private Date birthday;
+    @NotNull
+    @Size(max = 30)
+    private String lastName;
 
+    @NotNull
+    private String employeeId;
+
+    @OneToOne(targetEntity = User.class)
+    private User user;
+
+    private BigDecimal payRate;
+
+    @ManyToOne
+    private TechnicalRole techRole;
+    
     @Override
     public String toString() {
         return "";
