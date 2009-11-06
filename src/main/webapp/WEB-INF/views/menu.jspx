@@ -107,18 +107,18 @@
             </li>
         </ul>
     </li>
-<li id="web_mvc_jsp_constants_category">
-        <h2>constants</h2>
+<li id="web_mvc_jsp_admin/constants_category">
+        <h2>admin/constants</h2>
         <ul>
-            <li id="web_mvc_jsp_create_constants_menu_item">
-                <c:url value="/constants/form" var="web_mvc_jsp_create_constants_menu_item_url"/>
-                <a href="${web_mvc_jsp_create_constants_menu_item_url}">
+            <li id="web_mvc_jsp_create_admin/constants_menu_item">
+                <c:url value="/admin/constants/form" var="web_mvc_jsp_create_admin_constants_menu_item_url"/>
+                <a href="${web_mvc_jsp_create_admin_constants_menu_item_url}">
                     <spring:message arguments="Constants" code="global.menu.new"/>
                 </a>
             </li>
-        <li id="web_mvc_jsp_list_constants_menu_item">
-                <c:url value="/constants?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_constants_menu_item_url"/>
-                <a href="${web_mvc_jsp_list_constants_menu_item_url}">
+        <li id="web_mvc_jsp_list_admin/constants_menu_item">
+                <c:url value="/admin/constants?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_admin_constants_menu_item_url"/>
+                <a href="${web_mvc_jsp_list_admin_constants_menu_item_url}">
                     <spring:message arguments="Constantses" code="global.menu.list"/>
                 </a>
             </li>

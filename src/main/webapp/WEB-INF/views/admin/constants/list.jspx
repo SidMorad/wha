@@ -29,7 +29,7 @@
                             </form:form>
                         </td>
                         <td>
-                            <c:url value="/constants/${constants.id}/form" var="update_form_url"/>
+                            <c:url value="/admin/constants/${constants.id}/form" var="update_form_url"/>
                             <c:url value="/static/images/update.png" var="update_image_url"/>
                             <form:form action="${update_form_url}" method="GET">
                                 <spring:message arguments="Constants" code="entity.update" var="update_label"/>
@@ -37,7 +37,7 @@
                             </form:form>
                         </td>
                         <td>
-                            <c:url value="/constants/${constants.id}" var="delete_form_url"/>
+                            <c:url value="/admin/constants/${constants.id}" var="delete_form_url"/>
                             <c:url value="/static/images/delete.png" var="delete_image_url"/>
                             <form:form action="${delete_form_url}" method="DELETE">
                                 <spring:message arguments="Constants" code="entity.delete" var="delete_label"/>
@@ -49,7 +49,7 @@
                 <tr class="footer">
                     <td colspan="6">
                         <span class="new">
-                            <c:url value="/constants/form" var="create_url"/>
+                            <c:url value="/admin/constants/form" var="create_url"/>
                             <a href="${create_url}">
                                 <c:url value="/static/images/add.png" var="create_img_url"/>
                                 <spring:message arguments="Constants" code="global.menu.new" var="add_message"/>
