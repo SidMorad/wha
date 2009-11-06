@@ -3,7 +3,7 @@
     <div id="_title" style="width: 100%">
         <spring:message arguments="Constants" code="entity.create" var="title"/>
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title}'}})); </script>
-        <c:url value="/constants" var="form_url"/>
+        <c:url value="/admin/constants" var="form_url"/>
         <form:form action="${form_url}" method="POST" modelAttribute="constants">
             <div id="roo_constants_key">
                 <label for="_key">Key:</label>

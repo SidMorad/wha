@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 privileged aspect ConstantsController_Roo_Controller {
     
-    @RequestMapping(value = "/constants", method = RequestMethod.POST)    
+    @RequestMapping(value = "/admin/constants", method = RequestMethod.POST)    
     public String ConstantsController.create(@ModelAttribute("constants") Constants constants, BindingResult result, ModelMap modelMap) {    
         if (constants == null) throw new IllegalArgumentException("A constants is required");        
         for (ConstraintViolation<Constants> constraint : Validation.buildDefaultValidatorFactory().getValidator().validate(constants)) {        
@@ -24,26 +24,26 @@ privileged aspect ConstantsController_Roo_Controller {
         if (result.hasErrors()) {        
             modelMap.addAllAttributes(result.getAllErrors());            
             modelMap.addAttribute("constants", constants);            
-            return "constants/create";            
+            return "admin/constants/create";            
         }        
         constants.persist();        
-        return "redirect:/constants/" + constants.getId();        
+        return "redirect:/admin/constants/" + constants.getId();        
     }    
     
-    @RequestMapping(value = "/constants/form", method = RequestMethod.GET)    
+    @RequestMapping(value = "/admin/constants/form", method = RequestMethod.GET)    
     public String ConstantsController.createForm(ModelMap modelMap) {    
         modelMap.addAttribute("constants", new Constants());        
-        return "constants/create";        
+        return "admin/constants/create";        
     }    
     
-    @RequestMapping(value = "/constants/{id}", method = RequestMethod.GET)    
+    @RequestMapping(value = "/admin/constants/{id}", method = RequestMethod.GET)    
     public String ConstantsController.show(@PathVariable("id") Long id, ModelMap modelMap) {    
         if (id == null) throw new IllegalArgumentException("An Identifier is required");        
         modelMap.addAttribute("constants", Constants.findConstants(id));        
-        return "constants/show";        
+        return "admin/constants/show";        
     }    
     
-    @RequestMapping(value = "/constants", method = RequestMethod.GET)    
+    @RequestMapping(value = "/admin/constants", method = RequestMethod.GET)    
     public String ConstantsController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, ModelMap modelMap) {    
         if (page != null || size != null) {        
             int sizeNo = size == null ? 10 : size.intValue();            
@@ -53,7 +53,7 @@ privileged aspect ConstantsController_Roo_Controller {
         } else {        
             modelMap.addAttribute("constantses", Constants.findAllConstantses());            
         }        
-        return "constants/list";        
+        return "admin/constants/list";        
     }    
     
     @RequestMapping(method = RequestMethod.PUT)    
@@ -65,24 +65,24 @@ privileged aspect ConstantsController_Roo_Controller {
         if (result.hasErrors()) {        
             modelMap.addAllAttributes(result.getAllErrors());            
             modelMap.addAttribute("constants", constants);            
-            return "constants/update";            
+            return "admin/constants/update";            
         }        
         constants.merge();        
-        return "redirect:/constants/" + constants.getId();        
+        return "redirect:/admin/constants/" + constants.getId();        
     }    
     
-    @RequestMapping(value = "/constants/{id}/form", method = RequestMethod.GET)    
+    @RequestMapping(value = "/admin/constants/{id}/form", method = RequestMethod.GET)    
     public String ConstantsController.updateForm(@PathVariable("id") Long id, ModelMap modelMap) {    
         if (id == null) throw new IllegalArgumentException("An Identifier is required");        
         modelMap.addAttribute("constants", Constants.findConstants(id));        
-        return "constants/update";        
+        return "admin/constants/update";        
     }    
     
-    @RequestMapping(value = "/constants/{id}", method = RequestMethod.DELETE)    
+    @RequestMapping(value = "/admin/constants/{id}", method = RequestMethod.DELETE)    
     public String ConstantsController.delete(@PathVariable("id") Long id) {    
         if (id == null) throw new IllegalArgumentException("An Identifier is required");        
         Constants.findConstants(id).remove();        
-        return "redirect:/constants";        
+        return "redirect:/admin/constants";        
     }    
     
 }
