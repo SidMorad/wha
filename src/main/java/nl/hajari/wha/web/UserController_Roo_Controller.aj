@@ -90,4 +90,16 @@ privileged aspect UserController_Roo_Controller {
         return "redirect:/user";        
     }    
     
+    @RequestMapping(value = "find/ByUsernameEquals/form", method = RequestMethod.GET)    
+    public String UserController.findUsersByUsernameEqualsForm(ModelMap modelMap) {    
+        return "user/findUsersByUsernameEquals";        
+    }    
+    
+    @RequestMapping(value = "find/ByUsernameEquals", method = RequestMethod.GET)    
+    public String UserController.findUsersByUsernameEquals(@RequestParam("username") String username, ModelMap modelMap) {    
+        if (username == null || username.length() == 0) throw new IllegalArgumentException("A Username is required.");        
+        modelMap.addAttribute("users", User.findUsersByUsernameEquals(username).getResultList());        
+        return "user/list";        
+    }    
+    
 }

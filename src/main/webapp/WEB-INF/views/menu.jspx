@@ -88,6 +88,12 @@
                     <spring:message arguments="Users" code="global.menu.list"/>
                 </a>
             </li>
+        <li id="finder_findusersbyusernameequals_menu_item">
+                <c:url value="/user/find/ByUsernameEquals/form" var="finder_findusersbyusernameequals_menu_item_url"/>
+                <a href="${finder_findusersbyusernameequals_menu_item_url}">
+                    <spring:message arguments="Username Equals" code="global.menu.find"/>
+                </a>
+            </li>
         </ul>
     </li>
 <li id="web_mvc_jsp_technicalrole_category">

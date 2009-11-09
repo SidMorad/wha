@@ -22,7 +22,7 @@ import org.springframework.security.userdetails.UserDetails;
 @Entity
 @Table(name = "app_user", uniqueConstraints = @UniqueConstraint(columnNames = { "username" }))
 @RooJavaBean
-@RooEntity
+@RooEntity(finders = { "findUsersByUsernameEquals" })
 public class User implements UserDetails {
 
     @NotNull
@@ -33,7 +33,7 @@ public class User implements UserDetails {
     private String password;
 
     private transient String confirmPassword;
-    
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<Role>();
@@ -55,7 +55,7 @@ public class User implements UserDetails {
     }
 
     public boolean isEnabled() {
-        return false;
+        return enabled;
     }
 
     @Transient
