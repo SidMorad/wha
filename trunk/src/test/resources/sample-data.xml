@@ -27,7 +27,7 @@
             <value description="enabled">1</value>
             <value description="account_expired">0</value>
             <value description="account_locked">0</value>
-            <value description="credentials_expired">1</value>
+            <value description="credentials_expired">0</value>
         </row>
     </table>
     <table name="role">
