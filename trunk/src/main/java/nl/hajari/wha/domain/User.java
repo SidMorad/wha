@@ -3,6 +3,7 @@ package nl.hajari.wha.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -38,7 +39,7 @@ public class User implements UserDetails {
     @Size(min = 2, max = 30)
     private String email;
     
-    @OneToOne(targetEntity = Employee.class)
+    @OneToOne(targetEntity = Employee.class, cascade = CascadeType.REMOVE)
     private Employee employee;
     
     @ManyToMany(fetch = FetchType.EAGER)

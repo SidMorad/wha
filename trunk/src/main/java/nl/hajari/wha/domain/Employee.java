@@ -1,5 +1,6 @@
 package nl.hajari.wha.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -14,27 +15,27 @@ import java.math.BigDecimal;
 @RooEntity
 public class Employee {
 
-    @NotNull
-    @Size(max = 30)
-    private String firstName;
+	@NotNull
+	@Size(max = 30)
+	private String firstName;
 
-    @NotNull
-    @Size(max = 30)
-    private String lastName;
+	@NotNull
+	@Size(max = 30)
+	private String lastName;
 
-    @NotNull
-    private String employeeId;
+	@NotNull
+	private String employeeId;
 
-    @OneToOne(targetEntity = User.class)
-    private User user;
+	@OneToOne(targetEntity = User.class, cascade = CascadeType.REMOVE)
+	private User user;
 
-    private BigDecimal payRate;
+	private BigDecimal payRate;
 
-    @ManyToOne
-    private TechnicalRole technicalRole;
-    
-    @Override
-    public String toString() {
-        return "";
-    }
+	@ManyToOne
+	private TechnicalRole technicalRole;
+
+	@Override
+	public String toString() {
+		return employeeId + " : " + firstName + " " + lastName;
+	}
 }

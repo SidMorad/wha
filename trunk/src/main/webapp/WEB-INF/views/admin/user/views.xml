@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+    <definition extends="default" name="admin/user/list">
+        <put-attribute name="body" value="/WEB-INF/views/admin/user/list.jspx"/>
+    </definition>
+    <definition extends="default" name="admin/user/show">
+        <put-attribute name="body" value="/WEB-INF/views/admin/user/show.jspx"/>
+    </definition>
+    <definition extends="default" name="admin/user/create">
+        <put-attribute name="body" value="/WEB-INF/views/admin/user/create.jspx"/>
+    </definition>
+    <definition extends="default" name="admin/user/update">
+        <put-attribute name="body" value="/WEB-INF/views/admin/user/update.jspx"/>
+    </definition>
+    <definition extends="default" name="admin/user/findUsersByUsernameEquals">
+        <put-attribute name="body" value="/WEB-INF/views/admin/user/findUsersByUsernameEquals.jspx"/>
+    </definition>
+    <definition extends="default" name="admin/user/changePassword">
+        <put-attribute name="body" value="/WEB-INF/views/admin/user/changePassword.jspx"/>
+    </definition>
+</tiles-definitions>

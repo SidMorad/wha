@@ -14,29 +14,26 @@
                 <div class="box" id="_password">${user.password}</div>
             </div>
             <br/>
-            <div id="roo_user_enabled">
-                <label for="_enabled">Enabled:</label>
-                <div class="box" id="_enabled">${user.enabled}</div>
-            </div>
-            <br/>
-            <div id="roo_user_confirmPassword">
-                <label for="_confirmPassword">Confirm Password:</label>
-                <div class="box" id="_confirmPassword">${user.confirmPassword}</div>
-            </div>
-            <br/>
             <div id="roo_user_email">
                 <label for="_email">Email:</label>
                 <div class="box" id="_email">${user.email}</div>
             </div>
             <br/>
+            <c:if test="${not empty user.employee}">
             <div id="roo_user_employee">
                 <label for="_employee">Employee:</label>
                 <div class="box" id="_employee">${user.employee}</div>
             </div>
             <br/>
+            </c:if>
             <div id="roo_user_roles">
                 <label for="_roles">Roles:</label>
                 <div class="box" id="_roles">${user.roles}</div>
+            </div>
+            <br/>
+            <div id="roo_user_enabled">
+                <label for="_enabled">Enabled:</label>
+                <div class="box" id="_enabled">${user.enabled}</div>
             </div>
             <br/>
             <div id="roo_user_accountExpired">

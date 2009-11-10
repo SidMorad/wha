@@ -18,7 +18,7 @@
 	
 	<beans:bean id="passwordEncoder" class="org.springframework.security.providers.encoding.ShaPasswordEncoder"/>
     
-    <beans:bean id="userController" class="nl.hajari.wha.web.UserController"/>
+    <beans:bean id="userController" class="nl.hajari.wha.web.controller.UserController"/>
     
     <authentication-provider user-service-ref="userController">
     	<password-encoder ref="passwordEncoder"/>
