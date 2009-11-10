@@ -11,9 +11,8 @@
                         <th>Username</th>
                         <th>Password</th>
                         <th>Enabled</th>
-                        <th>Confirm Password</th>
                         <th>Email</th>
-                        <th>Employee</th>
+                        <th>Change Password</th>
                         <th/>
                         <th/>
                         <th/>
@@ -25,11 +24,17 @@
                         <td>${fn:substring(user.username, 0, 10)}</td>
                         <td>${fn:substring(user.password, 0, 10)}</td>
                         <td>${fn:substring(user.enabled, 0, 10)}</td>
-                        <td>${fn:substring(user.confirmPassword, 0, 10)}</td>
                         <td>${fn:substring(user.email, 0, 10)}</td>
-                        <td>${fn:substring(user.employee, 0, 10)}</td>
                         <td>
-                            <c:url value="/user/${user.id}" var="show_form_url"/>
+                            <c:url value="/admin/user/change_password/${user.id}/form" var="change_password_url"/>
+                            <c:url value="/static/images/update.png" var="update_image_url"/>
+                            <form:form action="${change_password_url}" method="GET">
+                                <spring:message code="user.changePassword" var="update_label"/>
+                                <input alt="${update_label}" class="image" src="${update_image_url}" title="${update_label}" type="image" value="${update_label}"/>
+                            </form:form>
+                        </td>
+                        <td>
+                            <c:url value="/admin/user/${user.id}" var="show_form_url"/>
                             <c:url value="/static/images/show.png" var="show_image_url"/>
                             <form:form action="${show_form_url}" method="GET">
                                 <spring:message arguments="User" code="entity.show" var="show_label"/>
@@ -37,7 +42,7 @@
                             </form:form>
                         </td>
                         <td>
-                            <c:url value="/user/${user.id}/form" var="update_form_url"/>
+                            <c:url value="/admin/user/${user.id}/form" var="update_form_url"/>
                             <c:url value="/static/images/update.png" var="update_image_url"/>
                             <form:form action="${update_form_url}" method="GET">
                                 <spring:message arguments="User" code="entity.update" var="update_label"/>
@@ -45,7 +50,7 @@
                             </form:form>
                         </td>
                         <td>
-                            <c:url value="/user/${user.id}" var="delete_form_url"/>
+                            <c:url value="/admin/user/${user.id}" var="delete_form_url"/>
                             <c:url value="/static/images/delete.png" var="delete_image_url"/>
                             <form:form action="${delete_form_url}" method="DELETE">
                                 <spring:message arguments="User" code="entity.delete" var="delete_label"/>
@@ -57,7 +62,7 @@
                 <tr class="footer">
                     <td colspan="10">
                         <span class="new">
-                            <c:url value="/user/form" var="create_url"/>
+                            <c:url value="/admin/user/form" var="create_url"/>
                             <a href="${create_url}">
                                 <c:url value="/static/images/add.png" var="create_img_url"/>
                                 <spring:message arguments="User" code="global.menu.new" var="add_message"/>

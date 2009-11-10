@@ -3,7 +3,7 @@
     <div id="_title" style="width: 100%">
         <spring:message arguments="Find Users By Username Equals" code="entity.find" var="title"/>
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title}'}})); </script>
-        <c:url value="/user/find/ByUsernameEquals" var="form_url"/>
+        <c:url value="/admin/user/find/ByUsernameEquals" var="form_url"/>
         <form:form action="${form_url}" method="GET">
             <div id="roo_user_username">
                 <label for="_username">Username:</label>

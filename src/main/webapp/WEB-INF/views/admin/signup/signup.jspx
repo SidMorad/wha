@@ -108,7 +108,7 @@
                     <form:select cssStyle="width:250px" id="_technicalRole" path="employee.technicalRole">
                         <form:options itemValue="id" items="${technicalroles}"/>
                     </form:select>
-                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_technicalRole', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_technicalRole', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true, required : false}})); </script>
                 </c:if>
             </div>
             <br/>
