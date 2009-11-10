@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
@@ -34,6 +35,12 @@ public class User implements UserDetails {
 
     private transient String confirmPassword;
 
+    @Size(min = 2, max = 30)
+    private String email;
+    
+    @OneToOne(targetEntity = Employee.class)
+    private Employee employee;
+    
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<Role>();
@@ -78,6 +85,21 @@ public class User implements UserDetails {
         return !credentialsExpired;
     }
 
+    @Transient
+    public String getConfirmPassword() {
+		return confirmPassword;
+	}
+    
+    @Transient
+    public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+    
+    @Transient
+    public void addRole(Role role) {
+    	getRoles().add(role);
+    }
+    
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(this.username);

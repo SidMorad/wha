@@ -31,7 +31,7 @@ public class Employee {
     private BigDecimal payRate;
 
     @ManyToOne
-    private TechnicalRole techRole;
+    private TechnicalRole technicalRole;
     
     @Override
     public String toString() {

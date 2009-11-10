@@ -85,4 +85,16 @@ privileged aspect RoleController_Roo_Controller {
         return "redirect:/role";        
     }    
     
+    @RequestMapping(value = "find/ByNameEquals/form", method = RequestMethod.GET)    
+    public String RoleController.findRolesByNameEqualsForm(ModelMap modelMap) {    
+        return "role/findRolesByNameEquals";        
+    }    
+    
+    @RequestMapping(value = "find/ByNameEquals", method = RequestMethod.GET)    
+    public String RoleController.findRolesByNameEquals(@RequestParam("name") String name, ModelMap modelMap) {    
+        if (name == null || name.length() == 0) throw new IllegalArgumentException("A Name is required.");        
+        modelMap.addAttribute("roles", Role.findRolesByNameEquals(name).getResultList());        
+        return "role/list";        
+    }    
+    
 }

@@ -10,4 +10,10 @@
     <definition extends="default" name="admin/empmonth/list">
         <put-attribute name="body" value="/WEB-INF/views/admin/empmonth/list.jspx"/>
     </definition>
+	<definition extends="default" name="admin/signup">
+        <put-attribute name="body" value="/WEB-INF/views/admin/signup/signup.jspx"/>
+    </definition>
+	<definition extends="default" name="admin/signup/show">
+        <put-attribute name="body" value="/WEB-INF/views/admin/signup/show.jspx"/>
+    </definition>
 </tiles-definitions>

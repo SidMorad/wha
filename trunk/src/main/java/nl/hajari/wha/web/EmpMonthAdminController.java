@@ -5,7 +5,7 @@ import java.util.List;
 import nl.hajari.wha.domain.EmpMonth;
 import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.MonthStatus;
-import nl.hajari.wha.utils.ComboUtil;
+import nl.hajari.wha.web.util.ComboUtil;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

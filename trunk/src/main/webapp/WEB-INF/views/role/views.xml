@@ -13,4 +13,7 @@
     <definition extends="default" name="role/update">
         <put-attribute name="body" value="/WEB-INF/views/role/update.jspx"/>
     </definition>
+<definition extends="default" name="role/findRolesByNameEquals">
+        <put-attribute name="body" value="/WEB-INF/views/role/findRolesByNameEquals.jspx"/>
+    </definition>
 </tiles-definitions>
