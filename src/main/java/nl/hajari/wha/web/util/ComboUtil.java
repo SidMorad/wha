@@ -1,4 +1,4 @@
-package nl.hajari.wha.utils;
+package nl.hajari.wha.web.util;
 
 import java.util.ArrayList;
 import java.util.Calendar;

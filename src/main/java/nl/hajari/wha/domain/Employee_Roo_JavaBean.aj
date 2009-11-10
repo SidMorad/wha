@@ -47,12 +47,12 @@ privileged aspect Employee_Roo_JavaBean {
         this.payRate = payRate;        
     }    
     
-    public TechnicalRole Employee.getTechRole() {    
-        return this.techRole;        
+    public TechnicalRole Employee.getTechnicalRole() {    
+        return this.technicalRole;        
     }    
     
-    public void Employee.setTechRole(TechnicalRole techRole) {    
-        this.techRole = techRole;        
+    public void Employee.setTechnicalRole(TechnicalRole technicalRole) {    
+        this.technicalRole = technicalRole;        
     }    
     
 }

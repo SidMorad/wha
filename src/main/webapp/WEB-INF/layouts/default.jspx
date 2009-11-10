@@ -43,6 +43,13 @@
 						    <a href="${logout}"><spring:message code="security.logout" /></a>
 					    </span>					    
 					</c:if>			    
+				    <c:if test="${pageContext.request.userPrincipal == null}">	
+				    	<c:out value="&#160;|&#160;"/>
+				    	<span>			    
+						    <c:url var="login" value="/login" />
+						    <a href="${login}"><spring:message code="login.title" /></a>
+					    </span>					    
+					</c:if>			    
 				    
 				    <roo:language />
 				    <roo:theme />

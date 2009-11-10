@@ -39,7 +39,7 @@
         </row>
         <row>
             <value description="id">-2</value>
-            <value description="name">ROLE_USER</value>
+            <value description="name">ROLE_EMPLOYEE</value>
         </row>
     </table>
     <table name="user_role">

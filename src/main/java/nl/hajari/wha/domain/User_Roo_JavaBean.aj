@@ -2,6 +2,7 @@ package nl.hajari.wha.domain;
 
 import java.lang.String;
 import java.util.Set;
+import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.Role;
 
 privileged aspect User_Roo_JavaBean {
@@ -12,6 +13,22 @@ privileged aspect User_Roo_JavaBean {
     
     public void User.setPassword(String password) {    
         this.password = password;        
+    }    
+    
+    public String User.getEmail() {    
+        return this.email;        
+    }    
+    
+    public void User.setEmail(String email) {    
+        this.email = email;        
+    }    
+    
+    public Employee User.getEmployee() {    
+        return this.employee;        
+    }    
+    
+    public void User.setEmployee(Employee employee) {    
+        this.employee = employee;        
     }    
     
     public Set<Role> User.getRoles() {    
