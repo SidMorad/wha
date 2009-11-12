@@ -12,7 +12,9 @@ import org.springframework.security.GrantedAuthority;
 @RooEntity(finders = { "findRolesByNameEquals" })
 public class Role implements GrantedAuthority {
 
-    @NotNull
+	private static final long serialVersionUID = 1L;
+	
+	@NotNull
     @Size(max = 20)
     private String name;
 
@@ -20,10 +22,22 @@ public class Role implements GrantedAuthority {
     public String getAuthority() {
         return name;
     }
+    
+    @Override
+    public int hashCode() {
+    	return (name != null ? name.hashCode() : Integer.MIN_VALUE);
+    }
 
     @Override
     public int compareTo(Object o) {
-        return (name != null ? name.hashCode() : 0);
+    	if (o == null) {
+    		return 1;
+    	}
+    	if (!(o instanceof Role)) {
+    		return 1;
+    	}
+    	Role r = (Role) o;
+    	return name.compareTo(r.name);
     }
 
     @Override
