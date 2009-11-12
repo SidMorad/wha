@@ -27,7 +27,9 @@ import org.springframework.security.userdetails.UserDetails;
 @RooEntity(finders = { "findUsersByUsernameEquals" })
 public class User implements UserDetails {
 
-    @NotNull
+	private static final long serialVersionUID = 1L;
+
+	@NotNull
     @Size(max = 30)
     private String username;
 
