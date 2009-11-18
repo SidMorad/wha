@@ -79,36 +79,36 @@
                 <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "_lastName", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${field_validation}", invalidMessage: "${field_invalid}", required : true}})); </script>
             </div>
             <br/>
-            <div id="roo_employee_employeeId">
-                <label for="_employeeId"><spring:message code="employee.employeeId"/>:</label>
-                <form:input cssStyle="width:250px" id="_employeeId" maxlength="30" path="employee.employeeId" size="0"/>
+            <div id="roo_employee_empId">
+                <label for="_empId"><spring:message code="employee.empId"/>:</label>
+                <form:input cssStyle="width:250px" id="_empId" maxlength="30" path="employee.empId" size="0"/>
                 <br/>
-                <form:errors cssClass="errors" id="_employeeId" path="employee.employeeId"/>
+                <form:errors cssClass="errors" id="_empId" path="employee.empId"/>
                 <spring:message arguments="Employee Id" code="field.invalid" var="field_invalid"/>
                 <spring:message code="field.required" var="required"/>
                 <spring:message argumentSeparator="," arguments="Employee Id,(${required})" code="field.simple.validation" var="field_validation"/>
-                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "_employeeId", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${field_validation}", invalidMessage: "${field_invalid}", required : true}})); </script>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "_empId", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${field_validation}", invalidMessage: "${field_invalid}", required : true}})); </script>
             </div>
             <br/>
-            <div id="roo_employee_payRate">
-                <label for="_payRate"><spring:message code="employee.payRate"/>:</label>
-                <form:input cssStyle="width:250px" id="_payRate" maxlength="30" path="employee.payRate" size="0"/>
+            <div id="roo_employee_hourlyWage">
+                <label for="_hourlyWage"><spring:message code="employee.hourlyWage"/>:</label>
+                <form:input cssStyle="width:250px" id="_hourlyWage" maxlength="30" path="employee.hourlyWage" size="0"/>
                 <br/>
-                <form:errors cssClass="errors" id="_payRate" path="employee.payRate"/>
+                <form:errors cssClass="errors" id="_hourlyWage" path="employee.hourlyWage"/>
                 <spring:message arguments="Pay Rate" code="field.invalid" var="field_invalid"/>
  				<spring:message code="field.invalid.decimal" var="field_invalid"/>                
                 <spring:message code="field.required" var="required"/>
                 <spring:message argumentSeparator="," arguments="Pay Rate," code="field.simple.validation" var="field_validation"/>
-                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "_payRate", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${field_validation}", invalidMessage: "${field_invalid}", regExp: "-?[0-9 .]*", required : false}})); </script>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "_hourlyWage", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${field_validation}", invalidMessage: "${field_invalid}", regExp: "-?[0-9 .]*", required : false}})); </script>
             </div>
             <br/>
-            <div id="roo_employee_technicalRole">
-                <c:if test="${not empty technicalroles}">
-                    <label for="_technicalRole"><spring:message code="employee.technicalRole"/>:</label>
-                    <form:select cssStyle="width:250px" id="_technicalRole" path="employee.technicalRole">
-                        <form:options itemValue="id" items="${technicalroles}"/>
+            <div id="roo_employee_techRoles">
+                <c:if test="${not empty techroles}">
+                    <label for="_techRoles">Tech Roles:</label>
+                    <form:select cssStyle="width:250px" id="_techRoles" path="employee.techRoles">
+                        <form:options itemValue="id" items="${techroles}"/>
                     </form:select>
-                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_technicalRole', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true, required : false}})); </script>
+                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_techRoles', widgetType: 'dijit.form.MultiSelect', widgetAttrs: {}})); </script>
                 </c:if>
             </div>
             <br/>

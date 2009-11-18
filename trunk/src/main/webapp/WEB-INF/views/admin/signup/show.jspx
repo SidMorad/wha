@@ -34,19 +34,19 @@
                 <div class="box" id="_lastName">${user.employee.lastName}</div>
             </div>
             <br/>
-            <div id="roo_employee_employeeId">
-                <label for="_employeeId"><spring:message code="employee.employeeId"/>:</label>
-                <div class="box" id="_employeeId">${user.employee.employeeId}</div>
+            <div id="roo_employee_empId">
+                <label for="_empId"><spring:message code="employee.empId"/>:</label>
+                <div class="box" id="_empId">${user.employee.empId}</div>
             </div>
             <br/>
-            <div id="roo_employee_payRate">
-                <label for="_payRate"><spring:message code="employee.payRate"/>:</label>
-                <div class="box" id="_payRate">${user.employee.payRate}</div>
+            <div id="roo_employee_hourlyWage">
+                <label for="_hourlyWage"><spring:message code="employee.hourlyWage"/>:</label>
+                <div class="box" id="_hourlyWage">${user.employee.hourlyWage}</div>
             </div>
             <br/>
-            <div id="roo_employee_technicalRole">
-                <label for="_technicalRole"><spring:message code="employee.technicalRole"/>:</label>
-                <div class="box" id="_technicalRole">${user.employee.technicalRole}</div>
+            <div id="roo_employee_techRoles">
+                <label for="_techRoles"><spring:message code="employee.techRoles"/>:</label>
+                <div class="box" id="_techRoles">${user.employee.techRoles}</div>
             </div>
             <br/>
             <div id="roo_user_enabled">
