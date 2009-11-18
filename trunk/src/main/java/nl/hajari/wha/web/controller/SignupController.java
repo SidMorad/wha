@@ -1,11 +1,11 @@
 package nl.hajari.wha.web.controller;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
 import nl.hajari.wha.Constants;
 import nl.hajari.wha.domain.Employee;
-import nl.hajari.wha.domain.TechnicalRole;
 import nl.hajari.wha.domain.User;
 import nl.hajari.wha.web.RoleController;
 
@@ -34,7 +34,7 @@ public class SignupController {
 		Employee newemployee = new Employee();
 		newuser.setEmployee(newemployee);
 		modelMap.put("newuser", newuser);
-		modelMap.put("technicalroles", TechnicalRole.findAllTechnicalRoles());
+//		modelMap.put("technicalroles", TechnicalRole.findAllTechnicalRoles());
 		return "admin/signup";
 	}
 
@@ -64,7 +64,7 @@ public class SignupController {
 		} else {
 			modelMap.put("errors", errors);
 			modelMap.put("newuser", newuser);
-			modelMap.put("technicalroles", TechnicalRole.findAllTechnicalRoles());
+//			modelMap.put("technicalroles", TechnicalRole.findAllTechnicalRoles());
 			return "admin/signup";
 		}
 	}

@@ -37,7 +37,6 @@
 	            <value>/WEB-INF/views/admin/user/views.xml</value>
             	<value>/WEB-INF/views/employee/views.xml</value>
 	            <value>/WEB-INF/views/role/views.xml</value>
-	            <value>/WEB-INF/views/technicalrole/views.xml</value>
             </list>
 		</property>
 	</bean>

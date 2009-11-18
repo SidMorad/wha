@@ -61,16 +61,6 @@
                 <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_payRate', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : false}})); </script>
             </div>
             <br/>
-            <div id="roo_employee_technicalRole">
-                <c:if test="${not empty technicalroles}">
-                    <label for="_technicalRole">Technical Role:</label>
-                    <form:select cssStyle="width:250px" id="_technicalRole" path="technicalRole">
-                        <form:options itemValue="id" items="${technicalroles}"/>
-                    </form:select>
-                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_technicalRole', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
-                </c:if>
-            </div>
-            <br/>
             <div class="submit" id="roo_employee_submit">
                 <spring:message code="button.save" var="save_button"/>
                 <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>

@@ -15,7 +15,6 @@
                         <th>Employee Id</th>
                         <th>User</th>
                         <th>Pay Rate</th>
-                        <th>Technical Role</th>
                         <th/>
                         <th/>
                         <th/>
@@ -29,7 +28,6 @@
                         <td>${fn:substring(employee.employeeId, 0, 10)}</td>
                         <td>${fn:substring(employee.user, 0, 10)}</td>
                         <td>${fn:substring(employee.payRate, 0, 10)}</td>
-                        <td>${fn:substring(employee.technicalRole, 0, 10)}</td>
                         <td>
                             <spring:url value="/employee/${employee.id}" var="show_form_url"/>
                             <spring:url value="/static/images/show.png" var="show_image_url"/>
@@ -57,7 +55,7 @@
                     </tr>
                 </c:forEach>
                 <tr class="footer">
-                    <td colspan="10">
+                    <td colspan="9">
                         <span class="new">
                             <spring:url value="/employee/form" var="create_url"/>
                             <a href="${create_url}">
