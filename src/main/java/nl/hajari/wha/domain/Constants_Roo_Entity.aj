@@ -74,7 +74,7 @@ privileged aspect Constants_Roo_Entity {
         this.id = merged.getId();        
     }    
     
-    public static EntityManager Constants.entityManager() {    
+    public static final EntityManager Constants.entityManager() {    
         EntityManager em = new Constants().entityManager;        
         if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");        
         return em;        

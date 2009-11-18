@@ -19,92 +19,92 @@ privileged aspect EmpMonthIntegrationTest_Roo_IntegrationTest {
     
     @Test    
     public void EmpMonthIntegrationTest.testCountEmpMonths() {    
-        junit.framework.Assert.assertNotNull("Data on demand for 'EmpMonth' failed to initialize correctly", dod.getRandomEmpMonth());        
+        org.junit.Assert.assertNotNull("Data on demand for 'EmpMonth' failed to initialize correctly", dod.getRandomEmpMonth());        
         long count = nl.hajari.wha.domain.EmpMonth.countEmpMonths();        
-        junit.framework.Assert.assertTrue("Counter for 'EmpMonth' incorrectly reported there were no entries", count > 0);        
+        org.junit.Assert.assertTrue("Counter for 'EmpMonth' incorrectly reported there were no entries", count > 0);        
     }    
     
     @Test    
     public void EmpMonthIntegrationTest.testFindEmpMonth() {    
-        junit.framework.Assert.assertNotNull("Data on demand for 'EmpMonth' failed to initialize correctly", dod.getRandomEmpMonth());        
+        org.junit.Assert.assertNotNull("Data on demand for 'EmpMonth' failed to initialize correctly", dod.getRandomEmpMonth());        
         java.lang.Long id = dod.getRandomEmpMonth().getId();        
-        junit.framework.Assert.assertNotNull("Data on demand for 'EmpMonth' failed to provide an identifier", id);        
+        org.junit.Assert.assertNotNull("Data on demand for 'EmpMonth' failed to provide an identifier", id);        
         nl.hajari.wha.domain.EmpMonth obj = nl.hajari.wha.domain.EmpMonth.findEmpMonth(id);        
-        junit.framework.Assert.assertNotNull("Find method for 'EmpMonth' illegally returned null for id '" + id + "'", obj);        
-        junit.framework.Assert.assertEquals("Find method for 'EmpMonth' returned the incorrect identifier", id, obj.getId());        
+        org.junit.Assert.assertNotNull("Find method for 'EmpMonth' illegally returned null for id '" + id + "'", obj);        
+        org.junit.Assert.assertEquals("Find method for 'EmpMonth' returned the incorrect identifier", id, obj.getId());        
     }    
     
     @Test    
     public void EmpMonthIntegrationTest.testFindAllEmpMonths() {    
-        junit.framework.Assert.assertNotNull("Data on demand for 'EmpMonth' failed to initialize correctly", dod.getRandomEmpMonth());        
+        org.junit.Assert.assertNotNull("Data on demand for 'EmpMonth' failed to initialize correctly", dod.getRandomEmpMonth());        
         long count = nl.hajari.wha.domain.EmpMonth.countEmpMonths();        
-        junit.framework.Assert.assertTrue("Too expensive to perform a find all test for 'EmpMonth', as there are " + count + " entries; set the findAllMaximum to exceed this value or set findAll=false on the integration test annotation to disable the test", count < 250);        
+        org.junit.Assert.assertTrue("Too expensive to perform a find all test for 'EmpMonth', as there are " + count + " entries; set the findAllMaximum to exceed this value or set findAll=false on the integration test annotation to disable the test", count < 250);        
         java.util.List<nl.hajari.wha.domain.EmpMonth> result = nl.hajari.wha.domain.EmpMonth.findAllEmpMonths();        
-        junit.framework.Assert.assertNotNull("Find all method for 'EmpMonth' illegally returned null", result);        
-        junit.framework.Assert.assertTrue("Find all method for 'EmpMonth' failed to return any data", result.size() > 0);        
+        org.junit.Assert.assertNotNull("Find all method for 'EmpMonth' illegally returned null", result);        
+        org.junit.Assert.assertTrue("Find all method for 'EmpMonth' failed to return any data", result.size() > 0);        
     }    
     
     @Test    
     public void EmpMonthIntegrationTest.testFindEmpMonthEntries() {    
-        junit.framework.Assert.assertNotNull("Data on demand for 'EmpMonth' failed to initialize correctly", dod.getRandomEmpMonth());        
+        org.junit.Assert.assertNotNull("Data on demand for 'EmpMonth' failed to initialize correctly", dod.getRandomEmpMonth());        
         long count = nl.hajari.wha.domain.EmpMonth.countEmpMonths();        
         if (count > 20) count = 20;        
         java.util.List<nl.hajari.wha.domain.EmpMonth> result = nl.hajari.wha.domain.EmpMonth.findEmpMonthEntries(0, (int)count);        
-        junit.framework.Assert.assertNotNull("Find entries method for 'EmpMonth' illegally returned null", result);        
-        junit.framework.Assert.assertEquals("Find entries method for 'EmpMonth' returned an incorrect number of entries", count, result.size());        
+        org.junit.Assert.assertNotNull("Find entries method for 'EmpMonth' illegally returned null", result);        
+        org.junit.Assert.assertEquals("Find entries method for 'EmpMonth' returned an incorrect number of entries", count, result.size());        
     }    
     
     @Test    
     @Transactional    
     public void EmpMonthIntegrationTest.testFlush() {    
-        junit.framework.Assert.assertNotNull("Data on demand for 'EmpMonth' failed to initialize correctly", dod.getRandomEmpMonth());        
+        org.junit.Assert.assertNotNull("Data on demand for 'EmpMonth' failed to initialize correctly", dod.getRandomEmpMonth());        
         java.lang.Long id = dod.getRandomEmpMonth().getId();        
-        junit.framework.Assert.assertNotNull("Data on demand for 'EmpMonth' failed to provide an identifier", id);        
+        org.junit.Assert.assertNotNull("Data on demand for 'EmpMonth' failed to provide an identifier", id);        
         nl.hajari.wha.domain.EmpMonth obj = nl.hajari.wha.domain.EmpMonth.findEmpMonth(id);        
-        junit.framework.Assert.assertNotNull("Find method for 'EmpMonth' illegally returned null for id '" + id + "'", obj);        
+        org.junit.Assert.assertNotNull("Find method for 'EmpMonth' illegally returned null for id '" + id + "'", obj);        
         boolean modified =  dod.modifyEmpMonth(obj);        
         java.lang.Integer currentVersion = obj.getVersion();        
         obj.flush();        
-        junit.framework.Assert.assertTrue("Version for 'EmpMonth' failed to increment on flush directive", obj.getVersion() > currentVersion || !modified);        
+        org.junit.Assert.assertTrue("Version for 'EmpMonth' failed to increment on flush directive", obj.getVersion() > currentVersion || !modified);        
     }    
     
     @Test    
     @Transactional    
     public void EmpMonthIntegrationTest.testMerge() {    
-        junit.framework.Assert.assertNotNull("Data on demand for 'EmpMonth' failed to initialize correctly", dod.getRandomEmpMonth());        
+        org.junit.Assert.assertNotNull("Data on demand for 'EmpMonth' failed to initialize correctly", dod.getRandomEmpMonth());        
         java.lang.Long id = dod.getRandomEmpMonth().getId();        
-        junit.framework.Assert.assertNotNull("Data on demand for 'EmpMonth' failed to provide an identifier", id);        
+        org.junit.Assert.assertNotNull("Data on demand for 'EmpMonth' failed to provide an identifier", id);        
         nl.hajari.wha.domain.EmpMonth obj = nl.hajari.wha.domain.EmpMonth.findEmpMonth(id);        
-        junit.framework.Assert.assertNotNull("Find method for 'EmpMonth' illegally returned null for id '" + id + "'", obj);        
+        org.junit.Assert.assertNotNull("Find method for 'EmpMonth' illegally returned null for id '" + id + "'", obj);        
         boolean modified =  dod.modifyEmpMonth(obj);        
         java.lang.Integer currentVersion = obj.getVersion();        
         obj.merge();        
         obj.flush();        
-        junit.framework.Assert.assertTrue("Version for 'EmpMonth' failed to increment on merge and flush directive", obj.getVersion() > currentVersion || !modified);        
+        org.junit.Assert.assertTrue("Version for 'EmpMonth' failed to increment on merge and flush directive", obj.getVersion() > currentVersion || !modified);        
     }    
     
     @Test    
     @Transactional    
     public void EmpMonthIntegrationTest.testPersist() {    
-        junit.framework.Assert.assertNotNull("Data on demand for 'EmpMonth' failed to initialize correctly", dod.getRandomEmpMonth());        
+        org.junit.Assert.assertNotNull("Data on demand for 'EmpMonth' failed to initialize correctly", dod.getRandomEmpMonth());        
         nl.hajari.wha.domain.EmpMonth obj = dod.getNewTransientEmpMonth(Integer.MAX_VALUE);        
-        junit.framework.Assert.assertNotNull("Data on demand for 'EmpMonth' failed to provide a new transient entity", obj);        
-        junit.framework.Assert.assertNull("Expected 'EmpMonth' identifier to be null", obj.getId());        
+        org.junit.Assert.assertNotNull("Data on demand for 'EmpMonth' failed to provide a new transient entity", obj);        
+        org.junit.Assert.assertNull("Expected 'EmpMonth' identifier to be null", obj.getId());        
         obj.persist();        
         obj.flush();        
-        junit.framework.Assert.assertNotNull("Expected 'EmpMonth' identifier to no longer be null", obj.getId());        
+        org.junit.Assert.assertNotNull("Expected 'EmpMonth' identifier to no longer be null", obj.getId());        
     }    
     
     @Test    
     @Transactional    
     public void EmpMonthIntegrationTest.testRemove() {    
-        junit.framework.Assert.assertNotNull("Data on demand for 'EmpMonth' failed to initialize correctly", dod.getRandomEmpMonth());        
+        org.junit.Assert.assertNotNull("Data on demand for 'EmpMonth' failed to initialize correctly", dod.getRandomEmpMonth());        
         java.lang.Long id = dod.getRandomEmpMonth().getId();        
-        junit.framework.Assert.assertNotNull("Data on demand for 'EmpMonth' failed to provide an identifier", id);        
+        org.junit.Assert.assertNotNull("Data on demand for 'EmpMonth' failed to provide an identifier", id);        
         nl.hajari.wha.domain.EmpMonth obj = nl.hajari.wha.domain.EmpMonth.findEmpMonth(id);        
-        junit.framework.Assert.assertNotNull("Find method for 'EmpMonth' illegally returned null for id '" + id + "'", obj);        
+        org.junit.Assert.assertNotNull("Find method for 'EmpMonth' illegally returned null for id '" + id + "'", obj);        
         obj.remove();        
-        junit.framework.Assert.assertNull("Failed to remove 'EmpMonth' with identifier '" + id + "'", nl.hajari.wha.domain.EmpMonth.findEmpMonth(id));        
+        org.junit.Assert.assertNull("Failed to remove 'EmpMonth' with identifier '" + id + "'", nl.hajari.wha.domain.EmpMonth.findEmpMonth(id));        
     }    
     
 }

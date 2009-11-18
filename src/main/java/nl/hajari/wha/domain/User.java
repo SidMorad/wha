@@ -103,7 +103,8 @@ public class User implements UserDetails {
     	getRoles().add(role);
     }
     
-    public String toString() {
+    @Override
+	public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(this.username);
         GrantedAuthority[] auths = this.getAuthorities();

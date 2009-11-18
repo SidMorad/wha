@@ -1,9 +1,10 @@
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="http://www.springframework.org/tags/form" xmlns:spring="http://www.springframework.org/tags">
-    <script type="text/javascript">dojo.require("dijit.TitlePane");dojo.require("dijit.form.FilteringSelect");</script>
-    <div id="_title" style="width: 100%">
-        <spring:message arguments="Find Emp Months By Employee And Number Equals" code="entity.find" var="title"/>
-        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title}'}})); </script>
-        <c:url value="/empmonth/find/ByEmployeeAndNumberEquals" var="form_url"/>
+    <script type="text/javascript">dojo.require('dijit.TitlePane');dojo.require('dijit.form.FilteringSelect');</script>
+    <div id="_title_div" style="width: 100%">
+        <spring:message code="label.employeeandnumberequals" var="entity_label"/>
+        <spring:message arguments="${entity_label}" code="entity.find" var="title_msg"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
+        <spring:url value="/empmonth/find/ByEmployeeAndNumberEquals" var="form_url"/>
         <form:form action="${form_url}" method="GET">
             <div id="roo_empmonth_employee">
                 <c:if test="${not empty employees}">
@@ -20,8 +21,8 @@
             <div id="roo_empmonth_number">
                 <label for="_number">Number:</label>
                 <input id="_number" name="number" size="0" style="width:250px"/>
-                <spring:message code="field.required" var="required"/>
-                <spring:message argumentSeparator="," arguments="Number,(${required})" code="field.simple.validation" var="validation_required"/>
+                <spring:message code="field.required" var="field_required"/>
+                <spring:message argumentSeparator="," arguments="Number,(${field_required})" code="field.simple.validation" var="validation_required"/>
                 <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_number', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${validation_required}', required : true}})); </script>
             </div>
             <br/>

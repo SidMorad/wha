@@ -1,8 +1,9 @@
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:form="http://www.springframework.org/tags/form" xmlns:spring="http://www.springframework.org/tags">
-    <script type="text/javascript">dojo.require("dijit.TitlePane");</script>
-    <div id="_title" style="width: 100%">
-        <spring:message arguments="Employee" code="entity.show" var="title"/>
-        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title}'}})); </script>
+    <script type="text/javascript">dojo.require('dijit.TitlePane');</script>
+    <div id="_title_div" style="width: 100%">
+        <spring:message code="label.employee" var="entity_label"/>
+        <spring:message arguments="${entity_label}" code="entity.show" var="title_msg"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
         <c:if test="${not empty employee}">
             <div id="roo_employee_firstName">
                 <label for="_firstName">First Name:</label>
@@ -36,7 +37,7 @@
             <br/>
         </c:if>
         <c:if test="${empty employee}">
-            <spring:message arguments="Employee" code="entity.not.found.single"/>
+            <spring:message arguments="${entity_label}" code="entity.not.found.single"/>
         </c:if>
     </div>
 </div>

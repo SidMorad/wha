@@ -2,12 +2,10 @@ package nl.hajari.wha.web;
 
 import java.lang.Long;
 import java.lang.String;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
+import javax.validation.Valid;
 import nl.hajari.wha.domain.Role;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,14 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 privileged aspect RoleController_Roo_Controller {
     
     @RequestMapping(value = "/role", method = RequestMethod.POST)    
-    public String RoleController.create(@ModelAttribute("role") Role role, BindingResult result, ModelMap modelMap) {    
+    public String RoleController.create(@Valid Role role, BindingResult result, ModelMap modelMap) {    
         if (role == null) throw new IllegalArgumentException("A role is required");        
-        for (ConstraintViolation<Role> constraint : Validation.buildDefaultValidatorFactory().getValidator().validate(role)) {        
-            result.rejectValue(constraint.getPropertyPath().toString(), "role.error." + constraint.getPropertyPath(), constraint.getMessage());            
-        }        
         if (result.hasErrors()) {        
-            modelMap.addAllAttributes(result.getAllErrors());            
-            modelMap.addAttribute("role", role);            
             return "role/create";            
         }        
         role.persist();        
@@ -57,14 +50,9 @@ privileged aspect RoleController_Roo_Controller {
     }    
     
     @RequestMapping(method = RequestMethod.PUT)    
-    public String RoleController.update(@ModelAttribute("role") Role role, BindingResult result, ModelMap modelMap) {    
+    public String RoleController.update(@Valid Role role, BindingResult result, ModelMap modelMap) {    
         if (role == null) throw new IllegalArgumentException("A role is required");        
-        for (ConstraintViolation<Role> constraint : Validation.buildDefaultValidatorFactory().getValidator().validate(role)) {        
-            result.rejectValue(constraint.getPropertyPath().toString(), "role.error." + constraint.getPropertyPath(), constraint.getMessage());            
-        }        
         if (result.hasErrors()) {        
-            modelMap.addAllAttributes(result.getAllErrors());            
-            modelMap.addAttribute("role", role);            
             return "role/update";            
         }        
         role.merge();        

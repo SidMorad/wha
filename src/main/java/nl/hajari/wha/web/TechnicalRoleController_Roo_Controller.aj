@@ -2,12 +2,10 @@ package nl.hajari.wha.web;
 
 import java.lang.Long;
 import java.lang.String;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
+import javax.validation.Valid;
 import nl.hajari.wha.domain.TechnicalRole;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,14 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 privileged aspect TechnicalRoleController_Roo_Controller {
     
     @RequestMapping(value = "/technicalrole", method = RequestMethod.POST)    
-    public String TechnicalRoleController.create(@ModelAttribute("technicalrole") TechnicalRole technicalrole, BindingResult result, ModelMap modelMap) {    
+    public String TechnicalRoleController.create(@Valid TechnicalRole technicalrole, BindingResult result, ModelMap modelMap) {    
         if (technicalrole == null) throw new IllegalArgumentException("A technicalrole is required");        
-        for (ConstraintViolation<TechnicalRole> constraint : Validation.buildDefaultValidatorFactory().getValidator().validate(technicalrole)) {        
-            result.rejectValue(constraint.getPropertyPath().toString(), "technicalrole.error." + constraint.getPropertyPath(), constraint.getMessage());            
-        }        
         if (result.hasErrors()) {        
-            modelMap.addAllAttributes(result.getAllErrors());            
-            modelMap.addAttribute("technicalrole", technicalrole);            
             return "technicalrole/create";            
         }        
         technicalrole.persist();        
@@ -57,14 +50,9 @@ privileged aspect TechnicalRoleController_Roo_Controller {
     }    
     
     @RequestMapping(method = RequestMethod.PUT)    
-    public String TechnicalRoleController.update(@ModelAttribute("technicalrole") TechnicalRole technicalrole, BindingResult result, ModelMap modelMap) {    
+    public String TechnicalRoleController.update(@Valid TechnicalRole technicalrole, BindingResult result, ModelMap modelMap) {    
         if (technicalrole == null) throw new IllegalArgumentException("A technicalrole is required");        
-        for (ConstraintViolation<TechnicalRole> constraint : Validation.buildDefaultValidatorFactory().getValidator().validate(technicalrole)) {        
-            result.rejectValue(constraint.getPropertyPath().toString(), "technicalrole.error." + constraint.getPropertyPath(), constraint.getMessage());            
-        }        
         if (result.hasErrors()) {        
-            modelMap.addAllAttributes(result.getAllErrors());            
-            modelMap.addAttribute("technicalrole", technicalrole);            
             return "technicalrole/update";            
         }        
         technicalrole.merge();        

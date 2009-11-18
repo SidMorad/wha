@@ -2,14 +2,12 @@ package nl.hajari.wha.web;
 
 import java.lang.Long;
 import java.lang.String;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
+import javax.validation.Valid;
 import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.TechnicalRole;
 import nl.hajari.wha.domain.User;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,14 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 privileged aspect EmployeeController_Roo_Controller {
     
     @RequestMapping(value = "/employee", method = RequestMethod.POST)    
-    public String EmployeeController.create(@ModelAttribute("employee") Employee employee, BindingResult result, ModelMap modelMap) {    
+    public String EmployeeController.create(@Valid Employee employee, BindingResult result, ModelMap modelMap) {    
         if (employee == null) throw new IllegalArgumentException("A employee is required");        
-        for (ConstraintViolation<Employee> constraint : Validation.buildDefaultValidatorFactory().getValidator().validate(employee)) {        
-            result.rejectValue(constraint.getPropertyPath().toString(), "employee.error." + constraint.getPropertyPath(), constraint.getMessage());            
-        }        
         if (result.hasErrors()) {        
-            modelMap.addAllAttributes(result.getAllErrors());            
-            modelMap.addAttribute("employee", employee);            
             modelMap.addAttribute("technicalroles", TechnicalRole.findAllTechnicalRoles());            
             modelMap.addAttribute("users", User.findAllUsers());            
             return "employee/create";            
@@ -63,14 +56,9 @@ privileged aspect EmployeeController_Roo_Controller {
     }    
     
     @RequestMapping(method = RequestMethod.PUT)    
-    public String EmployeeController.update(@ModelAttribute("employee") Employee employee, BindingResult result, ModelMap modelMap) {    
+    public String EmployeeController.update(@Valid Employee employee, BindingResult result, ModelMap modelMap) {    
         if (employee == null) throw new IllegalArgumentException("A employee is required");        
-        for (ConstraintViolation<Employee> constraint : Validation.buildDefaultValidatorFactory().getValidator().validate(employee)) {        
-            result.rejectValue(constraint.getPropertyPath().toString(), "employee.error." + constraint.getPropertyPath(), constraint.getMessage());            
-        }        
         if (result.hasErrors()) {        
-            modelMap.addAllAttributes(result.getAllErrors());            
-            modelMap.addAttribute("employee", employee);            
             modelMap.addAttribute("technicalroles", TechnicalRole.findAllTechnicalRoles());            
             modelMap.addAttribute("users", User.findAllUsers());            
             return "employee/update";            

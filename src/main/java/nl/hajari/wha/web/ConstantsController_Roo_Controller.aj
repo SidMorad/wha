@@ -2,12 +2,10 @@ package nl.hajari.wha.web;
 
 import java.lang.Long;
 import java.lang.String;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
+import javax.validation.Valid;
 import nl.hajari.wha.domain.Constants;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,14 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 privileged aspect ConstantsController_Roo_Controller {
     
     @RequestMapping(value = "/admin/constants", method = RequestMethod.POST)    
-    public String ConstantsController.create(@ModelAttribute("constants") Constants constants, BindingResult result, ModelMap modelMap) {    
+    public String ConstantsController.create(@Valid Constants constants, BindingResult result, ModelMap modelMap) {    
         if (constants == null) throw new IllegalArgumentException("A constants is required");        
-        for (ConstraintViolation<Constants> constraint : Validation.buildDefaultValidatorFactory().getValidator().validate(constants)) {        
-            result.rejectValue(constraint.getPropertyPath().toString(), "constants.error." + constraint.getPropertyPath(), constraint.getMessage());            
-        }        
         if (result.hasErrors()) {        
-            modelMap.addAllAttributes(result.getAllErrors());            
-            modelMap.addAttribute("constants", constants);            
             return "admin/constants/create";            
         }        
         constants.persist();        
@@ -57,14 +50,9 @@ privileged aspect ConstantsController_Roo_Controller {
     }    
     
     @RequestMapping(method = RequestMethod.PUT)    
-    public String ConstantsController.update(@ModelAttribute("constants") Constants constants, BindingResult result, ModelMap modelMap) {    
+    public String ConstantsController.update(@Valid Constants constants, BindingResult result, ModelMap modelMap) {    
         if (constants == null) throw new IllegalArgumentException("A constants is required");        
-        for (ConstraintViolation<Constants> constraint : Validation.buildDefaultValidatorFactory().getValidator().validate(constants)) {        
-            result.rejectValue(constraint.getPropertyPath().toString(), "constants.error." + constraint.getPropertyPath(), constraint.getMessage());            
-        }        
         if (result.hasErrors()) {        
-            modelMap.addAllAttributes(result.getAllErrors());            
-            modelMap.addAttribute("constants", constants);            
             return "admin/constants/update";            
         }        
         constants.merge();        
