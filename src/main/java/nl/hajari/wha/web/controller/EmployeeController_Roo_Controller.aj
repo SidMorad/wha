@@ -1,9 +1,10 @@
-package nl.hajari.wha.web;
+package nl.hajari.wha.web.controller;
 
 import java.lang.Long;
 import java.lang.String;
 import javax.validation.Valid;
 import nl.hajari.wha.domain.Employee;
+import nl.hajari.wha.domain.TechRole;
 import nl.hajari.wha.domain.User;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -18,6 +19,7 @@ privileged aspect EmployeeController_Roo_Controller {
     public String EmployeeController.create(@Valid Employee employee, BindingResult result, ModelMap modelMap) {    
         if (employee == null) throw new IllegalArgumentException("A employee is required");        
         if (result.hasErrors()) {        
+            modelMap.addAttribute("techroles", TechRole.findAllTechRoles());            
             modelMap.addAttribute("users", User.findAllUsers());            
             return "employee/create";            
         }        
@@ -28,6 +30,7 @@ privileged aspect EmployeeController_Roo_Controller {
     @RequestMapping(value = "/employee/form", method = RequestMethod.GET)    
     public String EmployeeController.createForm(ModelMap modelMap) {    
         modelMap.addAttribute("employee", new Employee());        
+        modelMap.addAttribute("techroles", TechRole.findAllTechRoles());        
         modelMap.addAttribute("users", User.findAllUsers());        
         return "employee/create";        
     }    
@@ -56,6 +59,7 @@ privileged aspect EmployeeController_Roo_Controller {
     public String EmployeeController.update(@Valid Employee employee, BindingResult result, ModelMap modelMap) {    
         if (employee == null) throw new IllegalArgumentException("A employee is required");        
         if (result.hasErrors()) {        
+            modelMap.addAttribute("techroles", TechRole.findAllTechRoles());            
             modelMap.addAttribute("users", User.findAllUsers());            
             return "employee/update";            
         }        
@@ -67,6 +71,7 @@ privileged aspect EmployeeController_Roo_Controller {
     public String EmployeeController.updateForm(@PathVariable("id") Long id, ModelMap modelMap) {    
         if (id == null) throw new IllegalArgumentException("An Identifier is required");        
         modelMap.addAttribute("employee", Employee.findEmployee(id));        
+        modelMap.addAttribute("techroles", TechRole.findAllTechRoles());        
         modelMap.addAttribute("users", User.findAllUsers());        
         return "employee/update";        
     }    

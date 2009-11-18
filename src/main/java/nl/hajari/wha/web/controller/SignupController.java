@@ -6,6 +6,7 @@ import java.util.List;
 
 import nl.hajari.wha.Constants;
 import nl.hajari.wha.domain.Employee;
+import nl.hajari.wha.domain.TechRole;
 import nl.hajari.wha.domain.User;
 import nl.hajari.wha.web.RoleController;
 
@@ -34,7 +35,7 @@ public class SignupController {
 		Employee newemployee = new Employee();
 		newuser.setEmployee(newemployee);
 		modelMap.put("newuser", newuser);
-//		modelMap.put("technicalroles", TechnicalRole.findAllTechnicalRoles());
+		modelMap.put("techroles", TechRole.findAllTechRoles());
 		return "admin/signup";
 	}
 
@@ -59,12 +60,16 @@ public class SignupController {
 			newuser.setPassword(passwordEncoder.encodePassword(newuser.getPassword(),null));
 			newuser.addRole(roleController.getRole(Constants.ROLE_EMPLOYEE));
 			newuser.persist();
+			// we need to set the user for employee and persist again
+			employee.setUser(newuser);
+			employee.persist();
+			
 			modelMap.put("user", newuser);
 			return "admin/signup/show";
 		} else {
 			modelMap.put("errors", errors);
 			modelMap.put("newuser", newuser);
-//			modelMap.put("technicalroles", TechnicalRole.findAllTechnicalRoles());
+			modelMap.put("techroles", TechRole.findAllTechRoles());
 			return "admin/signup";
 		}
 	}

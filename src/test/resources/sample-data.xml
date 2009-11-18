@@ -54,28 +54,52 @@
             <value description="role_id">-1</value>
         </row>
     </table>
-    <!-- //TODO: add data to below tables will break the default integration-test for related entities . 
 	<table name="employee">
 		<column>id</column>	
+		<column>version</column>	
 		<column>user</column>	
         <column>first_name</column>
         <column>last_name</column>
+        <column>emp_id</column>
+        <column>hourly_wage</column>
 		<row>
 			<value description="id">-1</value>
+			<value description="version">1</value>
 			<value description="user">-1</value>
+			<value description="first_name">Saeid</value>
+			<value description="last_name">Moradi</value>
+			<value description="emp_id">33</value>
+			<value description="hourly_wage">55.55</value>
 		</row>	
 	</table>
-	<table name="emp_month">
+	<table name="tech_role">
 		<column>id</column>
-		<column>employee</column>
-		<column>number</column>
-		<column>month_status</column>
+		<column>version</column>
+		<column>name</column>
+		<column>hourly_wage</column>
 		<row>
 			<value description="id">-1</value>
-			<value description="employee">-1</value>
-			<value description="number">200911</value>
-			<value description="month_status">NEW</value>
+			<value description="version">1</value>
+			<value description="name">Designer</value>
+			<value description="hourly_wage">40.00</value>
+		</row>
+		<row>
+			<value description="id">-2</value>
+			<value description="version">1</value>
+			<value description="name">Developer</value>
+			<value description="hourly_wage">45.95</value>
 		</row>
 	</table>
-     -->
+	<table name="employee_has_techrole">
+		<column>employee_id</column>
+		<column>techrole_id</column>
+		<row>
+			<value description="employee_id">-1</value>
+			<value description="employee_id">-1</value>
+		</row>
+		<row>
+			<value description="employee_id">-1</value>
+			<value description="employee_id">-2</value>
+		</row>
+	</table>
 </dataset>

@@ -1,14 +1,21 @@
 package nl.hajari.wha.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
-import java.math.BigDecimal;
 
 @Entity
 @RooJavaBean
@@ -16,23 +23,31 @@ import java.math.BigDecimal;
 public class Employee {
 
 	@NotNull
-	@Size(max = 30)
+	@Size(min = 2, max = 45)
+	@Column(name = "first_name", length = 45)
 	private String firstName;
 
 	@NotNull
-	@Size(max = 30)
+	@Size(min = 2, max = 45)
+	@Column(name = "last_name", length = 45)
 	private String lastName;
 
 	@NotNull
-	private String employeeId;
+	@Size(max = 45)
+	@Column(name = "emp_id", length = 45)
+	private String empId;
 
-	@OneToOne(targetEntity = User.class, cascade = CascadeType.REMOVE)
+	private Float hourlyWage;
+
+	@OneToOne(targetEntity = User.class, cascade = CascadeType.ALL)
 	private User user;
 
-	private BigDecimal payRate;
-
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "employee_has_techrole", joinColumns = { @JoinColumn(name = "employee_id") }, inverseJoinColumns = @JoinColumn(name = "techrole_id"))
+	private Set<TechRole> techRoles = new HashSet<TechRole>();
+	
 	@Override
 	public String toString() {
-		return employeeId + " : " + firstName + " " + lastName;
+		return empId + " : " + firstName + " " + lastName;
 	}
 }

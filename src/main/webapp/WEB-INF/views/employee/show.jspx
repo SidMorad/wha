@@ -15,9 +15,14 @@
                 <div class="box" id="_lastName">${employee.lastName}</div>
             </div>
             <br/>
-            <div id="roo_employee_employeeId">
-                <label for="_employeeId">Employee Id:</label>
-                <div class="box" id="_employeeId">${employee.employeeId}</div>
+            <div id="roo_employee_empId">
+                <label for="_empId">Emp Id:</label>
+                <div class="box" id="_empId">${employee.empId}</div>
+            </div>
+            <br/>
+            <div id="roo_employee_hourlyWage">
+                <label for="_hourlyWage">Hourly Wage:</label>
+                <div class="box" id="_hourlyWage">${employee.hourlyWage}</div>
             </div>
             <br/>
             <div id="roo_employee_user">
@@ -25,9 +30,9 @@
                 <div class="box" id="_user">${employee.user}</div>
             </div>
             <br/>
-            <div id="roo_employee_payRate">
-                <label for="_payRate">Pay Rate:</label>
-                <div class="box" id="_payRate">${employee.payRate}</div>
+            <div id="roo_employee_techRoles">
+                <label for="_techRoles">Tech Roles:</label>
+                <div class="box" id="_techRoles">${employee.techRoles}</div>
             </div>
             <br/>
         </c:if>

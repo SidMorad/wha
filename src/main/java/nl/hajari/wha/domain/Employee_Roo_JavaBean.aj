@@ -1,7 +1,9 @@
 package nl.hajari.wha.domain;
 
+import java.lang.Float;
 import java.lang.String;
-import java.math.BigDecimal;
+import java.util.Set;
+import nl.hajari.wha.domain.TechRole;
 import nl.hajari.wha.domain.User;
 
 privileged aspect Employee_Roo_JavaBean {
@@ -22,12 +24,20 @@ privileged aspect Employee_Roo_JavaBean {
         this.lastName = lastName;        
     }    
     
-    public String Employee.getEmployeeId() {    
-        return this.employeeId;        
+    public String Employee.getEmpId() {    
+        return this.empId;        
     }    
     
-    public void Employee.setEmployeeId(String employeeId) {    
-        this.employeeId = employeeId;        
+    public void Employee.setEmpId(String empId) {    
+        this.empId = empId;        
+    }    
+    
+    public Float Employee.getHourlyWage() {    
+        return this.hourlyWage;        
+    }    
+    
+    public void Employee.setHourlyWage(Float hourlyWage) {    
+        this.hourlyWage = hourlyWage;        
     }    
     
     public User Employee.getUser() {    
@@ -38,12 +48,12 @@ privileged aspect Employee_Roo_JavaBean {
         this.user = user;        
     }    
     
-    public BigDecimal Employee.getPayRate() {    
-        return this.payRate;        
+    public Set<TechRole> Employee.getTechRoles() {    
+        return this.techRoles;        
     }    
     
-    public void Employee.setPayRate(BigDecimal payRate) {    
-        this.payRate = payRate;        
+    public void Employee.setTechRoles(Set<TechRole> techRoles) {    
+        this.techRoles = techRoles;        
     }    
     
 }
