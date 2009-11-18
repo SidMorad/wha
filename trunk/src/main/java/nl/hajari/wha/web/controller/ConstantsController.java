@@ -1,4 +1,4 @@
-package nl.hajari.wha.web;
+package nl.hajari.wha.web.controller;
 
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import nl.hajari.wha.domain.Constants;
