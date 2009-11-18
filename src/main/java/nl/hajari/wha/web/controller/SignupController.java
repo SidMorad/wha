@@ -8,7 +8,6 @@ import nl.hajari.wha.Constants;
 import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.TechRole;
 import nl.hajari.wha.domain.User;
-import nl.hajari.wha.web.RoleController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.providers.encoding.PasswordEncoder;

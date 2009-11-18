@@ -1,4 +1,4 @@
-package nl.hajari.wha.web;
+package nl.hajari.wha.web.controller;
 
 import java.lang.Long;
 import java.lang.String;
