@@ -2,7 +2,6 @@ package nl.hajari.wha.domain;
 
 import java.lang.String;
 import java.math.BigDecimal;
-import nl.hajari.wha.domain.TechnicalRole;
 import nl.hajari.wha.domain.User;
 
 privileged aspect Employee_Roo_JavaBean {
@@ -45,14 +44,6 @@ privileged aspect Employee_Roo_JavaBean {
     
     public void Employee.setPayRate(BigDecimal payRate) {    
         this.payRate = payRate;        
-    }    
-    
-    public TechnicalRole Employee.getTechnicalRole() {    
-        return this.technicalRole;        
-    }    
-    
-    public void Employee.setTechnicalRole(TechnicalRole technicalRole) {    
-        this.technicalRole = technicalRole;        
     }    
     
 }

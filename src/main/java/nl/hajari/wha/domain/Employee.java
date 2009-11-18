@@ -31,9 +31,6 @@ public class Employee {
 
 	private BigDecimal payRate;
 
-	@ManyToOne
-	private TechnicalRole technicalRole;
-
 	@Override
 	public String toString() {
 		return employeeId + " : " + firstName + " " + lastName;
