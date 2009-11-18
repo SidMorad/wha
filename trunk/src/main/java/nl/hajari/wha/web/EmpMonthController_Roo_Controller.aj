@@ -2,14 +2,12 @@ package nl.hajari.wha.web;
 
 import java.lang.Long;
 import java.lang.String;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
+import javax.validation.Valid;
 import nl.hajari.wha.domain.EmpMonth;
 import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.MonthStatus;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,16 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 privileged aspect EmpMonthController_Roo_Controller {
     
     @RequestMapping(value = "/empmonth", method = RequestMethod.POST)    
-    public String EmpMonthController.create(@ModelAttribute("empmonth") EmpMonth empmonth, BindingResult result, ModelMap modelMap) {    
+    public String EmpMonthController.create(@Valid EmpMonth empmonth, BindingResult result, ModelMap modelMap) {    
         if (empmonth == null) throw new IllegalArgumentException("A empmonth is required");        
-        for (ConstraintViolation<EmpMonth> constraint : Validation.buildDefaultValidatorFactory().getValidator().validate(empmonth)) {        
-            result.rejectValue(constraint.getPropertyPath().toString(), "empmonth.error." + constraint.getPropertyPath(), constraint.getMessage());            
-        }        
         if (result.hasErrors()) {        
-            modelMap.addAllAttributes(result.getAllErrors());            
-            modelMap.addAttribute("empmonth", empmonth);            
             modelMap.addAttribute("employees", Employee.findAllEmployees());            
-            modelMap.addAttribute("_monthstatus", MonthStatus.class.getEnumConstants());            
+            modelMap.addAttribute("monthstatus_enum", MonthStatus.class.getEnumConstants());            
             return "empmonth/create";            
         }        
         empmonth.persist();        
@@ -38,7 +31,7 @@ privileged aspect EmpMonthController_Roo_Controller {
     public String EmpMonthController.createForm(ModelMap modelMap) {    
         modelMap.addAttribute("empmonth", new EmpMonth());        
         modelMap.addAttribute("employees", Employee.findAllEmployees());        
-        modelMap.addAttribute("_monthstatus", MonthStatus.class.getEnumConstants());        
+        modelMap.addAttribute("monthstatus_enum", MonthStatus.class.getEnumConstants());        
         return "empmonth/create";        
     }    
     
@@ -63,16 +56,11 @@ privileged aspect EmpMonthController_Roo_Controller {
     }    
     
     @RequestMapping(method = RequestMethod.PUT)    
-    public String EmpMonthController.update(@ModelAttribute("empmonth") EmpMonth empmonth, BindingResult result, ModelMap modelMap) {    
+    public String EmpMonthController.update(@Valid EmpMonth empmonth, BindingResult result, ModelMap modelMap) {    
         if (empmonth == null) throw new IllegalArgumentException("A empmonth is required");        
-        for (ConstraintViolation<EmpMonth> constraint : Validation.buildDefaultValidatorFactory().getValidator().validate(empmonth)) {        
-            result.rejectValue(constraint.getPropertyPath().toString(), "empmonth.error." + constraint.getPropertyPath(), constraint.getMessage());            
-        }        
         if (result.hasErrors()) {        
-            modelMap.addAllAttributes(result.getAllErrors());            
-            modelMap.addAttribute("empmonth", empmonth);            
             modelMap.addAttribute("employees", Employee.findAllEmployees());            
-            modelMap.addAttribute("_monthstatus", MonthStatus.class.getEnumConstants());            
+            modelMap.addAttribute("monthstatus_enum", MonthStatus.class.getEnumConstants());            
             return "empmonth/update";            
         }        
         empmonth.merge();        
@@ -84,7 +72,7 @@ privileged aspect EmpMonthController_Roo_Controller {
         if (id == null) throw new IllegalArgumentException("An Identifier is required");        
         modelMap.addAttribute("empmonth", EmpMonth.findEmpMonth(id));        
         modelMap.addAttribute("employees", Employee.findAllEmployees());        
-        modelMap.addAttribute("_monthstatus", MonthStatus.class.getEnumConstants());        
+        modelMap.addAttribute("monthstatus_enum", MonthStatus.class.getEnumConstants());        
         return "empmonth/update";        
     }    
     

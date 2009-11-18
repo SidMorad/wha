@@ -130,4 +130,25 @@
             </li>
         </ul>
     </li>
+<li id="web_mvc_jsp_admin_constants_category">
+        <h2>
+            <spring:message code="menu.category.web_mvc_jsp_admin_constants_category.label"/>
+        </h2>
+        <ul>
+            <li id="web_mvc_jsp_create_admin_constants_menu_item">
+                <spring:url value="/admin/constants/form" var="web_mvc_jsp_create_admin_constants_menu_item_url"/>
+                <a href="${web_mvc_jsp_create_admin_constants_menu_item_url}">
+                    <spring:message code="label.constants" var="label_constants"/>
+                    <spring:message arguments="${label_constants}" code="global.menu.new"/>
+                </a>
+            </li>
+        <li id="web_mvc_jsp_list_admin_constants_menu_item">
+                <spring:url value="/admin/constants?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_admin_constants_menu_item_url"/>
+                <a href="${web_mvc_jsp_list_admin_constants_menu_item_url}">
+                    <spring:message code="label.constantses" var="label_constantses"/>
+                    <spring:message arguments="${label_constantses}" code="global.menu.list"/>
+                </a>
+            </li>
+        </ul>
+    </li>
 </ul>

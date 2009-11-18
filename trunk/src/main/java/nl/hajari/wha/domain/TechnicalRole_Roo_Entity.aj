@@ -74,7 +74,7 @@ privileged aspect TechnicalRole_Roo_Entity {
         this.id = merged.getId();        
     }    
     
-    public static EntityManager TechnicalRole.entityManager() {    
+    public static final EntityManager TechnicalRole.entityManager() {    
         EntityManager em = new TechnicalRole().entityManager;        
         if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");        
         return em;        

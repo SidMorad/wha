@@ -27,7 +27,8 @@ privileged aspect EmployeeDataOnDemand_Roo_DataOnDemand {
     
     public Employee EmployeeDataOnDemand.getRandomEmployee() {    
         init();        
-        return data.get(rnd.nextInt(data.size()));        
+        Employee obj = data.get(rnd.nextInt(data.size()));        
+        return Employee.findEmployee(obj.getId());        
     }    
     
     public boolean EmployeeDataOnDemand.modifyEmployee(Employee obj) {    

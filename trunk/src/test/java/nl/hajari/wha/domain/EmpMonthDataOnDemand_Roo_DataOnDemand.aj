@@ -24,7 +24,8 @@ privileged aspect EmpMonthDataOnDemand_Roo_DataOnDemand {
     
     public EmpMonth EmpMonthDataOnDemand.getRandomEmpMonth() {    
         init();        
-        return data.get(rnd.nextInt(data.size()));        
+        EmpMonth obj = data.get(rnd.nextInt(data.size()));        
+        return EmpMonth.findEmpMonth(obj.getId());        
     }    
     
     public boolean EmpMonthDataOnDemand.modifyEmpMonth(EmpMonth obj) {    

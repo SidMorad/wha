@@ -74,7 +74,7 @@ privileged aspect EmpMonth_Roo_Entity {
         this.id = merged.getId();        
     }    
     
-    public static EntityManager EmpMonth.entityManager() {    
+    public static final EntityManager EmpMonth.entityManager() {    
         EntityManager em = new EmpMonth().entityManager;        
         if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");        
         return em;        

@@ -1,8 +1,10 @@
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:form="http://www.springframework.org/tags/form" xmlns:roo="urn:jsptagdir:/WEB-INF/tags" xmlns:spring="http://www.springframework.org/tags">
-    <script type="text/javascript">dojo.require("dijit.TitlePane");</script>
-    <div id="_title" style="width: 100%">
-        <spring:message arguments="Constantses" code="entity.list.all" var="title"/>
-        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title}'}})); </script>
+    <script type="text/javascript">dojo.require('dijit.TitlePane');</script>
+    <div id="_title_div" style="width: 100%">
+        <spring:message code="label.constants" var="entity_label"/>
+        <spring:message code="label.constantses" var="entity_label_plural"/>
+        <spring:message arguments="${entity_label_plural}" code="entity.list.all" var="title_msg"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
         <c:if test="${not empty constantses}">
             <table width="300px">
                 <thead>
@@ -21,26 +23,26 @@
                         <td>${fn:substring(constants.key, 0, 10)}</td>
                         <td>${fn:substring(constants.value, 0, 10)}</td>
                         <td>
-                            <c:url value="/constants/${constants.id}" var="show_form_url"/>
-                            <c:url value="/static/images/show.png" var="show_image_url"/>
+                            <spring:url value="/admin/constants/${constants.id}" var="show_form_url"/>
+                            <spring:url value="/static/images/show.png" var="show_image_url"/>
                             <form:form action="${show_form_url}" method="GET">
-                                <spring:message arguments="Constants" code="entity.show" var="show_label"/>
+                                <spring:message arguments="${entity_label}" code="entity.show" var="show_label"/>
                                 <input alt="${show_label}" class="image" src="${show_image_url}" title="${show_label}" type="image" value="${show_label}"/>
                             </form:form>
                         </td>
                         <td>
-                            <c:url value="/admin/constants/${constants.id}/form" var="update_form_url"/>
-                            <c:url value="/static/images/update.png" var="update_image_url"/>
+                            <spring:url value="/admin/constants/${constants.id}/form" var="update_form_url"/>
+                            <spring:url value="/static/images/update.png" var="update_image_url"/>
                             <form:form action="${update_form_url}" method="GET">
-                                <spring:message arguments="Constants" code="entity.update" var="update_label"/>
+                                <spring:message arguments="${entity_label}" code="entity.update" var="update_label"/>
                                 <input alt="${update_label}" class="image" src="${update_image_url}" title="${update_label}" type="image" value="${update_label}"/>
                             </form:form>
                         </td>
                         <td>
-                            <c:url value="/admin/constants/${constants.id}" var="delete_form_url"/>
-                            <c:url value="/static/images/delete.png" var="delete_image_url"/>
+                            <spring:url value="/admin/constants/${constants.id}" var="delete_form_url"/>
+                            <spring:url value="/static/images/delete.png" var="delete_image_url"/>
                             <form:form action="${delete_form_url}" method="DELETE">
-                                <spring:message arguments="Constants" code="entity.delete" var="delete_label"/>
+                                <spring:message arguments="${entity_label}" code="entity.delete" var="delete_label"/>
                                 <input alt="${delete_label}" class="image" src="${delete_image_url}" title="${delete_label}" type="image" value="${delete_label}"/>
                             </form:form>
                         </td>
@@ -49,10 +51,10 @@
                 <tr class="footer">
                     <td colspan="6">
                         <span class="new">
-                            <c:url value="/admin/constants/form" var="create_url"/>
+                            <spring:url value="/admin/constants/form" var="create_url"/>
                             <a href="${create_url}">
-                                <c:url value="/static/images/add.png" var="create_img_url"/>
-                                <spring:message arguments="Constants" code="global.menu.new" var="add_message"/>
+                                <spring:url value="/static/images/add.png" var="create_img_url"/>
+                                <spring:message arguments="${entity_label}" code="global.menu.new" var="add_message"/>
                                 <img alt="${add_message}" src="${create_img_url}" title="${add_message}"/>
                             </a>
                         </span>
@@ -64,7 +66,7 @@
             </table>
         </c:if>
         <c:if test="${empty constantses}">
-            <spring:message arguments="Constantses" code="entity.not.found"/>
+            <spring:message arguments="${entity_label_plural}" code="entity.not.found"/>
         </c:if>
     </div>
 </div>
