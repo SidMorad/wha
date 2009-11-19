@@ -89,7 +89,7 @@
 		<dependency>
 			<groupId>org.springframework.roo</groupId>
 			<artifactId>org.springframework.roo.annotations</artifactId>
-			<version>1.0.0.RC2</version>
+			<version>1.0.0.RC4</version>
 			<scope>provided</scope>
 		</dependency>
 		<!-- Spring dependencies -->
@@ -519,7 +519,7 @@
 	</build>
 
 	<properties>
-		<spring.version>3.0.0.RC1</spring.version>
+		<spring.version>3.0.0.RC2</spring.version>
 		<aspectj.version>1.6.5.RELEASE</aspectj.version>
 	
 		<!-- Database settings -->

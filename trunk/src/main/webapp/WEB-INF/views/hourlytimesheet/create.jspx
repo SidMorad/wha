@@ -1,0 +1,117 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="http://www.springframework.org/tags/form" xmlns:spring="http://www.springframework.org/tags">
+    <script type="text/javascript">dojo.require('dijit.TitlePane');dojo.require('dijit.form.DateTextBox');dojo.require('dijit.form.FilteringSelect');</script>
+    <div id="_title_div" style="width: 100%">
+        <spring:message code="label.hourlytimesheet" var="entity_label"/>
+        <spring:message arguments="${entity_label}" code="entity.create" var="title_msg"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
+        <spring:url value="/hourlytimesheet" var="form_url"/>
+        <form:form action="${form_url}" method="POST" modelAttribute="hourlytimesheet">
+            <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
+            <div id="roo_hourlytimesheet_hourlyTimesheetcol">
+                <label for="_hourlyTimesheetcol">Hourly Timesheetcol:</label>
+                <form:input cssStyle="width:250px" id="_hourlyTimesheetcol" maxlength="45" path="hourlyTimesheetcol" size="0"/>
+                <br/>
+                <form:errors cssClass="errors" id="_hourlyTimesheetcol_error" path="hourlyTimesheetcol"/>
+                <spring:message arguments="Hourly Timesheetcol" code="field.invalid" var="field_invalid"/>
+                <spring:message code="field.required" var="field_required"/>
+                <spring:message argumentSeparator="," arguments="Hourly Timesheetcol," code="field.simple.validation" var="field_validation"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_hourlyTimesheetcol', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : false}})); </script>
+            </div>
+            <br/>
+            <div id="roo_hourlytimesheet_timeFrom">
+                <label for="_timeFrom">Time From:</label>
+                <form:input cssStyle="width:250px" id="_timeFrom" maxlength="30" path="timeFrom" size="0"/>
+                <br/>
+                <form:errors cssClass="errors" id="_timeFrom_error" path="timeFrom"/>
+                <spring:message arguments="Time From" code="field.invalid" var="field_invalid"/>
+                <spring:message code="field.required" var="field_required"/>
+                <spring:message argumentSeparator="," arguments="Time From,(${field_required})" code="field.simple.validation" var="field_validation"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_timeFrom', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_timeFrom', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {constraints: {datePattern : 'd/MM/yy', required : false}, datePattern : 'd/MM/yy'}})); </script>
+            </div>
+            <br/>
+            <div id="roo_hourlytimesheet_timeTo">
+                <label for="_timeTo">Time To:</label>
+                <form:input cssStyle="width:250px" id="_timeTo" maxlength="30" path="timeTo" size="0"/>
+                <br/>
+                <form:errors cssClass="errors" id="_timeTo_error" path="timeTo"/>
+                <spring:message arguments="Time To" code="field.invalid" var="field_invalid"/>
+                <spring:message code="field.required" var="field_required"/>
+                <spring:message argumentSeparator="," arguments="Time To,(${field_required})" code="field.simple.validation" var="field_validation"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_timeTo', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_timeTo', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {constraints: {datePattern : 'd/MM/yy', required : false}, datePattern : 'd/MM/yy'}})); </script>
+            </div>
+            <br/>
+            <div id="roo_hourlytimesheet_timeDate">
+                <label for="_timeDate">Time Date:</label>
+                <form:input cssStyle="width:250px" id="_timeDate" maxlength="30" path="timeDate" size="0"/>
+                <br/>
+                <form:errors cssClass="errors" id="_timeDate_error" path="timeDate"/>
+                <spring:message arguments="Time Date" code="field.invalid" var="field_invalid"/>
+                <spring:message code="field.required" var="field_required"/>
+                <spring:message argumentSeparator="," arguments="Time Date," code="field.simple.validation" var="field_validation"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_timeDate', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : false}})); </script>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_timeDate', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {constraints: {datePattern : 'd/MM/yy', required : false}, datePattern : 'd/MM/yy'}})); </script>
+            </div>
+            <br/>
+            <div id="roo_hourlytimesheet_duration">
+                <label for="_duration">Duration:</label>
+                <form:input cssStyle="width:250px" id="_duration" maxlength="30" path="duration" size="0"/>
+                <br/>
+                <form:errors cssClass="errors" id="_duration_error" path="duration"/>
+                <spring:message code="field.invalid.number" var="field_invalid"/>
+                <spring:message code="field.required" var="field_required"/>
+                <spring:message argumentSeparator="," arguments="Duration," code="field.simple.validation" var="field_validation"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_duration', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]*\.[0-9]*', required : false}})); </script>
+            </div>
+            <br/>
+            <div id="roo_hourlytimesheet_durationOffs">
+                <label for="_durationOffs">Duration Offs:</label>
+                <form:input cssStyle="width:250px" id="_durationOffs" maxlength="30" path="durationOffs" size="0"/>
+                <br/>
+                <form:errors cssClass="errors" id="_durationOffs_error" path="durationOffs"/>
+                <spring:message code="field.invalid.number" var="field_invalid"/>
+                <spring:message code="field.required" var="field_required"/>
+                <spring:message argumentSeparator="," arguments="Duration Offs," code="field.simple.validation" var="field_validation"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_durationOffs', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]*\.[0-9]*', required : false}})); </script>
+            </div>
+            <br/>
+            <div id="roo_hourlytimesheet_durationTraining">
+                <label for="_durationTraining">Duration Training:</label>
+                <form:input cssStyle="width:250px" id="_durationTraining" maxlength="30" path="durationTraining" size="0"/>
+                <br/>
+                <form:errors cssClass="errors" id="_durationTraining_error" path="durationTraining"/>
+                <spring:message code="field.invalid.number" var="field_invalid"/>
+                <spring:message code="field.required" var="field_required"/>
+                <spring:message argumentSeparator="," arguments="Duration Training," code="field.simple.validation" var="field_validation"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_durationTraining', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]*\.[0-9]*', required : false}})); </script>
+            </div>
+            <br/>
+            <div id="roo_hourlytimesheet_dailyTimesheet">
+                <c:if test="${not empty dailytimesheets}">
+                    <label for="_dailyTimesheet">Daily Timesheet:</label>
+                    <form:select cssStyle="width:250px" id="_dailyTimesheet" path="dailyTimesheet">
+                        <form:options itemValue="id" items="${dailytimesheets}"/>
+                    </form:select>
+                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dailyTimesheet', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+                </c:if>
+            </div>
+            <br/>
+            <div id="roo_hourlytimesheet_project">
+                <c:if test="${not empty projects}">
+                    <label for="_project">Project:</label>
+                    <form:select cssStyle="width:250px" id="_project" path="project">
+                        <form:options itemValue="id" items="${projects}"/>
+                    </form:select>
+                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_project', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+                </c:if>
+            </div>
+            <br/>
+            <div class="submit" id="roo_hourlytimesheet_submit">
+                <spring:message code="button.save" var="save_button"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
+                <input id="proceed" type="submit" value="${save_button}"/>
+            </div>
+        </form:form>
+    </div>
+</div>

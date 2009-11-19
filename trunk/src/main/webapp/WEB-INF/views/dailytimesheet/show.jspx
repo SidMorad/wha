@@ -1,0 +1,30 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:form="http://www.springframework.org/tags/form" xmlns:spring="http://www.springframework.org/tags">
+    <script type="text/javascript">dojo.require('dijit.TitlePane');</script>
+    <div id="_title_div" style="width: 100%">
+        <spring:message code="label.dailytimesheet" var="entity_label"/>
+        <spring:message arguments="${entity_label}" code="entity.show" var="title_msg"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
+        <c:if test="${not empty dailytimesheet}">
+            <div id="roo_dailytimesheet_dayDate">
+                <label for="_dayDate">Day Date:</label>
+                <div class="box" id="_dayDate">
+                    <fmt:formatDate pattern="d/MM/yy" type="DATE" value="${dailytimesheet.dayDate}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_dailytimesheet_dailyTotalDuration">
+                <label for="_dailyTotalDuration">Daily Total Duration:</label>
+                <div class="box" id="_dailyTotalDuration">${dailytimesheet.dailyTotalDuration}</div>
+            </div>
+            <br/>
+            <div id="roo_dailytimesheet_timesheet">
+                <label for="_timesheet">Timesheet:</label>
+                <div class="box" id="_timesheet">${dailytimesheet.timesheet}</div>
+            </div>
+            <br/>
+        </c:if>
+        <c:if test="${empty dailytimesheet}">
+            <spring:message arguments="${entity_label}" code="entity.not.found.single"/>
+        </c:if>
+    </div>
+</div>

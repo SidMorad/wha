@@ -1,0 +1,33 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:form="http://www.springframework.org/tags/form" xmlns:spring="http://www.springframework.org/tags">
+    <script type="text/javascript">dojo.require('dijit.TitlePane');</script>
+    <div id="_title_div" style="width: 100%">
+        <spring:message code="label.timesheet" var="entity_label"/>
+        <spring:message arguments="${entity_label}" code="entity.show" var="title_msg"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
+        <c:if test="${not empty timesheet}">
+            <div id="roo_timesheet_sheetYear">
+                <label for="_sheetYear">Sheet Year:</label>
+                <div class="box" id="_sheetYear">${timesheet.sheetYear}</div>
+            </div>
+            <br/>
+            <div id="roo_timesheet_sheetMonth">
+                <label for="_sheetMonth">Sheet Month:</label>
+                <div class="box" id="_sheetMonth">${timesheet.sheetMonth}</div>
+            </div>
+            <br/>
+            <div id="roo_timesheet_monthlyTotal">
+                <label for="_monthlyTotal">Monthly Total:</label>
+                <div class="box" id="_monthlyTotal">${timesheet.monthlyTotal}</div>
+            </div>
+            <br/>
+            <div id="roo_timesheet_employee">
+                <label for="_employee">Employee:</label>
+                <div class="box" id="_employee">${timesheet.employee}</div>
+            </div>
+            <br/>
+        </c:if>
+        <c:if test="${empty timesheet}">
+            <spring:message arguments="${entity_label}" code="entity.not.found.single"/>
+        </c:if>
+    </div>
+</div>

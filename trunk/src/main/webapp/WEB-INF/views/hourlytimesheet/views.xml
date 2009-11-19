@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+    <definition extends="default" name="hourlytimesheet/list">
+        <put-attribute name="body" value="/WEB-INF/views/hourlytimesheet/list.jspx"/>
+    </definition>
+    <definition extends="default" name="hourlytimesheet/show">
+        <put-attribute name="body" value="/WEB-INF/views/hourlytimesheet/show.jspx"/>
+    </definition>
+    <definition extends="default" name="hourlytimesheet/create">
+        <put-attribute name="body" value="/WEB-INF/views/hourlytimesheet/create.jspx"/>
+    </definition>
+    <definition extends="default" name="hourlytimesheet/update">
+        <put-attribute name="body" value="/WEB-INF/views/hourlytimesheet/update.jspx"/>
+    </definition>
+</tiles-definitions>
