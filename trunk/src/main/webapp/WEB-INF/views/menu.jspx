@@ -11,7 +11,7 @@
             <li id="web_mvc_jsp_create_adminstration_menu_item">
                 <c:url value="/admin/signup" var="web_mvc_jsp_create_admin_signup_menu_item_url"/>
                 <a href="${web_mvc_jsp_create_admin_signup_menu_item_url}">
-                    <spring:message arguments="Employee" code="global.menu.new"/>
+                    <spring:message arguments="User and Employee" code="global.menu.new"/>
                 </a>
             </li>
         </ul>
