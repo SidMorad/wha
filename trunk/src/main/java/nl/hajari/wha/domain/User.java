@@ -30,95 +30,96 @@ public class User implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
 	@NotNull
-    @Size(max = 30)
-    private String username;
+	@Size(max = 30)
+	private String username;
 
-    @NotNull
-    private String password;
+	@NotNull
+	private String password;
 
-    private transient String confirmPassword;
+	private transient String confirmPassword;
 
-    @Size(min = 2, max = 30)
-    private String email;
-    
-    @OneToOne(targetEntity = Employee.class, cascade = CascadeType.REMOVE)
-    private Employee employee;
-    
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<Role>();
+	@Size(min = 2, max = 30)
+	private String email;
 
-    private boolean enabled;
+	@OneToOne(targetEntity = Employee.class, cascade = CascadeType.REMOVE)
+	@JoinColumn(name = "employee_id")
+	private Employee employee;
 
-    private boolean accountExpired;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles = new HashSet<Role>();
 
-    private boolean accountLocked;
+	private boolean enabled;
 
-    private boolean credentialsExpired;
+	private boolean accountExpired;
 
-    public String getUsername() {
-        return username;
-    }
+	private boolean accountLocked;
 
-    public String getPassword() {
-        return password;
-    }
+	private boolean credentialsExpired;
 
-    public boolean isEnabled() {
-        return enabled;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    @Transient
-    public GrantedAuthority[] getAuthorities() {
-        return roles.toArray(new GrantedAuthority[0]);
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    @Transient
-    public boolean isAccountNonExpired() {
-        return !accountExpired;
-    }
+	public boolean isEnabled() {
+		return enabled;
+	}
 
-    @Transient
-    public boolean isAccountNonLocked() {
-        return !accountLocked;
-    }
+	@Transient
+	public GrantedAuthority[] getAuthorities() {
+		return roles.toArray(new GrantedAuthority[0]);
+	}
 
-    @Transient
-    public boolean isCredentialsNonExpired() {
-        return !credentialsExpired;
-    }
+	@Transient
+	public boolean isAccountNonExpired() {
+		return !accountExpired;
+	}
 
-    @Transient
-    public String getConfirmPassword() {
+	@Transient
+	public boolean isAccountNonLocked() {
+		return !accountLocked;
+	}
+
+	@Transient
+	public boolean isCredentialsNonExpired() {
+		return !credentialsExpired;
+	}
+
+	@Transient
+	public String getConfirmPassword() {
 		return confirmPassword;
 	}
-    
-    @Transient
-    public void setConfirmPassword(String confirmPassword) {
+
+	@Transient
+	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
-    
-    @Transient
-    public void addRole(Role role) {
-    	getRoles().add(role);
-    }
-    
-    @Override
+
+	@Transient
+	public void addRole(Role role) {
+		getRoles().add(role);
+	}
+
+	@Override
 	public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(this.username);
-        GrantedAuthority[] auths = this.getAuthorities();
-        if (auths != null) {
-            sb.append(" Granted Authorities: ");
-            for (int i = 0; i < auths.length; i++) {
-                if (i > 0) {
-                    sb.append(", ");
-                }
-                sb.append(auths[i].toString());
-            }
-        } else {
-            sb.append("No Granted Authorities");
-        }
-        return sb.toString();
-    }
+		StringBuilder sb = new StringBuilder();
+		sb.append(this.username);
+		GrantedAuthority[] auths = this.getAuthorities();
+		if (auths != null) {
+			sb.append(" Granted Authorities: ");
+			for (int i = 0; i < auths.length; i++) {
+				if (i > 0) {
+					sb.append(", ");
+				}
+				sb.append(auths[i].toString());
+			}
+		} else {
+			sb.append("No Granted Authorities");
+		}
+		return sb.toString();
+	}
 }
