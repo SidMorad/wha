@@ -105,4 +105,67 @@
             </li>
         </ul>
     </li>
+<li id="web_mvc_jsp_timesheet_category">
+        <h2>
+            <spring:message code="menu.category.web_mvc_jsp_timesheet_category.label"/>
+        </h2>
+        <ul>
+            <li id="web_mvc_jsp_create_timesheet_menu_item">
+                <spring:url value="/timesheet/form" var="web_mvc_jsp_create_timesheet_menu_item_url"/>
+                <a href="${web_mvc_jsp_create_timesheet_menu_item_url}">
+                    <spring:message code="label.timesheet" var="label_timesheet"/>
+                    <spring:message arguments="${label_timesheet}" code="global.menu.new"/>
+                </a>
+            </li>
+        <li id="web_mvc_jsp_list_timesheet_menu_item">
+                <spring:url value="/timesheet?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_timesheet_menu_item_url"/>
+                <a href="${web_mvc_jsp_list_timesheet_menu_item_url}">
+                    <spring:message code="label.timesheets" var="label_timesheets"/>
+                    <spring:message arguments="${label_timesheets}" code="global.menu.list"/>
+                </a>
+            </li>
+        </ul>
+    </li>
+<li id="web_mvc_jsp_dailytimesheet_category">
+        <h2>
+            <spring:message code="menu.category.web_mvc_jsp_dailytimesheet_category.label"/>
+        </h2>
+        <ul>
+            <li id="web_mvc_jsp_create_dailytimesheet_menu_item">
+                <spring:url value="/dailytimesheet/form" var="web_mvc_jsp_create_dailytimesheet_menu_item_url"/>
+                <a href="${web_mvc_jsp_create_dailytimesheet_menu_item_url}">
+                    <spring:message code="label.dailytimesheet" var="label_dailytimesheet"/>
+                    <spring:message arguments="${label_dailytimesheet}" code="global.menu.new"/>
+                </a>
+            </li>
+        <li id="web_mvc_jsp_list_dailytimesheet_menu_item">
+                <spring:url value="/dailytimesheet?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_dailytimesheet_menu_item_url"/>
+                <a href="${web_mvc_jsp_list_dailytimesheet_menu_item_url}">
+                    <spring:message code="label.dailytimesheets" var="label_dailytimesheets"/>
+                    <spring:message arguments="${label_dailytimesheets}" code="global.menu.list"/>
+                </a>
+            </li>
+        </ul>
+    </li>
+<li id="web_mvc_jsp_hourlytimesheet_category">
+        <h2>
+            <spring:message code="menu.category.web_mvc_jsp_hourlytimesheet_category.label"/>
+        </h2>
+        <ul>
+            <li id="web_mvc_jsp_create_hourlytimesheet_menu_item">
+                <spring:url value="/hourlytimesheet/form" var="web_mvc_jsp_create_hourlytimesheet_menu_item_url"/>
+                <a href="${web_mvc_jsp_create_hourlytimesheet_menu_item_url}">
+                    <spring:message code="label.hourlytimesheet" var="label_hourlytimesheet"/>
+                    <spring:message arguments="${label_hourlytimesheet}" code="global.menu.new"/>
+                </a>
+            </li>
+        <li id="web_mvc_jsp_list_hourlytimesheet_menu_item">
+                <spring:url value="/hourlytimesheet?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_hourlytimesheet_menu_item_url"/>
+                <a href="${web_mvc_jsp_list_hourlytimesheet_menu_item_url}">
+                    <spring:message code="label.hourlytimesheets" var="label_hourlytimesheets"/>
+                    <spring:message arguments="${label_hourlytimesheets}" code="global.menu.list"/>
+                </a>
+            </li>
+        </ul>
+    </li>
 </ul>
