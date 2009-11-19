@@ -40,12 +40,13 @@ public class Employee {
 	private Float hourlyWage;
 
 	@OneToOne(targetEntity = User.class, cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id")
 	private User user;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "employee_has_techrole", joinColumns = { @JoinColumn(name = "employee_id") }, inverseJoinColumns = @JoinColumn(name = "techrole_id"))
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "employee_has_techrole", joinColumns = { @JoinColumn(name = "employee_id") }, inverseJoinColumns = @JoinColumn(name = "techrole_id"))
 	private Set<TechRole> techRoles = new HashSet<TechRole>();
-	
+
 	@Override
 	public String toString() {
 		return empId + " : " + firstName + " " + lastName;

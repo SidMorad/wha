@@ -20,9 +20,8 @@ public class TechRole {
 
 	private Float hourlyWage;
 
-	@Override
 	public String toString() {
 		return name + " " + hourlyWage;
 	}
-	
+
 }
