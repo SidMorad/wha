@@ -14,6 +14,7 @@
                         <th>Sheet Month</th>
                         <th>Monthly Total</th>
                         <th>Employee</th>
+                        <th>Daily Timesheets</th>
                         <th/>
                         <th/>
                         <th/>
@@ -26,6 +27,7 @@
                         <td>${fn:substring(timesheet.sheetMonth, 0, 10)}</td>
                         <td>${fn:substring(timesheet.monthlyTotal, 0, 10)}</td>
                         <td>${fn:substring(timesheet.employee, 0, 10)}</td>
+                        <td>${fn:length(timesheet.dailyTimesheets)}</td>
                         <td>
                             <spring:url value="/timesheet/${timesheet.id}" var="show_form_url"/>
                             <spring:url value="/static/images/show.png" var="show_image_url"/>
@@ -37,7 +39,7 @@
                     </tr>
                 </c:forEach>
                 <tr class="footer">
-                    <td colspan="8">
+                    <td colspan="9">
                         <span class="new">
                             <spring:url value="/timesheet/form" var="create_url"/>
                             <a href="${create_url}">

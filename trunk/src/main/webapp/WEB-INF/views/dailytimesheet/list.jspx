@@ -11,6 +11,9 @@
                     <tr>
                         <th>Id</th>
                         <th>Day Date</th>
+                        <th>Duration</th>
+                        <th>Duration Offs</th>
+                        <th>Duration Training</th>
                         <th>Daily Total Duration</th>
                         <th>Timesheet</th>
                         <th/>
@@ -24,6 +27,9 @@
                         <td>
                             <fmt:formatDate pattern="d/MM/yy" type="DATE" value="${dailytimesheet.dayDate}"/>
                         </td>
+                        <td>${fn:substring(dailytimesheet.duration, 0, 10)}</td>
+                        <td>${fn:substring(dailytimesheet.durationOffs, 0, 10)}</td>
+                        <td>${fn:substring(dailytimesheet.durationTraining, 0, 10)}</td>
                         <td>${fn:substring(dailytimesheet.dailyTotalDuration, 0, 10)}</td>
                         <td>${fn:substring(dailytimesheet.timesheet, 0, 10)}</td>
                         <td>
@@ -53,7 +59,7 @@
                     </tr>
                 </c:forEach>
                 <tr class="footer">
-                    <td colspan="7">
+                    <td colspan="11">
                         <span class="new">
                             <spring:url value="/dailytimesheet/form" var="create_url"/>
                             <a href="${create_url}">
