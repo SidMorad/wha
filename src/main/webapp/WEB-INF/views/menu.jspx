@@ -1,39 +1,64 @@
 <ul xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:spring="http://www.springframework.org/tags" id="roo_menu">
-<li id="web_mvc_jsp_adminstration_category">
+	<li id="web_mvc_jsp_adminstration_category">
         <h2>Adminstration Panel</h2>
         <ul>
-        	<li id="web_mvc_jsp_list_admin_user_menu_item">
-                <c:url value="/admin/user?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_admin_user_menu_item_url"/>
-                <a href="${web_mvc_jsp_list_admin_user_menu_item_url}">
-                    <spring:message arguments="Users" code="global.menu.list"/>
-                </a>
-            </li>
             <li id="web_mvc_jsp_create_adminstration_menu_item">
                 <c:url value="/admin/signup" var="web_mvc_jsp_create_admin_signup_menu_item_url"/>
                 <a href="${web_mvc_jsp_create_admin_signup_menu_item_url}">
-                    <spring:message arguments="User and Employee" code="global.menu.new"/>
+                    <spring:message code="label.user.and.employee" var="label_user_and_employee"/>
+                    <spring:message arguments="${label_user_and_employee}" code="global.menu.new"/>
                 </a>
             </li>
-        </ul>
-    </li>
-<li id="web_mvc_jsp_employee_category">
-        <h2>employee</h2>
-        <ul>
-            <li id="web_mvc_jsp_create_employee_menu_item">
-                <c:url value="/employee/form" var="web_mvc_jsp_create_employee_menu_item_url"/>
-                <a href="${web_mvc_jsp_create_employee_menu_item_url}">
-                    <spring:message arguments="Employee" code="global.menu.new"/>
+     		<li id="web_mvc_jsp_list_role_menu_item">
+                <c:url value="/role?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_role_menu_item_url"/>
+                <a href="${web_mvc_jsp_list_role_menu_item_url}">
+                    <spring:message code="label.roles" var="label_roles"/>
+                    <spring:message arguments="${label_roles}" code="global.menu.list"/>
                 </a>
             </li>
-        <li id="web_mvc_jsp_list_employee_menu_item">
+        	<li id="web_mvc_jsp_list_admin_user_menu_item">
+                <c:url value="/admin/user?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_admin_user_menu_item_url"/>
+                <a href="${web_mvc_jsp_list_admin_user_menu_item_url}">
+                    <spring:message code="label.users" var="label_users"/>
+                    <spring:message arguments="${label_users}" code="global.menu.list"/>
+                </a>
+            </li>
+        	<li id="web_mvc_jsp_list_employee_menu_item">
                 <c:url value="/employee?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_employee_menu_item_url"/>
                 <a href="${web_mvc_jsp_list_employee_menu_item_url}">
-                    <spring:message arguments="Employees" code="global.menu.list"/>
+                    <spring:message code="label.employees" var="label_employees"/>
+                    <spring:message arguments="${label_employees}" code="global.menu.list"/>
+                </a>
+            </li>
+        	<li id="web_mvc_jsp_list_constants_menu_item">
+                <spring:url value="/constants?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_constants_menu_item_url"/>
+                <a href="${web_mvc_jsp_list_constants_menu_item_url}">
+                    <spring:message code="label.constantses" var="label_constantses"/>
+                    <spring:message arguments="${label_constantses}" code="global.menu.list"/>
                 </a>
             </li>
         </ul>
     </li>
-<li id="selenium_category">
+	<li id="web_mvc_jsp_employee_panel_category">
+        <h2>Employee Panel</h2>
+        <ul>
+            <li id="web_mvc_jsp_create_dailytimesheet_menu_item">
+                <spring:url value="/time/daily/form" var="web_mvc_jsp_create_daily_menu_item_url"/>
+                <a href="${web_mvc_jsp_create_daily_menu_item_url}">
+                    <spring:message code="label.dailytimesheet" var="label_dailytimesheet"/>
+                    <spring:message arguments="${label_dailytimesheet}" code="global.menu.new"/>
+                </a>
+            </li>
+            
+            <li id="web_mvc_jsp_list_timesheet_menu_item">
+                <c:url value="/time/timesheet?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_time_list_timesheet_menu_item_url"/>
+                <a href="${web_mvc_jsp_time_list_timesheet_menu_item_url}">
+                    <spring:message arguments="Timesheet" code="global.menu.list"/>
+                </a>
+            </li>
+        </ul>
+    </li>
+	<li id="selenium_category">
         <h2>Selenium Tests</h2>
         <ul>
             <li id="selenium_test_suite_menu_item">
@@ -44,68 +69,7 @@
             </li>
         </ul>
     </li>
-<li id="web_mvc_jsp_role_category">
-        <h2>role</h2>
-        <ul>
-            <li id="web_mvc_jsp_create_role_menu_item">
-                <c:url value="/role/form" var="web_mvc_jsp_create_role_menu_item_url"/>
-                <a href="${web_mvc_jsp_create_role_menu_item_url}">
-                    <spring:message arguments="Role" code="global.menu.new"/>
-                </a>
-            </li>
-        <li id="web_mvc_jsp_list_role_menu_item">
-                <c:url value="/role?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_role_menu_item_url"/>
-                <a href="${web_mvc_jsp_list_role_menu_item_url}">
-                    <spring:message arguments="Roles" code="global.menu.list"/>
-                </a>
-            </li>
-        <li id="finder_findrolesbynameequals_menu_item">
-                <c:url value="/role/find/ByNameEquals/form" var="finder_findrolesbynameequals_menu_item_url"/>
-                <a href="${finder_findrolesbynameequals_menu_item_url}">
-                    <spring:message arguments="Name Equals" code="global.menu.find"/>
-                </a>
-            </li>
-        </ul>
-    </li>
-<li id="web_mvc_jsp_admin/constants_category">
-        <h2>admin/constants</h2>
-        <ul>
-            <li id="web_mvc_jsp_create_admin/constants_menu_item">
-                <c:url value="/admin/constants/form" var="web_mvc_jsp_create_admin_constants_menu_item_url"/>
-                <a href="${web_mvc_jsp_create_admin_constants_menu_item_url}">
-                    <spring:message arguments="Constants" code="global.menu.new"/>
-                </a>
-            </li>
-        <li id="web_mvc_jsp_list_admin/constants_menu_item">
-                <c:url value="/admin/constants?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_admin_constants_menu_item_url"/>
-                <a href="${web_mvc_jsp_list_admin_constants_menu_item_url}">
-                    <spring:message arguments="Constantses" code="global.menu.list"/>
-                </a>
-            </li>
-        </ul>
-    </li>
-<li id="web_mvc_jsp_admin_constants_category">
-        <h2>
-            <spring:message code="menu.category.web_mvc_jsp_admin_constants_category.label"/>
-        </h2>
-        <ul>
-            <li id="web_mvc_jsp_create_admin_constants_menu_item">
-                <spring:url value="/admin/constants/form" var="web_mvc_jsp_create_admin_constants_menu_item_url"/>
-                <a href="${web_mvc_jsp_create_admin_constants_menu_item_url}">
-                    <spring:message code="label.constants" var="label_constants"/>
-                    <spring:message arguments="${label_constants}" code="global.menu.new"/>
-                </a>
-            </li>
-        <li id="web_mvc_jsp_list_admin_constants_menu_item">
-                <spring:url value="/admin/constants?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_admin_constants_menu_item_url"/>
-                <a href="${web_mvc_jsp_list_admin_constants_menu_item_url}">
-                    <spring:message code="label.constantses" var="label_constantses"/>
-                    <spring:message arguments="${label_constantses}" code="global.menu.list"/>
-                </a>
-            </li>
-        </ul>
-    </li>
-<li id="web_mvc_jsp_timesheet_category">
+	<li id="web_mvc_jsp_timesheet_category">
         <h2>
             <spring:message code="menu.category.web_mvc_jsp_timesheet_category.label"/>
         </h2>
@@ -126,7 +90,7 @@
             </li>
         </ul>
     </li>
-<li id="web_mvc_jsp_dailytimesheet_category">
+	<li id="web_mvc_jsp_dailytimesheet_category">
         <h2>
             <spring:message code="menu.category.web_mvc_jsp_dailytimesheet_category.label"/>
         </h2>
@@ -143,27 +107,6 @@
                 <a href="${web_mvc_jsp_list_dailytimesheet_menu_item_url}">
                     <spring:message code="label.dailytimesheets" var="label_dailytimesheets"/>
                     <spring:message arguments="${label_dailytimesheets}" code="global.menu.list"/>
-                </a>
-            </li>
-        </ul>
-    </li>
-<li id="web_mvc_jsp_hourlytimesheet_category">
-        <h2>
-            <spring:message code="menu.category.web_mvc_jsp_hourlytimesheet_category.label"/>
-        </h2>
-        <ul>
-            <li id="web_mvc_jsp_create_hourlytimesheet_menu_item">
-                <spring:url value="/hourlytimesheet/form" var="web_mvc_jsp_create_hourlytimesheet_menu_item_url"/>
-                <a href="${web_mvc_jsp_create_hourlytimesheet_menu_item_url}">
-                    <spring:message code="label.hourlytimesheet" var="label_hourlytimesheet"/>
-                    <spring:message arguments="${label_hourlytimesheet}" code="global.menu.new"/>
-                </a>
-            </li>
-        <li id="web_mvc_jsp_list_hourlytimesheet_menu_item">
-                <spring:url value="/hourlytimesheet?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_hourlytimesheet_menu_item_url"/>
-                <a href="${web_mvc_jsp_list_hourlytimesheet_menu_item_url}">
-                    <spring:message code="label.hourlytimesheets" var="label_hourlytimesheets"/>
-                    <spring:message arguments="${label_hourlytimesheets}" code="global.menu.list"/>
                 </a>
             </li>
         </ul>

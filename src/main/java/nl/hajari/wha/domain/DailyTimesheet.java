@@ -21,6 +21,13 @@ public class DailyTimesheet {
 	@Temporal(TemporalType.DATE)
 	private Date dayDate;
 
+
+    private Float duration;
+
+    private Float durationOffs;
+
+    private Float durationTraining;
+	
 	private Float dailyTotalDuration;
 
 	@NotNull
@@ -28,6 +35,10 @@ public class DailyTimesheet {
 	@JoinColumn(name = "timesheet_id")
 	private Timesheet timesheet;
 
+    @ManyToOne(targetEntity = Project.class)
+    @JoinColumn(name = "project_id")
+    private Project project;
+	
 	public String toString() {
 		return dayDate.getDate() + " " + dailyTotalDuration;
 	}

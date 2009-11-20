@@ -1,9 +1,14 @@
 package nl.hajari.wha.domain;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -32,6 +37,9 @@ public class Timesheet {
 	@ManyToOne(targetEntity = Employee.class)
 	@JoinColumn(name = "employee_id")
 	private Employee employee;
+
+	@OneToMany(targetEntity = DailyTimesheet.class, mappedBy = "timesheet", fetch = FetchType.LAZY, cascade =CascadeType.ALL)
+	private Set<DailyTimesheet> dailyTimesheets;
 
 	public String toString() {
 		return sheetYear + " " + sheetMonth + " " + monthlyTotal;

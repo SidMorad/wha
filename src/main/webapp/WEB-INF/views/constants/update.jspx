@@ -4,7 +4,7 @@
         <spring:message code="label.constants" var="entity_label"/>
         <spring:message arguments="${entity_label}" code="entity.update" var="title_msg"/>
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
-        <spring:url value="/admin/constants/${constants.id}" var="form_url"/>
+        <spring:url value="/constants/${constants.id}" var="form_url"/>
         <form:form action="${form_url}" method="PUT" modelAttribute="constants">
             <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
             <div id="roo_constants_key">

@@ -144,7 +144,7 @@
 			<value description="version">0</value>
 			<value description="sheet_year">09</value>
 			<value description="sheet_month">Nov</value>
-			<value description="monthly_total">10</value>
+			<value description="monthly_total">8</value>
 			<value description="employee_id">-1</value>
 		</row>
 	</table>
@@ -152,74 +152,33 @@
 		<column>id</column>	
 		<column>version</column>
 		<column>timesheet_id</column>	
+		<column>project_id</column>
 		<column>day_date</column>	
+		<column>duration</column>
+		<column>duration_offs</column>
+		<column>duration_training</column>
 		<column>daily_total_duration</column>
 		<row>
 			<value description="id">-1</value>
 			<value description="version">0</value>
 			<value description="timesheet_id">-1</value>
+			<value description="project_id">-1</value>
 			<value description="day_date">2009-11-20</value>
-			<value description="daily_total_duration">5</value>
+			<value description="duration">3</value>
+			<null/>
+			<null/>
+			<value description="daily_total_duration">3</value>
 		</row>
 		<row>
 			<value description="id">-2</value>
 			<value description="version">0</value>
 			<value description="timesheet_id">-1</value>
+			<value description="project_id">-1</value>
 			<value description="day_date">2009-11-21</value>
-			<value description="daily_total_duration">5</value>
-		</row>
-	</table>
-	<table name="hourly_timesheet">
-		<column>id</column>
-		<column>version</column>
-		<column>daily_timesheet_id</column>
-		<column>project_id</column>
-		<column>hourly_timesheetcol</column>
-		<column>time_from</column>
-		<column>time_to</column>
-		<column>time_date</column>
-		<column>duration</column>
-		<column>duration_offs</column>
-		<column>duration_training</column>
-		<row>
-			<value description="id">-1</value>
-			<value description="version">0</value>
-			<value description="daily_timesheet_id">-1</value>
-			<value description="project_id">-1</value>
-			<value description="hourly_timesheetcol">1</value>
-			<value description="time_from">09:00:00</value>
-			<value description="time_to">12:00:00</value>
-			<value description="time_date">2009-11-20</value>
-			<value description="duration">3</value>
-			<null/>
-			<null/>
-		</row>
-		<row>
-			<value description="id">-2</value>
-			<value description="version">0</value>
-			<value description="daily_timesheet_id">-1</value>
-			<value description="project_id">-1</value>
-			<value description="hourly_timesheetcol">2</value>
-			<value description="time_from">15:00:00</value>
-			<value description="time_to">17:00:00</value>
-			<value description="time_date">2009-11-20</value>
-			<value description="duration">2</value>
-			<null/>
-			<null/>
-		</row>
-		<row>
-			<value description="id">-3</value>
-			<value description="version">0</value>
-			<value description="daily_timesheet_id">-2</value>
-			<value description="project_id">-1</value>
-			<value description="hourly_timesheetcol">1</value>
-			<value description="time_from">09:00:00</value>
-			<value description="time_to">14:00:00</value>
-			<value description="time_date">2009-11-21</value>
 			<value description="duration">5</value>
 			<null/>
 			<null/>
+			<value description="daily_total_duration">5</value>
 		</row>
 	</table>
-		
 </dataset>

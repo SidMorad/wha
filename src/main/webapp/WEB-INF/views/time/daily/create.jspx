@@ -2,10 +2,10 @@
     <script type="text/javascript">dojo.require('dijit.TitlePane');dojo.require('dijit.form.DateTextBox');dojo.require('dijit.form.FilteringSelect');</script>
     <div id="_title_div" style="width: 100%">
         <spring:message code="label.dailytimesheet" var="entity_label"/>
-        <spring:message arguments="${entity_label}" code="entity.update" var="title_msg"/>
+        <spring:message arguments="${entity_label}" code="entity.create" var="title_msg"/>
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
-        <spring:url value="/dailytimesheet/${dailytimesheet.id}" var="form_url"/>
-        <form:form action="${form_url}" method="PUT" modelAttribute="dailytimesheet">
+        <spring:url value="/time/daily" var="form_url"/>
+        <form:form action="${form_url}" method="POST" modelAttribute="dailytimesheet">
             <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
             <div id="roo_dailytimesheet_dayDate">
                 <label for="_dayDate">Day Date:</label>
@@ -84,12 +84,10 @@
             </div>
             <br/>
             <div class="submit" id="roo_dailytimesheet_submit">
-                <spring:message code="button.update" var="update_button"/>
+                <spring:message code="button.save" var="save_button"/>
                 <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
-                <input id="proceed" type="submit" value="${update_button}"/>
+                <input id="proceed" type="submit" value="${save_button}"/>
             </div>
-            <form:hidden id="_id" path="id"/>
-            <form:hidden id="_version" path="version"/>
         </form:form>
     </div>
 </div>
