@@ -1,26 +1,27 @@
 package nl.hajari.wha.domain;
 
 import java.lang.Float;
-import java.lang.String;
+import java.lang.Integer;
 import java.util.Set;
 import nl.hajari.wha.domain.DailyTimesheet;
 import nl.hajari.wha.domain.Employee;
+import nl.hajari.wha.domain.enums.Month;
 
 privileged aspect Timesheet_Roo_JavaBean {
     
-    public String Timesheet.getSheetYear() {    
+    public Integer Timesheet.getSheetYear() {    
         return this.sheetYear;        
     }    
     
-    public void Timesheet.setSheetYear(String sheetYear) {    
+    public void Timesheet.setSheetYear(Integer sheetYear) {    
         this.sheetYear = sheetYear;        
     }    
     
-    public String Timesheet.getSheetMonth() {    
+    public Month Timesheet.getSheetMonth() {    
         return this.sheetMonth;        
     }    
     
-    public void Timesheet.setSheetMonth(String sheetMonth) {    
+    public void Timesheet.setSheetMonth(Month sheetMonth) {    
         this.sheetMonth = sheetMonth;        
     }    
     

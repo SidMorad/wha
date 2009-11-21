@@ -20,13 +20,10 @@
             <br/>
             <div id="roo_timesheet_sheetMonth">
                 <label for="_sheetMonth">Sheet Month:</label>
-                <form:input cssStyle="width:250px" id="_sheetMonth" maxlength="4" path="sheetMonth" size="0"/>
-                <br/>
                 <form:errors cssClass="errors" id="_sheetMonth_error" path="sheetMonth"/>
-                <spring:message arguments="Sheet Month" code="field.invalid" var="field_invalid"/>
-                <spring:message code="field.required" var="field_required"/>
-                <spring:message argumentSeparator="," arguments="Sheet Month,(${field_required})" code="field.simple.validation" var="field_validation"/>
-                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_sheetMonth', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
+                <form:select cssStyle="width:250px" id="_sheetMonth" items="${month_enum}" path="sheetMonth"/>
+                <br/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_sheetMonth', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
             </div>
             <br/>
             <div id="roo_timesheet_monthlyTotal">

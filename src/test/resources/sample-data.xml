@@ -142,8 +142,8 @@
 		<row>
 			<value description="id">-1</value>
 			<value description="version">0</value>
-			<value description="sheet_year">09</value>
-			<value description="sheet_month">Nov</value>
+			<value description="sheet_year">2009</value>
+			<value description="sheet_month">NOV</value>
 			<value description="monthly_total">8</value>
 			<value description="employee_id">-1</value>
 		</row>

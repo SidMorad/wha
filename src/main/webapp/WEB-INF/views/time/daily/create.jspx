@@ -5,7 +5,10 @@
         <spring:message arguments="${entity_label}" code="entity.create" var="title_msg"/>
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
         <spring:url value="/time/daily" var="form_url"/>
-        <form:form action="${form_url}" method="POST" modelAttribute="dailytimesheet">
+        <c:if test="${not empty customError}">
+        	<c:out value="${customError}"/>
+        </c:if>
+        <form:form action="${form_url}" method="POST" modelAttribute="dailyTimesheet">
             <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
             <div id="roo_dailytimesheet_dayDate">
                 <label for="_dayDate">Day Date:</label>
@@ -16,7 +19,7 @@
                 <spring:message code="field.required" var="field_required"/>
                 <spring:message argumentSeparator="," arguments="Day Date,(${field_required})" code="field.simple.validation" var="field_validation"/>
                 <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dayDate', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
-                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dayDate', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {constraints: {datePattern : 'd/MM/yy', required : false}, datePattern : 'd/MM/yy'}})); </script>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dayDate', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {constraints: {datePattern : 'd/MM/yy', required : true}, datePattern : 'd/MM/yy'}})); </script>
             </div>
             <br/>
             <div id="roo_dailytimesheet_duration">
@@ -27,7 +30,7 @@
                 <spring:message code="field.invalid.number" var="field_invalid"/>
                 <spring:message code="field.required" var="field_required"/>
                 <spring:message argumentSeparator="," arguments="Duration," code="field.simple.validation" var="field_validation"/>
-                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_duration', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]*\.[0-9]*', required : false}})); </script>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_duration', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]*\.[0-9]*', required : true}})); </script>
             </div>
             <br/>
             <div id="roo_dailytimesheet_durationOffs">
@@ -63,23 +66,13 @@
                 <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dailyTotalDuration', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]*\.[0-9]*', required : false}})); </script>
             </div>
             <br/>
-            <div id="roo_dailytimesheet_timesheet">
-                <c:if test="${not empty timesheets}">
-                    <label for="_timesheet">Timesheet:</label>
-                    <form:select cssStyle="width:250px" id="_timesheet" path="timesheet">
-                        <form:options itemValue="id" items="${timesheets}"/>
-                    </form:select>
-                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_timesheet', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
-                </c:if>
-            </div>
-            <br/>
             <div id="roo_dailytimesheet_project">
                 <c:if test="${not empty projects}">
                     <label for="_project">Project:</label>
                     <form:select cssStyle="width:250px" id="_project" path="project">
                         <form:options itemValue="id" items="${projects}"/>
                     </form:select>
-                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_project', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_project', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : false}})); </script>
                 </c:if>
             </div>
             <br/>

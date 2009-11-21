@@ -19,22 +19,10 @@ privileged aspect TimeController_DailyTimesheetController {
 	
 	@RequestMapping(value = "/time/daily/form", method = RequestMethod.GET)
 	public String TimeController.createDailyTimesheetForm(ModelMap modelMap) {
-		modelMap.addAttribute("dailytimesheet", new DailyTimesheet());
+		modelMap.addAttribute("dailyTimesheet", new DailyTimesheet());
 		modelMap.addAttribute("projects", Project.findAllProjects());
-		modelMap.addAttribute("timesheets", Timesheet.findAllTimesheets());
+//		modelMap.addAttribute("timesheets", Timesheet.findAllTimesheets());
 		return "time/daily/create";
-	}
-	
-	@RequestMapping(value = "/time/daily", method = RequestMethod.POST)
-	public String TimeController.createDailyTimesheet(@Valid DailyTimesheet dailytimesheet, BindingResult result, ModelMap modelMap) {
-		if (dailytimesheet == null) { throw new IllegalArgumentException("A dailytimesheet is required"); }
-		if (result.hasErrors()) {
-			modelMap.addAttribute("projects", Project.findAllProjects());
-			modelMap.addAttribute("timesheets", Timesheet.findAllTimesheets());
-			return "time/daily/create";
-		}
-		dailytimesheet.persist();
-		return "redirect:/time/daily/" + dailytimesheet.getId();
 	}
 	
     @RequestMapping(value = "/time/daily/{id}", method = RequestMethod.GET)    

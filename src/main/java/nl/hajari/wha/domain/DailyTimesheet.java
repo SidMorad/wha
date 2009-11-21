@@ -21,7 +21,7 @@ public class DailyTimesheet {
 	@Temporal(TemporalType.DATE)
 	private Date dayDate;
 
-
+	@NotNull
     private Float duration;
 
     private Float durationOffs;
@@ -30,7 +30,7 @@ public class DailyTimesheet {
 	
 	private Float dailyTotalDuration;
 
-	@NotNull
+//	@NotNull this line commented temporary !
 	@ManyToOne(targetEntity = Timesheet.class)
 	@JoinColumn(name = "timesheet_id")
 	private Timesheet timesheet;

@@ -5,7 +5,7 @@ import nl.hajari.wha.domain.Constants;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
 
-@RooWebScaffold(path = "constants", automaticallyMaintainView = true, formBackingObject = Constants.class)
+@RooWebScaffold(path = "constants", automaticallyMaintainView = false, formBackingObject = Constants.class)
 @RequestMapping("/constants/**")
 @Controller
 public class ConstantsController {

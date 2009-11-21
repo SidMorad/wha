@@ -83,4 +83,17 @@ privileged aspect EmployeeController_Roo_Controller {
         return "redirect:/employee";        
     }    
     
+    @RequestMapping(value = "find/ByUser/form", method = RequestMethod.GET)    
+    public String EmployeeController.findEmployeesByUserForm(ModelMap modelMap) {    
+        modelMap.addAttribute("users", User.findAllUsers());        
+        return "employee/findEmployeesByUser";        
+    }    
+    
+    @RequestMapping(value = "find/ByUser", method = RequestMethod.GET)    
+    public String EmployeeController.findEmployeesByUser(@RequestParam("user") User user, ModelMap modelMap) {    
+        if (user == null) throw new IllegalArgumentException("A User is required.");        
+        modelMap.addAttribute("employees", Employee.findEmployeesByUser(user).getResultList());        
+        return "employee/list";        
+    }    
+    
 }
