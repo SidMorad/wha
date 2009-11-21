@@ -1,11 +1,12 @@
 package nl.hajari.wha.web.controller;
 
-import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import nl.hajari.wha.domain.Employee;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.stereotype.Controller;
 
-@RooWebScaffold(path = "employee", automaticallyMaintainView = true, formBackingObject = Employee.class)
+import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@RooWebScaffold(path = "employee", automaticallyMaintainView = false, formBackingObject = Employee.class)
 @RequestMapping("/employee/**")
 @Controller
 public class EmployeeController {
