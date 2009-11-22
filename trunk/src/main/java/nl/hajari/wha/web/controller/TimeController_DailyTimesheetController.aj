@@ -73,9 +73,4 @@ privileged aspect TimeController_DailyTimesheetController {
         return "redirect:/time/daily";        
     }    
     
-    @InitBinder    
-    public void TimeController.initBinder(WebDataBinder binder) {    
-        binder.registerCustomEditor(java.util.Date.class, new org.springframework.beans.propertyeditors.CustomDateEditor(new java.text.SimpleDateFormat("d/MM/yy"), true));        
-    }    
-    
 }

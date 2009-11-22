@@ -18,6 +18,6 @@ public enum Month {
     @Override
     public String toString() {
     	//TODO return localized lable here 
-    	return "m " + value;
+    	return super.toString();
     }
 }
