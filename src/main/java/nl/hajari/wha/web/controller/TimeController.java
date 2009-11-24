@@ -8,6 +8,7 @@ import nl.hajari.wha.domain.Timesheet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -23,6 +24,7 @@ public class TimeController {
 	TimesheetController timesheetController;
 	
 	@RequestMapping(value = "/time/daily", method = RequestMethod.POST)
+	@Transactional
 	public String createDailyTimesheet(@Valid DailyTimesheet dailyTimesheet, BindingResult result, ModelMap modelMap) {
 		if (dailyTimesheet == null) { throw new IllegalArgumentException("A dailyTimesheet is required"); }
 
@@ -33,8 +35,9 @@ public class TimeController {
 				result.rejectValue("dayDate" ,"error.time.timesheet.not.avaiable");
 			} else {
 				dailyTimesheet.setTimesheet(timesheet);
-				//TODO: this update should be transactional . 
-				timesheet.setMonthlyTotal(timesheet.getMonthlyTotal()+dailyTimesheet.getDuration());
+				float dailyTotalDuration = dailyTimesheet.getDuration() + dailyTimesheet.getDurationTraining() - dailyTimesheet.getDurationOffs();
+				dailyTimesheet.setDailyTotalDuration(dailyTotalDuration);
+				timesheet.setMonthlyTotal(timesheet.getMonthlyTotal() + dailyTotalDuration);
 				timesheet.persist();
 			}
 		}	

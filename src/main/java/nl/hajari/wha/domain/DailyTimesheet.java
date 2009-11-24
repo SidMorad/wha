@@ -32,8 +32,10 @@ public class DailyTimesheet {
 	@Column(nullable=false)
     private Float duration;
 
+	@NotNull
     private Float durationOffs;
 
+	@NotNull
     private Float durationTraining;
 	
 	private Float dailyTotalDuration;

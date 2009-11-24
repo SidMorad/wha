@@ -30,6 +30,20 @@
                     <spring:message arguments="${label_employees}" code="global.menu.list"/>
                 </a>
             </li>
+    	    <li id="web_mvc_jsp_list_customer_menu_item">
+                <spring:url value="/customer?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_customer_menu_item_url"/>
+                <a href="${web_mvc_jsp_list_customer_menu_item_url}">
+                    <spring:message code="label.customers" var="label_customers"/>
+                    <spring:message arguments="${label_customers}" code="global.menu.list"/>
+                </a>
+            </li>
+	        <li id="web_mvc_jsp_list_project_menu_item">
+                <spring:url value="/project?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_project_menu_item_url"/>
+                <a href="${web_mvc_jsp_list_project_menu_item_url}">
+                    <spring:message code="label.projects" var="label_projects"/>
+                    <spring:message arguments="${label_projects}" code="global.menu.list"/>
+                </a>
+            </li>
         	<li id="web_mvc_jsp_list_constants_menu_item">
                 <spring:url value="/constants?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_constants_menu_item_url"/>
                 <a href="${web_mvc_jsp_list_constants_menu_item_url}">

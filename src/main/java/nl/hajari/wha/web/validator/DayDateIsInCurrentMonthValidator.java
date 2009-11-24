@@ -18,7 +18,7 @@ public class DayDateIsInCurrentMonthValidator implements ConstraintValidator<Day
 	@Override
 	public boolean isValid(DailyTimesheet dailyTimesheet, ConstraintValidatorContext constraintValidatorContext) {
 		if (dailyTimesheet.getDayDate() == null) {
-			return false;
+			return true;
 		}
 		Calendar cal1 = Calendar.getInstance();
 		cal1.setTime(new Date());
