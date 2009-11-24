@@ -8,8 +8,6 @@ import nl.hajari.wha.domain.Timesheet;
 
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,7 +17,12 @@ privileged aspect TimeController_DailyTimesheetController {
 	
 	@RequestMapping(value = "/time/daily/form", method = RequestMethod.GET)
 	public String TimeController.createDailyTimesheetForm(ModelMap modelMap) {
-		modelMap.addAttribute("dailyTimesheet", new DailyTimesheet());
+		DailyTimesheet dailyTimesheet = new DailyTimesheet();
+		dailyTimesheet.setDuration(0f);
+		dailyTimesheet.setDurationOffs(0f);
+		dailyTimesheet.setDurationTraining(0f);
+		dailyTimesheet.setDailyTotalDuration(0f);
+		modelMap.addAttribute("dailyTimesheet", dailyTimesheet);
 		modelMap.addAttribute("projects", Project.findAllProjects());
 //		modelMap.addAttribute("timesheets", Timesheet.findAllTimesheets());
 		return "time/daily/create";

@@ -164,22 +164,8 @@
             <artifactId>com.springsource.slf4j.api</artifactId>
             <version>1.5.6</version>
         </dependency>
-    	<dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>com.springsource.org.hibernate.validator</artifactId>
-            <version>4.0.0.Beta2</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-    	<dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>com.springsource.javax.validation</artifactId>
-            <version>1.0.0.CR3</version>
-        </dependency>
+    	
+    	
     	<dependency>
             <groupId>javax.transaction</groupId>
             <artifactId>com.springsource.javax.transaction</artifactId>
@@ -274,6 +260,22 @@
             <groupId>javax.activation</groupId>
             <artifactId>com.springsource.javax.activation</artifactId>
             <version>1.1.1</version>
+        </dependency>
+    <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>com.springsource.org.hibernate.validator</artifactId>
+            <version>4.0.0.GA</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>com.springsource.javax.validation</artifactId>
+            <version>1.0.0.GA</version>
         </dependency>
     </dependencies>
 

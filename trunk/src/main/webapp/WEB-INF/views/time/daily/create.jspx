@@ -55,7 +55,7 @@
                 <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_durationTraining', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]*\.[0-9]*', required : false}})); </script>
             </div>
             <br/>
-            <div id="roo_dailytimesheet_dailyTotalDuration">
+<!--        <div id="roo_dailytimesheet_dailyTotalDuration">
                 <label for="_dailyTotalDuration">Daily Total Duration:</label>
                 <form:input cssStyle="width:250px" id="_dailyTotalDuration" maxlength="30" path="dailyTotalDuration" size="0"/>
                 <br/>
@@ -65,7 +65,7 @@
                 <spring:message argumentSeparator="," arguments="Daily Total Duration," code="field.simple.validation" var="field_validation"/>
                 <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dailyTotalDuration', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]*\.[0-9]*', required : false}})); </script>
             </div>
-            <br/>
+            <br/>  -->
             <div id="roo_dailytimesheet_project">
                 <c:if test="${not empty projects}">
                     <label for="_project">Project:</label>
