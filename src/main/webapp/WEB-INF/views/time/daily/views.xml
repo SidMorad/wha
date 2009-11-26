@@ -13,4 +13,7 @@
     <definition extends="default" name="time/daily/update">
         <put-attribute name="body" value="/WEB-INF/views/time/daily/update.jspx"/>
     </definition>
+    <definition extends="default" name="time/daily/month">
+        <put-attribute name="body" value="/WEB-INF/views/time/daily/month.jspx"/>
+    </definition>
 </tiles-definitions>

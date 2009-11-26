@@ -84,6 +84,13 @@
                     <spring:message arguments="Timesheet" code="global.menu.list"/>
                 </a>
             </li>
+            
+            <li id="web_mvc_jsp_list_timesheet_month_view_menu_item">
+                <c:url value="/time/view/month" var="web_mvc_jsp_time_list_timesheet_month_view_menu_item_url"/>
+                <a href="${web_mvc_jsp_time_list_timesheet_month_view_menu_item_url}">
+                    <spring:message arguments="Timesheet Month View" code="global.menu.list"/>
+                </a>
+            </li>
         </ul>
     </li>
 	<li id="selenium_category">
