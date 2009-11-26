@@ -39,10 +39,6 @@ public class TimeController {
 				result.rejectValue("dayDate" ,"error.time.timesheet.not.avaiable");
 			} else {
 				dailyTimesheet.setTimesheet(timesheet);
-				float dailyTotalDuration = dailyTimesheet.getDuration() + dailyTimesheet.getDurationTraining() - dailyTimesheet.getDurationOffs();
-				dailyTimesheet.setDailyTotalDuration(dailyTotalDuration);
-				timesheet.setMonthlyTotal(timesheet.getMonthlyTotal() + dailyTotalDuration);
-				timesheet.persist();
 			}
 		}	
 		
@@ -50,8 +46,13 @@ public class TimeController {
 			modelMap.addAttribute("projects", Project.findAllProjects());
 			return "time/daily/create";
 		}
-
+		
+		// calculate dailyTotalDuration = duration + durationTraining - durationOffs
+		dailyTimesheet.setDailyTotalDuration(dailyTimesheet.getDuration() + dailyTimesheet.getDurationTraining() - dailyTimesheet.getDurationOffs());
 		dailyTimesheet.persist();
+		// now we update monthlyTotalDuration in timesheet entity
+		Long timesheetId = dailyTimesheet.getTimesheet().getId();
+		Timesheet.updateTimesheetTotalMonthly(timesheetId, DailyTimesheet.findTimesheetTotalMonthly(timesheetId));
 		return "redirect:/time/daily/" + dailyTimesheet.getId();
 	}
 	
