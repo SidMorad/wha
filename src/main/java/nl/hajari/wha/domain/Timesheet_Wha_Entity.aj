@@ -3,7 +3,6 @@ package nl.hajari.wha.domain;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import org.springframework.security.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 
 privileged aspect Timesheet_Wha_Entity {
@@ -15,11 +14,6 @@ privileged aspect Timesheet_Wha_Entity {
 		query.setParameter("total", total);
 		query.setParameter("id", id);
 		return query.executeUpdate();
-	}
-	
-	public static Timesheet Timesheet.getCurrentEmployeeCurrentMonthTimesheet() {
-		SecurityContextHolder.getContext().getAuthentication().getName();
-		return null;
 	}
 	
 }
