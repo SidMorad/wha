@@ -165,8 +165,8 @@
 			<value description="project_id">-1</value>
 			<value description="day_date">2009-11-20</value>
 			<value description="duration">3</value>
-			<null/>
-			<null/>
+			<value description="duration_offs">0</value>
+			<value description="duration_training">0</value>
 			<value description="daily_total_duration">3</value>
 		</row>
 		<row>
@@ -176,8 +176,8 @@
 			<value description="project_id">-1</value>
 			<value description="day_date">2009-11-21</value>
 			<value description="duration">5</value>
-			<null/>
-			<null/>
+			<value description="duration_offs">0</value>
+			<value description="duration_training">0</value>
 			<value description="daily_total_duration">5</value>
 		</row>
 	</table>

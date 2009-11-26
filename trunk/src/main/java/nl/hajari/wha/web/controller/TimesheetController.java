@@ -2,12 +2,17 @@ package nl.hajari.wha.web.controller;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.Timesheet;
 import nl.hajari.wha.domain.User;
 import nl.hajari.wha.domain.enums.Month;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.security.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -38,5 +43,5 @@ public class TimesheetController {
 			timesheet.persist();
 		}
 		return timesheet;
-	}
+	}	
 }
