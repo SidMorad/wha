@@ -76,4 +76,12 @@ privileged aspect TimeController_DailyTimesheetController {
         return "redirect:/time/daily";        
     }    
     
+    @RequestMapping(value="/time/view/month", method = RequestMethod.GET)
+    public String TimeController.prepareTimesheetMonthView(ModelMap modelMap) {
+    	DailyTimesheet dailyTimesheet = new DailyTimesheet();
+    	modelMap.put("dailyTimesheet", dailyTimesheet);
+    	modelMap.put("projects", Project.findAllProjects());
+    	return "time/daily/month";
+    }
+    
 }
