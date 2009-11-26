@@ -28,6 +28,8 @@ import org.springframework.security.userdetails.UserDetails;
 public class User implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
+	
+	public static final String USER_ID = "userId";
 
 	@NotNull
 	@Size(max = 30)

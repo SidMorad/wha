@@ -19,6 +19,8 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 @RooJavaBean
 @RooEntity(finders = { "findEmployeesByUser" })
 public class Employee {
+	
+	public static final String EMPLOYEE_ID = "employeeId";
 
     @NotNull
     @Size(min = 2, max = 45)
