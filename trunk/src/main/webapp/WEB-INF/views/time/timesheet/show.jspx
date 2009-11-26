@@ -37,11 +37,10 @@
 		    <spring:message code="label.dailytimesheets" var="entity_daily_label_plural"/>
 		    <spring:message arguments="${entity_daily_label_plural}" code="entity.list.all" var="title_daily_msg"/>
 		    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_daily_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_daily_msg}'}})); </script>
-		    <c:if test="${not empty timesheet.dailyTimesheets}">
+		    <c:if test="${not empty timesheet.dailyTimesheetsSortedList}">
 		        <table width="300px">
 		            <thead>
 		                <tr>
-		                    <th>Id</th>
 		                    <th>Day Date</th>
 		                    <th>Duration</th>
 		                    <th>Duration Offs</th>
@@ -53,9 +52,8 @@
 		                    <th/>
 		                </tr>
 		            </thead>
-		            <c:forEach items="${timesheet.dailyTimesheets}" var="dailytimesheet">
+		            <c:forEach items="${timesheet.dailyTimesheetsSortedList}" var="dailytimesheet">
 		                <tr>
-		                    <td>${dailytimesheet.id}</td>
 		                    <td>
 		                        <fmt:formatDate pattern="d/MM/yy" type="DATE" value="${dailytimesheet.dayDate}"/>
 		                    </td>
@@ -107,7 +105,7 @@
 		            </tr>
 		        </table>
 		    </c:if>
-		    <c:if test="${empty timesheet.dailyTimesheets}">
+		    <c:if test="${empty timesheet.dailyTimesheetsSortedList}">
 		        <spring:message arguments="${entity_label_plural}" code="entity.not.found"/>
 		    </c:if>
 		</div>

@@ -6,6 +6,7 @@ import nl.hajari.wha.domain.DailyTimesheet;
 import nl.hajari.wha.domain.Project;
 import nl.hajari.wha.domain.Timesheet;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +25,6 @@ privileged aspect TimeController_DailyTimesheetController {
 		dailyTimesheet.setDailyTotalDuration(0f);
 		modelMap.addAttribute("dailyTimesheet", dailyTimesheet);
 		modelMap.addAttribute("projects", Project.findAllProjects());
-//		modelMap.addAttribute("timesheets", Timesheet.findAllTimesheets());
 		return "time/daily/create";
 	}
 	
@@ -49,31 +49,45 @@ privileged aspect TimeController_DailyTimesheetController {
     }    
     
     @RequestMapping(value = "/time/daily/update", method = RequestMethod.POST)    
-    public String TimeController.updateDailyTimesheet(@Valid DailyTimesheet dailytimesheet, BindingResult result, ModelMap modelMap) {    
-        if (dailytimesheet == null) throw new IllegalArgumentException("A dailytimesheet is required");        
+    @Transactional
+    public String TimeController.updateDailyTimesheet(@Valid DailyTimesheet dailyTimesheet, BindingResult result, ModelMap modelMap) {    
+        if (dailyTimesheet == null) throw new IllegalArgumentException("A dailytimesheet is required");        
         if (result.hasErrors()) {        
             modelMap.addAttribute("projects", Project.findAllProjects());            
-            modelMap.addAttribute("timesheets", Timesheet.findAllTimesheets());            
             return "time/daily/update";            
-        }        
-        dailytimesheet.merge();        
-        return "redirect:/time/daily/" + dailytimesheet.getId();        
+        }   
+        dailyTimesheet.setDailyTotalDuration(dailyTimesheet.getDuration() + dailyTimesheet.getDurationTraining() - dailyTimesheet.getDurationOffs());
+        dailyTimesheet.merge();
+        
+        //now we update monthlyTotal in Timesheet
+        Long tsId = dailyTimesheet.getTimesheet().getId();
+        Timesheet.updateTimesheetTotalMonthly(tsId, DailyTimesheet.findTimesheetTotalMonthly(tsId));
+        
+        return "redirect:/time/daily/" + dailyTimesheet.getId();        
     }    
     
     @RequestMapping(value = "/time/daily/{id}/form", method = RequestMethod.GET)    
     public String TimeController.updateDailyTimesheetForm(@PathVariable("id") Long id, ModelMap modelMap) {    
         if (id == null) throw new IllegalArgumentException("An Identifier is required");        
-        modelMap.addAttribute("dailytimesheet", DailyTimesheet.findDailyTimesheet(id));        
+        modelMap.addAttribute("dailyTimesheet", DailyTimesheet.findDailyTimesheet(id));        
         modelMap.addAttribute("projects", Project.findAllProjects());        
-        modelMap.addAttribute("timesheets", Timesheet.findAllTimesheets());        
         return "time/daily/update";        
     }    
     
     @RequestMapping(value = "/time/daily/{id}", method = RequestMethod.DELETE)    
-    public String TimeController.deleteDailyTimesheet(@PathVariable("id") Long id) {    
-        if (id == null) throw new IllegalArgumentException("An Identifier is required");        
-        DailyTimesheet.findDailyTimesheet(id).remove();        
-        return "redirect:/time/daily";        
+    @Transactional
+    public String TimeController.deleteDailyTimesheet(@PathVariable("id") Long id, ModelMap modelMap) {    
+        if (id == null) throw new IllegalArgumentException("An Identifier is required");
+        
+        DailyTimesheet dailyTimesheet = DailyTimesheet.findDailyTimesheet(id);
+        Long tsId = dailyTimesheet.getTimesheet().getId();
+        dailyTimesheet.remove();
+        
+        //now we update monthlyTotal in Timesheet table
+        Timesheet.updateTimesheetTotalMonthly(tsId, DailyTimesheet.findTimesheetTotalMonthly(tsId));
+        
+        modelMap.addAttribute("timesheet", Timesheet.findTimesheet(tsId));
+		return "time/timesheet/show";
     }    
     
     @RequestMapping(value="/time/view/month", method = RequestMethod.GET)
