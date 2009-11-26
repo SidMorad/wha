@@ -40,7 +40,6 @@ public class DailyTimesheet {
 	
 	private Float dailyTotalDuration;
 
-//	@NotNull TODO: We need to figure it out how we cloud ignore this validation programmatically.  
 	@ManyToOne(targetEntity = Timesheet.class)
 	@JoinColumn(name = "timesheet_id", nullable=false)
 	private Timesheet timesheet;
