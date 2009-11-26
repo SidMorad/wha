@@ -29,6 +29,9 @@ public class UserEmployeeSecurityFilter extends OncePerRequestFilter {
 		}
 		String username = SecurityContextUtils.getCurrentUsername();
 		if (!StringUtils.hasText(username)) {
+			username = (String) session.getAttribute(User.USER_ID);
+		}
+		if (!StringUtils.hasText(username)) {
 			filterChain.doFilter(request, response);
 			return;
 		}
@@ -37,13 +40,16 @@ public class UserEmployeeSecurityFilter extends OncePerRequestFilter {
 			filterChain.doFilter(request, response);
 			return;
 		}
-		Employee currentEmployee = (Employee) Employee.findEmployeesByUser(currentUser).getSingleResult();
 		session.setAttribute(User.USER_ID, currentUser.getId());
-		if (currentEmployee != null) {
-			session.setAttribute(Employee.EMPLOYEE_ID, currentEmployee.getId());
+		try {
+			Employee currentEmployee = (Employee) Employee.findEmployeesByUser(currentUser).getSingleResult();
+			if (currentEmployee != null) {
+				session.setAttribute(Employee.EMPLOYEE_ID, currentEmployee.getId());
+			}
+			logger.debug("Registered current user[" + currentUser + "] and employe[" + currentEmployee
+					+ "] on HTTP session.");
+		} catch (Exception e) {
 		}
 		filterChain.doFilter(request, response);
-		logger.debug("Registered current user[" + currentUser + "] and employe[" + currentEmployee
-				+ "] on HTTP session.");
 	}
 }
