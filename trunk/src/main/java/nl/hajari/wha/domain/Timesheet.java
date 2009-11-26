@@ -26,7 +26,7 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 
 @Entity
 @RooJavaBean
-@RooEntity(finders = { "findTimesheetsByEmployeeAndSheetMonthAndSheetYearEquals" })
+@RooEntity(finders = { "findTimesheetsByEmployeeAndSheetMonthAndSheetYearEquals", "findEmployeeCurrentTimesheet" })
 public class Timesheet {
 	
     @NotNull
@@ -68,6 +68,4 @@ public class Timesheet {
         return dailyTimesheetList;        
     }
 
-
-    
 }

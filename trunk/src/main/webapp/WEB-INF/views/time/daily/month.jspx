@@ -18,6 +18,16 @@
                 <th>Project</th>
             </tr>
             </thead>
+            <c:forEach items="${dailyTimesheets}" var="dt">
+            	<tr>
+            		<td>${dt.id}</td>
+            		<td>${dt.dayDate}</td>
+            		<td>${dt.duration}</td>
+            		<td>${dt.durationOffs}</td>
+            		<td>${dt.durationTraining}</td>
+            		<td>${dt.project}</td>
+           		</tr>
+            </c:forEach>
             <tr>
 				<td>-</td>
 				<td>
