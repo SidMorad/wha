@@ -41,6 +41,12 @@ input.image {
 	height: auto;
 }
 
+input.link {
+	border: none;
+	text-decoration: underline;
+	color: #7db223;
+}
+
 submit {
 	height:25px;
 }

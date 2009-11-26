@@ -61,7 +61,7 @@
                 <tr class="footer">
                     <td colspan="11">
                         <span class="new">
-                            <spring:url value="/dailytimesheet/form" var="create_url"/>
+                            <spring:url value="/time/daily/form" var="create_url"/>
                             <a href="${create_url}">
                                 <spring:url value="/static/images/add.png" var="create_img_url"/>
                                 <spring:message arguments="${entity_label}" code="global.menu.new" var="add_message"/>

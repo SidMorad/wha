@@ -10,6 +10,11 @@ privileged aspect DailyTimesheet_Wha_Entity {
 		EntityManager entityManager = DailyTimesheet.entityManager(); 
 		Query query = entityManager.createQuery("SELECT SUM(x.dailyTotalDuration) FROM DailyTimesheet x WHERE x.timesheet.id = :timesheetID");
 		query.setParameter("timesheetID", timesheetId);
+		
+		if (query.getSingleResult() == null) {
+			return 0f;
+		}
+		
 		// query will return double not float !
 		Double monthlyTotalDouble = (Double) query.getSingleResult();
 		// we new Float with double value. TODO: check if this is right thing to do.
