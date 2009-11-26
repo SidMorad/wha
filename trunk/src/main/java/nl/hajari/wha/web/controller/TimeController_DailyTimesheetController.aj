@@ -114,8 +114,7 @@ privileged aspect TimeController_DailyTimesheetController {
 		}
 		Timesheet timesheet = (Timesheet) Timesheet.findEmployeeCurrentTimesheet(employeeId).getSingleResult();
 		logger.debug("Employee Timesheet found: " + timesheet);
-		List<DailyTimesheet> dailyTimesheets = (List<DailyTimesheet>) DailyTimesheet.findDailyTimesheetsForTimesheet(
-				timesheet).getResultList();
+		List<DailyTimesheet> dailyTimesheets = timesheet.getDailyTimesheetsSortedList();
 		DailyTimesheet dailyTimesheet = new DailyTimesheet();
 		modelMap.put("dailyTimesheet", dailyTimesheet);
 		modelMap.put("projects", Project.findAllProjects());
