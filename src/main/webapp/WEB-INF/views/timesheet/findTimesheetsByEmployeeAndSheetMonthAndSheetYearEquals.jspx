@@ -1,0 +1,45 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
+    <script type="text/javascript">dojo.require('dijit.TitlePane');dojo.require('dijit.form.FilteringSelect');</script>
+    <div id="_title_div">
+        <spring:message code="label.employeeandsheetmonthandsheetyearequals" var="entity_label"/>
+        <spring:message arguments="${entity_label}" code="entity.find" var="title_msg"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
+        <spring:url value="/timesheet/find/ByEmployeeAndSheetMonthAndSheetYearEquals" var="form_url"/>
+        <form:form action="${form_url}" method="GET">
+            <div id="roo_timesheet_employee">
+                <c:if test="${not empty employees}">
+                    <label for="_employee">Employee:</label>
+                    <select name="employee" style="width:250px">
+                        <c:forEach items="${employees}" var="employee_item">
+                            <option value="${employee_item.id}">${employee_item}</option>
+                        </c:forEach>
+                    </select>
+                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_employee', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+                </c:if>
+            </div>
+            <br/>
+            <div id="roo_timesheet_sheetmonth">
+                <label for="_sheetmonth">Sheet Month:</label>
+                <input id="_sheetmonth" name="sheetmonth" size="0" style="width:250px"/>
+                <spring:message code="field.required" var="field_required"/>
+                <spring:message argumentSeparator="," arguments="Sheet Month,(${field_required})" code="field.simple.validation" var="validation_required"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_sheetmonth', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${validation_required}', required : true}})); </script>
+            </div>
+            <br/>
+            <div id="roo_timesheet_sheetyear">
+                <label for="_sheetyear">Sheet Year:</label>
+                <input id="_sheetyear" name="sheetyear" size="0" style="width:250px"/>
+                <spring:message code="field.required" var="field_required"/>
+                <spring:message argumentSeparator="," arguments="Sheet Year,(${field_required})" code="field.simple.validation" var="validation_required"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_sheetyear', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${validation_required}', required : true}})); </script>
+            </div>
+            <br/>
+            <div class="submit" id="roo_timesheet_submit">
+                <spring:message code="button.find" var="find_button"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
+                <input id="proceed" type="submit" value="${find_button}"/>
+            </div>
+        </form:form>
+    </div>
+</div>

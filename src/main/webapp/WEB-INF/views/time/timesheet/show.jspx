@@ -12,7 +12,7 @@
             <br/>
             <div id="roo_timesheet_sheetMonth">
                 <label for="_sheetMonth">Sheet Month:</label>
-                <div class="box" id="_sheetMonth">${timesheet.sheetMonth}</div>
+                <div class="box" id="_sheetMonth">${timesheet.sheetMonthShortName}</div>
             </div>
             <br/>
             <div id="roo_timesheet_monthlyTotal">

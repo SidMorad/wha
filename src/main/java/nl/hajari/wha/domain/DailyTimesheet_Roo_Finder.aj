@@ -2,21 +2,16 @@ package nl.hajari.wha.domain;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import nl.hajari.wha.domain.Timesheet;
 
 privileged aspect DailyTimesheet_Roo_Finder {
-
-	public static Query DailyTimesheet.findDailyTimesheetsForTimesheet(Timesheet timesheet) {
-		EntityManager em = DailyTimesheet.entityManager();
-		try {
-			System.out.println("ooooo \n timesheet[" + timesheet + "] \n oooooo");
-			Query query = em
-					.createQuery("SELECT DailyTimesheet FROM DailyTimesheet AS d WHERE d.timesheet = :timesheet");
-			query.setParameter("timesheet", timesheet);
-			return query;
-		} catch (RuntimeException re) {
-			re.printStackTrace();
-			throw re;
-		}
-	}
-
+    
+    public static Query DailyTimesheet.findDailyTimesheetsByTimesheet(Timesheet timesheet) {    
+        if (timesheet == null) throw new IllegalArgumentException("The timesheet argument is required");        
+        EntityManager em = DailyTimesheet.entityManager();        
+        Query q = em.createQuery("SELECT DailyTimesheet FROM DailyTimesheet AS dailytimesheet WHERE dailytimesheet.timesheet = :timesheet");        
+        q.setParameter("timesheet", timesheet);        
+        return q;        
+    }    
+    
 }

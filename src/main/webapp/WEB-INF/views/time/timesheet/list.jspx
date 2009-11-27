@@ -23,7 +23,7 @@
                     <tr>
                         <td>${timesheet.id}</td>
                         <td>${fn:substring(timesheet.sheetYear, 0, 10)}</td>
-                        <td>${fn:substring(timesheet.sheetMonth, 0, 10)}</td>
+                        <td>${fn:substring(timesheet.sheetMonthShortName, 0, 10)}</td>
                         <td>${fn:substring(timesheet.monthlyTotal, 0, 10)}</td>
                         <td>${fn:substring(timesheet.employee, 0, 10)}</td>
                         <td>

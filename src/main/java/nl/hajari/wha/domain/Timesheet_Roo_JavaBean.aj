@@ -5,7 +5,6 @@ import java.lang.Integer;
 import java.util.Set;
 import nl.hajari.wha.domain.DailyTimesheet;
 import nl.hajari.wha.domain.Employee;
-import nl.hajari.wha.domain.enums.Month;
 
 privileged aspect Timesheet_Roo_JavaBean {
     
@@ -17,11 +16,11 @@ privileged aspect Timesheet_Roo_JavaBean {
         this.sheetYear = sheetYear;        
     }    
     
-    public Month Timesheet.getSheetMonth() {    
+    public Integer Timesheet.getSheetMonth() {    
         return this.sheetMonth;        
     }    
     
-    public void Timesheet.setSheetMonth(Month sheetMonth) {    
+    public void Timesheet.setSheetMonth(Integer sheetMonth) {    
         this.sheetMonth = sheetMonth;        
     }    
     

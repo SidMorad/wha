@@ -90,4 +90,17 @@ privileged aspect DailyTimesheetController_Roo_Controller {
         binder.registerCustomEditor(java.util.Date.class, new org.springframework.beans.propertyeditors.CustomDateEditor(new java.text.SimpleDateFormat("d/MM/yy"), true));        
     }    
     
+    @RequestMapping(value = "find/ByTimesheet/form", method = RequestMethod.GET)    
+    public String DailyTimesheetController.findDailyTimesheetsByTimesheetForm(ModelMap modelMap) {    
+        modelMap.addAttribute("timesheets", Timesheet.findAllTimesheets());        
+        return "dailytimesheet/findDailyTimesheetsByTimesheet";        
+    }    
+    
+    @RequestMapping(value = "find/ByTimesheet", method = RequestMethod.GET)    
+    public String DailyTimesheetController.findDailyTimesheetsByTimesheet(@RequestParam("timesheet") Timesheet timesheet, ModelMap modelMap) {    
+        if (timesheet == null) throw new IllegalArgumentException("A Timesheet is required.");        
+        modelMap.addAttribute("dailytimesheets", DailyTimesheet.findDailyTimesheetsByTimesheet(timesheet).getResultList());        
+        return "dailytimesheet/list";        
+    }    
+    
 }
