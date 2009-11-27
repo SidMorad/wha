@@ -1,6 +1,7 @@
-<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="http://www.springframework.org/tags/form" xmlns:spring="http://www.springframework.org/tags">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
     <script type="text/javascript">dojo.require('dijit.TitlePane');dojo.require('dijit.form.FilteringSelect');</script>
-    <div id="_title_div" style="width: 100%">
+    <div id="_title_div">
         <spring:message code="label.timesheet" var="entity_label"/>
         <spring:message arguments="${entity_label}" code="entity.create" var="title_msg"/>
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
@@ -9,21 +10,24 @@
             <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
             <div id="roo_timesheet_sheetYear">
                 <label for="_sheetYear">Sheet Year:</label>
-                <form:input cssStyle="width:250px" id="_sheetYear" maxlength="2" path="sheetYear" size="0"/>
+                <form:input cssStyle="width:250px" id="_sheetYear" maxlength="4" path="sheetYear" size="0"/>
                 <br/>
                 <form:errors cssClass="errors" id="_sheetYear_error" path="sheetYear"/>
-                <spring:message arguments="Sheet Year" code="field.invalid" var="field_invalid"/>
+                <spring:message code="field.invalid.integer" var="field_invalid"/>
                 <spring:message code="field.required" var="field_required"/>
                 <spring:message argumentSeparator="," arguments="Sheet Year,(${field_required})" code="field.simple.validation" var="field_validation"/>
-                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_sheetYear', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_sheetYear', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]{44}', required : true}})); </script>
             </div>
             <br/>
             <div id="roo_timesheet_sheetMonth">
                 <label for="_sheetMonth">Sheet Month:</label>
-                <form:errors cssClass="errors" id="_sheetMonth_error" path="sheetMonth"/>
-                <form:select cssStyle="width:250px" id="_sheetMonth" items="${month_enum}" path="sheetMonth"/>
+                <form:input cssStyle="width:250px" id="_sheetMonth" maxlength="2" path="sheetMonth" size="0"/>
                 <br/>
-                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_sheetMonth', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+                <form:errors cssClass="errors" id="_sheetMonth_error" path="sheetMonth"/>
+                <spring:message code="field.invalid.integer" var="field_invalid"/>
+                <spring:message code="field.required" var="field_required"/>
+                <spring:message argumentSeparator="," arguments="Sheet Month,(${field_required})" code="field.simple.validation" var="field_validation"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_sheetMonth', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]{12}', required : true}})); </script>
             </div>
             <br/>
             <div id="roo_timesheet_monthlyTotal">

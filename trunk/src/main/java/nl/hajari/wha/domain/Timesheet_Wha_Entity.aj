@@ -3,6 +3,8 @@ package nl.hajari.wha.domain;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import nl.hajari.wha.web.util.DateUtils;
+
 import org.springframework.transaction.annotation.Transactional;
 
 privileged aspect Timesheet_Wha_Entity {
@@ -15,5 +17,13 @@ privileged aspect Timesheet_Wha_Entity {
 		query.setParameter("id", id);
 		return query.executeUpdate();
 	}
+	
+	public static Query Timesheet.findEmployeeCurrentTimesheet(Long employeeId) {
+		Employee employee = Employee.findEmployee(employeeId);
+		Query query = Timesheet.findTimesheetsByEmployeeAndSheetMonthAndSheetYearEquals(employee, DateUtils
+				.getCurrentMonth(), DateUtils.getCurrentYear());
+		return query;
+	}
+
 	
 }

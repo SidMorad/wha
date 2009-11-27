@@ -12,6 +12,6 @@ privileged aspect Employee_Roo_Finder {
         Query q = em.createQuery("SELECT Employee FROM Employee AS employee WHERE employee.user = :user");        
         q.setParameter("user", user);        
         return q;        
-    } 
+    }    
     
 }

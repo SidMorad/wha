@@ -1,9 +1,8 @@
+
 package nl.hajari.wha.web.util;
 
 import java.util.Calendar;
 import java.util.Locale;
-
-import nl.hajari.wha.domain.enums.Month;
 
 public class DateUtils {
 
@@ -19,8 +18,10 @@ public class DateUtils {
 		return Calendar.getInstance().get(Calendar.MONTH);
 	}
 
-	public static Month getCurrentMonthEnum() {
-		return Month.class.getEnumConstants()[Calendar.getInstance().get(Calendar.MONTH)];
+	public static String getSheetMonthShortName(Integer month) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.MONTH, month);
+		return calendar.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.getDefault());
 	}
 
 }

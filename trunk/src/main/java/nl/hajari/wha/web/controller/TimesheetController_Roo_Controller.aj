@@ -7,7 +7,6 @@ import javax.validation.Valid;
 import nl.hajari.wha.domain.DailyTimesheet;
 import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.Timesheet;
-import nl.hajari.wha.domain.enums.Month;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +22,6 @@ privileged aspect TimesheetController_Roo_Controller {
         if (result.hasErrors()) {        
             modelMap.addAttribute("dailytimesheets", DailyTimesheet.findAllDailyTimesheets());            
             modelMap.addAttribute("employees", Employee.findAllEmployees());            
-            modelMap.addAttribute("month_enum", Month.class.getEnumConstants());            
             return "timesheet/create";            
         }        
         timesheet.persist();        
@@ -35,7 +33,6 @@ privileged aspect TimesheetController_Roo_Controller {
         modelMap.addAttribute("timesheet", new Timesheet());        
         modelMap.addAttribute("dailytimesheets", DailyTimesheet.findAllDailyTimesheets());        
         modelMap.addAttribute("employees", Employee.findAllEmployees());        
-        modelMap.addAttribute("month_enum", Month.class.getEnumConstants());        
         return "timesheet/create";        
     }    
     
@@ -66,7 +63,7 @@ privileged aspect TimesheetController_Roo_Controller {
     }    
     
     @RequestMapping(value = "find/ByEmployeeAndSheetMonthAndSheetYearEquals", method = RequestMethod.GET)    
-    public String TimesheetController.findTimesheetsByEmployeeAndSheetMonthAndSheetYearEquals(@RequestParam("employee") Employee employee, @RequestParam("sheetmonth") Month sheetMonth, @RequestParam("sheetyear") Integer sheetYear, ModelMap modelMap) {    
+    public String TimesheetController.findTimesheetsByEmployeeAndSheetMonthAndSheetYearEquals(@RequestParam("employee") Employee employee, @RequestParam("sheetmonth") Integer sheetMonth, @RequestParam("sheetyear") Integer sheetYear, ModelMap modelMap) {    
         if (employee == null) throw new IllegalArgumentException("A Employee is required.");        
         if (sheetMonth == null) throw new IllegalArgumentException("A SheetMonth is required.");        
         if (sheetYear == null) throw new IllegalArgumentException("A SheetYear is required.");        
