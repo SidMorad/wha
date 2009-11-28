@@ -1,4 +1,5 @@
 <invoke description="get Login Page" url="/login"/>
+<verifytitle description="we should see the login title" text="${welcome.titlepane}" regex="true"/>
 <setInputField name="j_username" value="user"/>
 <setInputField description="Set password field j_password: user" name="j_password" value="user"/>
 <clickButton label="${button.submit}"/>
