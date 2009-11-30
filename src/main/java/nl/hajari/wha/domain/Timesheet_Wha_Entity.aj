@@ -1,6 +1,5 @@
 package nl.hajari.wha.domain;
 
-import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import nl.hajari.wha.web.util.DateUtils;
@@ -11,11 +10,11 @@ privileged aspect Timesheet_Wha_Entity {
 
 	@Transactional
 	public static int Timesheet.updateTimesheetTotalMonthly(Long id, Float total) {
-		EntityManager entityManager = Timesheet.entityManager();
-		Query query = entityManager.createQuery("UPDATE Timesheet t SET t.monthlyTotal = :total WHERE t.id = :id");
-		query.setParameter("total", total);
-		query.setParameter("id", id);
-		return query.executeUpdate();
+		Timesheet timesheet = Timesheet.findTimesheet(id);
+		timesheet.setMonthlyTotal(total);
+		timesheet.merge();
+		timesheet.flush();
+		return 0;
 	}
 	
 	public static Query Timesheet.findEmployeeCurrentTimesheet(Long employeeId) {
