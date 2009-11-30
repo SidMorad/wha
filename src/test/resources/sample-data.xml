@@ -32,6 +32,17 @@
             <value description="account_locked">0</value>
             <value description="credentials_expired">0</value>
         </row>
+        <row>
+            <value description="id">-3</value>
+            <value description="version">0</value>
+            <value description="username">behrooz</value>
+            <value description="password">a20729c9c746e282c698e2d36d00f95ec4158b56</value>
+            <null/>
+            <value description="enabled">1</value>
+            <value description="account_expired">0</value>
+            <value description="account_locked">0</value>
+            <value description="credentials_expired">0</value>
+        </row>
     </table>
     <table name="role">
         <column>id</column>
@@ -59,6 +70,10 @@
             <value description="user_id">-2</value>
             <value description="role_id">-1</value>
         </row>
+        <row>
+            <value description="user_id">-3</value>
+            <value description="role_id">-2</value>
+        </row>
     </table>
 	<table name="employee">
 		<column>id</column>	
@@ -76,6 +91,15 @@
 			<value description="last_name">Moradi</value>
 			<value description="emp_id">33</value>
 			<value description="hourly_wage">55.55</value>
+		</row>	
+		<row>
+			<value description="id">-2</value>
+			<value description="version">0</value>
+			<value description="user_id">-3</value>
+			<value description="first_name">Behrooz</value>
+			<value description="last_name">Nobakht</value>
+			<value description="emp_id">44</value>
+			<value description="hourly_wage">7</value>
 		</row>	
 	</table>
 	<table name="tech_role">
@@ -115,7 +139,12 @@
 		<row>
 			<value description="id">-1</value>
 			<value description="version">0</value>
-			<value description="name">Hajari</value>
+			<value description="name"><![CDATA[Hajari Multitasking]]></value>
+		</row>
+		<row>
+			<value description="id">-2</value>
+			<value description="version">0</value>
+			<value description="name"><![CDATA[TNT Express]]></value>
 		</row>
 	</table>
 	<table name="project">
@@ -128,6 +157,18 @@
 			<value description="version">0</value>
 			<value description="customer_id">-1</value>
 			<value description="name"><![CDATA[W.H.A]]></value>
+		</row>
+		<row>
+			<value description="id">-2</value>
+			<value description="version">0</value>
+			<value description="customer_id">-2</value>
+			<value description="name"><![CDATA[TNT Asia]]></value>
+		</row>
+		<row>
+			<value description="id">-3</value>
+			<value description="version">0</value>
+			<value description="customer_id">-2</value>
+			<value description="name"><![CDATA[Personal Medical File]]></value>
 		</row>
 	</table>
 
