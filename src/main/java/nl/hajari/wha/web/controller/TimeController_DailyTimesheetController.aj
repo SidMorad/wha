@@ -70,11 +70,12 @@ privileged aspect TimeController_DailyTimesheetController {
 		dailyTimesheet.setDailyTotalDuration(dailyTimesheet.getDuration() + dailyTimesheet.getDurationTraining()
 				- dailyTimesheet.getDurationOffs());
 		dailyTimesheet.merge();
-
+		dailyTimesheet.flush();
 		// now we update monthlyTotal in Timesheet
 		Long tsId = dailyTimesheet.getTimesheet().getId();
-		Timesheet.updateTimesheetTotalMonthly(tsId, DailyTimesheet.findTimesheetTotalMonthly(tsId));
-
+		Float total = DailyTimesheet.findTimesheetTotalMonthly(tsId);
+		logger.debug("Updating timesheet[" + tsId + "] to total [" + total + "]");
+		Timesheet.updateTimesheetTotalMonthly(tsId, total);
 		return "redirect:/time/daily/" + dailyTimesheet.getId();
 	}
 
@@ -119,7 +120,43 @@ privileged aspect TimeController_DailyTimesheetController {
 		modelMap.put("dailyTimesheet", dailyTimesheet);
 		modelMap.put("projects", Project.findAllProjects());
 		modelMap.put("dailyTimesheets", dailyTimesheets);
+		modelMap.put("timesheet", timesheet);
+		modelMap.put("employee", Employee.findEmployee(employeeId));
 		return "time/daily/month";
+	}
+
+	@RequestMapping(value = "/time/view/month/update", method = RequestMethod.POST)
+	public String TimeController.updateTimesheetMonthView(@Valid DailyTimesheet dailyTimesheet,
+			BindingResult result, HttpServletRequest request,
+			ModelMap modelMap) {
+		if (dailyTimesheet == null) {
+			throw new IllegalArgumentException("DailyTimesheet is null.");
+		}
+		if (result.hasErrors()) {
+			// TODO
+			return "time/view/month";
+		}
+		Long employeeId = (Long) request.getSession().getAttribute(Employee.EMPLOYEE_ID);
+		Timesheet timesheet = (Timesheet) Timesheet.findEmployeeCurrentTimesheet(employeeId).getSingleResult();
+		logger.debug("Resolving existent daily timesheet for: [" + timesheet + "] on [" + dailyTimesheet.getDayDate()
+				+ "]");
+		DailyTimesheet dailyTimesheet2 = null;
+		try {
+			dailyTimesheet2 = (DailyTimesheet) DailyTimesheet.findDailyTimesheetByDayDateAndTimesheet(
+					dailyTimesheet.getDayDate(), timesheet).getSingleResult();
+		} catch (Exception e) {
+			logger.debug("No daily timesheet found for such criteria.");
+		}
+		if (dailyTimesheet2 == null) {
+			createDailyTimesheet(dailyTimesheet, result, modelMap);
+		} else {
+			dailyTimesheet2.setDuration(dailyTimesheet.getDuration());
+			dailyTimesheet2.setDurationOffs(dailyTimesheet.getDurationOffs());
+			dailyTimesheet2.setDurationTraining(dailyTimesheet.getDurationTraining());
+			dailyTimesheet2.setProject(dailyTimesheet.getProject());
+			updateDailyTimesheet(dailyTimesheet2, result, modelMap);
+		}
+		return prepareTimesheetMonthView(request, modelMap);
 	}
 
 }
