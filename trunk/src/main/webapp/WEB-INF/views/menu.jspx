@@ -81,14 +81,15 @@
             <li id="web_mvc_jsp_list_timesheet_menu_item">
                 <c:url value="/time/timesheet?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_time_list_timesheet_menu_item_url"/>
                 <a href="${web_mvc_jsp_time_list_timesheet_menu_item_url}">
-                    <spring:message arguments="Timesheet" code="global.menu.list"/>
+                    <spring:message arguments="${label_timesheets}" code="global.menu.list"/>
                 </a>
             </li>
             
             <li id="web_mvc_jsp_list_timesheet_month_view_menu_item">
                 <c:url value="/time/view/month" var="web_mvc_jsp_time_list_timesheet_month_view_menu_item_url"/>
                 <a href="${web_mvc_jsp_time_list_timesheet_month_view_menu_item_url}">
-                    <spring:message arguments="Timesheet Month View" code="global.menu.list"/>
+                	<spring:message code="label.timesheet.month.view" var="label_timesheet_month_view"/>
+                    <spring:message arguments="${label_timesheet_month_view}" code="global.menu.list"/>
                 </a>
             </li>
         </ul>
