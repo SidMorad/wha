@@ -50,18 +50,13 @@ public class TimeController {
 		// calculate dailyTotalDuration = duration + durationTraining - durationOffs
 		dailyTimesheet.setDailyTotalDuration(dailyTimesheet.getDuration() + dailyTimesheet.getDurationTraining() - dailyTimesheet.getDurationOffs());
 		dailyTimesheet.persist();
+		dailyTimesheet.flush();
 		// now we update monthlyTotalDuration in timesheet entity
 		Long timesheetId = dailyTimesheet.getTimesheet().getId();
 		Timesheet.updateTimesheetTotalMonthly(timesheetId, DailyTimesheet.findTimesheetTotalMonthly(timesheetId));
 		return "redirect:/time/daily/" + dailyTimesheet.getId();
 	}
 	
-    @RequestMapping(value = "/time/view/month/update", method = RequestMethod.POST)
-    public String updateTimesheetMonthView(@Valid DailyTimesheet dailyTimesheet, BindingResult result, ModelMap modelMap) {
-    	logger.warn("Received daily timesheet: " + dailyTimesheet);
-    	return "time/daily/month";
-    }
-    
    @InitBinder    
     public void initBinder(WebDataBinder binder) {    
         binder.registerCustomEditor(java.util.Date.class, new org.springframework.beans.propertyeditors.CustomDateEditor(new java.text.SimpleDateFormat("d/MM/yy"), true));        
