@@ -1,5 +1,6 @@
 package nl.hajari.wha.domain;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,8 +19,9 @@ import javax.validation.constraints.Size;
 
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.security.GrantedAuthority;
-import org.springframework.security.userdetails.UserDetails;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "app_user", uniqueConstraints = @UniqueConstraint(columnNames = { "username" }))
@@ -28,7 +30,7 @@ import org.springframework.security.userdetails.UserDetails;
 public class User implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	public static final String USER_ID = "userId";
 
 	@NotNull
@@ -72,8 +74,9 @@ public class User implements UserDetails {
 	}
 
 	@Transient
-	public GrantedAuthority[] getAuthorities() {
-		return roles.toArray(new GrantedAuthority[0]);
+	public Collection<GrantedAuthority> getAuthorities() {
+		return AuthorityUtils
+				.commaSeparatedStringToAuthorityList(getRolesCommaSeparatedString());
 	}
 
 	@Transient
@@ -103,21 +106,29 @@ public class User implements UserDetails {
 
 	@Transient
 	public void addRole(Role role) {
-		getRoles().add(role);
+		roles.add(role);
+	}
+
+	@Transient
+	public String getRolesCommaSeparatedString() {
+		StringBuffer rolesBuffer = new StringBuffer();
+		for (Role role : roles) {
+			rolesBuffer.append(role.getName());
+			rolesBuffer.append(",");
+		}
+		String rolesCommaSeparated = rolesBuffer.toString();
+		return rolesCommaSeparated;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(this.username);
-		GrantedAuthority[] auths = this.getAuthorities();
+		Collection<GrantedAuthority> auths = this.getAuthorities();
 		if (auths != null) {
-			sb.append(" Granted Authorities: ");
-			for (int i = 0; i < auths.length; i++) {
-				if (i > 0) {
-					sb.append(", ");
-				}
-				sb.append(auths[i].toString());
+			for (GrantedAuthority authority : auths) {
+				sb.append(authority);
+				sb.append(", ");
 			}
 		} else {
 			sb.append("No Granted Authorities");
