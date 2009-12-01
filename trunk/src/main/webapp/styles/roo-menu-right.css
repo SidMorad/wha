@@ -191,6 +191,13 @@ h4 {
 	margin-left: 105px;
 }
 
+.errors-in-table {
+	color: red;
+	font-weight: bold;
+	display: block;
+	margin-left: 0;
+}
+
 a {
 	text-decoration: underline;
 	font-size: 13px;

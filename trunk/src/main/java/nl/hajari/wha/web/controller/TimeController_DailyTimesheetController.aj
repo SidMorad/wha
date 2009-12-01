@@ -133,8 +133,15 @@ privileged aspect TimeController_DailyTimesheetController {
 			throw new IllegalArgumentException("DailyTimesheet is null.");
 		}
 		if (result.hasErrors()) {
-			// TODO
-			return "time/view/month";
+			// Fill modelMap 
+			Long employeeId = (Long) request.getSession().getAttribute(Employee.EMPLOYEE_ID);
+			Timesheet timesheet = (Timesheet) Timesheet.findEmployeeCurrentTimesheet(employeeId).getSingleResult();
+			modelMap.put("employee", Employee.findEmployee(employeeId));
+			modelMap.put("timesheet", timesheet);
+			modelMap.put("dailyTimesheets", timesheet.getDailyTimesheetsSortedList());
+			modelMap.put("projects", Project.findAllProjects());
+			
+			return "time/daily/month";
 		}
 		Long employeeId = (Long) request.getSession().getAttribute(Employee.EMPLOYEE_ID);
 		Timesheet timesheet = (Timesheet) Timesheet.findEmployeeCurrentTimesheet(employeeId).getSingleResult();
