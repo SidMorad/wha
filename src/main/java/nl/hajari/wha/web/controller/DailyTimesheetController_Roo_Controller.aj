@@ -2,6 +2,7 @@ package nl.hajari.wha.web.controller;
 
 import java.lang.Long;
 import java.lang.String;
+import java.util.Date;
 import javax.validation.Valid;
 import nl.hajari.wha.domain.DailyTimesheet;
 import nl.hajari.wha.domain.Project;
@@ -100,6 +101,20 @@ privileged aspect DailyTimesheetController_Roo_Controller {
     public String DailyTimesheetController.findDailyTimesheetsByTimesheet(@RequestParam("timesheet") Timesheet timesheet, ModelMap modelMap) {    
         if (timesheet == null) throw new IllegalArgumentException("A Timesheet is required.");        
         modelMap.addAttribute("dailytimesheets", DailyTimesheet.findDailyTimesheetsByTimesheet(timesheet).getResultList());        
+        return "dailytimesheet/list";        
+    }    
+    
+    @RequestMapping(value = "find/ByDayDateAndTimesheet/form", method = RequestMethod.GET)    
+    public String DailyTimesheetController.findDailyTimesheetsByDayDateAndTimesheetForm(ModelMap modelMap) {    
+        modelMap.addAttribute("timesheets", Timesheet.findAllTimesheets());        
+        return "dailytimesheet/findDailyTimesheetsByDayDateAndTimesheet";        
+    }    
+    
+    @RequestMapping(value = "find/ByDayDateAndTimesheet", method = RequestMethod.GET)    
+    public String DailyTimesheetController.findDailyTimesheetsByDayDateAndTimesheet(@RequestParam("daydate") Date dayDate, @RequestParam("timesheet") Timesheet timesheet, ModelMap modelMap) {    
+        if (dayDate == null) throw new IllegalArgumentException("A DayDate is required.");        
+        if (timesheet == null) throw new IllegalArgumentException("A Timesheet is required.");        
+        modelMap.addAttribute("dailytimesheets", DailyTimesheet.findDailyTimesheetsByDayDateAndTimesheet(dayDate, timesheet).getResultList());        
         return "dailytimesheet/list";        
     }    
     
