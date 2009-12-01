@@ -17,7 +17,7 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 @Entity
 @RooJavaBean
 @DayDateIsInCurrentMonth
-@RooEntity(finders = { "findDailyTimesheetsByTimesheet", "findDailyTimesheetByDayDateAndTimesheet" })
+@RooEntity(finders = { "findDailyTimesheetsByTimesheet", "findDailyTimesheetsByDayDateAndTimesheet" })
 public class DailyTimesheet {
 
     @NotNull

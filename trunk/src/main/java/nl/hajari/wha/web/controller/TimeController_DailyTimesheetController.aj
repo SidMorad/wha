@@ -142,7 +142,7 @@ privileged aspect TimeController_DailyTimesheetController {
 				+ "]");
 		DailyTimesheet dailyTimesheet2 = null;
 		try {
-			dailyTimesheet2 = (DailyTimesheet) DailyTimesheet.findDailyTimesheetByDayDateAndTimesheet(
+			dailyTimesheet2 = (DailyTimesheet) DailyTimesheet.findDailyTimesheetsByDayDateAndTimesheet(
 					dailyTimesheet.getDayDate(), timesheet).getSingleResult();
 		} catch (Exception e) {
 			logger.debug("No daily timesheet found for such criteria.");
