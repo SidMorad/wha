@@ -33,7 +33,7 @@
             <tr>
 				<td>
 					<form:input cssStyle="width:80px" id="_dayDate" maxlength="30" path="dayDate" size="0"/>
-	                <form:errors cssClass="errors" id="_dayDate_error" path="dayDate"/>
+	                <form:errors cssClass="errors-in-table" id="_dayDate_error" path="dayDate"/>
 	                <spring:message arguments="Day Date" code="field.invalid" var="field_invalid"/>
 	                <spring:message code="field.required" var="field_required"/>
 	                <spring:message argumentSeparator="," arguments="Day Date,(${field_required})" code="field.simple.validation" var="field_validation"/>
@@ -42,7 +42,7 @@
 				</td>
 				<td>
 	                <form:input cssStyle="width:32px" id="_duration" maxlength="30" path="duration" size="0"/>
-	                <form:errors cssClass="errors" id="_duration_error" path="duration"/>
+	                <form:errors cssClass="errors-in-table" id="_duration_error" path="duration"/>
 	                <spring:message code="field.invalid.number" var="field_invalid"/>
 	                <spring:message code="field.required" var="field_required"/>
 	                <spring:message argumentSeparator="," arguments="Duration,(${field_required})" code="field.simple.validation" var="field_validation"/>
@@ -50,7 +50,7 @@
 				</td>     
 				<td>
 	                <form:input cssStyle="width:32px" id="_durationOffs" maxlength="30" path="durationOffs" size="0"/>
-	                <form:errors cssClass="errors" id="_durationOffs_error" path="durationOffs"/>
+	                <form:errors cssClass="errors-in-table" id="_durationOffs_error" path="durationOffs"/>
 	                <spring:message code="field.invalid.number" var="field_invalid"/>
 	                <spring:message code="field.required" var="field_required"/>
 	                <spring:message argumentSeparator="," arguments="Duration Offs," code="field.simple.validation" var="field_validation"/>
@@ -58,7 +58,7 @@
 				</td>
 				<td>
 	                <form:input cssStyle="width:32px" id="_durationTraining" maxlength="30" path="durationTraining" size="0"/>
-	                <form:errors cssClass="errors" id="_durationTraining_error" path="durationTraining"/>
+	                <form:errors cssClass="errors-in-table" id="_durationTraining_error" path="durationTraining"/>
 	                <spring:message code="field.invalid.number" var="field_invalid"/>
 	                <spring:message code="field.required" var="field_required"/>
 	                <spring:message argumentSeparator="," arguments="Duration Training," code="field.simple.validation" var="field_validation"/>
