@@ -1,6 +1,5 @@
 package nl.hajari.wha.web.controller;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +9,7 @@ import nl.hajari.wha.domain.TechRole;
 import nl.hajari.wha.domain.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.providers.encoding.PasswordEncoder;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
