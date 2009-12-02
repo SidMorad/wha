@@ -69,7 +69,7 @@
         </ul>
     </li>
 	</security:authorize>
-	<security:authorize ifAllGranted="ROLE_EMPLOYEE">
+	<security:authorize ifAnyGranted="ROLE_ADMIN,ROLE_EMPLOYEE">
 	<li id="web_mvc_jsp_employee_panel_category">
         <h2>Employee Panel</h2>
         <ul>
