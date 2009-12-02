@@ -7,7 +7,11 @@
               			http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
 
 	<security:http auto-config="true">
-    	<security:form-login login-processing-url="/static/j_spring_security_check" login-page="/login" authentication-failure-url="/login?login_error=t" default-target-url="/time/view/month"/>
+    	<security:form-login 
+    		login-processing-url="/static/j_spring_security_check" 
+    		login-page="/login" 
+    		authentication-failure-url="/login?login_error=t" 
+    		authentication-success-handler-ref="customizedDefaultTargetUrlHandler" />
         <security:logout logout-url="/static/j_spring_security_logout"/>
         <security:intercept-url pattern="/admin/**" access="ROLE_ADMIN"/>
         <security:intercept-url pattern="/time/**" access="ROLE_ADMIN,ROLE_EMPLOYEE"/>
@@ -23,6 +27,10 @@
     <beans:bean id="userController" class="nl.hajari.wha.web.controller.UserController"/>
     
     <beans:bean id="sessionSecurityFilter" class="nl.hajari.wha.web.security.UserEmployeeSecurityFilter"/>
+    
+    <beans:bean id="customizedDefaultTargetUrlHandler" class="nl.hajari.wha.web.security.CustomizedDefaultTargetUrlHandler">
+    	<beans:property name="defaultTargetUrl" value="/time/view/month" />
+    </beans:bean>
 
 	<security:authentication-manager>
     	<security:authentication-provider user-service-ref="userController">

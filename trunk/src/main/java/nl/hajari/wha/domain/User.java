@@ -22,6 +22,7 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.util.StringUtils;
 
 @Entity
 @Table(name = "app_user", uniqueConstraints = @UniqueConstraint(columnNames = { "username" }))
@@ -32,6 +33,7 @@ public class User implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
 	public static final String USER_ID = "userId";
+	public static final String USERNAME = "username";
 
 	@NotNull
 	@Size(max = 30)
@@ -111,13 +113,7 @@ public class User implements UserDetails {
 
 	@Transient
 	public String getRolesCommaSeparatedString() {
-		StringBuffer rolesBuffer = new StringBuffer();
-		for (Role role : roles) {
-			rolesBuffer.append(role.getName());
-			rolesBuffer.append(",");
-		}
-		String rolesCommaSeparated = rolesBuffer.toString();
-		return rolesCommaSeparated;
+		return StringUtils.collectionToDelimitedString(getRoles(), ",");
 	}
 
 	@Override
