@@ -188,6 +188,14 @@
 			<value description="monthly_total">8</value>
 			<value description="employee_id">-1</value>
 		</row>
+		<row>
+			<value description="id">-2</value>
+			<value description="version">0</value>
+			<value description="sheet_year">2009</value>
+			<value description="sheet_month">10</value>
+			<value description="monthly_total">5</value>
+			<value description="employee_id">-2</value>
+		</row>
 	</table>
 	<table name="daily_timesheet">
 		<column>id</column>	
@@ -214,6 +222,17 @@
 			<value description="id">-2</value>
 			<value description="version">0</value>
 			<value description="timesheet_id">-1</value>
+			<value description="project_id">-1</value>
+			<value description="day_date">2009-11-21</value>
+			<value description="duration">5</value>
+			<value description="duration_offs">0</value>
+			<value description="duration_training">0</value>
+			<value description="daily_total_duration">5</value>
+		</row>
+		<row>
+			<value description="id">-3</value>
+			<value description="version">0</value>
+			<value description="timesheet_id">-2</value>
 			<value description="project_id">-1</value>
 			<value description="day_date">2009-11-21</value>
 			<value description="duration">5</value>
