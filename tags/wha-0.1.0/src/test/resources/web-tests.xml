@@ -1,0 +1,24 @@
+<!DOCTYPE project [
+	<!ENTITY config SYSTEM "./config.xmlf">
+	<!ENTITY login SYSTEM "./login.xmlf">
+]>
+<project basedir="." default="run-all-tests">
+	<!-- Use i18n bundle, 2nd one listed is the default -->
+	<property file="${i18n.classpath}/messages_${user.language}.properties"/>
+	<property file="${i18n.classpath}/messages.properties"/>
+	
+	<!-- runs all targets -->
+	<target name="run-all-tests" 
+		depends="Login"
+		description="Call and executes all user test cases (targets)"/>
+	
+	<target name="Login" description="Runs login test and verifies Main's Title">
+		<webtest name="login">
+			&config;
+			<steps>
+				&login;
+			</steps>
+		</webtest>
+	</target>
+	
+</project>
