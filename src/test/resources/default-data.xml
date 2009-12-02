@@ -26,7 +26,7 @@
             <value description="version">0</value>
             <value description="username">admin</value>
             <value description="password">d033e22ae348aeb5660fc2140aec35850c4da997</value>
-            <value description="employee_id">3</value>
+            <null />
             <value description="enabled">1</value>
             <value description="account_expired">0</value>
             <value description="account_locked">0</value>
@@ -100,15 +100,6 @@
 			<value description="last_name">Nobakht</value>
 			<value description="emp_id">44</value>
 			<value description="hourly_wage">7</value>
-		</row>	
-		<row>
-			<value description="id">3</value>
-			<value description="version">0</value>
-			<value description="user_id">2</value>
-			<value description="first_name">Admin</value>
-			<value description="last_name">Admin</value>
-			<value description="emp_id">00</value>
-			<value description="hourly_wage">0</value>
 		</row>	
 	</table>
 	<table name="tech_role">
@@ -196,14 +187,6 @@
 			<value description="sheet_month">10</value>
 			<value description="monthly_total">8</value>
 			<value description="employee_id">1</value>
-		</row>
-		<row>
-			<value description="id">2</value>
-			<value description="version">0</value>
-			<value description="sheet_year">2009</value>
-			<value description="sheet_month">11</value>
-			<value description="monthly_total">0</value>
-			<value description="employee_id">3</value>
 		</row>
 	</table>
 	<table name="daily_timesheet">
