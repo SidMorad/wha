@@ -122,17 +122,6 @@ public class User implements UserDetails {
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(this.username);
-		Collection<GrantedAuthority> auths = this.getAuthorities();
-		if (auths != null) {
-			for (GrantedAuthority authority : auths) {
-				sb.append(authority);
-				sb.append(", ");
-			}
-		} else {
-			sb.append("No Granted Authorities");
-		}
-		return sb.toString();
+		return this.username;
 	}
 }
