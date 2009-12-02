@@ -10,7 +10,7 @@
     	<security:form-login login-processing-url="/static/j_spring_security_check" login-page="/login" authentication-failure-url="/login?login_error=t" default-target-url="/time/view/month"/>
         <security:logout logout-url="/static/j_spring_security_logout"/>
         <security:intercept-url pattern="/admin/**" access="ROLE_ADMIN"/>
-        <security:intercept-url pattern="/time/**" access="ROLE_EMPLOYEE"/>
+        <security:intercept-url pattern="/time/**" access="ROLE_ADMIN,ROLE_EMPLOYEE"/>
         <security:intercept-url pattern="/member/**" access="IS_AUTHENTICATED_REMEMBERED" />
         <security:intercept-url pattern="/resources/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <security:intercept-url pattern="/static/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
