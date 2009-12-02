@@ -1,5 +1,7 @@
 package nl.hajari.wha.domain;
 
+import java.util.List;
+
 import javax.persistence.Query;
 
 import nl.hajari.wha.web.util.DateUtils;
@@ -24,5 +26,18 @@ privileged aspect Timesheet_Wha_Entity {
 		return query;
 	}
 
+    public static List<Timesheet> Timesheet.findAllTimesheetsByEmployeeId(Long employeeId) {    
+    	Query query = entityManager().createQuery("select o from Timesheet o where o.employee.id= :employeeId");
+    	query.setParameter("employeeId", employeeId);
+    	return query.getResultList();
+    }    
 	
+    public static List<Timesheet> Timesheet.findTimesheetEntriesByEmployeeId(Long employeeId,int firstResult, int maxResults) {    
+        Query query = entityManager().createQuery("select o from Timesheet o where o.employee.id= :employeeId");
+        query.setParameter("employeeId", employeeId);
+        query.setFirstResult(firstResult);
+        query.setMaxResults(maxResults);
+        return query.getResultList();
+    } 
+    
 }
