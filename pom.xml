@@ -7,6 +7,54 @@
 	<version>0.1.0-SNAPSHOT</version>
 	<name>wha</name>
 
+    <prerequisites>
+        <maven>2.0.9</maven>
+    </prerequisites>
+	
+   	<organization>
+     	<name>Hajari MultiTasking, Inc</name>
+      	<url>http://www.hajari.nl/</url>
+    </organization>
+    <inceptionYear>2009</inceptionYear>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+	
+    <!-- Note when doing releases: tagBase is set in release plugin configuration below -->
+    <scm>
+        <connection>scm:svn:http://wha.googlecode.com/svn/trunk/</connection>
+        <developerConnection>scm:svn:https://wha.googlecode.com/svn/trunk/</developerConnection>
+    </scm>
+
+    <issueManagement>
+        <system>gcode</system>
+        <url>http://code.google.com/p/wha/issues/list</url>
+    </issueManagement>
+    <!-- <ciManagement>
+        <system>bamboo</system>
+        <url>https://build.host/browse/WHA</url>
+    </ciManagement> -->
+
+	<developers>
+		<developer>
+			<id>smoradi</id>
+			<name>Saeid Moradi</name>
+			<email>sid.moradi@gmail.com</email>
+			<timezone>+10</timezone>
+		</developer>
+		<developer>
+			<id>bnobakht</id>
+			<name>Behrooz Nobakht</name>
+			<email>behrooz.nobakht@gmail.com</email>	
+			<timezone>+1</timezone>
+		</developer>
+	</developers>
+	
 	<repositories>
 		<repository>
 			<id>com.springsource.repository.bundles.release</id>
@@ -433,6 +481,11 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.0-beta-7</version>
+                <configuration>
+                    <tagBase>
+                        https://wha.googlecode.com/svn/tags
+                    </tagBase>
+                </configuration>
 			</plugin>
 			<!-- IDE -->
 			<plugin>
@@ -626,6 +679,38 @@
 				</plugins>
 			</build>
 		</profile>
+		
+		<!-- ================= Production Settings Profile ================= -->
+        <!-- Use "-P prod" when you want to use the settings in this profile -->
+        <!-- =============================================================== -->
+        <profile>
+            <id>prod</id>
+            <properties>
+		       	<dbunit.dataTypeFactoryName>org.dbunit.ext.mysql.MySqlDataTypeFactory</dbunit.dataTypeFactoryName>
+		       	<dbunit.operation.type>CLEAN_INSERT</dbunit.operation.type>
+				<hibernate.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</hibernate.dialect>
+		       	<jdbc.groupId>com.mysql.jdbc</jdbc.groupId>
+		       	<jdbc.artifactId>com.springsource.com.mysql.jdbc</jdbc.artifactId>
+		       	<jdbc.version>5.1.6</jdbc.version>
+		       	<jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
+		       	<jdbc.url><![CDATA[jdbc:mysql://localhost/wha?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8]]></jdbc.url>
+		       	<jdbc.username>root</jdbc.username>
+		       	<jdbc.password>root</jdbc.password>
+            </properties>
+			<build>
+                <plugins>
+                    <!-- Override location of data file for DbUnit to load (doesn't have negative keys) -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>dbunit-maven-plugin</artifactId>
+                        <configuration>
+                            <src>src/test/resources/default-data.xml</src>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+		
 	</profiles>
 
 	<properties>
