@@ -29,7 +29,7 @@ public class UserEmployeeSecurityFilter extends OncePerRequestFilter {
 		}
 		String username = SecurityContextUtils.getCurrentUsername();
 		if (!StringUtils.hasText(username)) {
-			username = (String) session.getAttribute(User.USER_ID);
+			username = (String) session.getAttribute(User.USERNAME);
 		}
 		if (!StringUtils.hasText(username)) {
 			filterChain.doFilter(request, response);
@@ -40,7 +40,7 @@ public class UserEmployeeSecurityFilter extends OncePerRequestFilter {
 			filterChain.doFilter(request, response);
 			return;
 		}
-		session.setAttribute(User.USER_ID, currentUser.getId());
+		session.setAttribute(User.USERNAME, currentUser.getUsername());
 		try {
 			Employee currentEmployee = (Employee) Employee.findEmployeesByUser(currentUser).getSingleResult();
 			if (currentEmployee != null) {

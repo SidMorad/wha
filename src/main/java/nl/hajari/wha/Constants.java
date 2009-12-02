@@ -11,7 +11,7 @@ public class Constants {
 	 * 
 	 * @author behrooz
 	 */
-	public enum Role {
+	enum Role {
 
 		Admin("admin"), Employee("employee");
 
