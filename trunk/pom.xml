@@ -27,9 +27,20 @@
 	
     <!-- Note when doing releases: tagBase is set in release plugin configuration below -->
     <scm>
-        <connection>scm:svn:http://wha.googlecode.com/svn/trunk/</connection>
-        <developerConnection>scm:svn:https://wha.googlecode.com/svn/trunk/</developerConnection>
+        <connection>scm:svn:http://wha.googlecode.com/svn/trunk</connection>
+        <developerConnection>scm:svn:https://wha.googlecode.com/svn/trunk</developerConnection>
+        <url>http://wha.googlecode.com/svn/trunk</url>
     </scm>
+
+	<!-- Note when using maven-release-plugin then release:perform would use below
+		configuration to deploy war file to the host. (currently we don't use this feature) -->
+	<distributionManagement>
+		<repository>
+			<id>gcode-releases</id>
+			<name>Google Code Releases</name>
+			<url>https://wha.googlecode.com/svn/m2repo</url>
+		</repository>
+	</distributionManagement>
 
     <issueManagement>
         <system>gcode</system>
