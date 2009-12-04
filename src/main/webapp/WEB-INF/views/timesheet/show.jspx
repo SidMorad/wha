@@ -7,28 +7,28 @@
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
         <c:if test="${not empty timesheet}">
             <div id="roo_timesheet_sheetYear">
-                <label for="_sheetYear">Sheet Year:</label>
-                <div class="box" id="_sheetYear">${timesheet.sheetYear}</div>
+                <label for="_sheetYear_id">Sheet Year:</label>
+                <div class="box" id="_sheetYear_id">${timesheet.sheetYear}</div>
             </div>
             <br/>
             <div id="roo_timesheet_sheetMonth">
-                <label for="_sheetMonth">Sheet Month:</label>
-                <div class="box" id="_sheetMonth">${timesheet.sheetMonth}</div>
+                <label for="_sheetMonth_id">Sheet Month:</label>
+                <div class="box" id="_sheetMonth_id">${timesheet.sheetMonth}</div>
             </div>
             <br/>
             <div id="roo_timesheet_monthlyTotal">
-                <label for="_monthlyTotal">Monthly Total:</label>
-                <div class="box" id="_monthlyTotal">${timesheet.monthlyTotal}</div>
+                <label for="_monthlyTotal_id">Monthly Total:</label>
+                <div class="box" id="_monthlyTotal_id">${timesheet.monthlyTotal}</div>
             </div>
             <br/>
             <div id="roo_timesheet_employee">
-                <label for="_employee">Employee:</label>
-                <div class="box" id="_employee">${timesheet.employee}</div>
+                <label for="_employee_id">Employee:</label>
+                <div class="box" id="_employee_id">${timesheet.employee}</div>
             </div>
             <br/>
             <div id="roo_timesheet_dailyTimesheets">
-                <label for="_dailyTimesheets">Daily Timesheets:</label>
-                <div class="box" id="_dailyTimesheets">${timesheet.dailyTimesheets}</div>
+                <label for="_dailyTimesheets_id">Daily Timesheets:</label>
+                <div class="box" id="_dailyTimesheets_id">${timesheet.dailyTimesheets}</div>
             </div>
             <br/>
         </c:if>

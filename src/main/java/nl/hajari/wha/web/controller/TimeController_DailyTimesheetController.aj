@@ -10,6 +10,7 @@ import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.Project;
 import nl.hajari.wha.domain.Timesheet;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -20,6 +21,44 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 privileged aspect TimeController_DailyTimesheetController {
 
+	@Autowired
+	TimesheetController timesheetController;
+
+	@RequestMapping(value = "/time/daily", method = RequestMethod.POST)
+	@Transactional
+	public String TimeController.createDailyTimesheet(@Valid DailyTimesheet dailyTimesheet, BindingResult result, ModelMap modelMap) {
+		if (dailyTimesheet == null) {
+			throw new IllegalArgumentException("A dailyTimesheet is required");
+		}
+
+		if (!result.hasErrors()) {
+			Timesheet timesheet = timesheetController.getTimesheetOrCreateOneForCurrentEmployee();
+			if (timesheet == null) {
+				// we the correct settings we shouldn't see this message , but
+				// we have it in case .
+				result.rejectValue("dayDate", "error.time.timesheet.not.avaiable");
+			} else {
+				dailyTimesheet.setTimesheet(timesheet);
+			}
+		}
+
+		if (result.hasErrors()) {
+			modelMap.addAttribute("projects", Project.findAllProjects());
+			return "time/daily/create";
+		}
+
+		// calculate dailyTotalDuration = duration + durationTraining -
+		// durationOffs
+		dailyTimesheet.setDailyTotalDuration(dailyTimesheet.getDuration() + dailyTimesheet.getDurationTraining()
+				- dailyTimesheet.getDurationOffs());
+		dailyTimesheet.persist();
+		dailyTimesheet.flush();
+		// now we update monthlyTotalDuration in timesheet entity
+		Long timesheetId = dailyTimesheet.getTimesheet().getId();
+		Timesheet.updateTimesheetTotalMonthly(timesheetId, DailyTimesheet.findTimesheetTotalMonthly(timesheetId));
+		return "redirect:/time/daily/" + dailyTimesheet.getId();
+	}
+	
 	@RequestMapping(value = "/time/daily/form", method = RequestMethod.GET)
 	public String TimeController.createDailyTimesheetForm(ModelMap modelMap) {
 		DailyTimesheet dailyTimesheet = new DailyTimesheet();
@@ -30,8 +69,8 @@ privileged aspect TimeController_DailyTimesheetController {
 		modelMap.addAttribute("dailyTimesheet", dailyTimesheet);
 		modelMap.addAttribute("projects", Project.findAllProjects());
 		return "time/daily/create";
-	}
-
+	}	
+	
 	@RequestMapping(value = "/time/daily/{id}", method = RequestMethod.GET)
 	public String TimeController.showDailyTimesheet(@PathVariable("id") Long id, ModelMap modelMap) {
 		if (id == null)

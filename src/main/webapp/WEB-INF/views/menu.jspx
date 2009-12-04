@@ -99,6 +99,7 @@
         </ul>
     </li>
 	</security:authorize>	
+<!-- 
 	<li id="selenium_category">
         <h2>Selenium Tests</h2>
         <ul>
@@ -152,4 +153,5 @@
             </li>
         </ul>
     </li>
+     -->
 </ul>
