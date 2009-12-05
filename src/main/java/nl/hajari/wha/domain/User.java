@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -13,8 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.springframework.roo.addon.entity.RooEntity;
@@ -25,7 +26,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
 
 @Entity
-@Table(name = "app_user", uniqueConstraints = @UniqueConstraint(columnNames = { "username" }))
+@Table(name = "app_user")
 @RooJavaBean
 @RooEntity(finders = { "findUsersByUsernameEquals" })
 public class User implements UserDetails {
@@ -37,6 +38,7 @@ public class User implements UserDetails {
 
 	@NotNull
 	@Size(max = 30)
+	@Column(unique = true)
 	private String username;
 
 	@NotNull
@@ -44,10 +46,12 @@ public class User implements UserDetails {
 
 	private transient String confirmPassword;
 
-	@Size(min = 2, max = 30)
+//	@Pattern(regexp = "email@example.com")
+	@Size(max = 30)
+	@Column(unique = true)
 	private String email;
 
-	@OneToOne(targetEntity = Employee.class, cascade = CascadeType.REMOVE)
+	@OneToOne(targetEntity = Employee.class, cascade = CascadeType.ALL)
 	@JoinColumn(name = "employee_id")
 	private Employee employee;
 

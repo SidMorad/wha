@@ -10,7 +10,6 @@ import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.Project;
 import nl.hajari.wha.domain.Timesheet;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -21,21 +20,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 privileged aspect TimeController_DailyTimesheetController {
 
-	@Autowired
-	TimesheetController timesheetController;
-
 	@RequestMapping(value = "/time/daily", method = RequestMethod.POST)
 	@Transactional
-	public String TimeController.createDailyTimesheet(@Valid DailyTimesheet dailyTimesheet, BindingResult result, ModelMap modelMap) {
+	public String TimeController.createDailyTimesheet(@Valid DailyTimesheet dailyTimesheet, BindingResult result, ModelMap modelMap, HttpServletRequest request) {
 		if (dailyTimesheet == null) {
 			throw new IllegalArgumentException("A dailyTimesheet is required");
 		}
 
 		if (!result.hasErrors()) {
-			Timesheet timesheet = timesheetController.getTimesheetOrCreateOneForCurrentEmployee();
+			Long timesheetId = (Long) request.getSession().getAttribute(Timesheet.TIMESHEET_ID);
+			if (timesheetId == null) {
+				throw new IllegalStateException("Month Travel view requires current Timesheet. Timesheet ID is null.");
+			}
+			Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
 			if (timesheet == null) {
-				// we the correct settings we shouldn't see this message , but
-				// we have it in case .
+				// logically impossible to see below message , but we have it in a case
 				result.rejectValue("dayDate", "error.time.timesheet.not.avaiable");
 			} else {
 				dailyTimesheet.setTimesheet(timesheet);
@@ -194,7 +193,7 @@ privileged aspect TimeController_DailyTimesheetController {
 			logger.debug("No daily timesheet found for such criteria.");
 		}
 		if (dailyTimesheet2 == null) {
-			createDailyTimesheet(dailyTimesheet, result, modelMap);
+			createDailyTimesheet(dailyTimesheet, result, modelMap, request);
 		} else {
 			dailyTimesheet2.setDuration(dailyTimesheet.getDuration());
 			dailyTimesheet2.setDurationOffs(dailyTimesheet.getDurationOffs());

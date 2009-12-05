@@ -47,7 +47,6 @@ public class DailyTravel {
 	@Column(length = 100)
 	private String comment;
 
-	@NotNull
 	@ManyToOne(targetEntity = Timesheet.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "timesheet_id", nullable = false)
 	private Timesheet timesheet;
