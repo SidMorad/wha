@@ -5,6 +5,7 @@ import java.lang.Long;
 import java.lang.String;
 import javax.validation.Valid;
 import nl.hajari.wha.domain.DailyTimesheet;
+import nl.hajari.wha.domain.DailyTravel;
 import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.Timesheet;
 import org.springframework.ui.ModelMap;
@@ -21,6 +22,7 @@ privileged aspect TimesheetController_Roo_Controller {
         if (timesheet == null) throw new IllegalArgumentException("A timesheet is required");        
         if (result.hasErrors()) {        
             modelMap.addAttribute("dailytimesheets", DailyTimesheet.findAllDailyTimesheets());            
+            modelMap.addAttribute("dailytravels", DailyTravel.findAllDailyTravels());            
             modelMap.addAttribute("employees", Employee.findAllEmployees());            
             return "timesheet/create";            
         }        
@@ -32,6 +34,7 @@ privileged aspect TimesheetController_Roo_Controller {
     public String TimesheetController.createForm(ModelMap modelMap) {    
         modelMap.addAttribute("timesheet", new Timesheet());        
         modelMap.addAttribute("dailytimesheets", DailyTimesheet.findAllDailyTimesheets());        
+        modelMap.addAttribute("dailytravels", DailyTravel.findAllDailyTravels());        
         modelMap.addAttribute("employees", Employee.findAllEmployees());        
         return "timesheet/create";        
     }    

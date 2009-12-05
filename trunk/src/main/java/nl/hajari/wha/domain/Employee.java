@@ -2,6 +2,7 @@ package nl.hajari.wha.domain;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
@@ -34,7 +36,7 @@ public class Employee {
 
 	@NotNull
 	@Size(max = 45)
-	@Column(name = "emp_id", length = 45)
+	@Column(name = "emp_id", length = 45, unique = true)
 	private String empId;
 
 	private Float hourlyWage;
@@ -43,7 +45,7 @@ public class Employee {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "employee_has_techrole", joinColumns = { @JoinColumn(name = "employee_id") }, inverseJoinColumns = @JoinColumn(name = "techrole_id"))
 	private Set<TechRole> techRoles = new HashSet<TechRole>();
 

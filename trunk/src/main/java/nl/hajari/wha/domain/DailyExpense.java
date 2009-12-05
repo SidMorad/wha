@@ -40,7 +40,6 @@ public class DailyExpense {
 	@Column(length = 100)
 	private String expenseComment;
 
-	@NotNull
 	@ManyToOne(targetEntity = Timesheet.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "timesheet_id", nullable = false)
 	private Timesheet timesheet;

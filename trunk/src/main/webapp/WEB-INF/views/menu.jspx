@@ -96,6 +96,13 @@
                     <spring:message arguments="${label_timesheet_month_view}" code="global.menu.list"/>
                 </a>
             </li>
+            <li id="web_mvc_jsp_list_travel_month_view_menu_item">
+                <c:url value="/time/travel" var="web_mvc_jsp_time_list_travel_month_view_menu_item_url"/>
+                <a href="${web_mvc_jsp_time_list_travel_month_view_menu_item_url}">
+                	<spring:message code="label.travel.month.view" var="label_travel_month_view"/>
+                    <spring:message arguments="${label_travel_month_view}" code="global.menu.list"/>
+                </a>
+            </li>
         </ul>
     </li>
 	</security:authorize>	
