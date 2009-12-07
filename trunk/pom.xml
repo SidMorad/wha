@@ -588,12 +588,15 @@
 					<transaction>true</transaction>
 				</configuration>
 				<executions>
+					<!-- TODO:: I couldn't parameterized 'goal' value with ${dbunit.goal.type}
+								We need to have goal 'operation' in normal mode and 'export' in prod Profile . 
 					<execution>
 						<phase>test</phase>
 						<goals>
 							<goal>operation</goal>
 						</goals>
 					</execution>
+					 -->
 				</executions>
 				<dependencies>
 					<dependency>
@@ -711,32 +714,40 @@
 			<properties>
 				<dbunit.dataTypeFactoryName>org.dbunit.ext.mysql.MySqlDataTypeFactory</dbunit.dataTypeFactoryName>
 				<dbunit.operation.type>CLEAN_INSERT</dbunit.operation.type>
+				<dbunit.goal.type>export</dbunit.goal.type>
 				<hibernate.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</hibernate.dialect>
 				<jdbc.groupId>com.mysql.jdbc</jdbc.groupId>
 				<jdbc.artifactId>com.springsource.com.mysql.jdbc</jdbc.artifactId>
 				<jdbc.version>5.1.6</jdbc.version>
 				<jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
-				<jdbc.url><![CDATA[jdbc:mysql://localhost/wha?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8]]></jdbc.url>
-				<jdbc.username>root</jdbc.username>
-				<jdbc.password>root</jdbc.password>
+				<jdbc.url><![CDATA[jdbc:mysql://localhost/hajari_wha?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8]]></jdbc.url>
+				<jdbc.username>hajari_wha</jdbc.username>
+				<jdbc.password>**********</jdbc.password>
 			</properties>
 			<build>
 				<plugins>
-					<!--
-						Override location of data file for DbUnit to load (doesn't have
-						negative keys)
-					-->
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>dbunit-maven-plugin</artifactId>
-						<configuration>
-							<src>src/test/resources/default-data.xml</src>
-						</configuration>
+						<!-- 
+							In Production we need to export database inestad of imort.
+						 -->	
+						<executions>
+							<execution>
+								<phase>test-compile</phase>
+								<goals>
+									<goal>export</goal>
+								</goals>
+								<configuration>
+									<format>xml</format>
+									<dest>src/test/resources/export-data.xml</dest>
+								</configuration>
+							</execution>
+						</executions>
 					</plugin>
 				</plugins>
 			</build>
 		</profile>
-
 	</profiles>
 
 	<properties>
@@ -746,6 +757,7 @@
 		<!-- Database settings -->
 		<dbunit.dataTypeFactoryName>org.dbunit.ext.mysql.MySqlDataTypeFactory</dbunit.dataTypeFactoryName>
 		<dbunit.operation.type>CLEAN_INSERT</dbunit.operation.type>
+		<dbunit.goal.type>operation</dbunit.goal.type>
 		<hibernate.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</hibernate.dialect>
 		<jdbc.groupId>com.mysql.jdbc</jdbc.groupId>
 		<jdbc.artifactId>com.springsource.com.mysql.jdbc</jdbc.artifactId>
