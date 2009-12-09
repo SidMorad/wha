@@ -73,14 +73,6 @@
 	<li id="web_mvc_jsp_employee_panel_category">
         <h2>Employee Panel</h2>
         <ul>
-            <li id="web_mvc_jsp_create_dailytimesheet_menu_item">
-                <spring:url value="/time/daily/form" var="web_mvc_jsp_create_daily_menu_item_url"/>
-                <a href="${web_mvc_jsp_create_daily_menu_item_url}">
-                    <spring:message code="label.dailytimesheet" var="label_dailytimesheet"/>
-                    <spring:message arguments="${label_dailytimesheet}" code="global.menu.new"/>
-                </a>
-            </li>
-            
             <li id="web_mvc_jsp_list_timesheet_menu_item">
                 <c:url value="/time/timesheet?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_time_list_timesheet_menu_item_url"/>
                 <a href="${web_mvc_jsp_time_list_timesheet_menu_item_url}">

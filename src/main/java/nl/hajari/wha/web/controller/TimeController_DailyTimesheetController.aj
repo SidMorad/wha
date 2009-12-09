@@ -185,23 +185,31 @@ privileged aspect TimeController_DailyTimesheetController {
 		Timesheet timesheet = (Timesheet) Timesheet.findEmployeeCurrentTimesheet(employeeId).getSingleResult();
 		logger.debug("Resolving existent daily timesheet for: [" + timesheet + "] on [" + dailyTimesheet.getDayDate()
 				+ "]");
-		DailyTimesheet dailyTimesheet2 = null;
-		try {
-			dailyTimesheet2 = (DailyTimesheet) DailyTimesheet.findDailyTimesheetsByDayDateAndTimesheet(
-					dailyTimesheet.getDayDate(), timesheet).getSingleResult();
-		} catch (Exception e) {
-			logger.debug("No daily timesheet found for such criteria.");
-		}
-		if (dailyTimesheet2 == null) {
+//		DailyTimesheet dailyTimesheet2 = null;
+//		try {
+//			dailyTimesheet2 = (DailyTimesheet) DailyTimesheet.findDailyTimesheetsByDayDateAndTimesheet(
+//					dailyTimesheet.getDayDate(), timesheet).getSingleResult();
+//		} catch (Exception e) {
+//			logger.debug("No daily timesheet found for such criteria.");
+//		}
+//		if (dailyTimesheet2 == null) {
 			createDailyTimesheet(dailyTimesheet, result, modelMap, request);
-		} else {
-			dailyTimesheet2.setDuration(dailyTimesheet.getDuration());
-			dailyTimesheet2.setDurationOffs(dailyTimesheet.getDurationOffs());
-			dailyTimesheet2.setDurationTraining(dailyTimesheet.getDurationTraining());
-			dailyTimesheet2.setProject(dailyTimesheet.getProject());
-			updateDailyTimesheet(dailyTimesheet2, result, modelMap);
-		}
+//		} else {
+//			dailyTimesheet2.setDuration(dailyTimesheet.getDuration());
+//			dailyTimesheet2.setDurationOffs(dailyTimesheet.getDurationOffs());
+//			dailyTimesheet2.setDurationTraining(dailyTimesheet.getDurationTraining());
+//			dailyTimesheet2.setProject(dailyTimesheet.getProject());
+//			updateDailyTimesheet(dailyTimesheet2, result, modelMap);
+//		}
+		
 		return prepareTimesheetMonthView(request, modelMap);
 	}
 
+	@RequestMapping(value = "/time/view/month/delete/{id}", method = RequestMethod.DELETE)
+	public String TimeController.deleteTimesheetMonthView(@PathVariable("id") Long id) {
+        if (id == null) throw new IllegalArgumentException("An Identifier is required");
+        DailyTimesheet.findDailyTimesheet(id).remove();
+		return "redirect:/time/view/month";
+	}
+	
 }
