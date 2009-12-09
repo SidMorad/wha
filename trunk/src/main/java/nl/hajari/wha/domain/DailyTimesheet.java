@@ -30,11 +30,14 @@ public class DailyTimesheet {
     private Float duration;
 
     @NotNull
+    @Column(nullable = false)
     private Float durationOffs;
 
     @NotNull
+    @Column(nullable = false)
     private Float durationTraining;
 
+    @Column(nullable = false)
     private Float dailyTotalDuration;
 
     @ManyToOne(targetEntity = Timesheet.class)
