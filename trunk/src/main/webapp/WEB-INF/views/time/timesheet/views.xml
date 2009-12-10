@@ -7,7 +7,4 @@
     <definition extends="default" name="time/timesheet/show">
         <put-attribute name="body" value="/WEB-INF/views/time/timesheet/show.jspx"/>
     </definition>
-    <definition extends="default" name="time/timesheet/create">
-        <put-attribute name="body" value="/WEB-INF/views/time/timesheet/create.jspx"/>
-    </definition>
 </tiles-definitions>
