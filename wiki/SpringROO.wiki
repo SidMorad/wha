@@ -36,3 +36,9 @@ mvn selenium:selenese
 1.[http://blog.springsource.com/2009/05/01/roo-part-1/ Jump into Roo for extreme Java productivity]<br/> 
 2.[http://blog.springsource.com/2009/05/27/roo-part-2/ Getting Started with Spring Roo] <br/>
 3.[http://blog.springsource.com/2009/06/18/roo-part-3/ Exploring Roo's Architecture]<br/>
+
+== 4.Others ==
+1. Try this command in console ! ;-)
+{{{
+roo> version jaime
+}}}
