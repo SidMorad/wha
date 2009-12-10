@@ -17,8 +17,6 @@
                         <th>Employee</th>
                         <th>Daily Timesheets</th>
                         <th/>
-                        <th/>
-                        <th/>
                     </tr>
                 </thead>
                 <c:forEach items="${timesheets}" var="timesheet">

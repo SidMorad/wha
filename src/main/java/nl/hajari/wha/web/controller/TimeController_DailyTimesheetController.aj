@@ -16,11 +16,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 privileged aspect TimeController_DailyTimesheetController {
 
-	@RequestMapping(value = "/time/daily", method = RequestMethod.POST)
 	@Transactional
 	public String TimeController.createDailyTimesheet(@Valid DailyTimesheet dailyTimesheet, BindingResult result, ModelMap modelMap, HttpServletRequest request) {
 		if (dailyTimesheet == null) {
@@ -57,45 +55,7 @@ privileged aspect TimeController_DailyTimesheetController {
 		Timesheet.updateTimesheetTotalMonthly(timesheetId, DailyTimesheet.findTimesheetTotalMonthly(timesheetId));
 		return "redirect:/time/daily/" + dailyTimesheet.getId();
 	}
-	
-	@RequestMapping(value = "/time/daily/form", method = RequestMethod.GET)
-	public String TimeController.createDailyTimesheetForm(ModelMap modelMap) {
-		DailyTimesheet dailyTimesheet = new DailyTimesheet();
-		dailyTimesheet.setDuration(0f);
-		dailyTimesheet.setDurationOffs(0f);
-		dailyTimesheet.setDurationTraining(0f);
-		dailyTimesheet.setDailyTotalDuration(0f);
-		modelMap.addAttribute("dailyTimesheet", dailyTimesheet);
-		modelMap.addAttribute("projects", Project.findAllProjects());
-		return "time/daily/create";
-	}	
-	
-	@RequestMapping(value = "/time/daily/{id}", method = RequestMethod.GET)
-	public String TimeController.showDailyTimesheet(@PathVariable("id") Long id, ModelMap modelMap) {
-		if (id == null)
-			throw new IllegalArgumentException("An Identifier is required");
-		modelMap.addAttribute("dailytimesheet", DailyTimesheet.findDailyTimesheet(id));
-		return "time/daily/show";
-	}
 
-	@RequestMapping(value = "/time/daily", method = RequestMethod.GET)
-	public String TimeController.listDailyTimesheet(@RequestParam(value = "page", required = false) Integer page,
-			@RequestParam(value = "size", required = false) Integer size, ModelMap modelMap) {
-		if (page != null || size != null) {
-			int sizeNo = size == null ? 10 : size.intValue();
-			modelMap.addAttribute("dailytimesheets", DailyTimesheet.findDailyTimesheetEntries(page == null ? 0 : (page
-					.intValue() - 1)
-					* sizeNo, sizeNo));
-			float nrOfPages = (float) DailyTimesheet.countDailyTimesheets() / sizeNo;
-			modelMap.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1
-					: nrOfPages));
-		} else {
-			modelMap.addAttribute("dailytimesheets", DailyTimesheet.findAllDailyTimesheets());
-		}
-		return "time/daily/list";
-	}
-
-	@RequestMapping(value = "/time/daily/update", method = RequestMethod.POST)
 	@Transactional
 	public String TimeController.updateDailyTimesheet(@Valid DailyTimesheet dailyTimesheet, BindingResult result,
 			ModelMap modelMap) {
@@ -117,33 +77,6 @@ privileged aspect TimeController_DailyTimesheetController {
 		return "redirect:/time/daily/" + dailyTimesheet.getId();
 	}
 
-	@RequestMapping(value = "/time/daily/{id}/form", method = RequestMethod.GET)
-	public String TimeController.updateDailyTimesheetForm(@PathVariable("id") Long id, ModelMap modelMap) {
-		if (id == null)
-			throw new IllegalArgumentException("An Identifier is required");
-		modelMap.addAttribute("dailyTimesheet", DailyTimesheet.findDailyTimesheet(id));
-		modelMap.addAttribute("projects", Project.findAllProjects());
-		return "time/daily/update";
-	}
-
-	@RequestMapping(value = "/time/daily/{id}", method = RequestMethod.DELETE)
-	@Transactional
-	public String TimeController.deleteDailyTimesheet(@PathVariable("id") Long id, ModelMap modelMap) {
-		if (id == null)
-			throw new IllegalArgumentException("An Identifier is required");
-
-		DailyTimesheet dailyTimesheet = DailyTimesheet.findDailyTimesheet(id);
-		Long tsId = dailyTimesheet.getTimesheet().getId();
-		dailyTimesheet.remove();
-
-		// now we update monthlyTotal in Timesheet table
-		Timesheet.updateTimesheetTotalMonthly(tsId, DailyTimesheet.findTimesheetTotalMonthly(tsId));
-
-		modelMap.addAttribute("timesheet", Timesheet.findTimesheet(tsId));
-		return "time/timesheet/show";
-	}
-
-	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/time/view/month", method = RequestMethod.GET)
 	public String TimeController.prepareTimesheetMonthView(HttpServletRequest request, ModelMap modelMap) {
 		Long employeeId = (Long) request.getSession().getAttribute(Employee.EMPLOYEE_ID);
@@ -208,7 +141,12 @@ privileged aspect TimeController_DailyTimesheetController {
 	@RequestMapping(value = "/time/view/month/delete/{id}", method = RequestMethod.DELETE)
 	public String TimeController.deleteTimesheetMonthView(@PathVariable("id") Long id) {
         if (id == null) throw new IllegalArgumentException("An Identifier is required");
-        DailyTimesheet.findDailyTimesheet(id).remove();
+		DailyTimesheet dailyTimesheet = DailyTimesheet.findDailyTimesheet(id);
+		Long tsId = dailyTimesheet.getTimesheet().getId();
+		dailyTimesheet.remove();
+
+		// now we update monthlyTotal in Timesheet table
+		Timesheet.updateTimesheetTotalMonthly(tsId, DailyTimesheet.findTimesheetTotalMonthly(tsId));
 		return "redirect:/time/view/month";
 	}
 	
