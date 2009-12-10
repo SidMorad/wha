@@ -61,6 +61,14 @@ privileged aspect DailyTimesheet_Roo_JavaBean {
     
     public void DailyTimesheet.setProject(Project project) {    
         this.project = project;        
-    }    
+    }
+    
+    public void DailyTimesheet.setProjectName(String projectName) {
+    	this.projectName = projectName;
+    }
+    
+    public String DailyTimesheet.getProjectName() {
+    	return this.projectName;
+    }
     
 }
