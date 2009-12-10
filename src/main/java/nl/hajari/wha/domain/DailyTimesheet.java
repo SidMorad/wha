@@ -47,7 +47,9 @@ public class DailyTimesheet {
     @ManyToOne(targetEntity = Project.class)
     @JoinColumn(name = "project_id", nullable = false)
     private Project project;
-
+    
+    private transient String projectName;
+    
     public String toString() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dayDate);

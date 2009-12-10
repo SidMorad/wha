@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class TimeController {
 
+	protected static final String WORKING_DAILY_TIMESHEET_KEY = "WORKING_DAILY_TIMESHEET_KEY";
+
 	protected final Log logger = LogFactory.getLog(getClass());
 
 	@Autowired
@@ -44,7 +46,7 @@ public class TimeController {
 			String message = "Unauthorized access of user [" + user + "] to timesheet[" + timesheet + "] for employee["
 					+ timesheet.getEmployee() + "]";
 			logger.warn(message);
-//			response.sendError(HttpServletResponse.SC_FORBIDDEN, message);
+			// response.sendError(HttpServletResponse.SC_FORBIDDEN, message);
 			throw new AccessDeniedException(message);
 		}
 		return true;
