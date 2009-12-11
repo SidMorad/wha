@@ -10,9 +10,9 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Sheet Year</th>
-                        <th>Sheet Month</th>
-                        <th>Monthly Total</th>
+                        <th>Year</th>
+                        <th>Month</th>
+                        <th>Total</th>
                         <th>Employee</th>
                         <th/>
                     </tr>

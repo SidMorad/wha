@@ -5,7 +5,7 @@ import nl.hajari.wha.domain.DailyTravel;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
 
-@RooWebScaffold(path = "dailytravel", automaticallyMaintainView = true, formBackingObject = DailyTravel.class)
+@RooWebScaffold(path = "dailytravel", automaticallyMaintainView = false, formBackingObject = DailyTravel.class)
 @RequestMapping("/dailytravel/**")
 @Controller
 public class DailyTravelController {

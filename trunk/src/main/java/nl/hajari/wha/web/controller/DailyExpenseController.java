@@ -5,7 +5,7 @@ import nl.hajari.wha.domain.DailyExpense;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
 
-@RooWebScaffold(path = "dailyexpense", automaticallyMaintainView = true, formBackingObject = DailyExpense.class)
+@RooWebScaffold(path = "dailyexpense", automaticallyMaintainView = false, formBackingObject = DailyExpense.class)
 @RequestMapping("/dailyexpense/**")
 @Controller
 public class DailyExpenseController {
