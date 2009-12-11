@@ -11,12 +11,15 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import nl.hajari.wha.web.validator.DayDateIsInCurrentMonth;
+import nl.hajari.wha.web.validator.ProjectCreationInDailyTimesheet;
+
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
 @Entity
 @RooJavaBean
 @DayDateIsInCurrentMonth
+@ProjectCreationInDailyTimesheet
 @RooEntity(finders = { "findDailyTimesheetsByTimesheet", "findDailyTimesheetsByDayDateAndTimesheet" })
 public class DailyTimesheet {
 

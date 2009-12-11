@@ -131,13 +131,6 @@ privileged aspect TimeController_DailyTimesheetController {
 		logger.debug("Resolving existent daily timesheet for: [" + timesheet + "] on [" + dailyTimesheet.getDayDate()
 				+ "]");
 
-		Project sp = dailyTimesheet.getProject();
-		if (sp != null && sp.getId() != null && StringUtils.hasText(dailyTimesheet.getProjectName())) {
-			// TODO how to return and say an error?!
-		}
-		if (sp != null && sp.getId() == null && !StringUtils.hasText(dailyTimesheet.getProjectName())) {
-			// TODO how to return and say an error?!
-		}
 		try {
 			if (StringUtils.hasText(dailyTimesheet.getProjectName())) {
 				Project project = new Project();

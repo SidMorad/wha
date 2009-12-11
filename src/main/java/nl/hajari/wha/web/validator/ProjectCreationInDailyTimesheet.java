@@ -12,10 +12,10 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Documented
-@Constraint(validatedBy = DayDateIsInCurrentMonthValidator.class)
-public @interface DayDateIsInCurrentMonth {
+@Constraint(validatedBy = ProjectCreationInDailyTimesheetValidator.class)
+public @interface ProjectCreationInDailyTimesheet {
 
-	String message() default "{error.time.day.date.not.avaiable}";
+	String message() default "{error.project.binding.fail}";
 
 	Class<?>[] groups() default {};
 
