@@ -23,6 +23,9 @@
 		<script src="${dojo_url}" type="text/javascript" ><!-- //required for FF3 and Opera --></script>
 		<script src="${spring_url}" type="text/javascript"><!-- //required for FF3 and Opera --></script>
 		<script src="${spring_dojo_url}" type="text/javascript"><!-- //required for FF3 and Opera --></script>
+		<!-- 
+		<script type="text/javascript">djConfig = {parseOnLoad : true, isDebug : true}</script>
+		 -->
 		<script language="JavaScript" type="text/javascript">dojo.require("dojo.parser");</script>
 		<title><spring:message code="welcome.h3" /></title>
 		<tiles:insertAttribute name="head" ignore="true"/>
