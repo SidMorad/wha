@@ -8,15 +8,19 @@ import nl.hajari.wha.domain.Project;
 
 import org.springframework.util.StringUtils;
 
-public class ProjectCreationInDailyTimesheetValidator implements ConstraintValidator<ProjectCreationInDailyTimesheet, DailyTimesheet> {
+public class ProjectCreationInDailyTimesheetValidator implements
+		ConstraintValidator<ProjectCreationInDailyTimesheet, DailyTimesheet> {
 
 	@Override
-	public void initialize(ProjectCreationInDailyTimesheet constraintAnnotation) {}
+	public void initialize(ProjectCreationInDailyTimesheet constraintAnnotation) {
+	}
 
 	@Override
 	public boolean isValid(DailyTimesheet dailyTimesheet, ConstraintValidatorContext context) {
+		if (StringUtils.hasText(dailyTimesheet.getProjectName())) {
+			return true;
+		}
 		Project sp = dailyTimesheet.getProject();
-		
 		if (sp == null) {
 			if (!StringUtils.hasText(dailyTimesheet.getProjectName())) {
 				return false;
@@ -26,7 +30,7 @@ public class ProjectCreationInDailyTimesheetValidator implements ConstraintValid
 				return false;
 			}
 		}
-		
+
 		return true;
 	}
 

@@ -90,16 +90,16 @@ privileged aspect TimeController_DailyTimesheetController {
 		Timesheet timesheet = (Timesheet) Timesheet.findEmployeeCurrentTimesheet(employeeId).getSingleResult();
 		logger.debug("Employee Timesheet found: " + timesheet);
 		List<DailyTimesheet> dailyTimesheets = timesheet.getDailyTimesheetsSortedList();
-		
+
 		DailyTimesheet dailyTimesheet = new DailyTimesheet();
 		dailyTimesheet.setDurationOffs(0f);
 		dailyTimesheet.setDurationTraining(0f);
 		if (modelMap.containsAttribute(WORKING_DAILY_TIMESHEET_KEY)) {
-			DailyTimesheet current=(DailyTimesheet)modelMap.get(WORKING_DAILY_TIMESHEET_KEY);
+			DailyTimesheet current = (DailyTimesheet) modelMap.get(WORKING_DAILY_TIMESHEET_KEY);
 			dailyTimesheet.setDayDate(current.getDayDate());
 			dailyTimesheet.setProject(current.getProject());
 		}
-		
+
 		modelMap.put("dailyTimesheet", dailyTimesheet);
 		modelMap.put("projects", Project.findAllProjects());
 		modelMap.put("dailyTimesheets", dailyTimesheets);
@@ -133,14 +133,9 @@ privileged aspect TimeController_DailyTimesheetController {
 
 		try {
 			if (StringUtils.hasText(dailyTimesheet.getProjectName())) {
-				Project project = new Project();
-				project.setName(dailyTimesheet.getProjectName());
-				project.persist();
-				project.flush();
+				logger.debug("Recieved project name: " + dailyTimesheet.getProjectName());
+				Project project = projectService.loadOrCreateProject(dailyTimesheet.getProjectName());
 				dailyTimesheet.setProject(project);
-				logger.debug("Saved an ad-hoc project: " + dailyTimesheet.getProject());
-			} else {
-				logger.debug("Using an existent project: " + dailyTimesheet.getProject());
 			}
 		} catch (Exception e) {
 			logger.error("", e);
