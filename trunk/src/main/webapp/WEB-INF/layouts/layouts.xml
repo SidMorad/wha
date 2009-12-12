@@ -10,7 +10,6 @@
 	</definition>
 	
 	<definition name="public" template="/WEB-INF/layouts/default.jspx">
-		<put-attribute name="menu" value="" />
 	</definition>
 	
 </tiles-definitions>
