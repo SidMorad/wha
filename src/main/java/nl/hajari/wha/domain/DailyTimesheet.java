@@ -52,7 +52,7 @@ public class DailyTimesheet {
     private Project project;
     
     private transient String projectName;
-    
+
     public String toString() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dayDate);

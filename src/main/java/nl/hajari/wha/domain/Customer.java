@@ -5,14 +5,13 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = { "name" }))
 @RooJavaBean
-@RooEntity
+@RooEntity(finders = { "findCustomersByNameEquals" })
 public class Customer {
 
     @NotNull
@@ -21,6 +20,6 @@ public class Customer {
 
     @Override
     public String toString() {
-    	return name;
+        return name;
     }
 }

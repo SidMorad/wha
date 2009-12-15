@@ -73,4 +73,16 @@ privileged aspect CustomerController_Roo_Controller {
         return "redirect:/customer";        
     }    
     
+    @RequestMapping(value = "find/ByNameEquals/form", method = RequestMethod.GET)    
+    public String CustomerController.findCustomersByNameEqualsForm(ModelMap modelMap) {    
+        return "customer/findCustomersByNameEquals";        
+    }    
+    
+    @RequestMapping(value = "find/ByNameEquals", method = RequestMethod.GET)    
+    public String CustomerController.findCustomersByNameEquals(@RequestParam("name") String name, ModelMap modelMap) {    
+        if (name == null || name.length() == 0) throw new IllegalArgumentException("A Name is required.");        
+        modelMap.addAttribute("customers", Customer.findCustomersByNameEquals(name).getResultList());        
+        return "customer/list";        
+    }    
+    
 }

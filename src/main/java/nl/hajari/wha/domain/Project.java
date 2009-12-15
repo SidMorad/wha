@@ -11,7 +11,7 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 
 @Entity
 @RooJavaBean
-@RooEntity(finders = { "findProjectsByNameEquals", "findProjectsByNameLike" })
+@RooEntity(finders = { "findProjectsByNameEquals", "findProjectsByNameLike", "findProjectsByCustomerAndNameEquals" })
 public class Project {
 
     @NotNull
