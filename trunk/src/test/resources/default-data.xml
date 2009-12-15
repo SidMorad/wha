@@ -15,7 +15,7 @@
             <value description="version">0</value>
             <value description="username">user</value>
             <value description="password">12dea96fec20593566ab75692c9949596833adc9</value>
-            <value description="employee_id">1</value>
+            <null />
             <value description="enabled">1</value>
             <value description="account_expired">0</value>
             <value description="account_locked">0</value>
@@ -37,7 +37,18 @@
             <value description="version">0</value>
             <value description="username">behrooz</value>
             <value description="password">a20729c9c746e282c698e2d36d00f95ec4158b56</value>
-            <value description="employee_id">2</value>
+            <null />
+            <value description="enabled">1</value>
+            <value description="account_expired">0</value>
+            <value description="account_locked">0</value>
+            <value description="credentials_expired">0</value>
+        </row>
+        <row>
+        	<value description="id">4</value>
+        	<value description="version">0</value>
+        	<value description="username">amir</value>
+        	<value description="password">1dd89e5367785ba89076cd264daac0464fdf0d7b</value>
+        	<null/>
             <value description="enabled">1</value>
             <value description="account_expired">0</value>
             <value description="account_locked">0</value>
@@ -74,6 +85,10 @@
             <value description="user_id">3</value>
             <value description="role_id">2</value>
         </row>
+        <row>
+            <value description="user_id">4</value>
+            <value description="role_id">2</value>
+        </row>
     </table>
 	<table name="employee">
 		<column>id</column>	
@@ -90,7 +105,7 @@
 			<value description="first_name">Saeid</value>
 			<value description="last_name">Moradi</value>
 			<value description="emp_id">33</value>
-			<value description="hourly_wage">55.55</value>
+			<value description="hourly_wage">60.0</value>
 		</row>	
 		<row>
 			<value description="id">2</value>
@@ -100,6 +115,15 @@
 			<value description="last_name">Nobakht</value>
 			<value description="emp_id">44</value>
 			<value description="hourly_wage">7</value>
+		</row>	
+		<row>
+			<value description="id">3</value>
+			<value description="version">0</value>
+			<value description="user_id">4</value>
+			<value description="first_name">Amir</value>
+			<value description="last_name">Hajari</value>
+			<value description="emp_id">100</value>
+			<value description="hourly_wage">100.0</value>
 		</row>	
 	</table>
 	<table name="tech_role">

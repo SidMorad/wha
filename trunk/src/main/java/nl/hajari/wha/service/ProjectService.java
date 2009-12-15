@@ -17,8 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 
- * 
  * @author Behrooz Nobakht [behrooz dot nobakht at gmail dot nl]
+ * @author <a href="mailto:saeid3@gmail.com">Saeid Moradi</a>
  */
 @Service
 public class ProjectService {
@@ -28,7 +28,8 @@ public class ProjectService {
 	public List<Project> findProjectsByName(String projectName) {
 		Query query = Project.findProjectsByNameLike(projectName);
 		List projects = query.getResultList();
-		logger.debug("Projects [" + projects.size() + "] found with name similar to [" + projectName + "]");
+		logger.debug("Projects [" + projects.size()
+				+ "] found with name similar to [" + projectName + "]");
 		return projects;
 	}
 
@@ -46,10 +47,16 @@ public class ProjectService {
 		if (atSign > 0) {
 			customerName = projectName.substring(atSign + 1);
 			projectName = projectName.substring(0, atSign);
+			customerName = customerName.trim();
 		}
+		projectName = projectName.trim();
 		Project project;
 		try {
-			project = (Project) Project.findProjectsByNameEquals(projectName.trim()).getSingleResult();
+			// If customer does not exist , then project need to be create.
+			Customer customer = (Customer) Customer.findCustomersByNameEquals(
+					customerName).getSingleResult();
+			project = (Project) Project.findProjectsByCustomerAndNameEquals(
+					customer, projectName).getSingleResult();
 		} catch (Exception e) {
 			project = createProject(projectName, customerName);
 			return project;
@@ -63,10 +70,16 @@ public class ProjectService {
 		project.setName(projectName);
 		Customer customer = null;
 		if (customerName != null) {
-			customer = new Customer();
-			customer.setName(customerName);
-			customer.persist();
-			customer.flush();
+			try {
+				// Check if we have customer with this name already.
+				customer = (Customer) Customer.findCustomersByNameEquals(
+						customerName).getSingleResult();
+			} catch (Exception e) {
+				customer = new Customer();
+				customer.setName(customerName);
+				customer.persist();
+				customer.flush();
+			}
 		}
 		project.setCustomer(customer);
 		project.persist();

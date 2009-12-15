@@ -78,4 +78,42 @@ privileged aspect ProjectController_Roo_Controller {
         return "redirect:/project";        
     }    
     
+    @RequestMapping(value = "find/ByNameEquals/form", method = RequestMethod.GET)    
+    public String ProjectController.findProjectsByNameEqualsForm(ModelMap modelMap) {    
+        return "project/findProjectsByNameEquals";        
+    }    
+    
+    @RequestMapping(value = "find/ByNameEquals", method = RequestMethod.GET)    
+    public String ProjectController.findProjectsByNameEquals(@RequestParam("name") String name, ModelMap modelMap) {    
+        if (name == null || name.length() == 0) throw new IllegalArgumentException("A Name is required.");        
+        modelMap.addAttribute("projects", Project.findProjectsByNameEquals(name).getResultList());        
+        return "project/list";        
+    }    
+    
+    @RequestMapping(value = "find/ByNameLike/form", method = RequestMethod.GET)    
+    public String ProjectController.findProjectsByNameLikeForm(ModelMap modelMap) {    
+        return "project/findProjectsByNameLike";        
+    }    
+    
+    @RequestMapping(value = "find/ByNameLike", method = RequestMethod.GET)    
+    public String ProjectController.findProjectsByNameLike(@RequestParam("name") String name, ModelMap modelMap) {    
+        if (name == null || name.length() == 0) throw new IllegalArgumentException("A Name is required.");        
+        modelMap.addAttribute("projects", Project.findProjectsByNameLike(name).getResultList());        
+        return "project/list";        
+    }    
+    
+    @RequestMapping(value = "find/ByCustomerAndNameEquals/form", method = RequestMethod.GET)    
+    public String ProjectController.findProjectsByCustomerAndNameEqualsForm(ModelMap modelMap) {    
+        modelMap.addAttribute("customers", Customer.findAllCustomers());        
+        return "project/findProjectsByCustomerAndNameEquals";        
+    }    
+    
+    @RequestMapping(value = "find/ByCustomerAndNameEquals", method = RequestMethod.GET)    
+    public String ProjectController.findProjectsByCustomerAndNameEquals(@RequestParam("customer") Customer customer, @RequestParam("name") String name, ModelMap modelMap) {    
+        if (customer == null) throw new IllegalArgumentException("A Customer is required.");        
+        if (name == null || name.length() == 0) throw new IllegalArgumentException("A Name is required.");        
+        modelMap.addAttribute("projects", Project.findProjectsByCustomerAndNameEquals(customer, name).getResultList());        
+        return "project/list";        
+    }    
+    
 }
