@@ -15,7 +15,7 @@
             <value description="version">0</value>
             <value description="username">user</value>
             <value description="password">12dea96fec20593566ab75692c9949596833adc9</value>
-            <value description="employee_id">-1</value>
+            <null/>
             <value description="enabled">1</value>
             <value description="account_expired">0</value>
             <value description="account_locked">0</value>
@@ -37,7 +37,7 @@
             <value description="version">0</value>
             <value description="username">behrooz</value>
             <value description="password">a20729c9c746e282c698e2d36d00f95ec4158b56</value>
-            <value description="employee_id">-2</value>
+            <null/>
             <value description="enabled">1</value>
             <value description="account_expired">0</value>
             <value description="account_locked">0</value>
