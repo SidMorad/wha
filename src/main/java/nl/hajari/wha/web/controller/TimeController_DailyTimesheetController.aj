@@ -20,66 +20,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 privileged aspect TimeController_DailyTimesheetController {
 
-	@Transactional
-	public String TimeController.createDailyTimesheet(@Valid DailyTimesheet dailyTimesheet, BindingResult result,
-			ModelMap modelMap, HttpServletRequest request) {
-		if (dailyTimesheet == null) {
-			throw new IllegalArgumentException("A dailyTimesheet is required");
-		}
-
-		if (!result.hasErrors()) {
-			Long timesheetId = (Long) request.getSession().getAttribute(Timesheet.TIMESHEET_ID);
-			if (timesheetId == null) {
-				throw new IllegalStateException("Month Travel view requires current Timesheet. Timesheet ID is null.");
-			}
-			Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
-			if (timesheet == null) {
-				// logically impossible to see below message , but we have it in
-				// a case
-				result.rejectValue("dayDate", "error.time.timesheet.not.avaiable");
-			} else {
-				dailyTimesheet.setTimesheet(timesheet);
-			}
-		}
-
-		if (result.hasErrors()) {
-			modelMap.addAttribute("projects", Project.findAllProjects());
-			return "time/daily/create";
-		}
-
-		// calculate dailyTotalDuration = duration + durationTraining -
-		// durationOffs
-		dailyTimesheet.setDailyTotalDuration(dailyTimesheet.getDuration() + dailyTimesheet.getDurationTraining()
-				- dailyTimesheet.getDurationOffs());
-		dailyTimesheet.persist();
-		dailyTimesheet.flush();
-		// now we update monthlyTotalDuration in timesheet entity
-		Long timesheetId = dailyTimesheet.getTimesheet().getId();
-		Timesheet.updateTimesheetTotalMonthly(timesheetId, DailyTimesheet.findTimesheetTotalMonthly(timesheetId));
-		return "redirect:/time/daily/" + dailyTimesheet.getId();
-	}
-
-	@Transactional
-	public String TimeController.updateDailyTimesheet(@Valid DailyTimesheet dailyTimesheet, BindingResult result,
-			ModelMap modelMap) {
-		if (dailyTimesheet == null)
-			throw new IllegalArgumentException("A dailytimesheet is required");
-		if (result.hasErrors()) {
-			modelMap.addAttribute("projects", Project.findAllProjects());
-			return "time/daily/update";
-		}
-		dailyTimesheet.setDailyTotalDuration(dailyTimesheet.getDuration() + dailyTimesheet.getDurationTraining()
-				- dailyTimesheet.getDurationOffs());
-		dailyTimesheet.merge();
-		dailyTimesheet.flush();
-		// now we update monthlyTotal in Timesheet
-		Long tsId = dailyTimesheet.getTimesheet().getId();
-		Float total = DailyTimesheet.findTimesheetTotalMonthly(tsId);
-		logger.debug("Updating timesheet[" + tsId + "] to total [" + total + "]");
-		Timesheet.updateTimesheetTotalMonthly(tsId, total);
-		return "redirect:/time/daily/" + dailyTimesheet.getId();
-	}
-
 	@RequestMapping(value = "/time/view/month", method = RequestMethod.GET)
 	public String TimeController.prepareTimesheetMonthView(HttpServletRequest request, ModelMap modelMap) {
 		Long employeeId = (Long) request.getSession().getAttribute(Employee.EMPLOYEE_ID);
@@ -141,7 +81,7 @@ privileged aspect TimeController_DailyTimesheetController {
 			logger.error("", e);
 		}
 
-		createDailyTimesheet(dailyTimesheet, result, modelMap, request);
+		dailyTimesheet = dailyTimesheetService.createDailyTimesheet(dailyTimesheet, request);
 
 		/**
 		 * This was for updating an already existing daily time sheet!
