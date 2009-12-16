@@ -85,9 +85,6 @@
 					<property name="objectMapper" ref="jacksonJsonObjectMapper" />
 					<property name="renderedAttributes">
 						<set>
-							<!--
-								<value>#{applicationProperties.jsonModelAttributeError}</value>
-							-->
 							<value>items</value>
 						</set>
 					</property>
@@ -106,11 +103,13 @@
 		<property name="serializers">
 			<map>
 				<entry key="nl.hajari.wha.domain.Project" value-ref="projectSerializer" />
+				<entry key="nl.hajari.wha.domain.Customer" value-ref="projectSerializer" />
 			</map>
 		</property>
 	</bean>
 
 	<bean id="projectSerializer" class="nl.hajari.wha.service.json.ProjectSerializer" />
+	<bean id="customerSerializer" class="nl.hajari.wha.service.json.CustomerSerializer" />
 
 	<!--
 		Resolves logical view names returned by Controllers to Tiles; a view
