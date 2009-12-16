@@ -35,7 +35,7 @@ public class ProjectService {
 
 	public List<Project> findAll() {
 		List<Project> all = Project.findAllProjects();
-		logger.debug("All projects with size [" + all.size() + "].");
+		logger.debug("All projects fetched with size [" + all.size() + "].");
 		return all;
 	}
 
