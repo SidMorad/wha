@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <table name="app_user">
+        <column>id</column>
+        <column>version</column>
+        <column>username</column>
+        <column>password</column>
+        <column>employee_id</column>
+        <column>enabled</column>
+        <column>account_expired</column>
+        <column>account_locked</column>
+        <column>credentials_expired</column>
+        <row>
+            <value description="id">-1</value>
+            <value description="version">0</value>
+            <value description="username">user</value>
+            <value description="password">12dea96fec20593566ab75692c9949596833adc9</value>
+            <null/>
+            <value description="enabled">1</value>
+            <value description="account_expired">0</value>
+            <value description="account_locked">0</value>
+            <value description="credentials_expired">0</value>
+        </row>
+        <row>
+            <value description="id">-2</value>
+            <value description="version">0</value>
+            <value description="username">admin</value>
+            <value description="password">d033e22ae348aeb5660fc2140aec35850c4da997</value>
+            <null/>
+            <value description="enabled">1</value>
+            <value description="account_expired">0</value>
+            <value description="account_locked">0</value>
+            <value description="credentials_expired">0</value>
+        </row>
+        <row>
+            <value description="id">-3</value>
+            <value description="version">0</value>
+            <value description="username">behrooz</value>
+            <value description="password">a20729c9c746e282c698e2d36d00f95ec4158b56</value>
+            <null/>
+            <value description="enabled">1</value>
+            <value description="account_expired">0</value>
+            <value description="account_locked">0</value>
+            <value description="credentials_expired">0</value>
+        </row>
+    </table>
+    <table name="role">
+        <column>id</column>
+        <column>version</column>
+        <column>name</column>
+        <row>
+            <value description="id">-1</value>
+            <value description="version">0</value>
+            <value description="name">ROLE_ADMIN</value>
+        </row>
+        <row>
+            <value description="id">-2</value>
+            <value description="version">0</value>
+            <value description="name">ROLE_EMPLOYEE</value>
+        </row>
+    </table>
+    <table name="user_role">
+        <column>user_id</column>
+        <column>role_id</column>
+        <row>
+            <value description="user_id">-1</value>
+            <value description="role_id">-2</value>
+        </row>
+        <row>
+            <value description="user_id">-2</value>
+            <value description="role_id">-1</value>
+        </row>
+        <row>
+            <value description="user_id">-3</value>
+            <value description="role_id">-2</value>
+        </row>
+    </table>
+	<table name="employee">
+		<column>id</column>	
+		<column>version</column>	
+		<column>user_id</column>	
+        <column>first_name</column>
+        <column>last_name</column>
+        <column>emp_id</column>
+        <column>hourly_wage</column>
+		<row>
+			<value description="id">-1</value>
+			<value description="version">0</value>
+			<value description="user_id">-1</value>
+			<value description="first_name">Saeid</value>
+			<value description="last_name">Moradi</value>
+			<value description="emp_id">33</value>
+			<value description="hourly_wage">55.55</value>
+		</row>	
+		<row>
+			<value description="id">-2</value>
+			<value description="version">0</value>
+			<value description="user_id">-3</value>
+			<value description="first_name">Behrooz</value>
+			<value description="last_name">Nobakht</value>
+			<value description="emp_id">44</value>
+			<value description="hourly_wage">7</value>
+		</row>	
+	</table>
+	<table name="tech_role">
+		<column>id</column>
+		<column>version</column>
+		<column>name</column>
+		<column>hourly_wage</column>
+		<row>
+			<value description="id">-1</value>
+			<value description="version">0</value>
+			<value description="name">Designer</value>
+			<value description="hourly_wage">40.00</value>
+		</row>
+		<row>
+			<value description="id">-2</value>
+			<value description="version">0</value>
+			<value description="name">Developer</value>
+			<value description="hourly_wage">45.95</value>
+		</row>
+	</table>
+	<table name="employee_has_techrole">
+		<column>employee_id</column>
+		<column>techrole_id</column>
+		<row>
+			<value description="employee_id">-1</value>
+			<value description="techrole_id">-1</value>
+		</row>
+		<row>
+			<value description="employee_id">-1</value>
+			<value description="techrole_id">-2</value>
+		</row>
+	</table>
+	<table name="customer">
+		<column>id</column>
+		<column>version</column>
+		<column>name</column>
+		<row>
+			<value description="id">-1</value>
+			<value description="version">0</value>
+			<value description="name"><![CDATA[Hajari Multitasking]]></value>
+		</row>
+		<row>
+			<value description="id">-2</value>
+			<value description="version">0</value>
+			<value description="name"><![CDATA[TNT Express]]></value>
+		</row>
+	</table>
+	<table name="project">
+		<column>id</column>
+		<column>version</column>
+		<column>customer_id</column>
+		<column>name</column>
+		<row>
+			<value description="id">-1</value>
+			<value description="version">0</value>
+			<value description="customer_id">-1</value>
+			<value description="name"><![CDATA[W.H.A]]></value>
+		</row>
+		<row>
+			<value description="id">-2</value>
+			<value description="version">0</value>
+			<value description="customer_id">-2</value>
+			<value description="name"><![CDATA[TNT Asia]]></value>
+		</row>
+		<row>
+			<value description="id">-3</value>
+			<value description="version">0</value>
+			<value description="customer_id">-2</value>
+			<value description="name"><![CDATA[Personal Medical File]]></value>
+		</row>
+	</table>
+
+<!-- TIMESHEET #####################################-->
+	<table name="timesheet">
+		<column>id</column>
+		<column>version</column>
+		<column>sheet_year</column>
+		<column>sheet_month</column>
+		<column>monthly_total</column>
+		<column>employee_id</column>
+		<row>
+			<value description="id">-1</value>
+			<value description="version">0</value>
+			<value description="sheet_year">2009</value>
+			<value description="sheet_month">10</value>
+			<value description="monthly_total">8</value>
+			<value description="employee_id">-1</value>
+		</row>
+		<row>
+			<value description="id">-2</value>
+			<value description="version">0</value>
+			<value description="sheet_year">2009</value>
+			<value description="sheet_month">10</value>
+			<value description="monthly_total">5</value>
+			<value description="employee_id">-2</value>
+		</row>
+	</table>
+	<table name="daily_timesheet">
+		<column>id</column>	
+		<column>version</column>
+		<column>timesheet_id</column>	
+		<column>project_id</column>
+		<column>day_date</column>	
+		<column>duration</column>
+		<column>duration_offs</column>
+		<column>duration_training</column>
+		<column>daily_total_duration</column>
+		<row>
+			<value description="id">-1</value>
+			<value description="version">0</value>
+			<value description="timesheet_id">-1</value>
+			<value description="project_id">-1</value>
+			<value description="day_date">2009-11-20</value>
+			<value description="duration">3</value>
+			<value description="duration_offs">0</value>
+			<value description="duration_training">0</value>
+			<value description="daily_total_duration">3</value>
+		</row>
+		<row>
+			<value description="id">-2</value>
+			<value description="version">0</value>
+			<value description="timesheet_id">-1</value>
+			<value description="project_id">-1</value>
+			<value description="day_date">2009-11-21</value>
+			<value description="duration">5</value>
+			<value description="duration_offs">0</value>
+			<value description="duration_training">0</value>
+			<value description="daily_total_duration">5</value>
+		</row>
+		<row>
+			<value description="id">-3</value>
+			<value description="version">0</value>
+			<value description="timesheet_id">-2</value>
+			<value description="project_id">-1</value>
+			<value description="day_date">2009-11-21</value>
+			<value description="duration">5</value>
+			<value description="duration_offs">0</value>
+			<value description="duration_training">0</value>
+			<value description="daily_total_duration">5</value>
+		</row>
+	</table>
+</dataset>

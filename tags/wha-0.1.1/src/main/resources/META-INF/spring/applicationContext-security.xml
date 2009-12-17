@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans:beans xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+              			http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+
+	<security:http auto-config="true">
+    	<security:form-login 
+    		login-processing-url="/static/j_spring_security_check" 
+    		login-page="/login" 
+    		authentication-failure-url="/login?login_error=t" 
+    		authentication-success-handler-ref="customizedDefaultTargetUrlHandler" />
+        <security:logout logout-url="/static/j_spring_security_logout"/>
+        <security:intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
+        <security:intercept-url pattern="/time/**" access="ROLE_EMPLOYEE"/>
+        <security:intercept-url pattern="/member/**" access="IS_AUTHENTICATED_REMEMBERED" />
+        <security:intercept-url pattern="/resources/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <security:intercept-url pattern="/static/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <security:intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+	    <security:custom-filter ref="sessionSecurityFilter" after="BASIC_AUTH_FILTER"/>
+	    <security:access-denied-handler error-page="/403.jspx" />
+    </security:http>
+    
+	<beans:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder"/>
+    
+    <beans:bean id="userController" class="nl.hajari.wha.web.controller.UserController"/>
+    
+    <beans:bean id="sessionSecurityFilter" class="nl.hajari.wha.web.security.UserEmployeeSecurityFilter"/>
+    
+    <beans:bean id="customizedDefaultTargetUrlHandler" class="nl.hajari.wha.web.security.CustomizedDefaultTargetUrlHandler">
+    	<beans:property name="defaultTargetUrl" value="/time/view/month" />
+    </beans:bean>
+
+	<security:authentication-manager>
+    	<security:authentication-provider user-service-ref="userController">
+    		<security:password-encoder ref="passwordEncoder"/>
+		</security:authentication-provider>
+	</security:authentication-manager>    
+
+</beans:beans>

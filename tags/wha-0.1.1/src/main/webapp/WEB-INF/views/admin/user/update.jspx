@@ -1,0 +1,84 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="http://www.springframework.org/tags/form" xmlns:spring="http://www.springframework.org/tags">
+    <script type="text/javascript">dojo.require("dijit.TitlePane");dojo.require("dijit.form.MultiSelect");</script>
+    <div id="_title" style="width: 100%">
+        <spring:message arguments="User" code="entity.update" var="title"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title}'}})); </script>
+        <c:url value="/admin/user/${user.id}" var="form_url"/>
+        <form:form action="${form_url}" method="PUT" modelAttribute="user">
+            <div id="roo_user_username">
+                <label for="_username">Username:</label>
+                <form:input cssStyle="width:250px" id="_username" maxlength="30" path="username" size="0" readonly="true"/>
+                <br/>
+                <form:errors cssClass="errors" id="_username" path="username"/>
+                <spring:message arguments="Username" code="field.invalid" var="field_invalid"/>
+                <spring:message code="field.required" var="required"/>
+                <spring:message argumentSeparator="," arguments="Username,(${required})" code="field.simple.validation" var="field_validation"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "_username", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${field_validation}", invalidMessage: "${field_invalid}", required : true}})); </script>
+            </div>
+            <br/>
+            <div id="roo_user_email">
+                <label for="_email">Email:</label>
+                <form:input cssStyle="width:250px" id="_email" maxlength="30" path="email" size="0"/>
+                <br/>
+                <form:errors cssClass="errors" id="_email" path="email"/>
+                <spring:message code="field.invalid.email" var="field_invalid"/>
+                <spring:message code="field.required" var="required"/>
+                <spring:message argumentSeparator="," arguments="Email," code="field.simple.validation" var="field_validation"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "_email", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${field_validation}", invalidMessage: "${field_invalid}", required : false}})); </script>
+            </div>
+            <br/>
+            <c:if test="${not empty user.employee}">
+            <div id="roo_user_employee">
+                <label for="_employee">Employee:</label>
+                <form:input cssStyle="width:250px" id="_employee" maxlength="30" path="employee" size="0" readonly="true"/>
+                <br/>
+                <form:errors cssClass="errors" id="_employee" path="employee"/>
+                <spring:message arguments="Employee" code="field.invalid" var="field_invalid"/>
+                <spring:message code="field.required" var="required"/>
+                <spring:message argumentSeparator="," arguments="Employee," code="field.simple.validation" var="field_validation"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "_employee", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${field_validation}", invalidMessage: "${field_invalid}", required : false}})); </script>
+            </div>
+            <br/>
+            </c:if>
+            <div id="roo_user_roles">
+                <c:if test="${not empty roles}">
+                    <label for="_roles">Roles:</label>
+                    <form:select cssStyle="width:250px" id="_roles" path="roles">
+                    	<c:forEach var="role" items="${roles}">
+                        	<form:option value="${role.id}" label="${role.name}"  />
+                    	</c:forEach>
+                    </form:select>
+                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_roles', widgetType: 'dijit.form.MultiSelect', widgetAttrs: {}})); </script>
+                </c:if>
+            </div>
+            <br/>
+            <div id="roo_user_enabled">
+                <label for="_enabled">Enabled:</label>
+                <form:checkbox id="_enabled" path="enabled"/>
+            </div>
+            <br/>
+            <div id="roo_user_accountExpired">
+                <label for="_accountExpired">Account Expired:</label>
+                <form:checkbox id="_accountExpired" path="accountExpired"/>
+            </div>
+            <br/>
+            <div id="roo_user_accountLocked">
+                <label for="_accountLocked">Account Locked:</label>
+                <form:checkbox id="_accountLocked" path="accountLocked"/>
+            </div>
+            <br/>
+            <div id="roo_user_credentialsExpired">
+                <label for="_credentialsExpired">Credentials Expired:</label>
+                <form:checkbox id="_credentialsExpired" path="credentialsExpired"/>
+            </div>
+            <br/>
+            <div class="submit" id="roo_user_submit">
+                <spring:message code="button.update" var="update_button"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
+                <input id="proceed" type="submit" value="${update_button}"/>
+            </div>
+            <form:hidden id="_id" path="id"/>
+            <form:hidden id="_version" path="version"/>
+        </form:form>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+    <definition extends="default" name="dailyexpense/list">
+        <put-attribute name="body" value="/WEB-INF/views/dailyexpense/list.jspx"/>
+    </definition>
+    <definition extends="default" name="dailyexpense/show">
+        <put-attribute name="body" value="/WEB-INF/views/dailyexpense/show.jspx"/>
+    </definition>
+    <definition extends="default" name="dailyexpense/create">
+        <put-attribute name="body" value="/WEB-INF/views/dailyexpense/create.jspx"/>
+    </definition>
+    <definition extends="default" name="dailyexpense/update">
+        <put-attribute name="body" value="/WEB-INF/views/dailyexpense/update.jspx"/>
+    </definition>
+</tiles-definitions>
