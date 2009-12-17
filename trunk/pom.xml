@@ -597,7 +597,7 @@
 					<username>${jdbc.username}</username>
 					<password>${jdbc.password}</password>
 					<url>${jdbc.url}</url>
-					<src>src/test/resources/sample-data.xml</src>
+					<src>src/test/resources/default-data.xml</src>
 					<type>${dbunit.operation.type}</type>
 					<schema>${dbunit.schema}</schema>
 					<skip>${skipTests}</skip>
@@ -607,10 +607,14 @@
 					<!--
 						TODO:: I couldn't parameterized 'goal' value with
 						${dbunit.goal.type} We need to have goal 'operation' in normal
-						mode and 'export' in prod Profile . <execution>
-						<phase>test</phase> <goals> <goal>operation</goal> </goals>
-						</execution>
+						mode and 'export' in prod Profile . 
 					-->
+						<execution>
+							<phase>test</phase> 
+							<goals> 
+								<goal>operation</goal> 
+							</goals>
+						</execution>
 				</executions>
 				<dependencies>
 					<dependency>

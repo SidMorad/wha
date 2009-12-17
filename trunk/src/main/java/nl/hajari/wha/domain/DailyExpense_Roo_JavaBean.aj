@@ -3,6 +3,7 @@ package nl.hajari.wha.domain;
 import java.lang.Float;
 import java.lang.String;
 import java.util.Date;
+import nl.hajari.wha.domain.Customer;
 import nl.hajari.wha.domain.Timesheet;
 
 privileged aspect DailyExpense_Roo_JavaBean {
@@ -45,6 +46,14 @@ privileged aspect DailyExpense_Roo_JavaBean {
     
     public void DailyExpense.setTimesheet(Timesheet timesheet) {    
         this.timesheet = timesheet;        
+    }    
+    
+    public Customer DailyExpense.getCustomer() {    
+        return this.customer;        
+    }    
+    
+    public void DailyExpense.setCustomer(Customer customer) {    
+        this.customer = customer;        
     }    
     
 }

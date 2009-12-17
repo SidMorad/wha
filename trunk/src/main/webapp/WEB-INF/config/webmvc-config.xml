@@ -103,7 +103,7 @@
 		<property name="serializers">
 			<map>
 				<entry key="nl.hajari.wha.domain.Project" value-ref="projectSerializer" />
-				<entry key="nl.hajari.wha.domain.Customer" value-ref="projectSerializer" />
+				<entry key="nl.hajari.wha.domain.Customer" value-ref="customerSerializer" />
 			</map>
 		</property>
 	</bean>

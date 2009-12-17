@@ -12,7 +12,8 @@ privileged aspect DailyExpense_Roo_ToString {
         sb.append("ExpenseFor: ").append(getExpenseFor()).append(", ");        
         sb.append("ExpenseAmount: ").append(getExpenseAmount()).append(", ");        
         sb.append("ExpenseComment: ").append(getExpenseComment()).append(", ");        
-        sb.append("Timesheet: ").append(getTimesheet());        
+        sb.append("Timesheet: ").append(getTimesheet()).append(", ");        
+        sb.append("Customer: ").append(getCustomer());        
         return sb.toString();        
     }    
     
