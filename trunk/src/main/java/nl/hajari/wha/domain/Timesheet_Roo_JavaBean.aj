@@ -3,6 +3,7 @@ package nl.hajari.wha.domain;
 import java.lang.Float;
 import java.lang.Integer;
 import java.util.Set;
+import nl.hajari.wha.domain.DailyExpense;
 import nl.hajari.wha.domain.DailyTimesheet;
 import nl.hajari.wha.domain.DailyTravel;
 import nl.hajari.wha.domain.Employee;
@@ -55,6 +56,14 @@ privileged aspect Timesheet_Roo_JavaBean {
     
     public void Timesheet.setDailyTravels(Set<DailyTravel> dailyTravels) {    
         this.dailyTravels = dailyTravels;        
+    }    
+    
+    public Set<DailyExpense> Timesheet.getDailyExpenses() {    
+        return this.dailyExpenses;        
+    }    
+    
+    public void Timesheet.setDailyExpenses(Set<DailyExpense> dailyExpenses) {    
+        this.dailyExpenses = dailyExpenses;        
     }    
     
 }

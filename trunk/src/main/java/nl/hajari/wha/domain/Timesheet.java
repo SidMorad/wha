@@ -56,6 +56,9 @@ public class Timesheet {
 	@OneToMany(targetEntity = DailyTravel.class, mappedBy = "timesheet", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<DailyTravel> dailyTravels = new HashSet<DailyTravel>();
 
+	@OneToMany(targetEntity = DailyExpense.class, mappedBy = "timesheet", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Set<DailyExpense> dailyExpenses = new HashSet<DailyExpense>();
+
 	public String toString() {
 		return sheetYear + ", " + sheetMonth + ", " + monthlyTotal;
 	}
@@ -66,37 +69,40 @@ public class Timesheet {
 	}
 
 	@Transient
-	static final Comparator<DailyTimesheet> DAYDATE_ORDER = new Comparator<DailyTimesheet>() {
-		@Override
-		public int compare(DailyTimesheet d1, DailyTimesheet d2) {
-			return d1.getDayDate().compareTo(d2.getDayDate());
-		}
-	};
+	public String getSheetMonthShortName() {
+		return DateUtils.getSheetMonthShortName(sheetMonth);
+	}
 	
-	@Transient
-	static final Comparator<DailyTravel> DAYDATE_ORDER_FOR_TRAVEL = new Comparator<DailyTravel>() {
-		@Override
-		public int compare(DailyTravel d1, DailyTravel d2) {
-			return d1.getDayDate().compareTo(d2.getDayDate());
-		}
-	};
-
 	@Transient
 	public List<DailyTimesheet> getDailyTimesheetsSortedList() {
 		List<DailyTimesheet> dailyTimesheetList = new ArrayList<DailyTimesheet>(dailyTimesheets);
-		Collections.sort(dailyTimesheetList, DAYDATE_ORDER);
+		Collections.sort(dailyTimesheetList, new Comparator<DailyTimesheet>() {
+			public int compare(DailyTimesheet d1, DailyTimesheet d2) {
+				return d1.getDayDate().compareTo(d2.getDayDate());
+			}
+		});
 		return dailyTimesheetList;
 	}
 
 	@Transient
 	public List<DailyTravel> getDailyTravelsSortedList() {
 		List<DailyTravel> dailyTravelList = new ArrayList<DailyTravel>(dailyTravels);
-		Collections.sort(dailyTravelList, DAYDATE_ORDER_FOR_TRAVEL);
+		Collections.sort(dailyTravelList, new Comparator<DailyTravel>() {
+			public int compare(DailyTravel d1, DailyTravel d2) {
+				return d1.getDayDate().compareTo(d2.getDayDate());
+			}
+		});
 		return dailyTravelList;
 	}
 
 	@Transient
-	public String getSheetMonthShortName() {
-		return DateUtils.getSheetMonthShortName(sheetMonth);
+	public List<DailyExpense> getDailyExpensesSortedList() {
+		List<DailyExpense> dailyExpenseList = new ArrayList<DailyExpense>(dailyExpenses);
+		Collections.sort(dailyExpenseList, new Comparator<DailyExpense>() {
+			public int compare(DailyExpense d1, DailyExpense d2) {
+				return d1.getDayDate().compareTo(d2.getDayDate());
+			}
+		});
+		return dailyExpenseList;
 	}
 }

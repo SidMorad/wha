@@ -1,0 +1,127 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:form="http://www.springframework.org/tags/form" xmlns:roo="urn:jsptagdir:/WEB-INF/tags" xmlns:spring="http://www.springframework.org/tags">
+    <script type="text/javascript">dojo.require('dijit.TitlePane');dojo.require('dijit.form.DateTextBox');dojo.require('dijit.form.FilteringSelect');</script>
+    <div id="_title_div" style="width: 100%">
+        <spring:message code="label.dailyexpense" var="entity_label"/>
+        <spring:message code="label.dailyexpenses" var="entity_label_plural"/>
+        <spring:message arguments="${entity_label_plural}" code="entity.list.all" var="title_msg"/>
+        <spring:message code="field.required" var="field_required"/>
+        <spring:message code="field.invalid.decimal" var="field_invalid"/>
+        
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
+        <c:url var="action_url" value="/time/expense/update"/>
+        <form:form action="${action_url}" modelAttribute="dailyExpense" method="POST">
+        <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
+        <div style="border: none;">
+        	<table width="100%" border="0">
+	        	<tr>
+		        	<td>
+			        	<span style="float: left; font-weight:bolder; font-size: larger;">${timesheet.description}</span>
+			        	<span style="float: right; font-weight:bolder; font-size: larger;">${employee}</span>
+		        	</td>
+	        	</tr>
+        	</table>
+        </div>
+        <p></p>
+        <table width="600px">
+            <thead>
+            <tr>
+                <th width="100px">Date</th>
+                <th width="85px">Customer</th>
+                <th width="85px">For</th>
+                <th width="55px">Amount</th>
+                <th width="60px">Comment</th>
+                <th width="20px"></th>
+            </tr>
+            </thead>
+            <tr>
+				<td>
+	                <form:input cssStyle="width:90px" id="_dayDate_id" maxlength="30" path="dayDate" size="0"/>
+	                <form:errors cssClass="errors" id="_dayDate_error_id" path="dayDate"/>
+	                <spring:message arguments="Day Date" code="field.invalid" var="field_invalid"/>
+	                <spring:message argumentSeparator="," arguments="Day Date,(${field_required})" code="field.simple.validation" var="field_validation"/>
+	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dayDate_id', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true, datePattern : 'd/MM/yy'}})); </script>
+				</td>
+				<td>
+                    <c:if test="${not empty customers}">
+		                <spring:message arguments="Customer" code="field.invalid" var="field_invalid"/>
+	                    <form:select cssStyle="width:90px" id="_customer_id" path="customer">
+	                        <form:options itemValue="id" items="${customers}"/>
+	                    </form:select>
+                    	<!-- TODO:: default value is hard coded (1 == Hajari MultiTasking) -->
+	                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_customer_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true, value:1}})); </script>
+	                </c:if>
+				</td>     
+				<td>
+					 <form:input cssStyle="width:90px" id="_expenseFor_id" maxlength="45" path="expenseFor" size="0"/>
+                    <form:errors cssClass="errors" id="_expenseFor_error_id" path="expenseFor"/>
+                	<spring:message arguments="Expense For" code="field.invalid" var="field_invalid"/>
+                	<spring:message code="field.required" var="field_required"/>
+                	<spring:message argumentSeparator="," arguments="Expense For,(${field_required})" code="field.simple.validation" var="field_validation"/>
+                	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_expenseFor_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
+				</td>
+				<td>
+	                <form:input cssStyle="width:50px" id="_expenseAmount_id" maxlength="30" path="expenseAmount" size="0"/>
+	                <form:errors cssClass="errors" id="_expenseAmount_error_id" path="expenseAmount"/>
+	                <spring:message code="field.invalid.decimal" var="field_invalid"/>
+	                <spring:message argumentSeparator="," arguments="Expense Amount,(${field_required})" code="field.simple.validation" var="field_validation"/>
+	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_expenseAmount_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]*\.[0-9]*', required : true}})); </script>
+				</td>     
+				<td></td>
+				<td></td>
+            </tr>
+            <tr>
+            	<td>
+                	<label for="_comment_id"><b>Comment:</b></label>           		
+            	</td>
+            	<td colspan="6">
+					<form:textarea cssStyle="width:200px" id="_expenseComment_id" path="expenseComment"/>
+                	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_expenseComment_id', widgetType: 'dijit.form.SimpleTextarea', widgetAttrs: {}})); </script>
+                	<form:errors cssClass="errors" id="_expenseComment_error_id" path="expenseComment"/>
+            	</td>
+            </tr>
+        </table>
+        <div class="submit" id="roo_dailyexpense_submit">
+            <spring:message code="button.save" var="save_button"/>
+            <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
+            <input id="proceed" type="submit" value="${save_button}"/>
+        </div>
+        </form:form>
+		<table width="600px">
+            <tr>
+                <th width="100px">Date</th>
+                <th width="85px">Customer</th>
+                <th width="85px">For</th>
+                <th width="55px">Amount</th>
+                <th width="60px">Comment</th>
+                <th width="20px"></th>      
+            </tr>
+            <c:set var="totalAmount" value="0"/>
+            <c:forEach items="${dailyExpenses}" var="de">
+            	<tr>
+            		<td><fmt:formatDate pattern="d/MM/yy" type="DATE" value="${de.dayDate}"/></td>
+            		<td>${fn:substring(de.customer, 0, 14)}</td>
+            		<td>${fn:substring(de.expenseFor, 0, 14)}</td>
+            		<td>${de.expenseAmount}</td>
+            		<td>${fn:substring(de.expenseComment, 0, 10)}</td>
+                    <td>
+                        <spring:url value="/time/expense/delete/${de.id}" var="delete_form_url"/>
+                        <spring:url value="/static/images/delete.png" var="delete_image_url"/>
+                        <form:form action="${delete_form_url}" method="DELETE">
+                            <spring:message arguments="${entity_label}" code="entity.delete" var="delete_label"/>
+                            <input alt="${delete_label}" class="image" src="${delete_image_url}" title="${delete_label}" type="image" value="${delete_label}"/>
+                        </form:form>
+                    </td>
+           		</tr>
+	           	<c:set var="totalAmount" value="${totalAmount + de.expenseAmount }"/>
+            </c:forEach>
+            <tr align="right"> 
+            		<th>-</th>
+            		<th>-</th>
+            		<th>-</th>
+            		<th><b>${totalAmount}</b></th>
+            		<th>-</th>
+            		<th></th>
+            </tr>
+        </table>
+    </div>
+</div>

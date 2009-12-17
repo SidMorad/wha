@@ -93,6 +93,12 @@
                 	<spring:message code="label.travel.month.view"/>
                 </a>
             </li>
+            <li id="web_mvc_jsp_list_expense_month_view_menu_item">
+                <c:url value="/time/expense" var="web_mvc_jsp_time_list_expense_month_view_menu_item_url"/>
+                <a href="${web_mvc_jsp_time_list_expense_month_view_menu_item_url}">
+                	<spring:message code="label.expense.month.view"/>
+                </a>
+            </li>
         </ul>
     </li>
 	</security:authorize>	

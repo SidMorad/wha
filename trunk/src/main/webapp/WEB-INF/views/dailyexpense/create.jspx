@@ -60,6 +60,16 @@
                 </c:if>
             </div>
             <br/>
+            <div id="roo_dailyexpense_customer">
+                <c:if test="${not empty customers}">
+                    <label for="_customer_id">Customer:</label>
+                    <form:select cssStyle="width:250px" id="_customer_id" path="customer">
+                        <form:options itemValue="id" items="${customers}"/>
+                    </form:select>
+                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_customer_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+                </c:if>
+            </div>
+            <br/>
             <div class="submit" id="roo_dailyexpense_submit">
                 <spring:message code="button.save" var="save_button"/>
                 <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
