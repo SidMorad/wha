@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>nl.hajari.wha</groupId>
 	<artifactId>wha</artifactId>
 	<packaging>war</packaging>
-	<version>0.1.1-SNAPSHOT</version>
+	<version>0.1.1</version>
 	<name>wha</name>
 
 	<prerequisites>
@@ -31,9 +30,9 @@
 		configuration below
 	-->
 	<scm>
-		<connection>scm:svn:http://wha.googlecode.com/svn/trunk</connection>
-		<developerConnection>scm:svn:https://wha.googlecode.com/svn/trunk</developerConnection>
-		<url>https://wha.googlecode.com/svn/trunk</url>
+		<connection>scm:svn:http://wha.googlecode.com/svn/tags/wha-0.1.1</connection>
+		<developerConnection>scm:svn:https://wha.googlecode.com/svn/tags/wha-0.1.1</developerConnection>
+		<url>https://wha.googlecode.com/svn/tags/wha-0.1.1</url>
 	</scm>
 
 	<!--
@@ -692,8 +691,7 @@
 									specified
 								-->
 								<property name="test" value="run-all-tests" />
-								<property name="i18n.classpath"
-									value="${basedir}/src/main/webapp/WEB-INF/i18n" />
+								<property name="i18n.classpath" value="${basedir}/src/main/webapp/WEB-INF/i18n" />
 								<echo level="info">Testing '${project.build.finalName}' with
 									locale '${user.language}'</echo>
 								<ant antfile="src/test/resources/web-tests.xml" target="${test}">
