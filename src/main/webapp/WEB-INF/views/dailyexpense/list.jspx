@@ -16,6 +16,7 @@
                         <th>Expense Amount</th>
                         <th>Expense Comment</th>
                         <th>Timesheet</th>
+                        <th>Customer</th>
                         <th/>
                         <th/>
                         <th/>
@@ -31,6 +32,7 @@
                         <td>${fn:substring(dailyexpense.expenseAmount, 0, 10)}</td>
                         <td>${fn:substring(dailyexpense.expenseComment, 0, 10)}</td>
                         <td>${fn:substring(dailyexpense.timesheet, 0, 10)}</td>
+                        <td>${fn:substring(dailyexpense.customer, 0, 10)}</td>
                         <td>
                             <spring:url value="/dailyexpense/${dailyexpense.id}" var="show_form_url"/>
                             <spring:url value="/static/images/show.png" var="show_image_url"/>
@@ -58,7 +60,7 @@
                     </tr>
                 </c:forEach>
                 <tr class="footer">
-                    <td colspan="9">
+                    <td colspan="10">
                         <span class="new">
                             <spring:url value="/dailyexpense/form" var="create_url"/>
                             <a href="${create_url}">

@@ -33,6 +33,11 @@
                 <div class="box" id="_timesheet_id">${dailyexpense.timesheet}</div>
             </div>
             <br/>
+            <div id="roo_dailyexpense_customer">
+                <label for="_customer_id">Customer:</label>
+                <div class="box" id="_customer_id">${dailyexpense.customer}</div>
+            </div>
+            <br/>
         </c:if>
         <c:if test="${empty dailyexpense}">
             <spring:message arguments="${entity_label}" code="entity.not.found.single"/>

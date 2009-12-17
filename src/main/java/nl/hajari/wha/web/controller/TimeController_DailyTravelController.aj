@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-public aspect TimeController_DailyTravelController {
+/**
+ * 
+ * @author <a href="mailto:saeid3@gmail.com">Saeid Moradi</a>
+ **/
+privileged aspect TimeController_DailyTravelController {
 
 	@RequestMapping(value = "/time/travel", method = RequestMethod.GET)
 	public String TimeController.prepareTravelMonthView(HttpServletRequest request, ModelMap modelMap) {
@@ -21,7 +25,7 @@ public aspect TimeController_DailyTravelController {
 			throw new IllegalStateException("Month Travel view requires current Timesheet. Timesheet ID is null.");
 		}
 		Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
-		logger.debug("Timesheet Founded: [" + timesheet + "]");
+		logger.debug("Timesheet Founded: [" + timesheet + "] for Travel Month View");
 		
 		modelMap.put("dailyTravel", new DailyTravel());
 		modelMap.put("dailyTravels", timesheet.getDailyTravelsSortedList());
@@ -40,7 +44,7 @@ public aspect TimeController_DailyTravelController {
 		Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
 		
 		if (result.hasErrors()) {
-			// Fill modelMap again and return
+			// Fill modelMap and return
 			modelMap.put("dailyTravels", timesheet.getDailyTravelsSortedList());
 			modelMap.put("timesheet", timesheet);
 			modelMap.put("employee", timesheet.getEmployee());
