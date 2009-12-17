@@ -4,7 +4,7 @@
 	<groupId>nl.hajari.wha</groupId>
 	<artifactId>wha</artifactId>
 	<packaging>war</packaging>
-	<version>0.1.1</version>
+	<version>0.1.1-SNAPSHOT</version>
 	<name>wha</name>
 
 	<prerequisites>
@@ -30,9 +30,9 @@
 		configuration below
 	-->
 	<scm>
-		<connection>scm:svn:http://wha.googlecode.com/svn/tags/wha-0.1.1</connection>
-		<developerConnection>scm:svn:https://wha.googlecode.com/svn/tags/wha-0.1.1</developerConnection>
-		<url>https://wha.googlecode.com/svn/tags/wha-0.1.1</url>
+		<connection>scm:svn:http://wha.googlecode.com/svn/trunk</connection>
+		<developerConnection>scm:svn:https://wha.googlecode.com/svn/trunk</developerConnection>
+		<url>https://wha.googlecode.com/svn/trunk</url>
 	</scm>
 
 	<!--
