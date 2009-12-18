@@ -67,10 +67,10 @@ privileged aspect RoleController_Roo_Controller {
     }    
     
     @RequestMapping(value = "/role/{id}", method = RequestMethod.DELETE)    
-    public String RoleController.delete(@PathVariable("id") Long id) {    
+    public String RoleController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size) {    
         if (id == null) throw new IllegalArgumentException("An Identifier is required");        
         Role.findRole(id).remove();        
-        return "redirect:/role";        
+        return "redirect:/role?page=" + ((page == null) ? "1" : page.toString()) + "&size=" + ((size == null) ? "10" : size.toString());        
     }    
     
     @RequestMapping(value = "find/ByNameEquals/form", method = RequestMethod.GET)    

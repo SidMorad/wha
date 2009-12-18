@@ -4,9 +4,9 @@
     	<c:out value="&#160;|&#160;"/>
     	<spring:message code="global.language" />
     	<c:out value=":&#160;"/>
-    	<c:url var="img_en" value="/static/images/us.png" />
+    	<c:url var="img_en" value="/static/images/gb.png" />
     	<c:url var="url_en" value="">
-    		<c:param name="lang" value="us" />
+    		<c:param name="lang" value="en" />
     		<c:if test="${not empty param.page}">
     			<c:param name="page" value="${param.page}" />
     		</c:if>

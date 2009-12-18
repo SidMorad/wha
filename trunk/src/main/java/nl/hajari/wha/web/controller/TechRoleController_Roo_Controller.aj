@@ -67,10 +67,10 @@ privileged aspect TechRoleController_Roo_Controller {
     }    
     
     @RequestMapping(value = "/techrole/{id}", method = RequestMethod.DELETE)    
-    public String TechRoleController.delete(@PathVariable("id") Long id) {    
+    public String TechRoleController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size) {    
         if (id == null) throw new IllegalArgumentException("An Identifier is required");        
         TechRole.findTechRole(id).remove();        
-        return "redirect:/techrole";        
+        return "redirect:/techrole?page=" + ((page == null) ? "1" : page.toString()) + "&size=" + ((size == null) ? "10" : size.toString());        
     }    
     
 }

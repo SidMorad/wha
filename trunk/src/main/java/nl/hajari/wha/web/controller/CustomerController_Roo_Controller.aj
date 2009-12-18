@@ -67,10 +67,10 @@ privileged aspect CustomerController_Roo_Controller {
     }    
     
     @RequestMapping(value = "/customer/{id}", method = RequestMethod.DELETE)    
-    public String CustomerController.delete(@PathVariable("id") Long id) {    
+    public String CustomerController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size) {    
         if (id == null) throw new IllegalArgumentException("An Identifier is required");        
         Customer.findCustomer(id).remove();        
-        return "redirect:/customer";        
+        return "redirect:/customer?page=" + ((page == null) ? "1" : page.toString()) + "&size=" + ((size == null) ? "10" : size.toString());        
     }    
     
     @RequestMapping(value = "find/ByNameEquals/form", method = RequestMethod.GET)    
