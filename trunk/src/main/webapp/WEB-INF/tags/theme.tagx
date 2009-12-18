@@ -5,7 +5,7 @@
     	<spring:message code="global.theme" />
     	<c:out value=":&#160;"/>
     	<c:url var="url_theme1" value="">
-    		<c:param name="theme" value="left" />
+    		<c:param name="theme" value="standard" />
     		<c:if test="${not empty param.page}">
     			<c:param name="page" value="${param.page}" />
     		</c:if>
@@ -13,12 +13,12 @@
     			<c:param name="size" value="${param.size}" />
     		</c:if>
     	</c:url>
-    	<spring:message code="global.theme.left" var="theme_left" />
+    	<spring:message code="global.theme.standard" var="theme_left" />
     	<a href="${url_theme1}" title="${theme_left}">${theme_left}</a>
     	<c:out value="&#160;|&#160;"/>
 
     	<c:url var="url_theme2" value="">
-    		<c:param name="theme" value="right" />
+    		<c:param name="theme" value="alt" />
     		<c:if test="${not empty param.page}">
     			<c:param name="page" value="${param.page}" />
     		</c:if>
@@ -26,7 +26,7 @@
     			<c:param name="size" value="${param.size}" />
     		</c:if>
     	</c:url>
-    	<spring:message code="global.theme.right" var="theme_right" />
+    	<spring:message code="global.theme.alt" var="theme_right" />
     	<a href="${url_theme2}" title="${theme_right}">${theme_right}</a>
     </span>
     

@@ -33,7 +33,7 @@
     	<beans:property name="defaultTargetUrl" value="/time/view/month" />
     </beans:bean>
 
-	<authentication-manager>
+	<authentication-manager alias="authenticationManager">
     	<authentication-provider user-service-ref="userController">
     		<password-encoder ref="passwordEncoder"/>
 		</authentication-provider>
