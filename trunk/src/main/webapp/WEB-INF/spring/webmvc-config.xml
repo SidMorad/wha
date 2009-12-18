@@ -162,5 +162,11 @@
 
 	<bean id="projectSerializer" class="nl.hajari.wha.service.json.ProjectSerializer" />
 	<bean id="customerSerializer" class="nl.hajari.wha.service.json.CustomerSerializer" />
+	
+	<bean id="customerService" class="nl.hajari.wha.service.CustomerService">
+	<!-- 
+		<property name="defaultExpenseCustomerName" value="${default.expense.customer.name}" />
+	 -->
+	</bean>
 
 </beans>
