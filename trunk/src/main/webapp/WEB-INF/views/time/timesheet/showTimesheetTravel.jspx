@@ -33,51 +33,6 @@
     </div>
 
     <c:if test="${not empty timesheet}">
-		<div id="_title_daily_div" style="width: 100%">
-		    <spring:message code="label.dailytimesheet" var="entity_daily_label"/>
-		    <spring:message code="label.dailytimesheets" var="entity_daily_label_plural"/>
-		    <spring:message arguments="${entity_daily_label_plural}" code="entity.list.all" var="title_daily_msg"/>
-		    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_daily_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_daily_msg}'}})); </script>
-		    <c:if test="${not empty timesheet.dailyTimesheetsSortedList}">
-		        <table width="300px">
-		            <thead>
-		                <tr>
-		                    <th>Day Date</th>
-		                    <th>Project</th>
-		                    <th>Working</th>
-		                    <th>Off</th>
-		                    <th>Training</th>
-		                    <th>Total</th>
-		                </tr>
-		            </thead>
-		            <c:set var="totalMonthly" value="0" />	
-		            <c:forEach items="${timesheet.dailyTimesheetsSortedList}" var="dailytimesheet">
-		                <tr>
-		                    <td>
-		                        <fmt:formatDate pattern="d/MM/yy" type="DATE" value="${dailytimesheet.dayDate}"/>
-		                    </td>
-		                    <td>${fn:substring(dailytimesheet.project, 0, 10)}</td>
-		                    <td>${fn:substring(dailytimesheet.duration, 0, 10)}</td>
-		                    <td>${fn:substring(dailytimesheet.durationOffs, 0, 10)}</td>
-		                    <td>${fn:substring(dailytimesheet.durationTraining, 0, 10)}</td>
-		                    <td>${fn:substring(dailytimesheet.dailyTotalDuration, 0, 10)}</td>
-		                </tr>
-		                <c:set var="totalMonthly" value="${totalMonthly + dailytimesheet.dailyTotalDuration}"/>
-		            </c:forEach>
-		            <tr>
-		            	<td></td>
-		            	<td></td>
-		            	<td></td>
-		            	<td></td>
-		            	<td></td>
-		            	<td><b>${totalMonthly}</b></td>
-		            </tr> 
-		        </table>
-		    </c:if>
-		    <c:if test="${empty timesheet.dailyTimesheetsSortedList}">
-		        <spring:message arguments="${entity_daily_label_plural}" code="entity.not.found"/>
-		    </c:if>
-		</div>
 	    <div id="_title_travel_div">
 	        <spring:message code="label.dailytravel" var="entity_travel_label"/>
 	        <spring:message code="label.dailytravels" var="entity_travel_label_plural"/>
@@ -87,10 +42,10 @@
 	            <table width="300px">
 	                <thead>
 	                    <tr>
-	                        <th>Day Date</th>
-	                        <th>Origin</th>
-	                        <th>Destination</th>
-	                        <th>With Return</th>
+	                        <th width="80px">Day Date</th>
+	                        <th width="90px">Origin</th>
+	                        <th width="90px">Destination</th>
+	                        <th width="50px">Return?</th>
 	                        <th>Comment</th>
 	                        <th>Distance</th>
 	                    </tr>
@@ -104,7 +59,7 @@
 	                        <td>${fn:substring(dailytravel.origin, 0, 10)}</td>
 	                        <td>${fn:substring(dailytravel.destination, 0, 10)}</td>
 	                        <td>${fn:substring(dailytravel.withReturn, 0, 10)}</td>
-	                        <td>${fn:substring(dailytravel.comment, 0, 20)}</td>
+	                        <td>${fn:substring(dailytravel.comment, 0, 14)}</td>
 	                        <td>${fn:substring(dailytravel.distance, 0, 10)}</td>
 	                    </tr>
 	                    <c:if test="${!dailytravel.withReturn}">

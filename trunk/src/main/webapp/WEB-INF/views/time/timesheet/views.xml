@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
-    <definition extends="default" name="time/timesheet/list">
-        <put-attribute name="body" value="/WEB-INF/views/time/timesheet/list.jspx"/>
+    <definition extends="default" name="time/timesheet/daily/list">
+        <put-attribute name="body" value="/WEB-INF/views/time/timesheet/listTimesheetDaily.jspx"/>
     </definition>
-    <definition extends="default" name="time/timesheet/show">
-        <put-attribute name="body" value="/WEB-INF/views/time/timesheet/show.jspx"/>
+    <definition extends="default" name="time/timesheet/travel/list">
+        <put-attribute name="body" value="/WEB-INF/views/time/timesheet/listTimesheetTravel.jspx"/>
+    </definition>
+    <definition extends="default" name="time/timesheet/expense/list">
+        <put-attribute name="body" value="/WEB-INF/views/time/timesheet/listTimesheetExpense.jspx"/>
+    </definition>
+    <definition extends="default" name="time/timesheet/daily/show">
+        <put-attribute name="body" value="/WEB-INF/views/time/timesheet/showTimesheetDaily.jspx"/>
+    </definition>
+    <definition extends="default" name="time/timesheet/travel/show">
+        <put-attribute name="body" value="/WEB-INF/views/time/timesheet/showTimesheetTravel.jspx"/>
+    </definition>
+    <definition extends="default" name="time/timesheet/expense/show">
+        <put-attribute name="body" value="/WEB-INF/views/time/timesheet/showTimesheetExpense.jspx"/>
     </definition>
 </tiles-definitions>

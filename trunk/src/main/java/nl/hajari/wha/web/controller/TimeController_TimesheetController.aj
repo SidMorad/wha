@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 privileged aspect TimeController_TimesheetController {
 
 	@RequestMapping(value = "/time/timesheet", method = RequestMethod.GET)
-	public String TimeController.listTimesheet(@RequestParam(value = "page", required = false) Integer page,
-			@RequestParam(value = "size", required = false) Integer size, ModelMap modelMap, HttpServletRequest request) {
+	public String TimeController.listTimesheet(@RequestParam(value = "ent", required = true) String ent,@RequestParam(value = "page", required = false) Integer page,
+			@RequestParam(value = "size", required = false) Integer size,ModelMap modelMap, HttpServletRequest request) {
 		Long employeeId = (Long) request.getSession().getAttribute(Employee.EMPLOYEE_ID);
 		if (page != null || size != null) {
 			int sizeNo = size == null ? 10 : size.intValue();
@@ -28,18 +28,41 @@ privileged aspect TimeController_TimesheetController {
 		} else {
 			modelMap.addAttribute("timesheets", Timesheet.findAllTimesheetsByEmployeeId(employeeId));
 		}
-		return "time/timesheet/list";
+		modelMap.put("employee", Employee.findEmployee(employeeId));
+		return "time/timesheet/" + ent + "/list";
 	}
 
-	@RequestMapping(value = "/time/timesheet/{id}", method = RequestMethod.GET)
-	public String TimeController.showTimesheet(@PathVariable("id") Long id, HttpServletRequest request,
+	@RequestMapping(value = "/time/timesheet/daily/{id}", method = RequestMethod.GET)
+	public String TimeController.showTimesheetDaily(@PathVariable("id") Long id, HttpServletRequest request,
 			HttpServletResponse response, ModelMap modelMap) throws Exception {
 		if (id == null) {
 			throw new IllegalArgumentException("An Identifer is required");
 		}
 		authorizeAccessTimesheet(id, request, response);
 		modelMap.addAttribute("timesheet", Timesheet.findTimesheet(id));
-		return "time/timesheet/show";
+		return "time/timesheet/daily/show";
+	}
+
+	@RequestMapping(value = "/time/timesheet/travel/{id}", method = RequestMethod.GET)
+	public String TimeController.showTimesheetTravel(@PathVariable("id") Long id, HttpServletRequest request,
+			HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (id == null) {
+			throw new IllegalArgumentException("An Identifer is required");
+		}
+		authorizeAccessTimesheet(id, request, response);
+		modelMap.addAttribute("timesheet", Timesheet.findTimesheet(id));
+		return "time/timesheet/travel/show";
+	}
+
+	@RequestMapping(value = "/time/timesheet/expense/{id}", method = RequestMethod.GET)
+	public String TimeController.showTimesheetExpense(@PathVariable("id") Long id, HttpServletRequest request,
+			HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (id == null) {
+			throw new IllegalArgumentException("An Identifer is required");
+		}
+		authorizeAccessTimesheet(id, request, response);
+		modelMap.addAttribute("timesheet", Timesheet.findTimesheet(id));
+		return "time/timesheet/expense/show";
 	}
 
 }
