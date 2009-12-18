@@ -20,9 +20,9 @@
                 <c:forEach items="${timesheets}" var="timesheet">
                     <tr>
                         <td>${timesheet.id}</td>
-                        <td>${fn:substring(timesheet.sheetYear, 0, 10)}</td>
-                        <td>${fn:substring(timesheet.sheetMonthShortName, 0, 10)}</td>
-                        <td>${fn:substring(timesheet.monthlyTotal, 0, 10)}</td>
+                        <td>${timesheet.sheetYear}</td>
+                        <td>${timesheet.sheetMonthShortName}</td>
+                        <td>${timesheet.monthlyTotal}</td>
                         <td>${fn:length(timesheet.dailyExpenses)}</td>
                         <td>
                             <spring:url value="/time/timesheet/expense/${timesheet.id}" var="show_form_url"/>
