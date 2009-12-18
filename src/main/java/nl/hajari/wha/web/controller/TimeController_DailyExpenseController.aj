@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 /**
  * 
@@ -37,6 +38,10 @@ privileged aspect TimeController_DailyExpenseController {
 		modelMap.put("timesheet", timesheet);
 		modelMap.put("employee", timesheet.getEmployee());
 		modelMap.put("customers", Customer.findAllCustomers());
+		
+		Customer defaultCustomer = customerService.findExpenseDefaultCustomer();
+		modelMap.put("defaultCustomerId", defaultCustomer == null ? "-1" : defaultCustomer.getId());
+		
 		return "time/expense/month";
 	}
 

@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import nl.hajari.wha.domain.Timesheet;
 import nl.hajari.wha.domain.User;
+import nl.hajari.wha.service.CustomerService;
 import nl.hajari.wha.service.DailyTimesheetService;
 import nl.hajari.wha.service.ProjectService;
 import nl.hajari.wha.web.util.SecurityContextUtils;
@@ -31,6 +32,9 @@ public class TimeController {
 
 	@Autowired
 	protected ProjectService projectService;
+
+	@Autowired
+	protected CustomerService customerService;
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
