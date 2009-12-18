@@ -56,11 +56,11 @@
 	                        <td>
 	                            <fmt:formatDate pattern="d/MM/yy" type="DATE" value="${dailytravel.dayDate}"/>
 	                        </td>
-	                        <td>${fn:substring(dailytravel.origin, 0, 10)}</td>
-	                        <td>${fn:substring(dailytravel.destination, 0, 10)}</td>
-	                        <td>${fn:substring(dailytravel.withReturn, 0, 10)}</td>
-	                        <td>${fn:substring(dailytravel.comment, 0, 14)}</td>
-	                        <td>${fn:substring(dailytravel.distance, 0, 10)}</td>
+	                        <td>${dailytravel.origin}</td>
+	                        <td>${dailytravel.destination}</td>
+	                        <td>${dailytravel.withReturn}</td>
+	                        <td>${dailytravel.comment}</td>
+	                        <td>${dailytravel.distance}</td>
 	                    </tr>
 	                    <c:if test="${!dailytravel.withReturn}">
 			           		<c:set var="totalDistance" value="${totalDistance + dailytravel.distance}"/>

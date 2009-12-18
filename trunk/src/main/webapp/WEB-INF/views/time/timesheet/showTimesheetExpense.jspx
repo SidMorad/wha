@@ -51,9 +51,9 @@
 		            <c:forEach items="${timesheet.dailyExpensesSortedList}" var="de">
 		            	<tr>
 		            		<td><fmt:formatDate pattern="d/MM/yy" type="DATE" value="${de.dayDate}"/></td>
-		            		<td>${fn:substring(de.customer, 0, 14)}</td>
-		            		<td>${fn:substring(de.expenseFor, 0, 14)}</td>
-		            		<td>${fn:substring(de.expenseComment, 0, 20)}</td>
+		            		<td>${de.customer}</td>
+		            		<td>${de.expenseFor}</td>
+		            		<td>${de.expenseComment}</td>
 		            		<td>${de.expenseAmount}</td>
 		           		</tr>
 		           		
