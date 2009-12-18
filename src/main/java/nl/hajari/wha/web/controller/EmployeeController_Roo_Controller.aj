@@ -77,10 +77,10 @@ privileged aspect EmployeeController_Roo_Controller {
     }    
     
     @RequestMapping(value = "/employee/{id}", method = RequestMethod.DELETE)    
-    public String EmployeeController.delete(@PathVariable("id") Long id) {    
+    public String EmployeeController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size) {    
         if (id == null) throw new IllegalArgumentException("An Identifier is required");        
         Employee.findEmployee(id).remove();        
-        return "redirect:/employee";        
+        return "redirect:/employee?page=" + ((page == null) ? "1" : page.toString()) + "&size=" + ((size == null) ? "10" : size.toString());        
     }    
     
     @RequestMapping(value = "find/ByUser/form", method = RequestMethod.GET)    

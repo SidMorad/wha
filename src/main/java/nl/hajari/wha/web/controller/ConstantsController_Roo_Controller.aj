@@ -67,10 +67,10 @@ privileged aspect ConstantsController_Roo_Controller {
     }    
     
     @RequestMapping(value = "/constants/{id}", method = RequestMethod.DELETE)    
-    public String ConstantsController.delete(@PathVariable("id") Long id) {    
+    public String ConstantsController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size) {    
         if (id == null) throw new IllegalArgumentException("An Identifier is required");        
         Constants.findConstants(id).remove();        
-        return "redirect:/constants";        
+        return "redirect:/constants?page=" + ((page == null) ? "1" : page.toString()) + "&size=" + ((size == null) ? "10" : size.toString());        
     }    
     
 }

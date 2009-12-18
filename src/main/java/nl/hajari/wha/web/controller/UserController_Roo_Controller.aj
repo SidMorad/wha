@@ -51,10 +51,10 @@ privileged aspect UserController_Roo_Controller {
     }    
     
     @RequestMapping(value = "/admin/user/{id}", method = RequestMethod.DELETE)    
-    public String UserController.delete(@PathVariable("id") Long id) {    
+    public String UserController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size) {    
         if (id == null) throw new IllegalArgumentException("An Identifier is required");        
         User.findUser(id).remove();        
-        return "redirect:/admin/user";        
+        return "redirect:/admin/user?page=" + ((page == null) ? "1" : page.toString()) + "&size=" + ((size == null) ? "10" : size.toString());        
     }    
     
     @RequestMapping(value = "find/ByUsernameEquals/form", method = RequestMethod.GET)    

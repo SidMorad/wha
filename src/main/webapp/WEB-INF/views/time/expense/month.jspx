@@ -26,11 +26,9 @@
             <thead>
             <tr>
                 <th width="100px">Date</th>
-                <th width="85px">Customer</th>
-                <th width="85px">For</th>
-                <th width="55px">Amount</th>
-                <th width="60px">Comment</th>
-                <th width="20px"></th>
+                <th width="148px">Customer</th>
+                <th width="148px">For</th>
+                <th colspan="3">Amount</th>
             </tr>
             </thead>
             <tr>
@@ -44,7 +42,7 @@
 				<td>
                     <c:if test="${not empty customers}">
 		                <spring:message arguments="Customer" code="field.invalid" var="field_invalid"/>
-	                    <form:select cssStyle="width:90px" id="_customer_id" path="customer">
+	                    <form:select cssStyle="width:130px" id="_customer_id" path="customer">
 	                        <form:options itemValue="id" items="${customers}"/>
 	                    </form:select>
                     	<!-- TODO:: default value is hard coded (1 == Hajari MultiTasking) -->
@@ -52,22 +50,20 @@
 	                </c:if>
 				</td>     
 				<td>
-					 <form:input cssStyle="width:90px" id="_expenseFor_id" maxlength="45" path="expenseFor" size="0"/>
+					 <form:input cssStyle="width:130px" id="_expenseFor_id" maxlength="45" path="expenseFor" size="0"/>
                     <form:errors cssClass="errors" id="_expenseFor_error_id" path="expenseFor"/>
                 	<spring:message arguments="Expense For" code="field.invalid" var="field_invalid"/>
                 	<spring:message code="field.required" var="field_required"/>
                 	<spring:message argumentSeparator="," arguments="Expense For,(${field_required})" code="field.simple.validation" var="field_validation"/>
                 	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_expenseFor_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
 				</td>
-				<td>
-	                <form:input cssStyle="width:50px" id="_expenseAmount_id" maxlength="30" path="expenseAmount" size="0"/>
+				<td colspan="3">
+	                <form:input cssStyle="width:65px" id="_expenseAmount_id" maxlength="30" path="expenseAmount" size="0"/>
 	                <form:errors cssClass="errors" id="_expenseAmount_error_id" path="expenseAmount"/>
 	                <spring:message code="field.invalid.decimal" var="field_invalid"/>
 	                <spring:message argumentSeparator="," arguments="Expense Amount,(${field_required})" code="field.simple.validation" var="field_validation"/>
 	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_expenseAmount_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]*\.[0-9]*', required : true}})); </script>
 				</td>     
-				<td></td>
-				<td></td>
             </tr>
             <tr>
             	<td>
@@ -88,11 +84,11 @@
         </form:form>
 		<table width="600px">
             <tr>
-                <th width="100px">Date</th>
-                <th width="85px">Customer</th>
-                <th width="85px">For</th>
+                <th width="80px">Date</th>
+                <th width="120px">Customer</th>
+                <th width="120px">For</th>
                 <th width="55px">Amount</th>
-                <th width="60px">Comment</th>
+                <th width="100px">Comment</th>
                 <th width="20px"></th>      
             </tr>
             <c:set var="totalAmount" value="0"/>

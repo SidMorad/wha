@@ -7,8 +7,6 @@ import nl.hajari.wha.domain.DailyTravel;
 import nl.hajari.wha.domain.Timesheet;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -74,15 +72,10 @@ privileged aspect DailyTravelController_Roo_Controller {
     }    
     
     @RequestMapping(value = "/dailytravel/{id}", method = RequestMethod.DELETE)    
-    public String DailyTravelController.delete(@PathVariable("id") Long id) {    
+    public String DailyTravelController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size) {    
         if (id == null) throw new IllegalArgumentException("An Identifier is required");        
         DailyTravel.findDailyTravel(id).remove();        
-        return "redirect:/dailytravel";        
-    }    
-    
-    @InitBinder    
-    public void DailyTravelController.initBinder(WebDataBinder binder) {    
-        binder.registerCustomEditor(java.util.Date.class, new org.springframework.beans.propertyeditors.CustomDateEditor(new java.text.SimpleDateFormat("d/MM/yy"), true));        
+        return "redirect:/dailytravel?page=" + ((page == null) ? "1" : page.toString()) + "&size=" + ((size == null) ? "10" : size.toString());        
     }    
     
 }

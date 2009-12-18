@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<beans:beans xmlns:security="http://www.springframework.org/schema/security"
+<beans:beans xmlns="http://www.springframework.org/schema/security"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
               			http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
 
-	<security:http auto-config="true">
-    	<security:form-login 
+	<http auto-config="true" use-expressions="true">
+    	<form-login 
     		login-processing-url="/static/j_spring_security_check" 
     		login-page="/login" 
     		authentication-failure-url="/login?login_error=t" 
     		authentication-success-handler-ref="customizedDefaultTargetUrlHandler" />
-        <security:logout logout-url="/static/j_spring_security_logout"/>
-        <security:intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
-        <security:intercept-url pattern="/time/**" access="ROLE_EMPLOYEE"/>
-        <security:intercept-url pattern="/member/**" access="IS_AUTHENTICATED_REMEMBERED" />
-        <security:intercept-url pattern="/resources/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-        <security:intercept-url pattern="/static/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-        <security:intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-	    <security:custom-filter ref="sessionSecurityFilter" after="BASIC_AUTH_FILTER"/>
-	    <security:access-denied-handler error-page="/403.jspx" />
-    </security:http>
+        <logout logout-url="/static/j_spring_security_logout"/>
+        <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/time/**" access="hasRole('ROLE_EMPLOYEE')"/>
+        <intercept-url pattern="/member/**" access="isAuthenticated()"/>
+        <intercept-url pattern="/resources/**" access="permitAll" />
+        <intercept-url pattern="/static/**" access="permitAll" />
+        <intercept-url pattern="/**" access="permitAll" />
+	    <custom-filter ref="sessionSecurityFilter" after="BASIC_AUTH_FILTER"/>
+	    <access-denied-handler error-page="/403.jspx" />
+    </http>
     
 	<beans:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder"/>
     
@@ -33,10 +33,10 @@
     	<beans:property name="defaultTargetUrl" value="/time/view/month" />
     </beans:bean>
 
-	<security:authentication-manager>
-    	<security:authentication-provider user-service-ref="userController">
-    		<security:password-encoder ref="passwordEncoder"/>
-		</security:authentication-provider>
-	</security:authentication-manager>    
+	<authentication-manager>
+    	<authentication-provider user-service-ref="userController">
+    		<password-encoder ref="passwordEncoder"/>
+		</authentication-provider>
+	</authentication-manager>    
 
 </beans:beans>

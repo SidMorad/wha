@@ -33,7 +33,6 @@ public class Role implements GrantedAuthority {
 		return (name != null ? name.hashCode() : Integer.MIN_VALUE);
 	}
 
-	@Override
 	public int compareTo(GrantedAuthority o) {
 		if (o == null) {
 			return 1;
