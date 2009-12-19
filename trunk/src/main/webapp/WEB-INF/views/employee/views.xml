@@ -13,4 +13,10 @@
     <definition extends="default" name="employee/update">
         <put-attribute name="body" value="/WEB-INF/views/employee/update.jspx"/>
     </definition>
+    <definition extends="default" name="employee/profile">
+        <put-attribute name="body" value="/WEB-INF/views/employee/profile.jspx"/>
+    </definition>
+    <definition extends="default" name="employee/profile/show">
+        <put-attribute name="body" value="/WEB-INF/views/employee/profileShow.jspx"/>
+    </definition>
 </tiles-definitions>
