@@ -1,0 +1,52 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="http://www.springframework.org/tags/form" xmlns:spring="http://www.springframework.org/tags">
+    <script type="text/javascript">dojo.require('dijit.TitlePane');dojo.require('dijit.form.FilteringSelect');dojo.require('dijit.form.MultiSelect');</script>
+    <div id="_title_div" style="width: 100%">
+        <spring:message code="label.profile" var="entity_label"/>
+        <spring:message arguments="${entity_label}" code="entity.update" var="title_msg"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
+        <spring:url value="/employee/profile" var="form_url"/>
+        <form:form action="${form_url}" method="POST" modelAttribute="profileFormBean">
+            <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
+            <div id="roo_employee_firstName">
+                <label for="_firstName">First Name:</label>
+                <form:input cssStyle="width:250px" id="_firstName" maxlength="45" path="firstName" size="0"/>
+                <br/>
+                <form:errors cssClass="errors" id="_firstName_error" path="firstName"/>
+                <spring:message arguments="First Name" code="field.invalid" var="field_invalid"/>
+                <spring:message code="field.required" var="field_required"/>
+                <spring:message argumentSeparator="," arguments="First Name,(${field_required})" code="field.simple.validation" var="field_validation"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_firstName', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
+            </div>
+            <br/>
+            <div id="roo_employee_lastName">
+                <label for="_lastName">Last Name:</label>
+                <form:input cssStyle="width:250px" id="_lastName" maxlength="45" path="lastName" size="0"/>
+                <br/>
+                <form:errors cssClass="errors" id="_lastName_error" path="lastName"/>
+                <spring:message arguments="Last Name" code="field.invalid" var="field_invalid"/>
+                <spring:message code="field.required" var="field_required"/>
+                <spring:message argumentSeparator="," arguments="Last Name,(${field_required})" code="field.simple.validation" var="field_validation"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_lastName', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
+            </div>
+            <br/>
+            <div id="roo_user_email">
+                <label for="_email">Email:</label>
+                <form:input cssStyle="width:250px" id="_email" maxlength="30" path="email" size="0"/>
+                <br/>
+                <form:errors cssClass="errors" id="_email" path="email"/>
+                <spring:message code="field.invalid.email" var="field_invalid"/>
+                <spring:message code="field.required" var="required"/>
+                <spring:message argumentSeparator="," arguments="Email," code="field.simple.validation" var="field_validation"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "_email", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${field_validation}", invalidMessage: "${field_invalid}", required : false}})); </script>
+            </div>
+            <br/>
+            <div class="submit" id="roo_employee_submit">
+                <spring:message code="button.update" var="update_button"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
+                <input id="proceed" type="submit" value="${update_button}"/>
+            </div>
+            <form:hidden id="_id" path="id"/>
+            <form:hidden id="_version" path="version"/>
+        </form:form>
+    </div>
+</div>

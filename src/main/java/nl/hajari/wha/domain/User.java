@@ -46,7 +46,7 @@ public class User implements UserDetails {
 
 	private transient String confirmPassword;
 
-//	@Pattern(regexp = "email@example.com")
+	@Pattern(regexp = ".+@.+\\.[a-z]+")
 	@Size(max = 30)
 	@Column(unique = true)
 	private String email;
