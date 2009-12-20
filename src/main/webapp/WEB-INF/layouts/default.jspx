@@ -42,7 +42,11 @@
 		<tiles:insertAttribute name="head" ignore="true"/>
 	</head>
    	<body class="tundra spring">		
-  		<div id="wrap">  
+  		<div id="wrap">
+  			<div id="sitename">
+				<h1>WHA</h1>
+				<h2>Welcome to Work Hour Registration!</h2>
+  			</div>  
 		  	<div id="menu">
 		    	<tiles:insertAttribute name="menu" ignore="true" />
 		    </div>	    

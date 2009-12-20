@@ -13,7 +13,7 @@ body {
 	background-repeat: no-repeat;
 	text-align: center;
 	min-width: 800px;
-	margin-top: 60px;
+	margin-top: 6px;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -72,6 +72,28 @@ div .box {
   	height:400px;
   	text-align:left;  	
 
+}
+
+#sitename {
+	margin: 0 20px 10px;
+	text-align: left;
+}
+
+#sitename h1,#sitename h2 {
+	color:#fff;
+	font-weight: 400;
+	letter-spacing: -1px;
+	margin: 0;
+	padding: 0;
+}
+
+#sitename h1 {
+	font-size: 2.4em;
+	padding-top: 20px;
+}
+
+#sitename h2 {
+	font-size: 1.6em;
 }
 
 #main {

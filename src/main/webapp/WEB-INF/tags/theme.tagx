@@ -13,8 +13,8 @@
     			<c:param name="size" value="${param.size}" />
     		</c:if>
     	</c:url>
-    	<spring:message code="global.theme.standard" var="theme_left" />
-    	<a href="${url_theme1}" title="${theme_left}">${theme_left}</a>
+    	<spring:message code="global.theme.standard" var="theme_standard" />
+    	<a href="${url_theme1}" title="${theme_standard}">${theme_standard}</a>
     	<c:out value="&#160;|&#160;"/>
 
     	<c:url var="url_theme2" value="">
@@ -26,8 +26,21 @@
     			<c:param name="size" value="${param.size}" />
     		</c:if>
     	</c:url>
-    	<spring:message code="global.theme.alt" var="theme_right" />
-    	<a href="${url_theme2}" title="${theme_right}">${theme_right}</a>
+    	<spring:message code="global.theme.alt" var="theme_alt" />
+    	<a href="${url_theme2}" title="${theme_alt}">${theme_alt}</a>
+    	<c:out value="&#160;|&#160;"/>
+
+    	<c:url var="url_theme3" value="">
+    		<c:param name="theme" value="wide" />
+    		<c:if test="${not empty param.page}">
+    			<c:param name="page" value="${param.page}" />
+    		</c:if>
+    		<c:if test="${not empty param.size}">
+    			<c:param name="size" value="${param.size}" />
+    		</c:if>
+    	</c:url>
+    	<spring:message code="global.theme.wide" var="theme_wide" />
+    	<a href="${url_theme3}" title="${theme_wide}">${theme_wide}</a>
     </span>
     
  </jsp:root>

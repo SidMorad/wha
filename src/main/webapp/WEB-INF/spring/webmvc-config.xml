@@ -94,7 +94,7 @@
 
 	<!-- store preferred theme configuration in a cookie -->
 	<bean class="org.springframework.web.servlet.theme.CookieThemeResolver"
-		id="themeResolver" p:cookieName="theme" p:defaultThemeName="standard" />
+		id="themeResolver" p:cookieName="theme2" p:defaultThemeName="standard" />
 
 	<!--
 		This bean resolves specific types of exceptions to corresponding
