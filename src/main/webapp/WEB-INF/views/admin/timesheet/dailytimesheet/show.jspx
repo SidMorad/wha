@@ -43,9 +43,15 @@
                 <div class="box" id="_project_id">${dailytimesheet.project}</div>
             </div>
             <br/>
+            <spring:url value="/admin/timesheet/daily/${dailytimesheet.timesheet.id}" var="show_form_url"/>
+            <form:form action="${show_form_url}" method="GET">
+                <spring:message arguments="${entity_label}" code="entity.back.list" var="show_label"/>
+                <input alt="${show_label}" class="link" src="${show_image_url}" title="${show_label}" type="image" value="${show_label}"/>
+            </form:form>	
         </c:if>
         <c:if test="${empty dailytimesheet}">
             <spring:message arguments="${entity_label}" code="entity.not.found.single"/>
         </c:if>
+		
     </div>
 </div>

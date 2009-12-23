@@ -65,4 +65,14 @@ public class DailyTimesheetService {
 		return dailyTimesheet;
 	}
 
+	@Transactional(readOnly = false)
+	public Long deleteDailyTimesheet(DailyTimesheet dailyTimesheet) {
+		Long tsId = dailyTimesheet.getTimesheet().getId();
+		dailyTimesheet.remove();
+
+		// now we update monthlyTotal in Timesheet table
+		Timesheet.updateTimesheetTotalMonthly(tsId, DailyTimesheet.findTimesheetTotalMonthly(tsId));
+		return tsId;
+	}
+	
 }

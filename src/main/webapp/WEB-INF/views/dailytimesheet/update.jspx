@@ -1,6 +1,7 @@
-<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="http://www.springframework.org/tags/form" xmlns:spring="http://www.springframework.org/tags">
-    <script type="text/javascript">dojo.require('dijit.TitlePane');dojo.require('dijit.form.DateTextBox');dojo.require('dijit.form.FilteringSelect');</script>
-    <div id="_title_div" style="width: 100%">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
+    <script type="text/javascript">dojo.require('dijit.TitlePane');dojo.require('dijit.form.FilteringSelect');</script>
+    <div id="_title_div">
         <spring:message code="label.dailytimesheet" var="entity_label"/>
         <spring:message arguments="${entity_label}" code="entity.update" var="title_msg"/>
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
@@ -8,78 +9,77 @@
         <form:form action="${form_url}" method="PUT" modelAttribute="dailytimesheet">
             <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
             <div id="roo_dailytimesheet_dayDate">
-                <label for="_dayDate">Day Date:</label>
-                <form:input cssStyle="width:250px" id="_dayDate" maxlength="30" path="dayDate" size="0"/>
+                <label for="_dayDate_id">Day Date:</label>
+                <form:input cssStyle="width:250px" id="_dayDate_id" maxlength="30" path="dayDate" size="0"/>
                 <br/>
-                <form:errors cssClass="errors" id="_dayDate_error" path="dayDate"/>
+                <form:errors cssClass="errors" id="_dayDate_error_id" path="dayDate"/>
                 <spring:message arguments="Day Date" code="field.invalid" var="field_invalid"/>
                 <spring:message code="field.required" var="field_required"/>
                 <spring:message argumentSeparator="," arguments="Day Date,(${field_required})" code="field.simple.validation" var="field_validation"/>
-                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dayDate', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
-                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dayDate', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {constraints: {datePattern : 'd/MM/yy', required : false}, datePattern : 'd/MM/yy'}})); </script>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dayDate_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
             </div>
             <br/>
             <div id="roo_dailytimesheet_duration">
-                <label for="_duration">Duration:</label>
-                <form:input cssStyle="width:250px" id="_duration" maxlength="30" path="duration" size="0"/>
+                <label for="_duration_id">Duration:</label>
+                <form:input cssStyle="width:250px" id="_duration_id" maxlength="30" path="duration" size="0"/>
                 <br/>
-                <form:errors cssClass="errors" id="_duration_error" path="duration"/>
+                <form:errors cssClass="errors" id="_duration_error_id" path="duration"/>
                 <spring:message code="field.invalid.number" var="field_invalid"/>
                 <spring:message code="field.required" var="field_required"/>
                 <spring:message argumentSeparator="," arguments="Duration,(${field_required})" code="field.simple.validation" var="field_validation"/>
-                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_duration', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]*\.[0-9]*', required : true}})); </script>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_duration_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]*\.[0-9]*', required : true}})); </script>
             </div>
             <br/>
             <div id="roo_dailytimesheet_durationOffs">
-                <label for="_durationOffs">Duration Offs:</label>
-                <form:input cssStyle="width:250px" id="_durationOffs" maxlength="30" path="durationOffs" size="0"/>
+                <label for="_durationOffs_id">Duration Offs:</label>
+                <form:input cssStyle="width:250px" id="_durationOffs_id" maxlength="30" path="durationOffs" size="0"/>
                 <br/>
-                <form:errors cssClass="errors" id="_durationOffs_error" path="durationOffs"/>
+                <form:errors cssClass="errors" id="_durationOffs_error_id" path="durationOffs"/>
                 <spring:message code="field.invalid.number" var="field_invalid"/>
                 <spring:message code="field.required" var="field_required"/>
-                <spring:message argumentSeparator="," arguments="Duration Offs," code="field.simple.validation" var="field_validation"/>
-                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_durationOffs', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]*\.[0-9]*', required : false}})); </script>
+                <spring:message argumentSeparator="," arguments="Duration Offs,(${field_required})" code="field.simple.validation" var="field_validation"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_durationOffs_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]*\.[0-9]*', required : true}})); </script>
             </div>
             <br/>
             <div id="roo_dailytimesheet_durationTraining">
-                <label for="_durationTraining">Duration Training:</label>
-                <form:input cssStyle="width:250px" id="_durationTraining" maxlength="30" path="durationTraining" size="0"/>
+                <label for="_durationTraining_id">Duration Training:</label>
+                <form:input cssStyle="width:250px" id="_durationTraining_id" maxlength="30" path="durationTraining" size="0"/>
                 <br/>
-                <form:errors cssClass="errors" id="_durationTraining_error" path="durationTraining"/>
+                <form:errors cssClass="errors" id="_durationTraining_error_id" path="durationTraining"/>
                 <spring:message code="field.invalid.number" var="field_invalid"/>
                 <spring:message code="field.required" var="field_required"/>
-                <spring:message argumentSeparator="," arguments="Duration Training," code="field.simple.validation" var="field_validation"/>
-                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_durationTraining', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]*\.[0-9]*', required : false}})); </script>
+                <spring:message argumentSeparator="," arguments="Duration Training,(${field_required})" code="field.simple.validation" var="field_validation"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_durationTraining_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]*\.[0-9]*', required : true}})); </script>
             </div>
             <br/>
             <div id="roo_dailytimesheet_dailyTotalDuration">
-                <label for="_dailyTotalDuration">Daily Total Duration:</label>
-                <form:input cssStyle="width:250px" id="_dailyTotalDuration" maxlength="30" path="dailyTotalDuration" size="0"/>
+                <label for="_dailyTotalDuration_id">Daily Total Duration:</label>
+                <form:input cssStyle="width:250px" id="_dailyTotalDuration_id" maxlength="30" path="dailyTotalDuration" size="0"/>
                 <br/>
-                <form:errors cssClass="errors" id="_dailyTotalDuration_error" path="dailyTotalDuration"/>
+                <form:errors cssClass="errors" id="_dailyTotalDuration_error_id" path="dailyTotalDuration"/>
                 <spring:message code="field.invalid.number" var="field_invalid"/>
                 <spring:message code="field.required" var="field_required"/>
                 <spring:message argumentSeparator="," arguments="Daily Total Duration," code="field.simple.validation" var="field_validation"/>
-                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dailyTotalDuration', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]*\.[0-9]*', required : false}})); </script>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dailyTotalDuration_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]*\.[0-9]*', required : false}})); </script>
             </div>
             <br/>
             <div id="roo_dailytimesheet_timesheet">
                 <c:if test="${not empty timesheets}">
-                    <label for="_timesheet">Timesheet:</label>
-                    <form:select cssStyle="width:250px" id="_timesheet" path="timesheet">
+                    <label for="_timesheet_id">Timesheet:</label>
+                    <form:select cssStyle="width:250px" id="_timesheet_id" path="timesheet">
                         <form:options itemValue="id" items="${timesheets}"/>
                     </form:select>
-                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_timesheet', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_timesheet_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
                 </c:if>
             </div>
             <br/>
             <div id="roo_dailytimesheet_project">
                 <c:if test="${not empty projects}">
-                    <label for="_project">Project:</label>
-                    <form:select cssStyle="width:250px" id="_project" path="project">
+                    <label for="_project_id">Project:</label>
+                    <form:select cssStyle="width:250px" id="_project_id" path="project">
                         <form:options itemValue="id" items="${projects}"/>
                     </form:select>
-                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_project', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_project_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
                 </c:if>
             </div>
             <br/>
@@ -88,8 +88,8 @@
                 <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
                 <input id="proceed" type="submit" value="${update_button}"/>
             </div>
-            <form:hidden id="_id" path="id"/>
-            <form:hidden id="_version" path="version"/>
+            <form:hidden id="_id_id" path="id"/>
+            <form:hidden id="_version_id" path="version"/>
         </form:form>
     </div>
 </div>

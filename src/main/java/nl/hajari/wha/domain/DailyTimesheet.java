@@ -18,7 +18,8 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 
 @Entity
 @RooJavaBean
-@DayDateIsInCurrentMonth
+//TODO:: Handle this validation in another way (why? because e.g. Admin need to edit months in the past)
+//@DayDateIsInCurrentMonth
 @ProjectCreationInDailyTimesheet
 @RooEntity(finders = { "findDailyTimesheetsByTimesheet", "findDailyTimesheetsByDayDateAndTimesheet" })
 public class DailyTimesheet {
