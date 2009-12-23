@@ -1,0 +1,87 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:form="http://www.springframework.org/tags/form" xmlns:spring="http://www.springframework.org/tags" xmlns:roo="urn:jsptagdir:/WEB-INF/tags" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:jsp="http://java.sun.com/JSP/Page">
+    <jsp:output omit-xml-declaration="yes"/>
+    <script type="text/javascript">dojo.require('dijit.TitlePane');</script>
+    <div id="_title_div" style="width: 100%">
+        <spring:message code="label.timesheet" var="entity_label"/>
+        <spring:message arguments="${entity_label}" code="entity.show" var="title_msg"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
+        <c:if test="${not empty timesheet}">
+            <div id="roo_timesheet_employee">
+                <label for="_employee">Employee:</label>
+                <div class="box" id="_employee">${timesheet.employee}</div>
+            </div>
+           <br/>
+            <div id="roo_timesheet_sheetYear">
+                <label for="_sheetYear">Year:</label>
+                <div class="box" id="_sheetYear">${timesheet.sheetYear}</div>
+            </div>
+            <br/>
+            <div id="roo_timesheet_sheetMonth">
+                <label for="_sheetMonth">Month:</label>
+                <div class="box" id="_sheetMonth">${timesheet.sheetMonthShortName}</div>
+            </div>
+            <br/>
+            <div id="roo_timesheet_monthlyTotal">
+                <label for="_monthlyTotal">Total:</label>
+                <div class="box" id="_monthlyTotal">${timesheet.monthlyTotal}</div>
+            </div>
+            <br/>
+         </c:if>
+        <c:if test="${empty timesheet}">
+            <spring:message arguments="${entity_label}" code="entity.not.found.single"/>
+        </c:if>
+    </div>
+
+    <c:if test="${not empty timesheet}">
+	    <div id="_title_travel_div">
+	        <spring:message code="label.dailytravel" var="entity_travel_label"/>
+	        <spring:message code="label.dailytravels" var="entity_travel_label_plural"/>
+	        <spring:message arguments="${entity_travel_label_plural}" code="entity.list.all" var="title_msg"/>
+	        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_travel_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
+	        <c:if test="${not empty timesheet.dailyTravelsSortedList}">
+	            <table width="300px">
+	                <thead>
+	                    <tr>
+	                        <th width="80px">Day Date</th>
+	                        <th width="90px">Origin</th>
+	                        <th width="90px">Destination</th>
+	                        <th width="50px">Return?</th>
+	                        <th>Comment</th>
+	                        <th>Distance</th>
+	                    </tr>
+	                </thead>
+                    <c:set var="totalDistance" value="0"/>
+	                <c:forEach items="${timesheet.dailyTravelsSortedList}" var="dailytravel">
+	                    <tr>
+	                        <td>
+	                            <fmt:formatDate pattern="d/MM/yy" type="DATE" value="${dailytravel.dayDate}"/>
+	                        </td>
+	                        <td>${dailytravel.origin}</td>
+	                        <td>${dailytravel.destination}</td>
+	                        <td>${dailytravel.withReturn}</td>
+	                        <td>${dailytravel.comment}</td>
+	                        <td>${dailytravel.distance}</td>
+	                    </tr>
+	                    <c:if test="${!dailytravel.withReturn}">
+			           		<c:set var="totalDistance" value="${totalDistance + dailytravel.distance}"/>
+		           		</c:if>
+		           		<c:if test="${dailytravel.withReturn}">
+			           		<c:set var="totalDistance" value="${totalDistance + dailytravel.distance + dailytravel.distance}"/>
+		           		</c:if>
+	                </c:forEach>
+	                <tr> 
+            		<td></td>
+            		<td></td>
+            		<td></td>
+            		<td></td>
+            		<td></td>
+            		<td><b>${totalDistance}</b></td>
+            </tr>
+	            </table>
+	        </c:if>
+	        <c:if test="${empty timesheet.dailyTravelsSortedList}">
+	            <spring:message arguments="${entity_travel_label_plural}" code="entity.not.found"/>
+	        </c:if>
+	    </div>		
+	</c:if>
+</div>

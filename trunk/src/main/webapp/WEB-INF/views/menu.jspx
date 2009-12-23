@@ -24,9 +24,9 @@
                     <spring:message arguments="${label_employees}" code="global.menu.list"/>
                 </a>
             </li>
-        	<li id="web_mvc_jsp_list_timesheet_menu_item">
-                <spring:url value="/timesheet?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_timesheet_menu_item_url"/>
-                <a href="${web_mvc_jsp_list_timesheet_menu_item_url}">
+        	<li id="web_mvc_jsp_list_admin_timesheet_menu_item">
+                <spring:url value="/admin/timesheet?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_admin_timesheet_menu_item_url"/>
+                <a href="${web_mvc_jsp_list_admin_timesheet_menu_item_url}">
                     <spring:message code="label.timesheets" var="label_timesheets"/>
                     <spring:message arguments="${label_timesheets}" code="global.menu.list"/>
                 </a>
@@ -120,5 +120,5 @@
             </li>
         </ul>
     </li>
-	</security:authorize>	
+	</security:authorize>
 </ul>

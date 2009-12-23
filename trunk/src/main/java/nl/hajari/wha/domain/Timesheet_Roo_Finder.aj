@@ -19,4 +19,12 @@ privileged aspect Timesheet_Roo_Finder {
         return q;        
     }    
     
+    public static Query Timesheet.findTimesheetsByEmployee(Employee employee) {    
+        if (employee == null) throw new IllegalArgumentException("The employee argument is required");        
+        EntityManager em = Timesheet.entityManager();        
+        Query q = em.createQuery("SELECT Timesheet FROM Timesheet AS timesheet WHERE timesheet.employee = :employee");        
+        q.setParameter("employee", employee);        
+        return q;        
+    }    
+    
 }

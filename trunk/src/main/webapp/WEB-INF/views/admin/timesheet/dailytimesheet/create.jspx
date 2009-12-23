@@ -1,12 +1,12 @@
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
     <jsp:output omit-xml-declaration="yes"/>
-    <script type="text/javascript">dojo.require('dijit.TitlePane');dojo.require('dijit.form.FilteringSelect');</script>
+    <script type="text/javascript">dojo.require('dijit.TitlePane');dojo.require('dijit.form.DateTextBox');dojo.require('dijit.form.FilteringSelect');</script>
     <div id="_title_div">
         <spring:message code="label.dailytimesheet" var="entity_label"/>
         <spring:message arguments="${entity_label}" code="entity.create" var="title_msg"/>
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
         <spring:url value="/dailytimesheet" var="form_url"/>
-        <form:form action="${form_url}" method="POST" modelAttribute="dailytimesheet">
+        <form:form action="${form_url}" method="POST" modelAttribute="dailyTimesheet">
             <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
             <div id="roo_dailytimesheet_dayDate">
                 <label for="_dayDate_id">Day Date:</label>
@@ -16,7 +16,7 @@
                 <spring:message arguments="Day Date" code="field.invalid" var="field_invalid"/>
                 <spring:message code="field.required" var="field_required"/>
                 <spring:message argumentSeparator="," arguments="Day Date,(${field_required})" code="field.simple.validation" var="field_validation"/>
-                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dayDate_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
+               	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dayDate_id', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true,datePattern : 'd/MM/yy'}})); </script>
             </div>
             <br/>
             <div id="roo_dailytimesheet_duration">
@@ -50,17 +50,6 @@
                 <spring:message code="field.required" var="field_required"/>
                 <spring:message argumentSeparator="," arguments="Duration Training,(${field_required})" code="field.simple.validation" var="field_validation"/>
                 <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_durationTraining_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]*\.[0-9]*', required : true}})); </script>
-            </div>
-            <br/>
-            <div id="roo_dailytimesheet_dailyTotalDuration">
-                <label for="_dailyTotalDuration_id">Daily Total Duration:</label>
-                <form:input cssStyle="width:250px" id="_dailyTotalDuration_id" maxlength="30" path="dailyTotalDuration" size="0"/>
-                <br/>
-                <form:errors cssClass="errors" id="_dailyTotalDuration_error_id" path="dailyTotalDuration"/>
-                <spring:message code="field.invalid.number" var="field_invalid"/>
-                <spring:message code="field.required" var="field_required"/>
-                <spring:message argumentSeparator="," arguments="Daily Total Duration," code="field.simple.validation" var="field_validation"/>
-                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dailyTotalDuration_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]*\.[0-9]*', required : false}})); </script>
             </div>
             <br/>
             <div id="roo_dailytimesheet_timesheet">

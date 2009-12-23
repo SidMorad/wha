@@ -10,7 +10,6 @@ import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.Project;
 import nl.hajari.wha.domain.Timesheet;
 
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
@@ -113,11 +112,7 @@ privileged aspect TimeController_DailyTimesheetController {
 		if (id == null)
 			throw new IllegalArgumentException("An Identifier is required");
 		DailyTimesheet dailyTimesheet = DailyTimesheet.findDailyTimesheet(id);
-		Long tsId = dailyTimesheet.getTimesheet().getId();
-		dailyTimesheet.remove();
-
-		// now we update monthlyTotal in Timesheet table
-		Timesheet.updateTimesheetTotalMonthly(tsId, DailyTimesheet.findTimesheetTotalMonthly(tsId));
+		dailyTimesheetService.deleteDailyTimesheet(dailyTimesheet);
 		return "redirect:/time/view/month";
 	}
 

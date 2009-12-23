@@ -77,4 +77,17 @@ privileged aspect TimesheetController_Roo_Controller {
         return "timesheet/list";        
     }    
     
+    @RequestMapping(value = "find/ByEmployee/form", method = RequestMethod.GET)    
+    public String TimesheetController.findTimesheetsByEmployeeForm(ModelMap modelMap) {    
+        modelMap.addAttribute("employees", Employee.findAllEmployees());        
+        return "timesheet/findTimesheetsByEmployee";        
+    }    
+    
+    @RequestMapping(value = "find/ByEmployee", method = RequestMethod.GET)    
+    public String TimesheetController.findTimesheetsByEmployee(@RequestParam("employee") Employee employee, ModelMap modelMap) {    
+        if (employee == null) throw new IllegalArgumentException("A Employee is required.");        
+        modelMap.addAttribute("timesheets", Timesheet.findTimesheetsByEmployee(employee).getResultList());        
+        return "timesheet/list";        
+    }    
+    
 }

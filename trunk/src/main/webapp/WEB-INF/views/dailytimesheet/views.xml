@@ -7,7 +7,7 @@
     <definition extends="default" name="dailytimesheet/show">
         <put-attribute name="body" value="/WEB-INF/views/dailytimesheet/show.jspx"/>
     </definition>
-    <definition extends="default" name="dailytimesheet/create">
+	<definition extends="default" name="dailytimesheet/create">
         <put-attribute name="body" value="/WEB-INF/views/dailytimesheet/create.jspx"/>
     </definition>
     <definition extends="default" name="dailytimesheet/update">
