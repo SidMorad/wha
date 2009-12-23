@@ -48,6 +48,24 @@ public class DailyTimesheetService {
 	}
 
 	@Transactional(readOnly = false)
+	public DailyTimesheet createDailyTimesheet(DailyTimesheet dailyTimesheet) {
+		if (dailyTimesheet == null) {
+			throw new IllegalArgumentException("A dailyTimesheet is required");
+		}
+		
+		// calculate dailyTotalDuration = duration - durationOffs
+		dailyTimesheet.setDailyTotalDuration(dailyTimesheet.getDuration()
+				- dailyTimesheet.getDurationOffs());
+		dailyTimesheet.persist();
+		dailyTimesheet.flush();
+		Long timesheetId = dailyTimesheet.getTimesheet().getId();
+		// now we update monthlyTotalDuration in timesheet entity
+		Timesheet.updateTimesheetTotalMonthly(timesheetId, DailyTimesheet
+				.findTimesheetTotalMonthly(timesheetId));
+		return dailyTimesheet;
+	}
+
+	@Transactional(readOnly = false)
 	public DailyTimesheet updateDailyTimesheet(DailyTimesheet dailyTimesheet) {
 		if (dailyTimesheet == null) {
 			throw new IllegalArgumentException("A dailytimesheet is required");

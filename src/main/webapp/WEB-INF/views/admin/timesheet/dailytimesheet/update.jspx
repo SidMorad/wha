@@ -56,7 +56,7 @@
                 <c:if test="${not empty timesheets}">
                     <label for="_timesheet_id">Timesheet:</label>
                     <form:select cssStyle="width:250px" id="_timesheet_id" path="timesheet">
-                        <form:options itemValue="id" items="${timesheets}"/>
+                        <form:options itemValue="id" itemLabel="readableTimesheetName" items="${timesheets}"/>
                     </form:select>
                     <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_timesheet_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
                 </c:if>
