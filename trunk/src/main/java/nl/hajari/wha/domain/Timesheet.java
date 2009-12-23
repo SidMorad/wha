@@ -71,6 +71,11 @@ public class Timesheet {
     }
 
     @Transient
+    public String getReadableTimesheetName() {
+    	return sheetYear + " " + DateUtils.getSheetMonthLongName(sheetMonth);
+    }
+    
+    @Transient
     public List<DailyTimesheet> getDailyTimesheetsSortedList() {
         List<DailyTimesheet> dailyTimesheetList = new ArrayList<DailyTimesheet>(dailyTimesheets);
         Collections.sort(dailyTimesheetList, new Comparator<DailyTimesheet>() {

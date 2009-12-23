@@ -3,6 +3,7 @@ package nl.hajari.wha.web.controller;
 import javax.validation.Valid;
 
 import nl.hajari.wha.domain.DailyTimesheet;
+import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.Project;
 import nl.hajari.wha.domain.Timesheet;
 
@@ -15,22 +16,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 privileged aspect AdminTimesheetController_DailyTimesheetController {
 
     @RequestMapping(value = "/admin/timesheet/dailytimesheet", method = RequestMethod.POST)    
-    public String AdminTimesheetController.createDailyTimesheet(@Valid DailyTimesheet dailytimesheet, BindingResult result, ModelMap modelMap) {    
-        if (dailytimesheet == null) throw new IllegalArgumentException("A dailytimesheet is required");        
+    public String AdminTimesheetController.createDailyTimesheet(@Valid DailyTimesheet dailyTimesheet, BindingResult result, ModelMap modelMap) {    
+        if (dailyTimesheet == null) throw new IllegalArgumentException("A dailytimesheet is required");        
         if (result.hasErrors()) {        
             modelMap.addAttribute("projects", Project.findAllProjects());            
-            modelMap.addAttribute("timesheets", Timesheet.findAllTimesheets());            
+            modelMap.addAttribute("timesheets", Timesheet.findTimesheetsByEmployee(dailyTimesheet.getTimesheet().getEmployee()).getResultList());            
             return "admin/timesheet/dailytimesheet/create";            
         }        
-        dailytimesheet.persist();        
-        return "redirect:/admin/timesheet/dailytimesheet/" + dailytimesheet.getId();        
+        dailyTimesheet = dailyTimesheetService.createDailyTimesheet(dailyTimesheet);    
+        return "redirect:/admin/timesheet/dailytimesheet/" + dailyTimesheet.getId();        
     }    
     
-    @RequestMapping(value = "/admin/timesheet/dailytimesheet/form", method = RequestMethod.GET)    
-    public String AdminTimesheetController.createFormDailyTimesheet(ModelMap modelMap) {    
+    @RequestMapping(value = "/admin/timesheet/dailytimesheet/form/{employeeId}", method = RequestMethod.GET)    
+    public String AdminTimesheetController.createFormDailyTimesheet(@PathVariable("employeeId") Long employeeId, ModelMap modelMap) {    
         modelMap.addAttribute("dailyTimesheet", new DailyTimesheet());        
         modelMap.addAttribute("projects", Project.findAllProjects());        
-        modelMap.addAttribute("timesheets", Timesheet.findAllTimesheets());        
+        modelMap.addAttribute("timesheets", Timesheet.findTimesheetsByEmployee(Employee.findEmployee(employeeId)).getResultList());        
         return "admin/timesheet/dailytimesheet/create";        
     }    
     @RequestMapping(value = "/admin/timesheet/dailytimesheet/{id}", method = RequestMethod.GET)    
