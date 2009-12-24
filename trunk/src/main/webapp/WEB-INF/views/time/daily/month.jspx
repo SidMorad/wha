@@ -59,12 +59,13 @@
                     
 					<spring:url value="/project/list/all" var="allProjects" />
 					<form:input cssStyle="width:130px" id="_projectName" maxlength="30" path="projectName" size="0"/>
+	                <form:errors cssClass="errors-in-table" id="_projectName_error" path="projectName"/>
 	                <spring:message arguments="Project" code="field.invalid" var="field_invalid"/>
 					<script type="text/javascript">
 				    dojo.addOnLoad(function() {
 				        var projectStore = new dojo.data.ItemFileReadStore({url:"${allProjects}"});
 				    });
-					Spring.addDecoration(new Spring.ElementDecoration({elementId : '_projectName', widgetType: 'dijit.form.ComboBox', widgetAttrs: {id : '_projectName', name : 'projectName', value : '', store : new dojo.data.ItemFileReadStore({url:"${allProjects}"}), searchAttr : 'name'}})); 
+					Spring.addDecoration(new Spring.ElementDecoration({elementId : '_projectName', widgetType: 'dijit.form.ComboBox', widgetAttrs: {id : '_projectName', name : 'projectName', value : '', store : new dojo.data.ItemFileReadStore({url:"${allProjects}"}), searchAttr : 'name', required: true}})); 
 					</script>
                     
                     <!-- 

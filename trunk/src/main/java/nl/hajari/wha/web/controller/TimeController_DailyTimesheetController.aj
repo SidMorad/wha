@@ -9,6 +9,7 @@ import nl.hajari.wha.domain.DailyTimesheet;
 import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.Project;
 import nl.hajari.wha.domain.Timesheet;
+import nl.hajari.wha.web.util.DateUtils;
 
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
@@ -40,7 +41,6 @@ privileged aspect TimeController_DailyTimesheetController {
 		}
 
 		modelMap.put("dailyTimesheet", dailyTimesheet);
-		modelMap.put("projects", Project.findAllProjects());
 		modelMap.put("dailyTimesheets", dailyTimesheets);
 		modelMap.put("timesheet", timesheet);
 		modelMap.put("employee", Employee.findEmployee(employeeId));
@@ -54,6 +54,21 @@ privileged aspect TimeController_DailyTimesheetController {
 		if (dailyTimesheet == null) {
 			throw new IllegalArgumentException("DailyTimesheet is null.");
 		}
+        if (!DateUtils.getCurrentMonth().equals(DateUtils.getMonthInteger(dailyTimesheet.getDayDate()))) {
+        	result.rejectValue("dayDate", "error.time.day.date.not.avaiable");
+        }
+		if (StringUtils.hasText(dailyTimesheet.getProjectName())) {
+			logger.debug("Recieved project name: " + dailyTimesheet.getProjectName());
+			try {
+				Project project = projectService.loadOrCreateProject(dailyTimesheet.getProjectName());
+				dailyTimesheet.setProject(project);
+			} catch (Exception e) {
+				logger.error("", e);
+				result.rejectValue("projectName", "field.invalid");
+			}
+		} else {
+			result.rejectValue("projectName", "field.required");
+		}
 		if (result.hasErrors()) {
 			// Fill modelMap
 			Long employeeId = (Long) request.getSession().getAttribute(Employee.EMPLOYEE_ID);
@@ -61,7 +76,6 @@ privileged aspect TimeController_DailyTimesheetController {
 			modelMap.put("employee", Employee.findEmployee(employeeId));
 			modelMap.put("timesheet", timesheet);
 			modelMap.put("dailyTimesheets", timesheet.getDailyTimesheetsSortedList());
-			modelMap.put("projects", Project.findAllProjects());
 
 			return "time/daily/month";
 		}
@@ -70,15 +84,6 @@ privileged aspect TimeController_DailyTimesheetController {
 		logger.debug("Resolving existent daily timesheet for: [" + timesheet + "] on [" + dailyTimesheet.getDayDate()
 				+ "]");
 
-		try {
-			if (StringUtils.hasText(dailyTimesheet.getProjectName())) {
-				logger.debug("Recieved project name: " + dailyTimesheet.getProjectName());
-				Project project = projectService.loadOrCreateProject(dailyTimesheet.getProjectName());
-				dailyTimesheet.setProject(project);
-			}
-		} catch (Exception e) {
-			logger.error("", e);
-		}
 
 		dailyTimesheet = dailyTimesheetService.createDailyTimesheet(dailyTimesheet, request);
 

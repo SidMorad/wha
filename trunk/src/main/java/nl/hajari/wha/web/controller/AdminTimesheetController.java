@@ -2,7 +2,10 @@ package nl.hajari.wha.web.controller;
 
 import nl.hajari.wha.domain.Timesheet;
 import nl.hajari.wha.service.DailyTimesheetService;
+import nl.hajari.wha.service.ProjectService;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,9 +18,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AdminTimesheetController {
-
+	
+	protected final Log logger = LogFactory.getLog(getClass());
+	
 	@Autowired
 	protected DailyTimesheetService dailyTimesheetService;
+	
+	@Autowired
+	protected ProjectService projectService;
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {

@@ -10,17 +10,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import nl.hajari.wha.web.validator.DayDateIsInCurrentMonth;
-import nl.hajari.wha.web.validator.ProjectCreationInDailyTimesheet;
 
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
 @Entity
 @RooJavaBean
-//TODO:: Handle this validation in another way (why? because e.g. Admin need to edit months in the past)
-//@DayDateIsInCurrentMonth
-@ProjectCreationInDailyTimesheet
 @RooEntity(finders = { "findDailyTimesheetsByTimesheet", "findDailyTimesheetsByDayDateAndTimesheet" })
 public class DailyTimesheet {
 
