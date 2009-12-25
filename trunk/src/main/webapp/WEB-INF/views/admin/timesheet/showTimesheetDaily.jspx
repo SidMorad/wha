@@ -117,8 +117,16 @@
 		        </table>
 		    </c:if>
 		    <c:if test="${empty timesheet.dailyTimesheetsSortedList}">
-		        <spring:message arguments="${entity_daily_label_plural}" code="entity.not.found"/>
-		    </c:if>
+	        	<spring:message arguments="${entity_daily_label_plural}" code="entity.not.found"/>
+				<span class="new"> 
+					<spring:url value="/admin/timesheet/dailytimesheet/form/${timesheet.employee.id}" var="create_url" /> 
+					<spring:url value="/static/images/add.png" var="create_img_url" /> 
+					<form:form action="${create_url}" method="GET">
+						<spring:message arguments="${entity_daily_label}" code="global.menu.new" var="add_message" />
+						<input alt="${add_message}" class="image" src="${create_img_url}" title="${add_message}" type="image" value="${timesheet.id}" />
+					</form:form> 
+				</span>
+			</c:if>
 		</div>
 	</c:if>
 </div>

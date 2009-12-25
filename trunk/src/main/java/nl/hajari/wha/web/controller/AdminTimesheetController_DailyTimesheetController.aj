@@ -21,7 +21,7 @@ privileged aspect AdminTimesheetController_DailyTimesheetController {
     public String AdminTimesheetController.createDailyTimesheet(@Valid DailyTimesheet dailyTimesheet, BindingResult result, ModelMap modelMap) {    
         if (dailyTimesheet == null) throw new IllegalArgumentException("A dailytimesheet is required");        
         if (!dailyTimesheet.getTimesheet().getSheetMonth().equals(DateUtils.getMonthInteger(dailyTimesheet.getDayDate()))) {
-        	result.rejectValue("dayDate", "error.time.day.date.not.match");
+        	result.rejectValue("timesheet", "error.time.day.date.not.match");
         }
         if (StringUtils.hasText(dailyTimesheet.getProjectName())) {
         	logger.debug("Recieved project name: " + dailyTimesheet.getProjectName());
@@ -64,7 +64,7 @@ privileged aspect AdminTimesheetController_DailyTimesheetController {
     public String AdminTimesheetController.updateDailyTimesheet(@Valid DailyTimesheet dailyTimesheet, BindingResult result, ModelMap modelMap) {    
         if (dailyTimesheet == null) throw new IllegalArgumentException("A dailytimesheet is required");        
         if (!dailyTimesheet.getTimesheet().getSheetMonth().equals(DateUtils.getMonthInteger(dailyTimesheet.getDayDate()))) {
-        	result.rejectValue("dayDate", "error.time.day.date.not.match");
+        	result.rejectValue("timesheet", "error.time.day.date.not.match");
         }
         if (StringUtils.hasText(dailyTimesheet.getProjectName())) {
         	logger.debug("Recieved project name: " + dailyTimesheet.getProjectName());
@@ -87,7 +87,7 @@ privileged aspect AdminTimesheetController_DailyTimesheetController {
     }    
     
     @RequestMapping(value = "/admin/timesheet/dailytimesheet/{id}/form", method = RequestMethod.GET)    
-    public String AdminTimesheetController.updateForm(@PathVariable("id") Long id, ModelMap modelMap) {    
+    public String AdminTimesheetController.updateFormDailyTimesheet(@PathVariable("id") Long id, ModelMap modelMap) {    
         if (id == null) throw new IllegalArgumentException("An Identifier is required");
         DailyTimesheet dailyTimesheet = DailyTimesheet.findDailyTimesheet(id);
         dailyTimesheet.setProjectName(dailyTimesheet.getProject().toString());
@@ -97,7 +97,7 @@ privileged aspect AdminTimesheetController_DailyTimesheetController {
     }    
     
     @RequestMapping(value = "/admin/timesheet/dailytimesheet/{id}", method = RequestMethod.DELETE)    
-    public String AdminTimesheetController.delete(@PathVariable("id") Long id) {    
+    public String AdminTimesheetController.deleteDailyTimesheet(@PathVariable("id") Long id) {    
         if (id == null) throw new IllegalArgumentException("An Identifier is required");
         DailyTimesheet dailyTimesheet = DailyTimesheet.findDailyTimesheet(id);  
         Long timesheetId = dailyTimesheetService.deleteDailyTimesheet(dailyTimesheet);
