@@ -34,7 +34,7 @@
                                 <spring:message arguments="${entity_label}" code="entity.show" var="show_label"/>
                                 <input alt="${show_label}" class="image" src="${show_image_url}" title="${show_label}" type="image" value="${show_label}"/>
                             </form:form>
-                           	<c:out value="(${fn:length(timesheet.dailyTimesheets)})"/>
+                           	<c:out value="${fn:length(timesheet.dailyTimesheets)}"/>
                         </td>
                         <td align="center">
                             <spring:url value="/admin/timesheet/travel/${timesheet.id}" var="show_form_url"/>
@@ -43,7 +43,7 @@
                                 <spring:message arguments="${entity_label}" code="entity.show" var="show_label"/>
                                 <input alt="${show_label}" class="image" src="${show_image_url}" title="${show_label}" type="image" value="${show_label}"/>
                             </form:form>
-                           	<c:out value="(${fn:length(timesheet.dailyTravels)})"/>
+                           	<c:out value="${fn:length(timesheet.dailyTravels)}"/>
                         </td>
                         <td align="center">
                             <spring:url value="/admin/timesheet/expense/${timesheet.id}" var="show_form_url"/>
@@ -52,7 +52,7 @@
                                 <spring:message arguments="${entity_label}" code="entity.show" var="show_label"/>
                                 <input alt="${show_label}" class="image" src="${show_image_url}" title="${show_label}" type="image" value="${show_label}"/>
                             </form:form>
-                           	<c:out value="(${fn:length(timesheet.dailyExpenses)})"/>
+                           	<c:out value="${fn:length(timesheet.dailyExpenses)}"/>
                         </td>
                     </tr>
                 </c:forEach>

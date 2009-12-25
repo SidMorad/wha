@@ -27,7 +27,7 @@ privileged aspect DailyTravelController_Roo_Controller {
     
     @RequestMapping(value = "/dailytravel/form", method = RequestMethod.GET)    
     public String DailyTravelController.createForm(ModelMap modelMap) {    
-        modelMap.addAttribute("dailytravel", new DailyTravel());        
+        modelMap.addAttribute("dailyTravel", new DailyTravel());        
         modelMap.addAttribute("timesheets", Timesheet.findAllTimesheets());        
         return "dailytravel/create";        
     }    
@@ -35,7 +35,7 @@ privileged aspect DailyTravelController_Roo_Controller {
     @RequestMapping(value = "/dailytravel/{id}", method = RequestMethod.GET)    
     public String DailyTravelController.show(@PathVariable("id") Long id, ModelMap modelMap) {    
         if (id == null) throw new IllegalArgumentException("An Identifier is required");        
-        modelMap.addAttribute("dailytravel", DailyTravel.findDailyTravel(id));        
+        modelMap.addAttribute("dailyTravel", DailyTravel.findDailyTravel(id));        
         return "dailytravel/show";        
     }    
     
@@ -66,7 +66,7 @@ privileged aspect DailyTravelController_Roo_Controller {
     @RequestMapping(value = "/dailytravel/{id}/form", method = RequestMethod.GET)    
     public String DailyTravelController.updateForm(@PathVariable("id") Long id, ModelMap modelMap) {    
         if (id == null) throw new IllegalArgumentException("An Identifier is required");        
-        modelMap.addAttribute("dailytravel", DailyTravel.findDailyTravel(id));        
+        modelMap.addAttribute("dailyTravel", DailyTravel.findDailyTravel(id));        
         modelMap.addAttribute("timesheets", Timesheet.findAllTimesheets());        
         return "dailytravel/update";        
     }    

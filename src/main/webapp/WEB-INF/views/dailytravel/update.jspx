@@ -5,10 +5,10 @@
         <spring:message code="label.dailytravel" var="entity_label"/>
         <spring:message arguments="${entity_label}" code="entity.update" var="title_msg"/>
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
-        <spring:url value="/dailytravel/${dailytravel.id}" var="form_url"/>
-        <form:form action="${form_url}" method="PUT" modelAttribute="dailytravel">
+        <spring:url value="/dailytravel/${dailyTravel.id}" var="form_url"/>
+        <form:form action="${form_url}" method="PUT" modelAttribute="dailyTravel">
             <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
-            <div id="roo_dailytravel_dayDate">
+            <div id="roo_dailyTravel_dayDate">
                 <label for="_dayDate_id">Day Date:</label>
                 <form:input cssStyle="width:250px" id="_dayDate_id" maxlength="30" path="dayDate" size="0"/>
                 <br/>
@@ -16,11 +16,10 @@
                 <spring:message arguments="Day Date" code="field.invalid" var="field_invalid"/>
                 <spring:message code="field.required" var="field_required"/>
                 <spring:message argumentSeparator="," arguments="Day Date,(${field_required})" code="field.simple.validation" var="field_validation"/>
-                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dayDate_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
-                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dayDate_id', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {constraints: {datePattern : 'd/MM/yy', required : false}, datePattern : 'd/MM/yy'}})); </script>
+               	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dayDate_id', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true,datePattern : 'd/MM/yy'}})); </script>
             </div>
             <br/>
-            <div id="roo_dailytravel_origin">
+            <div id="roo_dailyTravel_origin">
                 <label for="_origin_id">Origin:</label>
                 <form:input cssStyle="width:250px" id="_origin_id" maxlength="45" path="origin" size="0"/>
                 <br/>
@@ -31,7 +30,7 @@
                 <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_origin_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
             </div>
             <br/>
-            <div id="roo_dailytravel_destination">
+            <div id="roo_dailyTravel_destination">
                 <label for="_destination_id">Destination:</label>
                 <form:input cssStyle="width:250px" id="_destination_id" maxlength="45" path="destination" size="0"/>
                 <br/>
@@ -42,23 +41,23 @@
                 <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_destination_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
             </div>
             <br/>
-            <div id="roo_dailytravel_withReturn">
+            <div id="roo_dailyTravel_withReturn">
                 <label for="_withReturn_id">With Return:</label>
                 <form:checkbox id="_withReturn_id" path="withReturn"/>
             </div>
             <br/>
-            <div id="roo_dailytravel_distance">
+            <div id="roo_dailyTravel_distance">
                 <label for="_distance_id">Distance:</label>
                 <form:input cssStyle="width:250px" id="_distance_id" maxlength="30" path="distance" size="0"/>
                 <br/>
                 <form:errors cssClass="errors" id="_distance_error_id" path="distance"/>
-                <spring:message code="field.invalid.number" var="field_invalid"/>
+                <spring:message code="field.invalid.decimal" var="field_invalid"/>
                 <spring:message code="field.required" var="field_required"/>
                 <spring:message argumentSeparator="," arguments="Distance,(${field_required})" code="field.simple.validation" var="field_validation"/>
                 <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_distance_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]*\.[0-9]*', required : true}})); </script>
             </div>
             <br/>
-            <div id="roo_dailytravel_comment">
+            <div id="roo_dailyTravel_comment">
                 <label for="_comment_id">Comment:</label>
                 <form:textarea cssStyle="width:250px" id="_comment_id" path="comment"/>
                 <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_comment_id', widgetType: 'dijit.form.SimpleTextarea', widgetAttrs: {}})); </script>
@@ -66,17 +65,17 @@
                 <form:errors cssClass="errors" id="_comment_error_id" path="comment"/>
             </div>
             <br/>
-            <div id="roo_dailytravel_timesheet">
+            <div id="roo_dailytimesheet_timesheet">
                 <c:if test="${not empty timesheets}">
                     <label for="_timesheet_id">Timesheet:</label>
                     <form:select cssStyle="width:250px" id="_timesheet_id" path="timesheet">
-                        <form:options itemValue="id" items="${timesheets}"/>
+                        <form:options itemValue="id" itemLabel="readableTimesheetName" items="${timesheets}"/>
                     </form:select>
                     <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_timesheet_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
                 </c:if>
             </div>
             <br/>
-            <div class="submit" id="roo_dailytravel_submit">
+            <div class="submit" id="roo_dailyTravel_submit">
                 <spring:message code="button.update" var="update_button"/>
                 <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
                 <input id="proceed" type="submit" value="${update_button}"/>

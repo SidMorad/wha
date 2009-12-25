@@ -5,7 +5,7 @@
         <spring:message code="label.dailytravel" var="entity_label"/>
         <spring:message arguments="${entity_label}" code="entity.create" var="title_msg"/>
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
-        <spring:url value="/dailytravel" var="form_url"/>
+        <spring:url value="/admin/timesheet/dailytravel" var="form_url"/>
         <form:form action="${form_url}" method="POST" modelAttribute="dailyTravel">
             <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
             <div id="roo_dailyTravel_dayDate">
@@ -71,6 +71,8 @@
                     <form:select cssStyle="width:250px" id="_timesheet_id" path="timesheet">
                         <form:options itemValue="id" itemLabel="readableTimesheetName" items="${timesheets}"/>
                     </form:select>
+	                <br/>
+	                <form:errors cssClass="errors" id="_timesheet_error_id" path="timesheet"/>                    
                     <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_timesheet_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
                 </c:if>
             </div>

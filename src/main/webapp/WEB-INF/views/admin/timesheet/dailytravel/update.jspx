@@ -1,11 +1,11 @@
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
     <jsp:output omit-xml-declaration="yes"/>
-    <script type="text/javascript">dojo.require('dijit.TitlePane');dojo.require('dijit.form.SimpleTextarea');dojo.require('dijit.form.FilteringSelect');</script>
+    <script type="text/javascript">dojo.require('dijit.TitlePane');dojo.require('dijit.form.DateTextBox');dojo.require('dijit.form.SimpleTextarea');dojo.require('dijit.form.FilteringSelect');</script>
     <div id="_title_div">
         <spring:message code="label.dailytravel" var="entity_label"/>
-        <spring:message arguments="${entity_label}" code="entity.create" var="title_msg"/>
+        <spring:message arguments="${entity_label}" code="entity.update" var="title_msg"/>
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
-        <spring:url value="/dailytravel" var="form_url"/>
+        <spring:url value="/admin/timesheet/dailytravel/update" var="form_url"/>
         <form:form action="${form_url}" method="POST" modelAttribute="dailyTravel">
             <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
             <div id="roo_dailyTravel_dayDate">
@@ -65,21 +65,25 @@
                 <form:errors cssClass="errors" id="_comment_error_id" path="comment"/>
             </div>
             <br/>
-            <div id="roo_dailyTravel_timesheet">
+            <div id="roo_dailytimesheet_timesheet">
                 <c:if test="${not empty timesheets}">
                     <label for="_timesheet_id">Timesheet:</label>
                     <form:select cssStyle="width:250px" id="_timesheet_id" path="timesheet">
                         <form:options itemValue="id" itemLabel="readableTimesheetName" items="${timesheets}"/>
                     </form:select>
+   	                <br/>
+	                <form:errors cssClass="errors" id="_timesheet_error_id" path="timesheet"/>
                     <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_timesheet_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
                 </c:if>
             </div>
             <br/>
             <div class="submit" id="roo_dailyTravel_submit">
-                <spring:message code="button.save" var="save_button"/>
+                <spring:message code="button.update" var="update_button"/>
                 <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
-                <input id="proceed" type="submit" value="${save_button}"/>
+                <input id="proceed" type="submit" value="${update_button}"/>
             </div>
+            <form:hidden id="_id_id" path="id"/>
+            <form:hidden id="_version_id" path="version"/>
         </form:form>
     </div>
 </div>

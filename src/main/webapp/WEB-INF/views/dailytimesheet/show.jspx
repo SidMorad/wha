@@ -9,7 +9,7 @@
             <div id="roo_dailytimesheet_dayDate">
                 <label for="_dayDate_id">Day Date:</label>
                 <div class="box" id="_dayDate_id">
-                    <fmt:formatDate pattern="${dailytimesheet_dayDate_date_format}" value="${dailytimesheet.dayDate}"/>
+                    <fmt:formatDate pattern="d/MM/yy" type="DATE" value="${dailytimesheet.dayDate}"/>
                 </div>
             </div>
             <br/>
