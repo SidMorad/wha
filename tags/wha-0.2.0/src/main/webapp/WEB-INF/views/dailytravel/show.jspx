@@ -1,0 +1,51 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
+    <script type="text/javascript">dojo.require('dijit.TitlePane');</script>
+    <div id="_title_div">
+        <spring:message code="label.dailytravel" var="entity_label"/>
+        <spring:message arguments="${entity_label}" code="entity.show" var="title_msg"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
+        <c:if test="${not empty dailyTravel}">
+            <div id="roo_dailyTravel_dayDate">
+                <label for="_dayDate_id">Day Date:</label>
+                <div class="box" id="_dayDate_id">
+                    <fmt:formatDate pattern="d/MM/yy" type="DATE" value="${dailyTravel.dayDate}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_dailyTravel_origin">
+                <label for="_origin_id">Origin:</label>
+                <div class="box" id="_origin_id">${dailyTravel.origin}</div>
+            </div>
+            <br/>
+            <div id="roo_dailyTravel_destination">
+                <label for="_destination_id">Destination:</label>
+                <div class="box" id="_destination_id">${dailyTravel.destination}</div>
+            </div>
+            <br/>
+            <div id="roo_dailyTravel_withReturn">
+                <label for="_withReturn_id">With Return:</label>
+                <div class="box" id="_withReturn_id">${dailyTravel.withReturn}</div>
+            </div>
+            <br/>
+            <div id="roo_dailyTravel_distance">
+                <label for="_distance_id">Distance:</label>
+                <div class="box" id="_distance_id">${dailyTravel.distance}</div>
+            </div>
+            <br/>
+            <div id="roo_dailyTravel_comment">
+                <label for="_comment_id">Comment:</label>
+                <div class="box" id="_comment_id">${dailyTravel.comment}</div>
+            </div>
+            <br/>
+            <div id="roo_dailyTravel_timesheet">
+                <label for="_timesheet_id">Timesheet:</label>
+                <div class="box" id="_timesheet_id">${dailyTravel.timesheet}</div>
+            </div>
+            <br/>
+        </c:if>
+        <c:if test="${empty dailyTravel}">
+            <spring:message arguments="${entity_label}" code="entity.not.found.single"/>
+        </c:if>
+    </div>
+</div>

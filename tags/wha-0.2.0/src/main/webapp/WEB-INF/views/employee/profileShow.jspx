@@ -1,0 +1,48 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:form="http://www.springframework.org/tags/form" xmlns:spring="http://www.springframework.org/tags">
+    <script type="text/javascript">dojo.require('dijit.TitlePane');</script>
+    <div id="_title_div" style="width: 100%">
+        <spring:message code="label.employee" var="entity_label"/>
+        <spring:message arguments="${entity_label}" code="entity.show" var="title_msg"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
+        <c:if test="${not empty employee}">
+            <div id="roo_employee_firstName">
+                <label for="_firstName">First Name:</label>
+                <div class="box" id="_firstName">${employee.firstName}</div>
+            </div>
+            <br/>
+            <div id="roo_employee_lastName">
+                <label for="_lastName">Last Name:</label>
+                <div class="box" id="_lastName">${employee.lastName}</div>
+            </div>
+            <br/>
+            <div id="roo_employee_user_email">
+                <label for="_user">Email:</label>
+                <div class="box" id="_user">${employee.user.email}</div>
+            </div>
+            <br/>
+            <div id="roo_employee_empId">
+                <label for="_empId">Emp Id:</label>
+                <div class="box" id="_empId">${employee.empId}</div>
+            </div>
+            <br/>
+            <div id="roo_employee_hourlyWage">
+                <label for="_hourlyWage">Hourly Wage:</label>
+                <div class="box" id="_hourlyWage">${employee.hourlyWage}</div>
+            </div>
+            <br/>
+            <div id="roo_employee_techRoles">
+                <label for="_techRoles">Tech Roles:</label>
+                <div class="box" id="_techRoles">${employee.techRoles}</div>
+            </div>
+            <br/>
+            <c:url value="/employee/profile/form" var="employee_profile_edit_url"/>
+            <a href="${employee_profile_edit_url}">
+            	<spring:message code="label.profile.edit"/>
+            </a>
+            <br/>
+        </c:if>
+        <c:if test="${empty employee}">
+            <spring:message arguments="${entity_label}" code="entity.not.found.single"/>
+        </c:if>
+    </div>
+</div>

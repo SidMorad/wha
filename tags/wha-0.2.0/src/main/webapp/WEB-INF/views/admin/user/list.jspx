@@ -1,0 +1,83 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:form="http://www.springframework.org/tags/form" xmlns:roo="urn:jsptagdir:/WEB-INF/tags" xmlns:spring="http://www.springframework.org/tags">
+    <script type="text/javascript">dojo.require("dijit.TitlePane");</script>
+    <div id="_title" style="width: 100%">
+        <spring:message arguments="Users" code="entity.list.all" var="title"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title}'}})); </script>
+        <c:if test="${not empty users}">
+            <table width="300px">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th>Enabled</th>
+                        <th>Email</th>
+                        <th>Change Password</th>
+                        <th/>
+                        <th/>
+                        <th/>
+                    </tr>
+                </thead>
+                <c:forEach items="${users}" var="user">
+                    <tr>
+                        <td>${user.id}</td>
+                        <td>${fn:substring(user.username, 0, 10)}</td>
+                        <td>${fn:substring(user.password, 0, 10)}</td>
+                        <td>${fn:substring(user.enabled, 0, 10)}</td>
+                        <td>${fn:substring(user.email, 0, 10)}</td>
+                        <td>
+                            <c:url value="/admin/user/change_password/${user.id}/form" var="change_password_url"/>
+                            <c:url value="/static/images/update.png" var="update_image_url"/>
+                            <form:form action="${change_password_url}" method="GET">
+                                <spring:message code="user.changePassword" var="update_label"/>
+                                <input alt="${update_label}" class="image" src="${update_image_url}" title="${update_label}" type="image" value="${update_label}"/>
+                            </form:form>
+                        </td>
+                        <td>
+                            <c:url value="/admin/user/${user.id}" var="show_form_url"/>
+                            <c:url value="/static/images/show.png" var="show_image_url"/>
+                            <form:form action="${show_form_url}" method="GET">
+                                <spring:message arguments="User" code="entity.show" var="show_label"/>
+                                <input alt="${show_label}" class="image" src="${show_image_url}" title="${show_label}" type="image" value="${show_label}"/>
+                            </form:form>
+                        </td>
+                        <td>
+                            <c:url value="/admin/user/${user.id}/form" var="update_form_url"/>
+                            <c:url value="/static/images/update.png" var="update_image_url"/>
+                            <form:form action="${update_form_url}" method="GET">
+                                <spring:message arguments="User" code="entity.update" var="update_label"/>
+                                <input alt="${update_label}" class="image" src="${update_image_url}" title="${update_label}" type="image" value="${update_label}"/>
+                            </form:form>
+                        </td>
+                        <td>
+                            <c:url value="/admin/user/${user.id}" var="delete_form_url"/>
+                            <c:url value="/static/images/delete.png" var="delete_image_url"/>
+                            <form:form action="${delete_form_url}" method="DELETE">
+                                <spring:message arguments="User" code="entity.delete" var="delete_label"/>
+                                <input alt="${delete_label}" class="image" src="${delete_image_url}" title="${delete_label}" type="image" value="${delete_label}"/>
+                            </form:form>
+                        </td>
+                    </tr>
+                </c:forEach>
+                <tr class="footer">
+                    <td colspan="10">
+                        <span class="new">
+                            <c:url value="/admin/user/form" var="create_url"/>
+                            <a href="${create_url}">
+                                <c:url value="/static/images/add.png" var="create_img_url"/>
+                                <spring:message arguments="User" code="global.menu.new" var="add_message"/>
+                                <img alt="${add_message}" src="${create_img_url}" title="${add_message}"/>
+                            </a>
+                        </span>
+                        <c:if test="${not empty maxPages}">
+                            <roo:pagination maxPages="${maxPages}" page="${param.page}" size="${param.size}"/>
+                        </c:if>
+                    </td>
+                </tr>
+            </table>
+        </c:if>
+        <c:if test="${empty users}">
+            <spring:message arguments="Users" code="entity.not.found"/>
+        </c:if>
+    </div>
+</div>

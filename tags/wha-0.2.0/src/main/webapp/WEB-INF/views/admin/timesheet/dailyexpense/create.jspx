@@ -1,0 +1,81 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
+    <script type="text/javascript">dojo.require('dijit.TitlePane');dojo.require('dijit.form.DateTextBox');dojo.require('dijit.form.SimpleTextarea');dojo.require('dijit.form.FilteringSelect');</script>
+    <div id="_title_div">
+        <spring:message code="label.dailyexpense" var="entity_label"/>
+        <spring:message arguments="${entity_label}" code="entity.create" var="title_msg"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
+        <spring:url value="/admin/timesheet/dailyexpense" var="form_url"/>
+        <form:form action="${form_url}" method="POST" modelAttribute="dailyExpense">
+            <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
+            <div id="roo_dailyexpense_dayDate">
+                <label for="_dayDate_id">Day Date:</label>
+                <form:input cssStyle="width:250px" id="_dayDate_id" maxlength="30" path="dayDate" size="0"/>
+                <br/>
+                <form:errors cssClass="errors" id="_dayDate_error_id" path="dayDate"/>
+                <spring:message arguments="Day Date" code="field.invalid" var="field_invalid"/>
+                <spring:message code="field.required" var="field_required"/>
+                <spring:message argumentSeparator="," arguments="Day Date,(${field_required})" code="field.simple.validation" var="field_validation"/>
+               	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dayDate_id', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true, datePattern : 'd/MM/yy'}})); </script>            
+           	</div>
+            <br/>
+            <div id="roo_dailyexpense_expenseFor">
+                <label for="_expenseFor_id">Expense For:</label>
+                <form:input cssStyle="width:250px" id="_expenseFor_id" maxlength="45" path="expenseFor" size="0"/>
+                <br/>
+                <form:errors cssClass="errors" id="_expenseFor_error_id" path="expenseFor"/>
+                <spring:message arguments="Expense For" code="field.invalid" var="field_invalid"/>
+                <spring:message code="field.required" var="field_required"/>
+                <spring:message argumentSeparator="," arguments="Expense For,(${field_required})" code="field.simple.validation" var="field_validation"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_expenseFor_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
+            </div>
+            <br/>
+            <div id="roo_dailyexpense_expenseAmount">
+                <label for="_expenseAmount_id">Expense Amount:</label>
+                <form:input cssStyle="width:250px" id="_expenseAmount_id" maxlength="30" path="expenseAmount" size="0"/>
+                <br/>
+                <form:errors cssClass="errors" id="_expenseAmount_error_id" path="expenseAmount"/>
+                <spring:message code="field.invalid.decimal" var="field_invalid"/>
+                <spring:message code="field.required" var="field_required"/>
+                <spring:message argumentSeparator="," arguments="Expense Amount,(${field_required})" code="field.simple.validation" var="field_validation"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_expenseAmount_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]*\.[0-9]*', required : true}})); </script>
+            </div>
+            <br/>
+            <div id="roo_dailyexpense_expenseComment">
+                <label for="_expenseComment_id">Expense Comment:</label>
+                <form:textarea cssStyle="width:250px" id="_expenseComment_id" path="expenseComment"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_expenseComment_id', widgetType: 'dijit.form.SimpleTextarea', widgetAttrs: {}})); </script>
+                <br/>
+                <form:errors cssClass="errors" id="_expenseComment_error_id" path="expenseComment"/>
+            </div>
+            <br/>
+            <div id="roo_dailyexpense_timesheet">
+                <c:if test="${not empty timesheets}">
+                    <label for="_timesheet_id">Timesheet:</label>
+                    <form:select cssStyle="width:250px" id="_timesheet_id" path="timesheet">
+                        <form:options itemValue="id" itemLabel="readableTimesheetName" items="${timesheets}"/>
+                    </form:select>
+	                <br/>
+	                <form:errors cssClass="errors" id="_timesheet_error_id" path="timesheet"/>                         
+                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_timesheet_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+                </c:if>
+            </div>
+            <br/>
+            <div id="roo_dailyexpense_customer">
+                <c:if test="${not empty customers}">
+                    <label for="_customer_id">Customer:</label>
+                    <form:select cssStyle="width:250px" id="_customer_id" path="customer">
+                        <form:options itemValue="id" items="${customers}"/>
+                    </form:select>
+                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_customer_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+                </c:if>
+            </div>
+            <br/>
+            <div class="submit" id="roo_dailyexpense_submit">
+                <spring:message code="button.save" var="save_button"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
+                <input id="proceed" type="submit" value="${save_button}"/>
+            </div>
+        </form:form>
+    </div>
+</div>

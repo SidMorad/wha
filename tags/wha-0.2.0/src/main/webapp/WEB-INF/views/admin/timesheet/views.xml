@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+    <definition extends="default" name="admin/timesheet/list">
+        <put-attribute name="body" value="/WEB-INF/views/admin/timesheet/listTimesheetAll.jspx"/>
+    </definition>
+    <definition extends="default" name="admin/timesheet/daily/show">
+        <put-attribute name="body" value="/WEB-INF/views/admin/timesheet/showTimesheetDaily.jspx"/>
+    </definition>
+    <definition extends="default" name="admin/timesheet/travel/show">
+        <put-attribute name="body" value="/WEB-INF/views/admin/timesheet/showTimesheetTravel.jspx"/>
+    </definition>
+    <definition extends="default" name="admin/timesheet/expense/show">
+        <put-attribute name="body" value="/WEB-INF/views/admin/timesheet/showTimesheetExpense.jspx"/>
+    </definition>    
+</tiles-definitions>

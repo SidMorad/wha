@@ -1,0 +1,57 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
+    <script type="text/javascript">dojo.require('dijit.TitlePane');</script>
+    <div id="_title_div">
+        <spring:message code="label.dailytimesheet" var="entity_label"/>
+        <spring:message arguments="${entity_label}" code="entity.show" var="title_msg"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
+        <c:if test="${not empty dailytimesheet}">
+            <div id="roo_dailytimesheet_dayDate">
+                <label for="_dayDate_id">Day Date:</label>
+                <div class="box" id="_dayDate_id">
+                    <fmt:formatDate pattern="d/MM/yy" type="DATE" value="${dailytimesheet.dayDate}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_dailytimesheet_duration">
+                <label for="_duration_id">Duration:</label>
+                <div class="box" id="_duration_id">${dailytimesheet.duration}</div>
+            </div>
+            <br/>
+            <div id="roo_dailytimesheet_durationOffs">
+                <label for="_durationOffs_id">Duration Offs:</label>
+                <div class="box" id="_durationOffs_id">${dailytimesheet.durationOffs}</div>
+            </div>
+            <br/>
+            <div id="roo_dailytimesheet_durationTraining">
+                <label for="_durationTraining_id">Duration Training:</label>
+                <div class="box" id="_durationTraining_id">${dailytimesheet.durationTraining}</div>
+            </div>
+            <br/>
+            <div id="roo_dailytimesheet_dailyTotalDuration">
+                <label for="_dailyTotalDuration_id">Daily Total Duration:</label>
+                <div class="box" id="_dailyTotalDuration_id">${dailytimesheet.dailyTotalDuration}</div>
+            </div>
+            <br/>
+            <div id="roo_dailytimesheet_timesheet">
+                <label for="_timesheet_id">Timesheet:</label>
+                <div class="box" id="_timesheet_id">${dailytimesheet.timesheet.readableTimesheetName}</div>
+            </div>
+            <br/>
+            <div id="roo_dailytimesheet_project">
+                <label for="_project_id">Project:</label>
+                <div class="box" id="_project_id">${dailytimesheet.project}</div>
+            </div>
+            <br/>
+            <spring:url value="/admin/timesheet/daily/${dailytimesheet.timesheet.id}" var="show_form_url"/>
+            <form:form action="${show_form_url}" method="GET">
+                <spring:message arguments="${entity_label}" code="entity.back.list" var="show_label"/>
+                <input alt="${show_label}" class="link" src="${show_image_url}" title="${show_label}" type="image" value="${show_label}"/>
+            </form:form>	
+        </c:if>
+        <c:if test="${empty dailytimesheet}">
+            <spring:message arguments="${entity_label}" code="entity.not.found.single"/>
+        </c:if>
+		
+    </div>
+</div>

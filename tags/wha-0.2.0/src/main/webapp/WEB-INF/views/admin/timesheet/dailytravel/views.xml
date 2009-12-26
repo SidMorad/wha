@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+    <definition extends="default" name="admin/timesheet/dailytravel/show">
+        <put-attribute name="body" value="/WEB-INF/views/admin/timesheet/dailytravel/show.jspx"/>
+    </definition>
+	<definition extends="default" name="admin/timesheet/dailytravel/create">
+        <put-attribute name="body" value="/WEB-INF/views/admin/timesheet/dailytravel/create.jspx"/>
+    </definition>
+    <definition extends="default" name="admin/timesheet/dailytravel/update">
+        <put-attribute name="body" value="/WEB-INF/views/admin/timesheet/dailytravel/update.jspx"/>
+    </definition>
+</tiles-definitions>
