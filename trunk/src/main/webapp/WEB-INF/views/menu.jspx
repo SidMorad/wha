@@ -113,7 +113,7 @@
                 </a>
             </li>
             <li id="web_mvc_jsp_employee_profile_month_view_menu_item">
-                <c:url value="/employee/profile/form" var="web_mvc_jsp_employee_profile_menu_item_url"/>
+                <c:url value="/employee/profile" var="web_mvc_jsp_employee_profile_menu_item_url"/>
                 <a href="${web_mvc_jsp_employee_profile_menu_item_url}">
                 	<spring:message code="label.profile"/>
                 </a>
