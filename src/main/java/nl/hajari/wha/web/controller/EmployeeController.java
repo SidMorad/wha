@@ -8,7 +8,9 @@ import nl.hajari.wha.web.controller.formbean.ProfileFormBean;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -20,6 +22,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class EmployeeController {
 	protected final Log logger = LogFactory.getLog(getClass());
+	
+	@Autowired
+	protected PasswordEncoder passwordEncoder; 
 	
 	@RequestMapping(value = "/employee/profile/form", method = RequestMethod.GET)
 	public String prepareProfile(ModelMap modelMap, HttpServletRequest request) {
@@ -37,9 +42,13 @@ public class EmployeeController {
 	@RequestMapping(value = "/employee/profile", method = RequestMethod.POST)
 	public String updateProfile(@Valid ProfileFormBean profileFormBean,BindingResult result, HttpServletRequest request,
 			ModelMap modelMap) {
-		
-		if (profileFormBean == null)
+		if (profileFormBean == null) {
 			throw new IllegalArgumentException("A profileFormBean is required");
+		}
+		if (!profileFormBean.getPassword().equals(profileFormBean.getConfirmPassword())) {
+			result.rejectValue("password", "error.passwordIsNotSame");
+		}
+		
 		if (result.hasErrors()) {
 			return "employee/profile";
 		}
@@ -63,12 +72,9 @@ public class EmployeeController {
         return "employee/profile/show";        
     }   
 
-	private ProfileFormBean putEmployeeToProfileFormBean(Employee employee,
-			ProfileFormBean profileFormBean) {
+	private ProfileFormBean putEmployeeToProfileFormBean(Employee employee, ProfileFormBean profileFormBean) {
 		profileFormBean.setId(employee.getId());
 		profileFormBean.setVersion(employee.getVersion());
-		profileFormBean.setFirstName(employee.getFirstName());
-		profileFormBean.setLastName(employee.getLastName());
 		profileFormBean.setEmail(employee.getUser().getEmail());
 		return profileFormBean;
 	}
@@ -76,8 +82,7 @@ public class EmployeeController {
 	private Employee putProfileFormBeanToEmployee(ProfileFormBean profileFormBean, Employee employee) {
 		employee.setId(profileFormBean.getId());
 		employee.setVersion(profileFormBean.getVersion());
-		employee.setFirstName(profileFormBean.getFirstName());
-		employee.setLastName(profileFormBean.getLastName());
+		employee.getUser().setPassword(passwordEncoder.encodePassword(profileFormBean.getPassword(), null));
 		employee.getUser().setEmail(profileFormBean.getEmail());
 		return employee;
 	}

@@ -35,6 +35,11 @@
                 <div class="box" id="_techRoles">${employee.techRoles}</div>
             </div>
             <br/>
+            <c:url value="/employee/profile/form" var="employee_profile_edit_url"/>
+            <a href="${employee_profile_edit_url}">
+            	<spring:message code="label.profile.edit"/>
+            </a>
+            <br/>
         </c:if>
         <c:if test="${empty employee}">
             <spring:message arguments="${entity_label}" code="entity.not.found.single"/>

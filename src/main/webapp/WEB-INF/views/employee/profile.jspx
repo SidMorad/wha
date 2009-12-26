@@ -7,26 +7,26 @@
         <spring:url value="/employee/profile" var="form_url"/>
         <form:form action="${form_url}" method="POST" modelAttribute="profileFormBean">
             <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
-            <div id="roo_employee_firstName">
-                <label for="_firstName">First Name:</label>
-                <form:input cssStyle="width:250px" id="_firstName" maxlength="45" path="firstName" size="0"/>
+            <div id="roo_user_password">
+                <label for="_password"><spring:message code="user.password"/>:</label>
+                <form:password cssStyle="width:250px" id="_password" maxlength="30" path="password" size="0"/>
                 <br/>
-                <form:errors cssClass="errors" id="_firstName_error" path="firstName"/>
-                <spring:message arguments="First Name" code="field.invalid" var="field_invalid"/>
-                <spring:message code="field.required" var="field_required"/>
-                <spring:message argumentSeparator="," arguments="First Name,(${field_required})" code="field.simple.validation" var="field_validation"/>
-                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_firstName', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
+                <form:errors cssClass="errors" id="_password" path="password"/>
+                <spring:message arguments="Password" code="field.invalid" var="field_invalid"/>
+                <spring:message code="field.required" var="required"/>
+                <spring:message argumentSeparator="," arguments="Password,(${required})" code="field.simple.validation" var="field_validation"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "_password", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${field_validation}", invalidMessage: "${field_invalid}", required : true}})); </script>
             </div>
             <br/>
-            <div id="roo_employee_lastName">
-                <label for="_lastName">Last Name:</label>
-                <form:input cssStyle="width:250px" id="_lastName" maxlength="45" path="lastName" size="0"/>
+            <div id="roo_user_confirmPassword">
+                <label for="_confirmPassword"><spring:message code="user.confirmPassword"/>:</label>
+                <form:password cssStyle="width:250px" id="_confirmPassword" maxlength="30" path="confirmPassword" size="0"/>
                 <br/>
-                <form:errors cssClass="errors" id="_lastName_error" path="lastName"/>
-                <spring:message arguments="Last Name" code="field.invalid" var="field_invalid"/>
-                <spring:message code="field.required" var="field_required"/>
-                <spring:message argumentSeparator="," arguments="Last Name,(${field_required})" code="field.simple.validation" var="field_validation"/>
-                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_lastName', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
+                <form:errors cssClass="errors" id="_confirmPassword" path="confirmPassword"/>
+                <spring:message arguments="Confirm Password" code="field.invalid" var="field_invalid"/>
+                <spring:message code="field.required" var="required"/>
+                <spring:message argumentSeparator="," arguments="ConfirmPassword,(${required})" code="field.simple.validation" var="field_validation"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "_confirmPassword", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${field_validation}", invalidMessage: "${field_invalid}", required : true}})); </script>
             </div>
             <br/>
             <div id="roo_user_email">
