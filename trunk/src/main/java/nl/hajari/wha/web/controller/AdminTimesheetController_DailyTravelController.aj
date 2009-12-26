@@ -22,7 +22,7 @@ privileged aspect AdminTimesheetController_DailyTravelController {
         	result.rejectValue("timesheet", "error.time.day.date.not.match");
         }
         if (result.hasErrors()) {        
-            modelMap.addAttribute("timesheets", Timesheet.findAllTimesheets());            
+            modelMap.addAttribute("timesheets", Timesheet.findTimesheetsByEmployee(dailyTravel.getTimesheet().getEmployee()).getResultList());            
             return "admin/timesheet/dailytravel/create";            
         }        
         dailyTravel.persist();        
@@ -51,7 +51,7 @@ privileged aspect AdminTimesheetController_DailyTravelController {
         	result.rejectValue("timesheet", "error.time.day.date.not.match");
         }
         if (result.hasErrors()) {        
-            modelMap.addAttribute("timesheets", Timesheet.findAllTimesheets());            
+            modelMap.addAttribute("timesheets", Timesheet.findTimesheetsByEmployee(dailyTravel.getTimesheet().getEmployee()).getResultList());            
             return "admin/timesheet/dailytravel/update";            
         }        
         dailyTravel.merge();        
