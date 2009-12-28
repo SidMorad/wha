@@ -36,6 +36,7 @@ public class BuildController {
 		
 		modelMap.addAttribute("implVersion", atts.getValue("Implementation-Version"));
 		modelMap.addAttribute("implBuild", atts.getValue("Implementation-Build"));
+		modelMap.addAttribute("implDate", atts.getValue("Implementation-Date"));
 		modelMap.addAttribute("implTitle", atts.getValue("Implementation-Title"));
 		modelMap.addAttribute("implVendor", atts.getValue("Implementation-Vendor"));
 		modelMap.addAttribute("implVendorId", atts.getValue("Implementation-Vendor-Id"));
