@@ -57,7 +57,7 @@
                                 <img alt="${add_message}" src="${create_img_url}" title="${add_message}"/>
                             </a>
                         </span>
-                        <span class="new">
+                        <span>
                         	<spring:url value="/customer/report/pdf" var="report_pdf_url"/>
                         	<a href="${report_pdf_url}">
                         		<spring:url value="/static/images/pdf.png" var="report_pdf_img_url"/>

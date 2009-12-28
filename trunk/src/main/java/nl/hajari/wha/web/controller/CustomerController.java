@@ -1,6 +1,5 @@
 package nl.hajari.wha.web.controller;
 
-import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import nl.hajari.wha.domain.Customer;
 
@@ -17,10 +16,8 @@ public class CustomerController {
 
 	@RequestMapping(value ="/customer/report/pdf", method = RequestMethod.GET)
 	public String fireReport(ModelMap modelMap) {
-		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(Customer.findAllCustomers());
-		//TODO: replace emptyDataSource with beanCollectionDataSource
-		modelMap.put("customerListData", new JREmptyDataSource());
-		
+		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(Customer.findAllCustomers(),false);
+		modelMap.put("customerListData", jrDataSource);
 		return "customerList";
 	}
 
