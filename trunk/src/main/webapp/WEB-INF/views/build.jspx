@@ -14,6 +14,11 @@
              <div class="box" id="_implBuild">${implBuild}</div>
          </div>
          <br/>
+         <div id="build_implDate">
+             <label for="_implDate">Implementation Date:</label>
+             <div class="box" id="_implDate">${implDate}</div>
+         </div>
+         <br/>
          <div id="build_implTitle">
              <label for="_implTitle">Implementation Title:</label>
              <div class="box" id="_implTitle">${implTitle}</div>
