@@ -2,6 +2,7 @@ package nl.hajari.wha.web.controller;
 
 import javax.validation.Valid;
 
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import nl.hajari.wha.domain.DailyTimesheet;
 import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.Project;
@@ -103,5 +104,14 @@ privileged aspect AdminTimesheetController_DailyTimesheetController {
         Long timesheetId = dailyTimesheetService.deleteDailyTimesheet(dailyTimesheet);
         return "redirect:/admin/timesheet/daily/" + timesheetId;        
     }    
+    
+    @RequestMapping(value = "/admin/timesheet/dailytimesheet/{timesheetId}/report/pdf" , method = RequestMethod.GET)
+    public String AdminTimesheetController.reportDailyTimesheet(@PathVariable("timesheetId")Long timesheetId, ModelMap modelMap) {
+    	Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
+    	JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(timesheet.getDailyTimesheetsSortedList(),false);
+    	modelMap.put("timesheetDailyReportList", jrDataSource);
+    	return "timesheetDailyReportList";
+    }
+    
     
 }

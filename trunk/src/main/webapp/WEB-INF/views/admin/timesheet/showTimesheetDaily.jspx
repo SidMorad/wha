@@ -112,6 +112,14 @@
 					                <input alt="${add_message}" class="image" src="${create_img_url}" title="${add_message}" type="image" value="${timesheet.id}"/>
 					            </form:form>	
 	                        </span>
+	                        <span>
+			              		<spring:url value="/admin/timesheet/dailytimesheet/${timesheet.id}/report/pdf" var="report_pdf_url"/>
+		              			<spring:url value="/static/images/pdf.png" var="report_pdf_img_url"/>
+					            <form:form action="${report_pdf_url}" method="GET">
+	                                <spring:message arguments="${entity_daily_label}" code="report.pdf" var="report_pdf_message"/>
+					                <input alt="${report_pdf_message}" class="image" src="${report_pdf_img_url}" title="${report_pdf_message}" type="image" value="${report_pdf_message}"/>
+					            </form:form>	
+			              	</span>
 	                    </td>
 	                </tr>		             
 		        </table>
