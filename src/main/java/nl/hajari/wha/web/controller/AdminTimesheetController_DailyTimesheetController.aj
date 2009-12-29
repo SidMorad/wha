@@ -1,5 +1,8 @@
 package nl.hajari.wha.web.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -7,6 +10,7 @@ import nl.hajari.wha.domain.DailyTimesheet;
 import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.Project;
 import nl.hajari.wha.domain.Timesheet;
+import nl.hajari.wha.web.controller.formbean.TimesheetDailyReportFormBean;
 import nl.hajari.wha.web.util.DateUtils;
 
 import org.springframework.ui.ModelMap;
@@ -109,6 +113,21 @@ privileged aspect AdminTimesheetController_DailyTimesheetController {
     public String AdminTimesheetController.reportDailyTimesheet(@PathVariable("timesheetId")Long timesheetId, ModelMap modelMap) {
     	Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
     	JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(timesheet.getDailyTimesheetsSortedList(),false);
+    	modelMap.put("timesheetDailyReportList", jrDataSource);
+    	return "timesheetDailyReportList";
+    }
+    
+    @RequestMapping(value = "/admin/timesheet/dailytimesheet/percustomer/report/pdf" , method = RequestMethod.POST)
+    public String AdminTimesheetController.reportDailyTimesheetPerCustomer(@Valid TimesheetDailyReportFormBean timesheetDailyReportFormBean, ModelMap modelMap) {
+    	if (timesheetDailyReportFormBean == null) throw new IllegalArgumentException("A timesheetDailyReportFormBean is required"); 
+    	Timesheet timesheet = Timesheet.findTimesheet(timesheetDailyReportFormBean.getTimesheetId());
+    	List<DailyTimesheet> dailytimesheets = new ArrayList<DailyTimesheet>();
+    	for (DailyTimesheet dt : timesheet.getDailyTimesheetsSortedList()) {
+			if (timesheetDailyReportFormBean.getCustomer().equals(dt.getProject().getCustomer())) {
+				dailytimesheets.add(dt);
+			}
+		}
+    	JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(dailytimesheets,false);
     	modelMap.put("timesheetDailyReportList", jrDataSource);
     	return "timesheetDailyReportList";
     }

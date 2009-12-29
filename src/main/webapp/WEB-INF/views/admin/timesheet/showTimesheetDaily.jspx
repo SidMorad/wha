@@ -121,6 +121,28 @@
 					            </form:form>	
 			              	</span>
 	                    </td>
+	                </tr>
+	                <tr>
+	                	<td colspan="9">
+	                	        <spring:url value="/admin/timesheet/dailytimesheet/percustomer/report/pdf" var="form_url"/>
+        						<form:form action="${form_url}" method="POST" modelAttribute="timesheetDailyReportFormBean">
+					            	<input type="hidden" name="timesheetId" value="${timesheet.id}" id="_timesheetId_id"/>
+			                		<div id="roo_project_customer" style="float: left;">
+						                <c:if test="${not empty customers}"> 
+						                    <label for="_customer" style="width:60px">Customer:</label>
+						                    <form:select cssStyle="width:200px;" id="_customer" path="customer">
+						                        <form:options itemValue="id" items="${customers}"/>
+						                    </form:select>
+						                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_customer', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+						                </c:if>
+						            </div>
+						            <div class="submit" id="roo_report_submit" >
+						                <spring:message code="button.report" var="report_button"/>
+						                <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
+						                <input id="proceed" type="submit" value="${report_button}" style="margin-left: 5px;"/>
+						            </div>
+				            </form:form>
+	                	</td>
 	                </tr>		             
 		        </table>
 		    </c:if>

@@ -1,8 +1,10 @@
 package nl.hajari.wha.web.controller;
 
+import nl.hajari.wha.domain.Customer;
 import nl.hajari.wha.domain.Timesheet;
 import nl.hajari.wha.service.DailyTimesheetService;
 import nl.hajari.wha.service.ProjectService;
+import nl.hajari.wha.web.controller.formbean.TimesheetDailyReportFormBean;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -50,7 +52,9 @@ public class AdminTimesheetController {
     @RequestMapping(value = "/admin/timesheet/daily/{id}", method = RequestMethod.GET)    
     public String showTimesheetDaily(@PathVariable("id") Long id, ModelMap modelMap) {    
         if (id == null) throw new IllegalArgumentException("An Identifier is required");        
-        modelMap.addAttribute("timesheet", Timesheet.findTimesheet(id));        
+        modelMap.addAttribute("timesheet", Timesheet.findTimesheet(id));
+        modelMap.addAttribute("timesheetDailyReportFormBean", new TimesheetDailyReportFormBean());
+        modelMap.addAttribute("customers", Customer.findAllCustomers());
         return "admin/timesheet/daily/show";        
     }   
     
