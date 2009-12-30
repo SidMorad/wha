@@ -1,5 +1,7 @@
 package nl.hajari.wha.web.controller.formbean;
 
+import javax.validation.constraints.NotNull;
+
 import nl.hajari.wha.domain.Customer;
 
 /**
@@ -10,9 +12,14 @@ import nl.hajari.wha.domain.Customer;
  **/
 public class TimesheetDailyReportFormBean {
 
+	@NotNull
 	private Long timesheetId;
-	
+
+	@NotNull
 	private Customer customer;
+
+	@NotNull
+	private String format;
 
 	public Long getTimesheetId() {
 		return timesheetId;
@@ -28,5 +35,13 @@ public class TimesheetDailyReportFormBean {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+
+	public String getFormat() {
+		return format;
+	}
+
+	public void setFormat(String format) {
+		this.format = format;
 	}
 }

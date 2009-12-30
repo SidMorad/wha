@@ -124,7 +124,7 @@
 	                </tr>
 	                <tr>
 	                	<td colspan="9">
-	                	        <spring:url value="/admin/timesheet/dailytimesheet/percustomer/report/pdf" var="form_url"/>
+	                	        <spring:url value="/admin/timesheet/dailytimesheet/percustomer/report" var="form_url"/>
         						<form:form action="${form_url}" method="POST" modelAttribute="timesheetDailyReportFormBean">
 					            	<input type="hidden" name="timesheetId" value="${timesheet.id}" id="_timesheetId_id"/>
 			                		<div id="roo_project_customer" style="float: left;">
@@ -136,6 +136,10 @@
 						                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_customer', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
 						                </c:if>
 						            </div>
+					            	<div id="roo_report_tag_id" style="float: left;">
+										<roo:report/>
+					                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_format_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true, required:true}})); </script>
+									</div>
 						            <div class="submit" id="roo_report_submit" >
 						                <spring:message code="button.report" var="report_button"/>
 						                <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>

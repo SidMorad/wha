@@ -1,0 +1,11 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+
+		<label for="_format_id" style="width: 45px">Format:</label>
+		<select name="format" id="_format_id" style="width: 65px">
+			<option value="pdf">pdf</option>
+			<option value="xls">xls</option>
+			<option value="csv">csv</option>
+			<option value="html">html</option>
+		</select>
+
+</jsp:root>

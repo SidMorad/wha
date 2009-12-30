@@ -173,5 +173,18 @@
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
     	<property name="basename" value="views"/>
 	</bean>
+	<bean id="jasperReportsMultiFormatView" name="jasperReportsMultiFormatViewBean"
+		class="nl.hajari.wha.web.report.CustomJasperReportsMultiFormatView">
+
+		<!-- The value _replace_name_ will be replaced with the report name -->
+		<property name="contentDispositionMappings">
+			<props>
+				<prop key="html">attachment; filename=_replace_name_.html</prop>
+				<prop key="pdf">attachment; filename=_replace_name_.pdf</prop>
+				<prop key="xls">attachment; filename=_replace_name_.xls</prop>
+				<prop key="csv">attachment; filename=_replace_name_.csv</prop>
+			</props>
+		</property>
+	</bean>
 
 </beans>
