@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import nl.hajari.wha.domain.DailyTimesheet;
 import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.Project;
@@ -120,5 +121,15 @@ privileged aspect TimeController_DailyTimesheetController {
 		dailyTimesheetService.deleteDailyTimesheet(dailyTimesheet);
 		return "redirect:/time/view/month";
 	}
+	
+    @RequestMapping(value = "/time/timesheet/dailytimesheet/{timesheetId}/report/{format}" , method = RequestMethod.GET)
+    public String TimeController.reportDailyTimesheet(@PathVariable("timesheetId")Long timesheetId, @PathVariable("format") String format, ModelMap modelMap) {
+    	Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
+    	JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(timesheet.getDailyTimesheetsSortedList(),false);
+    	modelMap.put("timesheetDailyReportList", jrDataSource);
+    	modelMap.put("format", format);
+    	return "timesheetDailyReportList";
+    }
+	
 
 }
