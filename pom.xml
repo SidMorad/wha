@@ -378,6 +378,13 @@
 			<artifactId>jasperreports</artifactId>
 			<version>3.5.3</version>
 		</dependency>
+		<!-- We need this dependency for generate reports in Excel format -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.2-FINAL</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>

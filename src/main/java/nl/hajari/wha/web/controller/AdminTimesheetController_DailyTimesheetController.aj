@@ -109,15 +109,16 @@ privileged aspect AdminTimesheetController_DailyTimesheetController {
         return "redirect:/admin/timesheet/daily/" + timesheetId;        
     }    
     
-    @RequestMapping(value = "/admin/timesheet/dailytimesheet/{timesheetId}/report/pdf" , method = RequestMethod.GET)
-    public String AdminTimesheetController.reportDailyTimesheet(@PathVariable("timesheetId")Long timesheetId, ModelMap modelMap) {
+    @RequestMapping(value = "/admin/timesheet/dailytimesheet/{timesheetId}/report/{format}" , method = RequestMethod.GET)
+    public String AdminTimesheetController.reportDailyTimesheet(@PathVariable("timesheetId")Long timesheetId, @PathVariable("format") String format, ModelMap modelMap) {
     	Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
     	JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(timesheet.getDailyTimesheetsSortedList(),false);
     	modelMap.put("timesheetDailyReportList", jrDataSource);
+    	modelMap.put("format", format);
     	return "timesheetDailyReportList";
     }
     
-    @RequestMapping(value = "/admin/timesheet/dailytimesheet/percustomer/report/pdf" , method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/timesheet/dailytimesheet/percustomer/report" , method = RequestMethod.POST)
     public String AdminTimesheetController.reportDailyTimesheetPerCustomer(@Valid TimesheetDailyReportFormBean timesheetDailyReportFormBean, ModelMap modelMap) {
     	if (timesheetDailyReportFormBean == null) throw new IllegalArgumentException("A timesheetDailyReportFormBean is required"); 
     	Timesheet timesheet = Timesheet.findTimesheet(timesheetDailyReportFormBean.getTimesheetId());
@@ -129,6 +130,8 @@ privileged aspect AdminTimesheetController_DailyTimesheetController {
 		}
     	JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(dailytimesheets,false);
     	modelMap.put("timesheetDailyReportList", jrDataSource);
+    	modelMap.put("format", timesheetDailyReportFormBean.getFormat());
+    	
     	return "timesheetDailyReportList";
     }
     
