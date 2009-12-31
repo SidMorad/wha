@@ -11,6 +11,16 @@
 	<field name="timesheet.employee.firstName" class="java.lang.String"/>
 	<field name="timesheet.employee.lastName" class="java.lang.String"/>
 	<field name="timesheet.employee.empId" class="java.lang.String"/>
+	<field name="timesheet.monthlyTotal" class="java.lang.Float"/>
+	<variable name="timesheet.monthlyTotal_1" class="java.lang.Float" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{timesheet.monthlyTotal}]]></variableExpression>
+	</variable>
+	<variable name="dailyTotalDuration_1" class="java.lang.Float" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{dailyTotalDuration}]]></variableExpression>
+	</variable>
+	<variable name="dailyTotalDuration_2" class="java.lang.Float" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{dailyTotalDuration}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -132,6 +142,20 @@
 		<band height="54" splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="500" y="9" width="63" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{timesheet.monthlyTotal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="420" y="9" width="80" height="20"/>
+				<textElement/>
+				<text><![CDATA[ Monthly Total :]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="5" width="572" height="1"/>
+			</line>
+		</band>
 	</summary>
 </jasperReport>
