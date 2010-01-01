@@ -18,6 +18,20 @@
     	<a href="${url_en}" title="${lang_en}"><img src="${img_en}" alt="${lang_en}"/></a>
     	<c:out value="&#160;|&#160;"/>
     	
+    	<c:url var="img_nl" value="/static/images/nl.png" />
+    	<c:url var="url_nl" value="">
+    		<c:param name="lang" value="nl" />
+    		<c:if test="${not empty param.page}">
+    			<c:param name="page" value="${param.page}" />
+    		</c:if>
+    		<c:if test="${not empty param.size}">
+    			<c:param name="size" value="${param.size}" />
+    		</c:if>
+    	</c:url>	
+    	<spring:message code="global.language.switch" arguments="Dutch" var="lang_nl"/>			    	
+    	<a href="${url_nl}" title="${lang_nl}"><img src="${img_nl}" alt="${lang_nl}"/></a>
+    	<c:out value="&#160;|&#160;"/>
+    	
     	<c:url var="img_de" value="/static/images/de.png" />
     	<c:url var="url_de" value="">
     		<c:param name="lang" value="de" />
