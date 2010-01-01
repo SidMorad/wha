@@ -17,6 +17,7 @@ privileged aspect CustomerController_Roo_Controller {
     public String CustomerController.create(@Valid Customer customer, BindingResult result, ModelMap modelMap) {    
         if (customer == null) throw new IllegalArgumentException("A customer is required");        
         if (result.hasErrors()) {        
+            modelMap.addAttribute("customer", customer);            
             return "customer/create";            
         }        
         customer.persist();        
@@ -53,6 +54,7 @@ privileged aspect CustomerController_Roo_Controller {
     public String CustomerController.update(@Valid Customer customer, BindingResult result, ModelMap modelMap) {    
         if (customer == null) throw new IllegalArgumentException("A customer is required");        
         if (result.hasErrors()) {        
+            modelMap.addAttribute("customer", customer);            
             return "customer/update";            
         }        
         customer.merge();        

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
 
-@RooWebScaffold(path = "dailytimesheet", automaticallyMaintainView = true, formBackingObject = DailyTimesheet.class, exposeFinders = false)
+@RooWebScaffold(path = "dailytimesheet", automaticallyMaintainView = false, formBackingObject = DailyTimesheet.class, exposeFinders = false)
 @RequestMapping("/dailytimesheet/**")
 @Controller
 public class DailyTimesheetController {

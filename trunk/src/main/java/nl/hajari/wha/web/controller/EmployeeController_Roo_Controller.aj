@@ -19,6 +19,7 @@ privileged aspect EmployeeController_Roo_Controller {
     public String EmployeeController.create(@Valid Employee employee, BindingResult result, ModelMap modelMap) {    
         if (employee == null) throw new IllegalArgumentException("A employee is required");        
         if (result.hasErrors()) {        
+            modelMap.addAttribute("employee", employee);            
             modelMap.addAttribute("techroles", TechRole.findAllTechRoles());            
             modelMap.addAttribute("users", User.findAllUsers());            
             return "employee/create";            
@@ -59,6 +60,7 @@ privileged aspect EmployeeController_Roo_Controller {
     public String EmployeeController.update(@Valid Employee employee, BindingResult result, ModelMap modelMap) {    
         if (employee == null) throw new IllegalArgumentException("A employee is required");        
         if (result.hasErrors()) {        
+            modelMap.addAttribute("employee", employee);            
             modelMap.addAttribute("techroles", TechRole.findAllTechRoles());            
             modelMap.addAttribute("users", User.findAllUsers());            
             return "employee/update";            

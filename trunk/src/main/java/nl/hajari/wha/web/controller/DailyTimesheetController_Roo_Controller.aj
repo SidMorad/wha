@@ -16,20 +16,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 privileged aspect DailyTimesheetController_Roo_Controller {
     
     @RequestMapping(value = "/dailytimesheet", method = RequestMethod.POST)    
-    public String DailyTimesheetController.create(@Valid DailyTimesheet dailytimesheet, BindingResult result, ModelMap modelMap) {    
-        if (dailytimesheet == null) throw new IllegalArgumentException("A dailytimesheet is required");        
+    public String DailyTimesheetController.create(@Valid DailyTimesheet dailyTimesheet, BindingResult result, ModelMap modelMap) {    
+        if (dailyTimesheet == null) throw new IllegalArgumentException("A dailyTimesheet is required");        
         if (result.hasErrors()) {        
+            modelMap.addAttribute("dailyTimesheet", dailyTimesheet);            
             modelMap.addAttribute("projects", Project.findAllProjects());            
             modelMap.addAttribute("timesheets", Timesheet.findAllTimesheets());            
             return "dailytimesheet/create";            
         }        
-        dailytimesheet.persist();        
-        return "redirect:/dailytimesheet/" + dailytimesheet.getId();        
+        dailyTimesheet.persist();        
+        return "redirect:/dailytimesheet/" + dailyTimesheet.getId();        
     }    
     
     @RequestMapping(value = "/dailytimesheet/form", method = RequestMethod.GET)    
     public String DailyTimesheetController.createForm(ModelMap modelMap) {    
-        modelMap.addAttribute("dailytimesheet", new DailyTimesheet());        
+        modelMap.addAttribute("dailyTimesheet", new DailyTimesheet());        
         modelMap.addAttribute("projects", Project.findAllProjects());        
         modelMap.addAttribute("timesheets", Timesheet.findAllTimesheets());        
         return "dailytimesheet/create";        
@@ -38,7 +39,7 @@ privileged aspect DailyTimesheetController_Roo_Controller {
     @RequestMapping(value = "/dailytimesheet/{id}", method = RequestMethod.GET)    
     public String DailyTimesheetController.show(@PathVariable("id") Long id, ModelMap modelMap) {    
         if (id == null) throw new IllegalArgumentException("An Identifier is required");        
-        modelMap.addAttribute("dailytimesheet", DailyTimesheet.findDailyTimesheet(id));        
+        modelMap.addAttribute("dailyTimesheet", DailyTimesheet.findDailyTimesheet(id));        
         return "dailytimesheet/show";        
     }    
     
@@ -56,21 +57,22 @@ privileged aspect DailyTimesheetController_Roo_Controller {
     }    
     
     @RequestMapping(method = RequestMethod.PUT)    
-    public String DailyTimesheetController.update(@Valid DailyTimesheet dailytimesheet, BindingResult result, ModelMap modelMap) {    
-        if (dailytimesheet == null) throw new IllegalArgumentException("A dailytimesheet is required");        
+    public String DailyTimesheetController.update(@Valid DailyTimesheet dailyTimesheet, BindingResult result, ModelMap modelMap) {    
+        if (dailyTimesheet == null) throw new IllegalArgumentException("A dailyTimesheet is required");        
         if (result.hasErrors()) {        
+            modelMap.addAttribute("dailyTimesheet", dailyTimesheet);            
             modelMap.addAttribute("projects", Project.findAllProjects());            
             modelMap.addAttribute("timesheets", Timesheet.findAllTimesheets());            
             return "dailytimesheet/update";            
         }        
-        dailytimesheet.merge();        
-        return "redirect:/dailytimesheet/" + dailytimesheet.getId();        
+        dailyTimesheet.merge();        
+        return "redirect:/dailytimesheet/" + dailyTimesheet.getId();        
     }    
     
     @RequestMapping(value = "/dailytimesheet/{id}/form", method = RequestMethod.GET)    
     public String DailyTimesheetController.updateForm(@PathVariable("id") Long id, ModelMap modelMap) {    
         if (id == null) throw new IllegalArgumentException("An Identifier is required");        
-        modelMap.addAttribute("dailytimesheet", DailyTimesheet.findDailyTimesheet(id));        
+        modelMap.addAttribute("dailyTimesheet", DailyTimesheet.findDailyTimesheet(id));        
         modelMap.addAttribute("projects", Project.findAllProjects());        
         modelMap.addAttribute("timesheets", Timesheet.findAllTimesheets());        
         return "dailytimesheet/update";        

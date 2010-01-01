@@ -16,20 +16,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 privileged aspect DailyExpenseController_Roo_Controller {
     
     @RequestMapping(value = "/dailyexpense", method = RequestMethod.POST)    
-    public String DailyExpenseController.create(@Valid DailyExpense dailyexpense, BindingResult result, ModelMap modelMap) {    
-        if (dailyexpense == null) throw new IllegalArgumentException("A dailyexpense is required");        
+    public String DailyExpenseController.create(@Valid DailyExpense dailyExpense, BindingResult result, ModelMap modelMap) {    
+        if (dailyExpense == null) throw new IllegalArgumentException("A dailyExpense is required");        
         if (result.hasErrors()) {        
+            modelMap.addAttribute("dailyExpense", dailyExpense);            
             modelMap.addAttribute("customers", Customer.findAllCustomers());            
             modelMap.addAttribute("timesheets", Timesheet.findAllTimesheets());            
             return "dailyexpense/create";            
         }        
-        dailyexpense.persist();        
-        return "redirect:/dailyexpense/" + dailyexpense.getId();        
+        dailyExpense.persist();        
+        return "redirect:/dailyexpense/" + dailyExpense.getId();        
     }    
     
     @RequestMapping(value = "/dailyexpense/form", method = RequestMethod.GET)    
     public String DailyExpenseController.createForm(ModelMap modelMap) {    
-        modelMap.addAttribute("dailyexpense", new DailyExpense());        
+        modelMap.addAttribute("dailyExpense", new DailyExpense());        
         modelMap.addAttribute("customers", Customer.findAllCustomers());        
         modelMap.addAttribute("timesheets", Timesheet.findAllTimesheets());        
         return "dailyexpense/create";        
@@ -38,7 +39,7 @@ privileged aspect DailyExpenseController_Roo_Controller {
     @RequestMapping(value = "/dailyexpense/{id}", method = RequestMethod.GET)    
     public String DailyExpenseController.show(@PathVariable("id") Long id, ModelMap modelMap) {    
         if (id == null) throw new IllegalArgumentException("An Identifier is required");        
-        modelMap.addAttribute("dailyexpense", DailyExpense.findDailyExpense(id));        
+        modelMap.addAttribute("dailyExpense", DailyExpense.findDailyExpense(id));        
         return "dailyexpense/show";        
     }    
     
@@ -56,21 +57,22 @@ privileged aspect DailyExpenseController_Roo_Controller {
     }    
     
     @RequestMapping(method = RequestMethod.PUT)    
-    public String DailyExpenseController.update(@Valid DailyExpense dailyexpense, BindingResult result, ModelMap modelMap) {    
-        if (dailyexpense == null) throw new IllegalArgumentException("A dailyexpense is required");        
+    public String DailyExpenseController.update(@Valid DailyExpense dailyExpense, BindingResult result, ModelMap modelMap) {    
+        if (dailyExpense == null) throw new IllegalArgumentException("A dailyExpense is required");        
         if (result.hasErrors()) {        
+            modelMap.addAttribute("dailyExpense", dailyExpense);            
             modelMap.addAttribute("customers", Customer.findAllCustomers());            
             modelMap.addAttribute("timesheets", Timesheet.findAllTimesheets());            
             return "dailyexpense/update";            
         }        
-        dailyexpense.merge();        
-        return "redirect:/dailyexpense/" + dailyexpense.getId();        
+        dailyExpense.merge();        
+        return "redirect:/dailyexpense/" + dailyExpense.getId();        
     }    
     
     @RequestMapping(value = "/dailyexpense/{id}/form", method = RequestMethod.GET)    
     public String DailyExpenseController.updateForm(@PathVariable("id") Long id, ModelMap modelMap) {    
         if (id == null) throw new IllegalArgumentException("An Identifier is required");        
-        modelMap.addAttribute("dailyexpense", DailyExpense.findDailyExpense(id));        
+        modelMap.addAttribute("dailyExpense", DailyExpense.findDailyExpense(id));        
         modelMap.addAttribute("customers", Customer.findAllCustomers());        
         modelMap.addAttribute("timesheets", Timesheet.findAllTimesheets());        
         return "dailyexpense/update";        

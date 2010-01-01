@@ -17,6 +17,7 @@ privileged aspect ConstantsController_Roo_Controller {
     public String ConstantsController.create(@Valid Constants constants, BindingResult result, ModelMap modelMap) {    
         if (constants == null) throw new IllegalArgumentException("A constants is required");        
         if (result.hasErrors()) {        
+            modelMap.addAttribute("constants", constants);            
             return "constants/create";            
         }        
         constants.persist();        
@@ -53,6 +54,7 @@ privileged aspect ConstantsController_Roo_Controller {
     public String ConstantsController.update(@Valid Constants constants, BindingResult result, ModelMap modelMap) {    
         if (constants == null) throw new IllegalArgumentException("A constants is required");        
         if (result.hasErrors()) {        
+            modelMap.addAttribute("constants", constants);            
             return "constants/update";            
         }        
         constants.merge();        

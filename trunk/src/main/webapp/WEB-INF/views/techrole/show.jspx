@@ -5,19 +5,19 @@
         <spring:message code="label.techrole" var="entity_label"/>
         <spring:message arguments="${entity_label}" code="entity.show" var="title_msg"/>
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
-        <c:if test="${not empty techrole}">
-            <div id="roo_techrole_name">
+        <c:if test="${not empty techRole}">
+            <div id="roo_techRole_name">
                 <label for="_name_id">Name:</label>
-                <div class="box" id="_name_id">${techrole.name}</div>
+                <div class="box" id="_name_id">${techRole.name}</div>
             </div>
             <br/>
-            <div id="roo_techrole_hourlyWage">
+            <div id="roo_techRole_hourlyWage">
                 <label for="_hourlyWage_id">Hourly Wage:</label>
-                <div class="box" id="_hourlyWage_id">${techrole.hourlyWage}</div>
+                <div class="box" id="_hourlyWage_id">${techRole.hourlyWage}</div>
             </div>
             <br/>
         </c:if>
-        <c:if test="${empty techrole}">
+        <c:if test="${empty techRole}">
             <spring:message arguments="${entity_label}" code="entity.not.found.single"/>
         </c:if>
     </div>

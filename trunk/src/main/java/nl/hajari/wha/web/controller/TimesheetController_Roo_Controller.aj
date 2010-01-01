@@ -22,6 +22,7 @@ privileged aspect TimesheetController_Roo_Controller {
     public String TimesheetController.create(@Valid Timesheet timesheet, BindingResult result, ModelMap modelMap) {    
         if (timesheet == null) throw new IllegalArgumentException("A timesheet is required");        
         if (result.hasErrors()) {        
+            modelMap.addAttribute("timesheet", timesheet);            
             modelMap.addAttribute("dailyexpenses", DailyExpense.findAllDailyExpenses());            
             modelMap.addAttribute("dailytimesheets", DailyTimesheet.findAllDailyTimesheets());            
             modelMap.addAttribute("dailytravels", DailyTravel.findAllDailyTravels());            

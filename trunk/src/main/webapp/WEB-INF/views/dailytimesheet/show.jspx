@@ -5,46 +5,46 @@
         <spring:message code="label.dailytimesheet" var="entity_label"/>
         <spring:message arguments="${entity_label}" code="entity.show" var="title_msg"/>
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
-        <c:if test="${not empty dailytimesheet}">
-            <div id="roo_dailytimesheet_dayDate">
+        <c:if test="${not empty dailyTimesheet}">
+            <div id="roo_dailyTimesheet_dayDate">
                 <label for="_dayDate_id">Day Date:</label>
                 <div class="box" id="_dayDate_id">
-                    <fmt:formatDate pattern="d/MM/yy" type="DATE" value="${dailytimesheet.dayDate}"/>
+                    <fmt:formatDate pattern="d/MM/yy" type="DATE" value="${dailyTimesheet.dayDate}"/>
                 </div>
             </div>
             <br/>
-            <div id="roo_dailytimesheet_duration">
+            <div id="roo_dailyTimesheet_duration">
                 <label for="_duration_id">Duration:</label>
-                <div class="box" id="_duration_id">${dailytimesheet.duration}</div>
+                <div class="box" id="_duration_id">${dailyTimesheet.duration}</div>
             </div>
             <br/>
-            <div id="roo_dailytimesheet_durationOffs">
+            <div id="roo_dailyTimesheet_durationOffs">
                 <label for="_durationOffs_id">Duration Offs:</label>
-                <div class="box" id="_durationOffs_id">${dailytimesheet.durationOffs}</div>
+                <div class="box" id="_durationOffs_id">${dailyTimesheet.durationOffs}</div>
             </div>
             <br/>
-            <div id="roo_dailytimesheet_durationTraining">
+            <div id="roo_dailyTimesheet_durationTraining">
                 <label for="_durationTraining_id">Duration Training:</label>
-                <div class="box" id="_durationTraining_id">${dailytimesheet.durationTraining}</div>
+                <div class="box" id="_durationTraining_id">${dailyTimesheet.durationTraining}</div>
             </div>
             <br/>
-            <div id="roo_dailytimesheet_dailyTotalDuration">
+            <div id="roo_dailyTimesheet_dailyTotalDuration">
                 <label for="_dailyTotalDuration_id">Daily Total Duration:</label>
-                <div class="box" id="_dailyTotalDuration_id">${dailytimesheet.dailyTotalDuration}</div>
+                <div class="box" id="_dailyTotalDuration_id">${dailyTimesheet.dailyTotalDuration}</div>
             </div>
             <br/>
-            <div id="roo_dailytimesheet_timesheet">
+            <div id="roo_dailyTimesheet_timesheet">
                 <label for="_timesheet_id">Timesheet:</label>
-                <div class="box" id="_timesheet_id">${dailytimesheet.timesheet}</div>
+                <div class="box" id="_timesheet_id">${dailyTimesheet.timesheet}</div>
             </div>
             <br/>
-            <div id="roo_dailytimesheet_project">
+            <div id="roo_dailyTimesheet_project">
                 <label for="_project_id">Project:</label>
-                <div class="box" id="_project_id">${dailytimesheet.project}</div>
+                <div class="box" id="_project_id">${dailyTimesheet.project}</div>
             </div>
             <br/>
         </c:if>
-        <c:if test="${empty dailytimesheet}">
+        <c:if test="${empty dailyTimesheet}">
             <spring:message arguments="${entity_label}" code="entity.not.found.single"/>
         </c:if>
     </div>
