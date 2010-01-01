@@ -17,6 +17,7 @@ privileged aspect RoleController_Roo_Controller {
     public String RoleController.create(@Valid Role role, BindingResult result, ModelMap modelMap) {    
         if (role == null) throw new IllegalArgumentException("A role is required");        
         if (result.hasErrors()) {        
+            modelMap.addAttribute("role", role);            
             return "role/create";            
         }        
         role.persist();        
@@ -53,6 +54,7 @@ privileged aspect RoleController_Roo_Controller {
     public String RoleController.update(@Valid Role role, BindingResult result, ModelMap modelMap) {    
         if (role == null) throw new IllegalArgumentException("A role is required");        
         if (result.hasErrors()) {        
+            modelMap.addAttribute("role", role);            
             return "role/update";            
         }        
         role.merge();        

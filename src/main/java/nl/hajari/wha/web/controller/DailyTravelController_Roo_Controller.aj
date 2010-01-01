@@ -15,14 +15,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 privileged aspect DailyTravelController_Roo_Controller {
     
     @RequestMapping(value = "/dailytravel", method = RequestMethod.POST)    
-    public String DailyTravelController.create(@Valid DailyTravel dailytravel, BindingResult result, ModelMap modelMap) {    
-        if (dailytravel == null) throw new IllegalArgumentException("A dailytravel is required");        
+    public String DailyTravelController.create(@Valid DailyTravel dailyTravel, BindingResult result, ModelMap modelMap) {    
+        if (dailyTravel == null) throw new IllegalArgumentException("A dailyTravel is required");        
         if (result.hasErrors()) {        
+            modelMap.addAttribute("dailyTravel", dailyTravel);            
             modelMap.addAttribute("timesheets", Timesheet.findAllTimesheets());            
             return "dailytravel/create";            
         }        
-        dailytravel.persist();        
-        return "redirect:/dailytravel/" + dailytravel.getId();        
+        dailyTravel.persist();        
+        return "redirect:/dailytravel/" + dailyTravel.getId();        
     }    
     
     @RequestMapping(value = "/dailytravel/form", method = RequestMethod.GET)    
@@ -53,14 +54,15 @@ privileged aspect DailyTravelController_Roo_Controller {
     }    
     
     @RequestMapping(method = RequestMethod.PUT)    
-    public String DailyTravelController.update(@Valid DailyTravel dailytravel, BindingResult result, ModelMap modelMap) {    
-        if (dailytravel == null) throw new IllegalArgumentException("A dailytravel is required");        
+    public String DailyTravelController.update(@Valid DailyTravel dailyTravel, BindingResult result, ModelMap modelMap) {    
+        if (dailyTravel == null) throw new IllegalArgumentException("A dailyTravel is required");        
         if (result.hasErrors()) {        
+            modelMap.addAttribute("dailyTravel", dailyTravel);            
             modelMap.addAttribute("timesheets", Timesheet.findAllTimesheets());            
             return "dailytravel/update";            
         }        
-        dailytravel.merge();        
-        return "redirect:/dailytravel/" + dailytravel.getId();        
+        dailyTravel.merge();        
+        return "redirect:/dailytravel/" + dailyTravel.getId();        
     }    
     
     @RequestMapping(value = "/dailytravel/{id}/form", method = RequestMethod.GET)    

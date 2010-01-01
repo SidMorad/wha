@@ -14,25 +14,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 privileged aspect TechRoleController_Roo_Controller {
     
     @RequestMapping(value = "/techrole", method = RequestMethod.POST)    
-    public String TechRoleController.create(@Valid TechRole techrole, BindingResult result, ModelMap modelMap) {    
-        if (techrole == null) throw new IllegalArgumentException("A techrole is required");        
+    public String TechRoleController.create(@Valid TechRole techRole, BindingResult result, ModelMap modelMap) {    
+        if (techRole == null) throw new IllegalArgumentException("A techRole is required");        
         if (result.hasErrors()) {        
+            modelMap.addAttribute("techRole", techRole);            
             return "techrole/create";            
         }        
-        techrole.persist();        
-        return "redirect:/techrole/" + techrole.getId();        
+        techRole.persist();        
+        return "redirect:/techrole/" + techRole.getId();        
     }    
     
     @RequestMapping(value = "/techrole/form", method = RequestMethod.GET)    
     public String TechRoleController.createForm(ModelMap modelMap) {    
-        modelMap.addAttribute("techrole", new TechRole());        
+        modelMap.addAttribute("techRole", new TechRole());        
         return "techrole/create";        
     }    
     
     @RequestMapping(value = "/techrole/{id}", method = RequestMethod.GET)    
     public String TechRoleController.show(@PathVariable("id") Long id, ModelMap modelMap) {    
         if (id == null) throw new IllegalArgumentException("An Identifier is required");        
-        modelMap.addAttribute("techrole", TechRole.findTechRole(id));        
+        modelMap.addAttribute("techRole", TechRole.findTechRole(id));        
         return "techrole/show";        
     }    
     
@@ -50,19 +51,20 @@ privileged aspect TechRoleController_Roo_Controller {
     }    
     
     @RequestMapping(method = RequestMethod.PUT)    
-    public String TechRoleController.update(@Valid TechRole techrole, BindingResult result, ModelMap modelMap) {    
-        if (techrole == null) throw new IllegalArgumentException("A techrole is required");        
+    public String TechRoleController.update(@Valid TechRole techRole, BindingResult result, ModelMap modelMap) {    
+        if (techRole == null) throw new IllegalArgumentException("A techRole is required");        
         if (result.hasErrors()) {        
+            modelMap.addAttribute("techRole", techRole);            
             return "techrole/update";            
         }        
-        techrole.merge();        
-        return "redirect:/techrole/" + techrole.getId();        
+        techRole.merge();        
+        return "redirect:/techrole/" + techRole.getId();        
     }    
     
     @RequestMapping(value = "/techrole/{id}/form", method = RequestMethod.GET)    
     public String TechRoleController.updateForm(@PathVariable("id") Long id, ModelMap modelMap) {    
         if (id == null) throw new IllegalArgumentException("An Identifier is required");        
-        modelMap.addAttribute("techrole", TechRole.findTechRole(id));        
+        modelMap.addAttribute("techRole", TechRole.findTechRole(id));        
         return "techrole/update";        
     }    
     

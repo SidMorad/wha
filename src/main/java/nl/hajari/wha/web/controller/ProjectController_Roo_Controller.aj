@@ -18,6 +18,7 @@ privileged aspect ProjectController_Roo_Controller {
     public String ProjectController.create(@Valid Project project, BindingResult result, ModelMap modelMap) {    
         if (project == null) throw new IllegalArgumentException("A project is required");        
         if (result.hasErrors()) {        
+            modelMap.addAttribute("project", project);            
             modelMap.addAttribute("customers", Customer.findAllCustomers());            
             return "project/create";            
         }        
@@ -56,6 +57,7 @@ privileged aspect ProjectController_Roo_Controller {
     public String ProjectController.update(@Valid Project project, BindingResult result, ModelMap modelMap) {    
         if (project == null) throw new IllegalArgumentException("A project is required");        
         if (result.hasErrors()) {        
+            modelMap.addAttribute("project", project);            
             modelMap.addAttribute("customers", Customer.findAllCustomers());            
             return "project/update";            
         }        

@@ -22,19 +22,19 @@
                         <th/>
                     </tr>
                 </thead>
-                <c:forEach items="${dailyexpenses}" var="dailyexpense">
+                <c:forEach items="${dailyexpenses}" var="dailyExpense">
                     <tr>
-                        <td>${dailyexpense.id}</td>
+                        <td>${dailyExpense.id}</td>
                         <td>
-                            <fmt:formatDate pattern="d/MM/yy" type="DATE" value="${dailyexpense.dayDate}"/>
+                            <fmt:formatDate pattern="d/MM/yy" type="DATE" value="${dailyExpense.dayDate}"/>
                         </td>
-                        <td>${fn:substring(dailyexpense.expenseFor, 0, 10)}</td>
-                        <td>${fn:substring(dailyexpense.expenseAmount, 0, 10)}</td>
-                        <td>${fn:substring(dailyexpense.expenseComment, 0, 10)}</td>
-                        <td>${fn:substring(dailyexpense.timesheet, 0, 10)}</td>
-                        <td>${fn:substring(dailyexpense.customer, 0, 10)}</td>
+                        <td>${fn:substring(dailyExpense.expenseFor, 0, 10)}</td>
+                        <td>${fn:substring(dailyExpense.expenseAmount, 0, 10)}</td>
+                        <td>${fn:substring(dailyExpense.expenseComment, 0, 10)}</td>
+                        <td>${fn:substring(dailyExpense.timesheet, 0, 10)}</td>
+                        <td>${fn:substring(dailyExpense.customer, 0, 10)}</td>
                         <td>
-                            <spring:url value="/dailyexpense/${dailyexpense.id}" var="show_form_url"/>
+                            <spring:url value="/dailyexpense/${dailyExpense.id}" var="show_form_url"/>
                             <spring:url value="/static/images/show.png" var="show_image_url"/>
                             <form:form action="${show_form_url}" method="GET">
                                 <spring:message arguments="${entity_label}" code="entity.show" var="show_label"/>
@@ -42,7 +42,7 @@
                             </form:form>
                         </td>
                         <td>
-                            <spring:url value="/dailyexpense/${dailyexpense.id}/form" var="update_form_url"/>
+                            <spring:url value="/dailyexpense/${dailyExpense.id}/form" var="update_form_url"/>
                             <spring:url value="/static/images/update.png" var="update_image_url"/>
                             <form:form action="${update_form_url}" method="GET">
                                 <spring:message arguments="${entity_label}" code="entity.update" var="update_label"/>
@@ -50,11 +50,17 @@
                             </form:form>
                         </td>
                         <td>
-                            <spring:url value="/dailyexpense/${dailyexpense.id}" var="delete_form_url"/>
+                            <spring:url value="/dailyexpense/${dailyExpense.id}" var="delete_form_url"/>
                             <spring:url value="/static/images/delete.png" var="delete_image_url"/>
                             <form:form action="${delete_form_url}" method="DELETE">
                                 <spring:message arguments="${entity_label}" code="entity.delete" var="delete_label"/>
                                 <input alt="${delete_label}" class="image" src="${delete_image_url}" title="${delete_label}" type="image" value="${delete_label}"/>
+                                <c:if test="${not empty param.page}">
+                                    <input name="page" type="hidden" value="${param.page}"/>
+                                </c:if>
+                                <c:if test="${not empty param.size}">
+                                    <input name="size" type="hidden" value="${param.size}"/>
+                                </c:if>
                             </form:form>
                         </td>
                     </tr>
