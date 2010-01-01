@@ -21,6 +21,7 @@
         <intercept-url pattern="/**" access="permitAll" />
 	    <custom-filter ref="sessionSecurityFilter" after="BASIC_AUTH_FILTER"/>
 	    <access-denied-handler error-page="/403.jspx" />
+	    <remember-me user-service-ref="userController" key="e37f4b31-0c45-11dd-bd0b-0800200c9a66"/>
     </http>
     
 	<beans:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder"/>
