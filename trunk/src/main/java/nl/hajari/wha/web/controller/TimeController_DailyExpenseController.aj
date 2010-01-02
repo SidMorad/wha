@@ -1,8 +1,10 @@
 package nl.hajari.wha.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import nl.hajari.wha.domain.Customer;
 import nl.hajari.wha.domain.DailyExpense;
 import nl.hajari.wha.domain.Timesheet;
@@ -12,7 +14,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
 /**
  * 
@@ -79,6 +80,24 @@ privileged aspect TimeController_DailyExpenseController {
 			throw new IllegalArgumentException("An Identifier is required");
 		DailyExpense.findDailyExpense(id).remove();
 		return "redirect:/time/expense";
+	}
+
+	@RequestMapping(value = "/time/timesheet/dailyexpense/{timesheetId}/report/{format}", method = RequestMethod.GET)
+	public String TimeController.reportDailyExpense(
+			@PathVariable("timesheetId") Long timesheetId,
+			@PathVariable("format") String format, ModelMap modelMap,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		if (timesheetId == null)
+			throw new IllegalArgumentException("An Identifier is required");
+		authorizeAccessTimesheet(timesheetId, request, response);
+
+		Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
+		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(
+				timesheet.getDailyExpensesSortedList(), false);
+		modelMap.put("timesheetExpenseReportList", jrDataSource);
+		modelMap.put("format", format);
+		return "timesheetExpenseReportList";
 	}
 
 }
