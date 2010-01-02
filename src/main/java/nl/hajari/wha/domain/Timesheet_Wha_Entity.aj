@@ -39,5 +39,13 @@ privileged aspect Timesheet_Wha_Entity {
         query.setMaxResults(maxResults);
         return query.getResultList();
     } 
+
+    public static List<Timesheet> Timesheet.findTimesheetEntriesByEmployeeIdAndCurrentYear(Long employeeId) {    
+    	Integer currentYear = DateUtils.getCurrentYear();
+    	Query query = entityManager().createQuery("select o from Timesheet o where o.employee.id= :employeeId and o.sheetYear= :currentYear");
+    	query.setParameter("employeeId", employeeId);
+    	query.setParameter("currentYear", currentYear);
+    	return query.getResultList();
+    } 
     
 }
