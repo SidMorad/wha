@@ -1,8 +1,10 @@
 package nl.hajari.wha.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import nl.hajari.wha.domain.DailyTravel;
 import nl.hajari.wha.domain.Timesheet;
 
@@ -63,5 +65,21 @@ privileged aspect TimeController_DailyTravelController {
         DailyTravel.findDailyTravel(id).remove();        
         return "redirect:/time/travel";
     }    
-	
+
+	@RequestMapping(value = "/time/timesheet/dailytravel/{timesheetId}/report/{format}", method = RequestMethod.GET)
+	public String TimeController.reportDailyTravel(
+			@PathVariable("timesheetId") Long timesheetId,
+			@PathVariable("format") String format, ModelMap modelMap,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		if (timesheetId == null)
+			throw new IllegalArgumentException("An Identifier is required");
+		authorizeAccessTimesheet(timesheetId, request, response);
+		Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
+		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(
+				timesheet.getDailyTravelsSortedList(), false);
+		modelMap.put("timesheetTravelReportList", jrDataSource);
+		modelMap.put("format", format);
+		return "timesheetTravelReportList";
+	}
 }

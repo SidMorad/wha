@@ -2,6 +2,7 @@ package nl.hajari.wha.web.controller;
 
 import javax.validation.Valid;
 
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import nl.hajari.wha.domain.DailyTravel;
 import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.Timesheet;
@@ -74,5 +75,14 @@ privileged aspect AdminTimesheetController_DailyTravelController {
         Long timesheetId = dailyTravel.getTimesheet().getId();
         dailyTravel.remove();        
         return "redirect:/admin/timesheet/travel/" + timesheetId;        
-    }    
+    }
+    
+    @RequestMapping(value = "/admin/timesheet/dailytravel/{timesheetId}/report/{format}" , method = RequestMethod.GET)
+    public String AdminTimesheetController.reportDailyTravel(@PathVariable("timesheetId")Long timesheetId, @PathVariable("format") String format, ModelMap modelMap) {
+    	Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
+    	JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(timesheet.getDailyTravelsSortedList(),false);
+    	modelMap.put("timesheetTravelReportList", jrDataSource);
+    	modelMap.put("format", format);
+    	return "timesheetTravelReportList";
+    }
 }
