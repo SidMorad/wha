@@ -2,6 +2,7 @@ package nl.hajari.wha.web.controller;
 
 import javax.validation.Valid;
 
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import nl.hajari.wha.domain.Customer;
 import nl.hajari.wha.domain.DailyExpense;
 import nl.hajari.wha.domain.Employee;
@@ -81,4 +82,13 @@ privileged aspect AdminTimesheetController_DailyExpenseController {
         return "redirect:/admin/timesheet/expense/" + timesheetId;        
     }    
 
+    @RequestMapping(value = "/admin/timesheet/dailyexpense/{timesheetId}/report/{format}" , method = RequestMethod.GET)
+    public String AdminTimesheetController.reportDailyExpense(@PathVariable("timesheetId")Long timesheetId, @PathVariable("format") String format, ModelMap modelMap) {
+    	Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
+    	JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(timesheet.getDailyExpensesSortedList(),false);
+    	modelMap.put("timesheetExpenseReportList", jrDataSource);
+    	modelMap.put("format", format);
+    	return "timesheetExpenseReportList";
+    }
+    
 }
