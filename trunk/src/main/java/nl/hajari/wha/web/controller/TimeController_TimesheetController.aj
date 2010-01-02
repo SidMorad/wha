@@ -15,19 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 privileged aspect TimeController_TimesheetController {
 
 	@RequestMapping(value = "/time/timesheet", method = RequestMethod.GET)
-	public String TimeController.listTimesheet(@RequestParam(value = "ent", required = true) String ent,@RequestParam(value = "page", required = false) Integer page,
-			@RequestParam(value = "size", required = false) Integer size,ModelMap modelMap, HttpServletRequest request) {
+	public String TimeController.listTimesheet(@RequestParam(value = "ent", required = true) String ent, ModelMap modelMap, HttpServletRequest request) {
 		Long employeeId = (Long) request.getSession().getAttribute(Employee.EMPLOYEE_ID);
-		if (page != null || size != null) {
-			int sizeNo = size == null ? 10 : size.intValue();
-			modelMap.addAttribute("timesheets", Timesheet.findTimesheetEntriesByEmployeeId(employeeId, page == null ? 0
-					: (page.intValue() - 1) * sizeNo, sizeNo));
-			float nrOfPages = (float) Timesheet.countTimesheets() / sizeNo;
-			modelMap.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1
-					: nrOfPages));
-		} else {
-			modelMap.addAttribute("timesheets", Timesheet.findAllTimesheetsByEmployeeId(employeeId));
+		if (employeeId == null) {
+			throw new IllegalArgumentException("Employee Id is required.");
 		}
+			
+		modelMap.addAttribute("timesheets", Timesheet.findTimesheetEntriesByEmployeeIdAndCurrentYear(employeeId));
 		modelMap.put("employee", Employee.findEmployee(employeeId));
 		return "time/timesheet/" + ent + "/list";
 	}
