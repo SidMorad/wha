@@ -2,7 +2,7 @@
 
 = Introduction =
 
-Currently we are using STS (SpringSource Tool Suits) version 2.3.0 and this wiki is about how to use Mylyn with Google Code.
+Currently we are using STS (SpringSource Tool Suites) [http://www.springsource.com/products/sts version 2.3.0] and this wiki is about how to use Mylyn with Google Code.
 
 
 = Details =
@@ -11,29 +11,19 @@ These steps need to be done for get things working :
 
 ==Install Mylyn Connector: Web Templates (Advanced)==
 
-#1 Help -> Install New Software
-
-#2 Click Add button and past this URL :
-
-http://download.eclipse.org/tools/mylyn/update/incubator
-
-#3 Check Mylyn Incubator -> Mylyn Connector: Web Templates (Advanced)
+  # Help -> Install New Software
+  # Click Add button and past this URL: [http://download.eclipse.org/tools/mylyn/update/incubator]
+  # Check Mylyn Incubator -> Mylyn Connector: Web Templates (Advanced)
 
 ==Add Task Repositoriy==
 
-#1 Window -> Show View -> Task Repositories
-
-#2 Right click on view -> Add Task Repository -> Select 'Web Template(Advanced)'
-
-#3 Select 'Eclipse Outliner(Google Code)' from Server combobox 
-
-#4 Change Server url to http://code.google.com/p/wha/issues
-
-#5 Enter Label, User ID and Password then click finish button.
+  # Window -> Show View -> Task Repositories 
+  # Right click on view -> Add Task Repository -> Select 'Web Template(Advanced)'
+  # Select 'Eclipse Outliner(Google Code)' from Server combobox 
+  # Change Server URL to [http://code.google.com/p/wha/issues]
+  # Enter Label, User ID and Password then click finish button.
 
 ==Add Query==
 
-#1 Window -> Show View -> Task List 
-
-#2 Right click on view -> Add Query -> Select Your Task Repository
-
+  # Window -> Show View -> Task List 
+  # Right click on view -> Add Query -> Select Your Task Repository
