@@ -140,4 +140,20 @@ privileged aspect TimeController_DailyTimesheetController {
 		return "timesheetDailyReportList";
 	}
 
+	@RequestMapping(value = "/time/timesheet/dailytimesheet/{timesheetId}/reportperproject/{format}", method = RequestMethod.GET)
+	public String TimeController.reportPerProjectDailyTimesheet(
+			@PathVariable("timesheetId") Long timesheetId,
+			@PathVariable("format") String format, ModelMap modelMap,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		if (timesheetId == null)
+			throw new IllegalArgumentException("An Identifier is required");
+		authorizeAccessTimesheet(timesheetId, request, response);
+		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(
+				dailyTimesheetService.getDailyTimesheetListForReportPerProject(timesheetId), false);
+		modelMap.put("timesheetDailyPerProjectReportList", jrDataSource);
+		modelMap.put("format", format);
+		return "timesheetDailyPerProjectReportList";
+	}
+
 }
