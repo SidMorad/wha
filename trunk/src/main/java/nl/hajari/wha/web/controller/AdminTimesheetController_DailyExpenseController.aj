@@ -1,8 +1,12 @@
 package nl.hajari.wha.web.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import nl.hajari.wha.Constants;
 import nl.hajari.wha.domain.Customer;
 import nl.hajari.wha.domain.DailyExpense;
 import nl.hajari.wha.domain.Employee;
@@ -82,13 +86,24 @@ privileged aspect AdminTimesheetController_DailyExpenseController {
         return "redirect:/admin/timesheet/expense/" + timesheetId;        
     }    
 
-    @RequestMapping(value = "/admin/timesheet/dailyexpense/{timesheetId}/report/{format}" , method = RequestMethod.GET)
-    public String AdminTimesheetController.reportDailyExpense(@PathVariable("timesheetId")Long timesheetId, @PathVariable("format") String format, ModelMap modelMap) {
-    	Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
-    	JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(timesheet.getDailyExpensesSortedList(),false);
+    @RequestMapping(value = "/admin/timesheet/dailyexpense/{timesheetId}/reportforhajari/{format}" , method = RequestMethod.GET)
+    public String AdminTimesheetController.reportDailyExpenseForHajari(@PathVariable("timesheetId")Long timesheetId, @PathVariable("format") String format, ModelMap modelMap, HttpServletRequest request) {
+		List<DailyExpense> dailyExpensesList = dailyExpenseService.getDailyExpensesForHajari(timesheetId);
+    	JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(dailyExpensesList,false);
     	modelMap.put("timesheetExpenseReportList", jrDataSource);
     	modelMap.put("format", format);
+    	modelMap.put(Constants.IMAGE_HM_LOGO, getFileFullPath(request, Constants.imageHMlogoAddress));
     	return "timesheetExpenseReportList";
+    }
+    
+    @RequestMapping(value = "/admin/timesheet/dailyexpense/{timesheetId}/reportforothers/{format}" , method = RequestMethod.GET)
+    public String AdminTimesheetController.reportDailyExpenseForOthers(@PathVariable("timesheetId")Long timesheetId, @PathVariable("format") String format, ModelMap modelMap, HttpServletRequest request) {
+    	List<DailyExpense> dailyExpensesList = dailyExpenseService.getDailyExpensesForOthers(timesheetId);
+    	JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(dailyExpensesList,false);
+    	modelMap.put("timesheetExpenseForNotHajariReportList", jrDataSource);
+    	modelMap.put("format", format);
+    	modelMap.put(Constants.IMAGE_HM_LOGO, getFileFullPath(request, Constants.imageHMlogoAddress));
+    	return "timesheetExpenseForNotHajariReportList";
     }
     
 }

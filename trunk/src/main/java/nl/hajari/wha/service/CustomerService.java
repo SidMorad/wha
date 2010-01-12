@@ -9,12 +9,14 @@ import nl.hajari.wha.domain.Customer;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Service;
 
 /**
  * 
  * 
  * @author Behrooz Nobakht [behrooz dot nobakht at gmail dot nl]
  */
+@Service
 public class CustomerService {
 
 	protected final Log logger = LogFactory.getLog(getClass());

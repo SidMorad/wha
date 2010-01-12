@@ -61,7 +61,10 @@
 	                        </td>
 	                        <td>${dailytravel.origin}</td>
 	                        <td>${dailytravel.destination}</td>
-	                        <td>${dailytravel.withReturn}</td>
+	                        <td>
+	                        	<c:if test="${dailytravel.withReturn == true}">Yes</c:if>
+	                        	<c:if test="${dailytravel.withReturn == false}">No</c:if>	                        
+	                        </td>
 	                        <td>${dailytravel.comment}</td>
 	                        <td>${dailytravel.distance}</td>
 			           		<td>

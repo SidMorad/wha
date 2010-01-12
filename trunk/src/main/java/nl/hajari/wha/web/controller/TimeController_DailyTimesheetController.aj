@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import nl.hajari.wha.Constants;
 import nl.hajari.wha.domain.DailyTimesheet;
 import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.Project;
@@ -137,6 +138,7 @@ privileged aspect TimeController_DailyTimesheetController {
 				timesheet.getDailyTimesheetsSortedList(), false);
 		modelMap.put("timesheetDailyReportList", jrDataSource);
 		modelMap.put("format", format);
+		modelMap.put(Constants.IMAGE_HM_LOGO, getFileFullPath(request, Constants.imageHMlogoAddress));
 		return "timesheetDailyReportList";
 	}
 
@@ -151,9 +153,10 @@ privileged aspect TimeController_DailyTimesheetController {
 		authorizeAccessTimesheet(timesheetId, request, response);
 		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(
 				dailyTimesheetService.getDailyTimesheetListForReportPerProject(timesheetId), false);
+		
 		modelMap.put("timesheetDailyPerProjectReportList", jrDataSource);
 		modelMap.put("format", format);
+		modelMap.put(Constants.IMAGE_HM_LOGO, getFileFullPath(request, Constants.imageHMlogoAddress));
 		return "timesheetDailyPerProjectReportList";
 	}
-
 }

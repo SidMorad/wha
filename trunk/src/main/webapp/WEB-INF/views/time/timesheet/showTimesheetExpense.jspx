@@ -34,9 +34,9 @@
 
     <c:if test="${not empty timesheet}">
 	    <div id="_title_travel_div">
-	        <spring:message code="label.dailytravel" var="entity_travel_label"/>
-	        <spring:message code="label.dailytravels" var="entity_travel_label_plural"/>
-	        <spring:message arguments="${entity_travel_label_plural}" code="entity.list.all" var="title_msg"/>
+	        <spring:message code="label.dailyexpense" var="entity_dailyexpense_label"/>
+	        <spring:message code="label.dailyexpenses" var="entity_dailyexpense_label_plural"/>
+	        <spring:message arguments="${entity_dailyexpense_label_plural}" code="entity.list.all" var="title_msg"/>
 	        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_travel_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
 	        <c:if test="${not empty timesheet.dailyExpensesSortedList}">
 	            <table width="600px">
@@ -66,10 +66,10 @@
 		            		<td></td>
 		            		<td><b>${totalAmount}</b></td>
 		            </tr>
-		            <tr>
+		            <tr class="footer">
 		            	<td colspan="5">
 							<span style="float: right;padding-left: 5px;">
-			              		<spring:url value="/time/timesheet/dailyexpense/${timesheet.id}/report/pdf" var="report_pdf_url"/>
+			              		<spring:url value="/time/timesheet/dailyexpense/${timesheet.id}/reportforhajari/pdf" var="report_pdf_url"/>
 		              			<spring:url value="/static/images/pdf.png" var="report_pdf_img_url"/>
 					            <form:form action="${report_pdf_url}" method="GET">
 	                                <spring:message arguments="${entity_expense_label}" code="report.pdf" var="report_pdf_message"/>
@@ -77,7 +77,7 @@
 					            </form:form>	
 			              	</span>
 	                        <span style="float: right;padding-left: 5px;">
-			              		<spring:url value="/time/timesheet/dailyexpense/${timesheet.id}/report/xls" var="report_xls_url"/>
+			              		<spring:url value="/time/timesheet/dailyexpense/${timesheet.id}/reportforhajari/xls" var="report_xls_url"/>
 		              			<spring:url value="/static/images/xls.png" var="report_xls_img_url"/>
 					            <form:form action="${report_xls_url}" method="GET">
 	                                <spring:message arguments="${entity_expense_label}" code="report.xls" var="report_xls_message"/>
@@ -85,7 +85,7 @@
 					            </form:form>	
 			              	</span>
 	                        <span style="float: right;padding-left: 5px;">
-			              		<spring:url value="/time/timesheet/dailyexpense/${timesheet.id}/report/html" var="report_html_url"/>
+			              		<spring:url value="/time/timesheet/dailyexpense/${timesheet.id}/reportforhajari/html" var="report_html_url"/>
 		              			<spring:url value="/static/images/html.png" var="report_html_img_url"/>
 					            <form:form action="${report_html_url}" method="GET">
 	                                <spring:message arguments="${entity_expense_label}" code="report.html" var="report_html_message"/>
@@ -93,13 +93,57 @@
 					            </form:form>	
 			              	</span>
 	                        <span style="float: right;padding-left: 5px;">
-			              		<spring:url value="/time/timesheet/dailyexpense/${timesheet.id}/report/csv" var="report_csv_url"/>
+			              		<spring:url value="/time/timesheet/dailyexpense/${timesheet.id}/reportforhajari/csv" var="report_csv_url"/>
 		              			<spring:url value="/static/images/csv.png" var="report_csv_img_url"/>
 					            <form:form action="${report_csv_url}" method="GET">
 	                                <spring:message arguments="${entity_expense_label}" code="report.csv" var="report_csv_message"/>
 					                <input alt="${report_csv_message}" class="image" src="${report_csv_img_url}" title="${report_csv_message}" type="image" value="${report_csv_message}"/>
 					            </form:form>	
-			              	</span>	    		            	
+			              	</span>
+			              	<span style="float: right;padding-left: 5px;">
+	                        	<spring:message var="reportDailyTimesheetForHajari" code="report.timesheet.expense.forhajari"/>
+	                        	<c:out value="${reportDailyTimesheetForHajari}: "/>
+							</span>	
+		            	</td>
+		            </tr>
+		            <tr class="footer">
+		            	<td colspan="5">
+							<span style="float: right;padding-left: 5px;">
+			              		<spring:url value="/time/timesheet/dailyexpense/${timesheet.id}/reportforothers/pdf" var="report_pdf_url"/>
+		              			<spring:url value="/static/images/pdf.png" var="report_pdf_img_url"/>
+					            <form:form action="${report_pdf_url}" method="GET">
+	                                <spring:message arguments="${entity_expense_label}" code="report.pdf" var="report_pdf_message"/>
+					                <input alt="${report_pdf_message}" class="image" src="${report_pdf_img_url}" title="${report_pdf_message}" type="image" value="${report_pdf_message}"/>
+					            </form:form>	
+			              	</span>
+	                        <span style="float: right;padding-left: 5px;">
+			              		<spring:url value="/time/timesheet/dailyexpense/${timesheet.id}/reportforothers/xls" var="report_xls_url"/>
+		              			<spring:url value="/static/images/xls.png" var="report_xls_img_url"/>
+					            <form:form action="${report_xls_url}" method="GET">
+	                                <spring:message arguments="${entity_expense_label}" code="report.xls" var="report_xls_message"/>
+					                <input alt="${report_xls_message}" class="image" src="${report_xls_img_url}" title="${report_xls_message}" type="image" value="${report_xls_message}"/>
+					            </form:form>	
+			              	</span>
+	                        <span style="float: right;padding-left: 5px;">
+			              		<spring:url value="/time/timesheet/dailyexpense/${timesheet.id}/reportforothers/html" var="report_html_url"/>
+		              			<spring:url value="/static/images/html.png" var="report_html_img_url"/>
+					            <form:form action="${report_html_url}" method="GET">
+	                                <spring:message arguments="${entity_expense_label}" code="report.html" var="report_html_message"/>
+					                <input alt="${report_html_message}" class="image" src="${report_html_img_url}" title="${report_html_message}" type="image" value="${report_html_message}"/>
+					            </form:form>	
+			              	</span>
+	                        <span style="float: right;padding-left: 5px;">
+			              		<spring:url value="/time/timesheet/dailyexpense/${timesheet.id}/reportforothers/csv" var="report_csv_url"/>
+		              			<spring:url value="/static/images/csv.png" var="report_csv_img_url"/>
+					            <form:form action="${report_csv_url}" method="GET">
+	                                <spring:message arguments="${entity_expense_label}" code="report.csv" var="report_csv_message"/>
+					                <input alt="${report_csv_message}" class="image" src="${report_csv_img_url}" title="${report_csv_message}" type="image" value="${report_csv_message}"/>
+					            </form:form>	
+			              	</span>
+			              	<span style="float: right;padding-left: 5px;">
+	                        	<spring:message var="reportDailyTimesheetForOthers" code="report.timesheet.expense.forothers"/>
+	                        	<c:out value="${reportDailyTimesheetForOthers}: "/>
+							</span>	
 		            	</td>
 		            </tr>
 		        </table>

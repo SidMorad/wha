@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dailyTimesheetList" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" 
+			  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			  xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" 
+			  name="dailyTravelList" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" 
+			  rightMargin="20" topMargin="20" bottomMargin="20" resourceBundle="reportlabels">
+	<parameter name="IMAGE_HM_LOGO" class="java.lang.String"/>
 	<field name="dayDate" class="java.util.Date"/>
 	<field name="origin" class="java.lang.String"/>
 	<field name="destination" class="java.lang.String"/>
@@ -8,70 +13,91 @@
 	<field name="withReturn" class="java.lang.Boolean"/>
 	<field name="timesheet.employee.firstName" class="java.lang.String"/>
 	<field name="timesheet.employee.lastName" class="java.lang.String"/>
-	<field name="timesheet.employee.empId" class="java.lang.String"/>	
-	<variable name="totalDistance" class="java.lang.Float" resetType="Column" calculation="Sum">
-		<variableExpression><![CDATA[$F{distance}]]></variableExpression>
+	<field name="timesheet.employee.empId" class="java.lang.String"/>
+	<field name="timesheet.description" class="java.lang.String"/>
+	<variable name="distance_1" class="java.lang.Float" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{withReturn}.equals(true)? $F{distance}*2 : $F{distance}]]></variableExpression>
 	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="74" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="100" height="70"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{IMAGE_HM_LOGO}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="235" y="23" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.travel.list}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="235" y="43" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{timesheet.description}]]></textFieldExpression>
+			</textField>
+		</band>
 	</title>
 	<pageHeader>
 		<band height="35" splitType="Stretch">
-			<textField pattern="MM/dd/yyyy">
-				<reportElement x="0" y="0" width="100" height="20"/>
+			<line>
+				<reportElement x="0" y="30" width="572" height="1"/>
+			</line>
+			<textField>
+				<reportElement x="0" y="4" width="51" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.employee} + ":"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="450" y="0" width="200" height="20"/>
+				<reportElement x="58" y="4" width="120" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{timesheet.employee.firstName} + " " + $F{timesheet.employee.lastName} + " [" + $F{timesheet.employee.empId} + "]"]]></textFieldExpression>
 			</textField>
-			<line>
-				<reportElement x="0" y="25" width="572" height="1"/>
-			</line>
+			<textField>
+				<reportElement x="451" y="4" width="46" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.billing.id} + ":"]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="31" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="0" width="100" height="20"/>
+			<textField>
+				<reportElement x="0" y="0" width="70" height="20"/>
 				<textElement/>
-				<text><![CDATA[Date]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="70" y="0" width="100" height="20"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="0" width="40" height="20"/>
 				<textElement/>
-				<text><![CDATA[Day]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="110" y="0" width="100" height="20"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.day}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="0" width="50" height="20"/>
 				<textElement/>
-				<text><![CDATA[Origin]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="170" y="0" width="169" height="20"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.origin}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="0" width="91" height="20"/>
 				<textElement/>
-				<text><![CDATA[Distination]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="280" y="0" width="229" height="20"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.destination}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="0" width="87" height="20"/>
 				<textElement/>
-				<text><![CDATA[Comment]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="400" y="0" width="100" height="20"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.comment}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="85" height="20"/>
 				<textElement/>
-				<text><![CDATA[Return?]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="500" y="0" width="100" height="20"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.return}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="500" y="0" width="72" height="20"/>
 				<textElement/>
-				<text><![CDATA[Distance]]></text>
-			</staticText>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.distance}]]></textFieldExpression>
+			</textField>
 			<line>
 				<reportElement x="0" y="25" width="572" height="1"/>
 			</line>
@@ -79,18 +105,18 @@
 	</columnHeader>
 	<detail>
 		<band height="26" splitType="Stretch">
-			<textField pattern="MM/dd/yyyy">
-				<reportElement x="0" y="0" width="100" height="20"/>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="0" width="70" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{dayDate}]]></textFieldExpression>
 			</textField>
 			<textField pattern="EEE">
-				<reportElement x="70" y="0" width="100" height="20"/>
+				<reportElement x="70" y="0" width="40" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{dayDate}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="110" y="0" width="100" height="20"/>
+				<reportElement x="110" y="0" width="68" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{origin}]]></textFieldExpression>
 			</textField>
@@ -105,24 +131,44 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{comment}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="400" y="0" width="100" height="20"/>
+				<reportElement x="400" y="0" width="97" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.Boolean"><![CDATA[$F{withReturn}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{withReturn}.equals(true)  ? "Yes" : "No"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="500" y="0" width="100" height="20"/>
+				<reportElement x="500" y="0" width="49" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.Float"><![CDATA[$F{distance}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="549" y="0" width="23" height="20"/>
+				<textElement/>
+				<text><![CDATA[KM]]></text>
+			</staticText>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="28" splitType="Stretch">
+		</band>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="37" splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="500" y="8" width="75" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$V{distance_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="549" y="8" width="23" height="20"/>
+				<textElement/>
+				<text><![CDATA[KM]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="8" width="572" height="1"/>
+			</line>
+		</band>	
 	</summary>
 </jasperReport>

@@ -102,7 +102,10 @@
             		<td><fmt:formatDate pattern="d/MM/yy" type="DATE" value="${dt.dayDate}"/></td>
             		<td>${fn:substring(dt.origin, 0, 14)}</td>
             		<td>${fn:substring(dt.destination, 0, 14)}</td>
-            		<td>${dt.withReturn}</td>
+            		<td>
+                       	<c:if test="${dt.withReturn == true}">Yes</c:if>
+                       	<c:if test="${dt.withReturn == false}">No</c:if>
+					</td>
             		<td>${dt.distance}</td>
             		<td>${fn:substring(dt.comment, 0, 10)}</td>
                     <td>

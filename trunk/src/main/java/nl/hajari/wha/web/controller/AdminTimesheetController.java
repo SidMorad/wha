@@ -1,7 +1,10 @@
 package nl.hajari.wha.web.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import nl.hajari.wha.domain.Customer;
 import nl.hajari.wha.domain.Timesheet;
+import nl.hajari.wha.service.DailyExpenseService;
 import nl.hajari.wha.service.DailyTimesheetService;
 import nl.hajari.wha.service.ProjectService;
 import nl.hajari.wha.web.controller.formbean.TimesheetDailyReportFormBean;
@@ -28,6 +31,9 @@ public class AdminTimesheetController {
 	
 	@Autowired
 	protected ProjectService projectService;
+	
+	@Autowired
+	protected DailyExpenseService dailyExpenseService;
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -71,4 +77,10 @@ public class AdminTimesheetController {
     	modelMap.addAttribute("timesheet", Timesheet.findTimesheet(id));        
     	return "admin/timesheet/expense/show";        
     }   
+    
+	public String getFileFullPath(HttpServletRequest request, String filePath){
+		String appServerHome = request.getSession().getServletContext().getRealPath("/");
+		return appServerHome + filePath;
+	}	
+
 }
