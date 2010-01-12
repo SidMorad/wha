@@ -1,8 +1,10 @@
 package nl.hajari.wha.web.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import nl.hajari.wha.Constants;
 import nl.hajari.wha.domain.DailyTravel;
 import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.Timesheet;
@@ -78,11 +80,12 @@ privileged aspect AdminTimesheetController_DailyTravelController {
     }
     
     @RequestMapping(value = "/admin/timesheet/dailytravel/{timesheetId}/report/{format}" , method = RequestMethod.GET)
-    public String AdminTimesheetController.reportDailyTravel(@PathVariable("timesheetId")Long timesheetId, @PathVariable("format") String format, ModelMap modelMap) {
+    public String AdminTimesheetController.reportDailyTravel(@PathVariable("timesheetId")Long timesheetId, @PathVariable("format") String format, ModelMap modelMap, HttpServletRequest request) {
     	Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
     	JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(timesheet.getDailyTravelsSortedList(),false);
     	modelMap.put("timesheetTravelReportList", jrDataSource);
     	modelMap.put("format", format);
+    	modelMap.put(Constants.IMAGE_HM_LOGO, getFileFullPath(request, Constants.imageHMlogoAddress));
     	return "timesheetTravelReportList";
     }
 }

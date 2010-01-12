@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import nl.hajari.wha.Constants;
 import nl.hajari.wha.domain.DailyTravel;
 import nl.hajari.wha.domain.Timesheet;
 
@@ -78,8 +79,10 @@ privileged aspect TimeController_DailyTravelController {
 		Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
 		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(
 				timesheet.getDailyTravelsSortedList(), false);
+
 		modelMap.put("timesheetTravelReportList", jrDataSource);
 		modelMap.put("format", format);
+		modelMap.put(Constants.IMAGE_HM_LOGO, getFileFullPath(request, Constants.imageHMlogoAddress));
 		return "timesheetTravelReportList";
 	}
 }

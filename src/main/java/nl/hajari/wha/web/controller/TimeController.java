@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import nl.hajari.wha.domain.Timesheet;
 import nl.hajari.wha.domain.User;
 import nl.hajari.wha.service.CustomerService;
+import nl.hajari.wha.service.DailyExpenseService;
 import nl.hajari.wha.service.DailyTimesheetService;
 import nl.hajari.wha.service.ProjectService;
 import nl.hajari.wha.web.util.SecurityContextUtils;
@@ -35,7 +36,10 @@ public class TimeController {
 
 	@Autowired
 	protected CustomerService customerService;
-
+	
+	@Autowired
+	protected DailyExpenseService dailyExpenseService; 
+	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(java.util.Date.class,
@@ -60,5 +64,10 @@ public class TimeController {
 		}
 		return true;
 	}
-
+	
+	public String getFileFullPath(HttpServletRequest request, String filePath){
+		String appServerHome = request.getSession().getServletContext().getRealPath("/");
+		return appServerHome + filePath;
+	}
+	
 }

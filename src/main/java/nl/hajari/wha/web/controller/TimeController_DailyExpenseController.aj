@@ -1,10 +1,13 @@
 package nl.hajari.wha.web.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import nl.hajari.wha.Constants;
 import nl.hajari.wha.domain.Customer;
 import nl.hajari.wha.domain.DailyExpense;
 import nl.hajari.wha.domain.Timesheet;
@@ -82,8 +85,8 @@ privileged aspect TimeController_DailyExpenseController {
 		return "redirect:/time/expense";
 	}
 
-	@RequestMapping(value = "/time/timesheet/dailyexpense/{timesheetId}/report/{format}", method = RequestMethod.GET)
-	public String TimeController.reportDailyExpense(
+	@RequestMapping(value = "/time/timesheet/dailyexpense/{timesheetId}/reportforhajari/{format}", method = RequestMethod.GET)
+	public String TimeController.reportDailyExpenseForHajari(
 			@PathVariable("timesheetId") Long timesheetId,
 			@PathVariable("format") String format, ModelMap modelMap,
 			HttpServletRequest request, HttpServletResponse response)
@@ -92,12 +95,32 @@ privileged aspect TimeController_DailyExpenseController {
 			throw new IllegalArgumentException("An Identifier is required");
 		authorizeAccessTimesheet(timesheetId, request, response);
 
-		Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
+		List<DailyExpense> dailyExpensesList = dailyExpenseService.getDailyExpensesForHajari(timesheetId); 
 		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(
-				timesheet.getDailyExpensesSortedList(), false);
+				dailyExpensesList, false);
 		modelMap.put("timesheetExpenseReportList", jrDataSource);
 		modelMap.put("format", format);
+		modelMap.put(Constants.IMAGE_HM_LOGO, getFileFullPath(request, Constants.imageHMlogoAddress));
 		return "timesheetExpenseReportList";
+	}
+
+	@RequestMapping(value = "/time/timesheet/dailyexpense/{timesheetId}/reportforothers/{format}", method = RequestMethod.GET)
+	public String TimeController.reportDailyExpenseForOthers(
+			@PathVariable("timesheetId") Long timesheetId,
+			@PathVariable("format") String format, ModelMap modelMap,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		if (timesheetId == null)
+			throw new IllegalArgumentException("An Identifier is required");
+		authorizeAccessTimesheet(timesheetId, request, response);
+		
+		List<DailyExpense> dailyExpensesList = dailyExpenseService.getDailyExpensesForOthers(timesheetId); 
+		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(
+				dailyExpensesList, false);
+		modelMap.put("timesheetExpenseForNotHajariReportList", jrDataSource);
+		modelMap.put("format", format);
+		modelMap.put(Constants.IMAGE_HM_LOGO, getFileFullPath(request, Constants.imageHMlogoAddress));
+		return "timesheetExpenseForNotHajariReportList";
 	}
 
 }

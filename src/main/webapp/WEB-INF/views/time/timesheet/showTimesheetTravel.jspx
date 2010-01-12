@@ -58,7 +58,10 @@
 	                        </td>
 	                        <td>${dailytravel.origin}</td>
 	                        <td>${dailytravel.destination}</td>
-	                        <td>${dailytravel.withReturn}</td>
+	                        <td>
+	                        	<c:if test="${dailytravel.withReturn == true}">Yes</c:if>
+	                        	<c:if test="${dailytravel.withReturn == false}">No</c:if>
+	                        </td>
 	                        <td>${dailytravel.comment}</td>
 	                        <td>${dailytravel.distance}</td>
 	                    </tr>
@@ -77,7 +80,7 @@
 	            		<td></td>
 	            		<td><b>${totalDistance}</b></td>
             		</tr>
-            		<tr>
+            		<tr class="footer">
             			<td colspan="6">
 							<span style="float: right;padding-left: 5px;">
 			              		<spring:url value="/time/timesheet/dailytravel/${timesheet.id}/report/pdf" var="report_pdf_url"/>
@@ -110,8 +113,8 @@
 	                                <spring:message arguments="${entity_travel_label}" code="report.csv" var="report_csv_message"/>
 					                <input alt="${report_csv_message}" class="image" src="${report_csv_img_url}" title="${report_csv_message}" type="image" value="${report_csv_message}"/>
 					            </form:form>	
-			              	</span>	              			
-            			</td>
+			              	</span>	
+						</td>
             		</tr>
 	            </table>
 	        </c:if>
