@@ -1,0 +1,12 @@
+#summary Simple instruction to report a bug
+#labels Phase-QA,Phase-Support,Phase-Deploy
+
+= Report Bugs =
+
+To report a bug:
+  # Go to [http://code.google.com/p/wha/issues/entry]
+  # Entry a title/summary for the bug
+  # Please write a simple short description, *especially* the most important data would be that *what scenario/steps* you took to create the bug so that it could be reproducible.
+  # Attach a file or screen shot if you think might be useful or necessary
+  # Please make the owner *behrooz.nobakht@gmail.com* so that we could fast get to know it or at least put the above email in the *CC*
+  # Change *priority* label if required.
