@@ -1,0 +1,179 @@
+/* A CSS Framework by Mike Stenhouse of Content with Style - customized by Saeid Moradi*/
+
+/* TYPOGRAPHY */
+
+body 
+	{
+	text-align: left;
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-size: 76%;
+	line-height: 1em;
+	}
+img
+	{
+	border: 0;
+	}
+a,a:link,a:active
+	{
+	color: #1465b7;
+	text-decoration: none;
+	}
+a:visited 
+	{
+	color: purple;
+	background-color: transparent;
+	}	
+a:hover
+	{
+	color: #cc0000;
+	text-decoration: none;
+	}
+h1,h2,h3,h4,h5,h6
+	{
+	font-family: tahoma, arial,helvetica, sans-serif;
+	font-weight: normal;
+	color: #b47000;
+	}	
+h1  {
+	font-size: 2.2em;
+	letter-spacing: -1px;
+	line-height: 1.3em;
+	margin: 0 0 0.5em 0;
+	padding: 0;
+	}
+h2  {
+	font-size: 1.6em;
+	line-height: 1.5em;
+	margin: 0 0 0.5em 0;
+  	padding: 0;
+	}
+h3	{
+    font-size: 1.3em;
+    line-height: 1.3em;
+    margin: 0 0 0.5em 0;
+    padding: 0;
+ 	}
+h4	{
+    font-size: 1.2em;
+    line-height: 1.3em;
+    margin: 0 0 0.25em 0;
+    padding: 0;
+	}
+h5 	{
+    font-size: 1.1em;
+    line-height: 1.3em;
+    margin: 0 0 0.25em 0;
+    padding: 0;
+	}
+h6 	{
+    font-size: 1em;
+    line-height: 1.3em;
+    margin: 0 0 0.25em 0;
+    padding: 0;
+	}
+p	{
+	font-size: 1em;
+	margin: 0 0 1.5em 0;
+	padding: 0;
+	line-height: 1.4em;
+	}
+blockquote 
+	{
+	border-left: 10px solid #ddd;
+	margin-left: 10px;
+	}
+pre {
+	font-family: monospace;
+	font-size: 12px;	
+	line-height: 1.4em;
+	}
+code{
+	font-family: "courier new", courier, monospace;
+	font-size: 12px;
+	white-space: pre;
+	}
+div.hr
+	{
+	height: 1px;
+	margin: 1.5em 10px;
+	border-bottom: 1px dotted black;
+	}
+    
+/* TABLE */
+table {
+    border-collapse: collapse;
+    border: 2px solid #74b3dc;
+    color: #000;
+    background: #fff;
+    width: 100%;
+	}
+table caption {
+    padding: 0 0.6em 0.8em;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: left;
+    color: #000;
+    background: transparent;
+    }
+table td, table th {
+    border: 1px solid silver;
+    padding: 1px;
+	}
+table th {
+	background-color: #d7e9f5;
+	}	
+table thead th {
+    border: 1px solid #e0e0e0;
+    text-align: left;
+    font-size: 12px;
+    font-weight: bold;
+    background: #d7e9f5;
+	}
+table tfoot th, tfoot td {
+    border: 1px solid #e0e0e0;
+    text-align: left;
+    font-size: 1em;
+    background: #e8e8cf;
+	}
+table tfoot th {
+    font-weight: bold;
+	}
+table tbody td a {
+    background: transparent;
+    text-decoration: underline;
+	}
+table tbody td a:hover {
+    background: transparent;
+    text-decoration: underline;
+	}
+table tbody th a {
+    background: transparent;
+    text-decoration: underline;
+    font-weight: bold;
+	}
+table tbody th, .table tbody td {
+    text-align: left;
+	}
+table tfoot td {
+    border: 1px solid #996;
+	}
+table tbody tr:hover, table tr.over {
+    background: #ffffd9 !important;
+	}
+table tr.footer td {
+	color: #666666;
+	background-color: #e9f1fb;
+	text-align: right;
+	}
+table tr td span.new {
+	float: left;
+	}
+table td form {
+	text-align: center;
+	vertical-align: middle;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	}			
+/* END TABLE */		
