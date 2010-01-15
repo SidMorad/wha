@@ -1,0 +1,29 @@
+/* A CSS Framework by Mike Stenhouse of Content with Style - customized by Saeid Moradi*/
+div#content 
+	{
+	position: relative;
+	width: 778px;
+	margin: 0 auto 20px auto;
+	padding: 0;
+	text-align: left;
+	}
+div#main 
+	{
+	width: 99% !important;
+	margin: 0;	
+	padding-left: 3px;
+	text-align: left;
+	}
+div#sub
+	{
+	display: none;
+	}
+div#nav 
+	{
+	position: absolute;
+	top: -11px;
+	left: 0px;
+	width: 100%;
+	text-align: left;
+	font-size: 100%;
+	}	
