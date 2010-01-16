@@ -12,7 +12,7 @@
         <form:form action="${action_url}" modelAttribute="dailyTravel" method="POST">
         <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
         <div style="border: none;">
-        	<table width="100%" border="0">
+        	<table style="width:98%" border="0">
 	        	<tr>
 		        	<td>
 			        	<span style="float: left; font-weight:bolder; font-size: larger;">${timesheet.description}</span>
@@ -22,7 +22,7 @@
         	</table>
         </div>
         <p></p>
-        <table width="600px">
+        <table style="width:98%">
             <thead>
             <tr>
                 <th width="100px">Date</th>
@@ -86,7 +86,7 @@
             <input id="proceed" type="submit" value="${save_button}"/>
         </div>
         </form:form>
-		<table width="600px">
+		<table style="width:98%">
             <thead>		
 	            <tr>
 					<th width="100px">Date</th>

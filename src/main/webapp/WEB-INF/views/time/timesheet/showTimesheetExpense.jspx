@@ -39,7 +39,7 @@
 	        <spring:message arguments="${entity_dailyexpense_label_plural}" code="entity.list.all" var="title_msg"/>
 	        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_travel_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
 	        <c:if test="${not empty timesheet.dailyExpensesSortedList}">
-	            <table width="600px">
+	            <table style="width:98%">
 		            <tr>
 		                <th width="80px">Date</th>
 		                <th width="100px">Customer</th>
