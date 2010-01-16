@@ -43,7 +43,7 @@
             </thead>
             <tr>
 				<td>
-					<form:input cssStyle="width:90px" id="_dayDate" maxlength="30" path="dayDate" size="0"/>
+					<form:input cssStyle="width:90%" id="_dayDate" maxlength="30" path="dayDate" size="0"/>
 	                <form:errors cssClass="errors-in-table" id="_dayDate_error" path="dayDate"/>
 	                <spring:message arguments="Day Date" code="field.invalid" var="field_invalid"/>
 	                <spring:message argumentSeparator="," arguments="Day Date,(${field_required})" code="field.simple.validation" var="field_validation"/>
@@ -58,7 +58,7 @@
 					-->
                     
 					<spring:url value="/project/list/all" var="allProjects" />
-					<form:input cssStyle="width:130px" id="_projectName" maxlength="30" path="projectName" size="0"/>
+					<form:input cssStyle="width:95%" id="_projectName" maxlength="30" path="projectName" size="0"/>
 	                <form:errors cssClass="errors-in-table" id="_projectName_error" path="projectName"/>
 	                <spring:message arguments="Project" code="field.invalid" var="field_invalid"/>
 					<script type="text/javascript">
@@ -92,21 +92,21 @@
                     -->
 				</td>
 				<td>
-	                <form:input cssStyle="width:32px" id="_duration" maxlength="30" path="duration" size="0"/>
+	                <form:input cssStyle="width:95%" id="_duration" maxlength="30" path="duration" size="0"/>
 	                <form:errors cssClass="errors-in-table" id="_duration_error" path="duration"/>
 	                <spring:message arguments="Duration" code="field.invalid" var="field_invalid"/>
 	                <spring:message argumentSeparator="," arguments="Duration,(${field_required})" code="field.simple.validation" var="field_validation"/>
 	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_duration', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: "-?[0-9 .]*", required : true}})); </script>
 				</td>     
 				<td>
-	                <form:input cssStyle="width:32px" id="_durationOffs" maxlength="30" path="durationOffs" size="0"/>
+	                <form:input cssStyle="width:95%" id="_durationOffs" maxlength="30" path="durationOffs" size="0"/>
 	                <form:errors cssClass="errors-in-table" id="_durationOffs_error" path="durationOffs"/>
 	                <spring:message arguments="Duration Offs" code="field.invalid" var="field_invalid"/>
 	                <spring:message argumentSeparator="," arguments="Duration Offs," code="field.simple.validation" var="field_validation"/>
 	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_durationOffs', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: "-?[0-9 .]*", required : true}})); </script>
 				</td>
 				<td>
-	                <form:input cssStyle="width:32px" id="_durationTraining" maxlength="30" path="durationTraining" size="0"/>
+	                <form:input cssStyle="width:95%" id="_durationTraining" maxlength="30" path="durationTraining" size="0"/>
 	                <form:errors cssClass="errors-in-table" id="_durationTraining_error" path="durationTraining"/>
 	                <spring:message arguments="Duration Training" code="field.invalid" var="field_invalid"/>
 	                <spring:message argumentSeparator="," arguments="Duration Training," code="field.simple.validation" var="field_validation"/>
@@ -124,19 +124,21 @@
 		    </div>        
         </form:form>
         <table>
-            <tr>
-                <th width="100px">Date</th>
-                <th width="148px">Project</th>
-                <th width="59px">Working</th>
-                <th width="45px">Off</th>
-                <th width="56px">Training</th>
-                <th width="45px">Total</th>
-                <th width="20px"></th>
-            </tr>
+            <thead>
+	            <tr>
+	                <th width="100px">Date</th>
+	                <th width="148px">Project</th>
+	                <th width="59px">Working</th>
+	                <th width="45px">Off</th>
+	                <th width="56px">Training</th>
+	                <th width="45px">Total</th>
+	                <th width="20px"></th>
+	            </tr>
+            </thead>
             <c:forEach items="${dailyTimesheets}" var="dt">
             	<tr>
             		<td><fmt:formatDate pattern="d/MM/yy" type="DATE" value="${dt.dayDate}"/></td>
-            		<td>${fn:substring(dt.project, 0, 20)}</td>
+            		<td>${dt.project}</td>
             		<td>${dt.duration}</td>
             		<td>${dt.durationOffs}</td>
             		<td>${dt.durationTraining}</td>

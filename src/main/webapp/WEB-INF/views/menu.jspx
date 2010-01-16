@@ -1,7 +1,10 @@
-<ul xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:security="http://www.springframework.org/security/tags" xmlns:spring="http://www.springframework.org/tags" id="roo_menu">
+<div class="wrapper">
+	<h2 class="accessibility">Navigation</h2>
+
+<ul id="primary-nav" class="menuList" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:security="http://www.springframework.org/security/tags" xmlns:spring="http://www.springframework.org/tags">
     <security:authorize ifAllGranted="ROLE_ADMIN">
-	<li id="web_mvc_jsp_adminstration_category">
-        <h2>Administration Panel</h2>
+	<li class="menubar">
+        <a class="menupanel" href="#">Administration Panel</a>
         <ul>
             <li id="web_mvc_jsp_create_adminstration_menu_item">
                 <c:url value="/admin/signup" var="web_mvc_jsp_create_admin_signup_menu_item_url"/>
@@ -70,8 +73,8 @@
     </li>
 	</security:authorize>
 	<security:authorize ifAllGranted="ROLE_EMPLOYEE">
-	<li id="web_mvc_jsp_employee_panel_category">
-        <h2>Employee Panel</h2>
+	<li class="menubar">
+        <a class="menupanel" href="#">Employee Panel</a>
         <ul>
             <li id="web_mvc_jsp_list_timesheet_daily_menu_item">
                 <c:url value="/time/timesheet?ent=daily" var="web_mvc_jsp_time_list_timesheet_daily_menu_item_url"/>
@@ -122,3 +125,5 @@
     </li>
 	</security:authorize>
 </ul>
+
+</div>

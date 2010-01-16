@@ -1,4 +1,4 @@
-<html
+<html 
  	xmlns:jsp="http://java.sun.com/JSP/Page"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:tiles="http://tiles.apache.org/tags-tiles"
@@ -43,55 +43,41 @@
 		<tiles:insertAttribute name="head" ignore="true"/>
 	</head>
    	<body class="tundra spring">		
-  		<div id="page">
-  			<div id="header" class="clearfix">
-  				<div id="branding">
-					<h1>WHA</h1>
-					<p>Welcome to Work Hour Registration!</p>
-  				</div>
-				<span style="float:right; margin-top:-56px;">
-					<c:url var="logo" value="/static/images/HM_100x70.jpg" />
+  		<div id="wrap">
+  			<div id="sitename">
+				<h1>WHA</h1>
+				<h2>Welcome to Work Hour Registration!</h2>
+  			</div>  
+		  	<div id="menu">
+		    	<tiles:insertAttribute name="menu" ignore="true" />
+		    </div>	    
+	    	<div id="main">
+	    		<tiles:insertAttribute name="body" />
+	    		<div class="footer">				
+				  	<c:url var="home" value="/" />
+				    <span><a href="${home}"><spring:message code="button.home"/></a></span>				    
+				    <c:if test="${pageContext.request.userPrincipal != null}">	
+				    	<c:out value="&#160;|&#160;"/>
+				    	<span>			    
+						    <c:url var="logout" value="/static/j_spring_security_logout" />
+						    <a href="${logout}"><spring:message code="security.logout" /></a>
+					    </span>					    
+					</c:if>			    
+				    <c:if test="${pageContext.request.userPrincipal == null}">	
+				    	<c:out value="&#160;|&#160;"/>
+				    	<span>			    
+						    <c:url var="login" value="/login" />
+						    <a href="${login}"><spring:message code="login.title" /></a>
+					    </span>					    
+					</c:if>			    
+				    
+				    <roo:language />
+				    <roo:themeOld />
+				    
+				    <c:url var="logo" value="/static/images/logo.png" />
 				    <spring:message code="global.sponsored" var="sponsored"/>
 				    <span><a href="http://hajari.nl" title="${sponsored}"><img src="${logo}" alt="${sponsored}" align="right"/></a></span>
-				</span>
-  			</div>  
-	    	<div id="content" class="clearfix">
-	    		<div id="main">
-	    			<tiles:insertAttribute name="body" />
-			  	</div>
-	    		
-	    		<div id="sub">
-	    			<tiles:insertAttribute name="sub" ignore="true"/>
-			  	</div>
-	    		<div id="local">
-	    			<tiles:insertAttribute name="local" ignore="true"/>
-			  	</div>
-			  	
-			  	<div id="nav">
-			    	<tiles:insertAttribute name="menu" ignore="true" />
-			    </div>	    
-			</div>
-    		<div id="footer" class="clearfix">				
-			  	<c:url var="home" value="/" />
-			    <span><a href="${home}"><spring:message code="button.home"/></a></span>				    
-			    <c:if test="${pageContext.request.userPrincipal != null}">	
-			    	<c:out value="&#160;|&#160;"/>
-			    	<span>			    
-					    <c:url var="logout" value="/static/j_spring_security_logout" />
-					    <a href="${logout}"><spring:message code="security.logout" /></a>
-				    </span>					    
-				</c:if>			    
-			    <c:if test="${pageContext.request.userPrincipal == null}">	
-			    	<c:out value="&#160;|&#160;"/>
-			    	<span>			    
-					    <c:url var="login" value="/login" />
-					    <a href="${login}"><spring:message code="login.title" /></a>
-				    </span>					    
-				</c:if>			    
-			    
-			    <roo:language />
-			    <roo:theme2 />
-			    
+				</div>
 			</div>
 		</div>		
 	</body>
