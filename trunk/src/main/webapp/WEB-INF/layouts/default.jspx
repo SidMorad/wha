@@ -1,4 +1,4 @@
-<html 
+<html
  	xmlns:jsp="http://java.sun.com/JSP/Page"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:tiles="http://tiles.apache.org/tags-tiles"
@@ -17,7 +17,7 @@
 		<spring:url value="/resources/dijit/themes/tundra/tundra.css" var="tundra_url"/>
 		<spring:url value="/resources/spring/Spring.js" var="spring_url"/>
 		<spring:url value="/resources/spring/Spring-Dojo.js" var="spring_dojo_url"/>		
-		<spring:url value="/static/images/favicon.ico" var="favicon" />
+		<spring:url value="/static/images/favicon.jpg" var="favicon" />
 		<link rel="stylesheet" type="text/css" media="screen" href="${roo_css_url}"><!-- //required for FF3 and Opera --></link>
 		<link rel="stylesheet" type="text/css" href="${tundra_url}"><!-- //required for FF3 and Opera --></link>		
 		<link rel="SHORTCUT ICON" href="${favicon}" />
@@ -43,17 +43,37 @@
 		<tiles:insertAttribute name="head" ignore="true"/>
 	</head>
    	<body class="tundra spring">		
-  		<div id="wrap">
-  			<div id="sitename">
-				<h1>WHA</h1>
-				<h2>Welcome to Work Hour Registration!</h2>
+  		<div id="page">
+  			<div id="header" class="clearfix">
+  				<div id="branding">
+					<h1>WHA</h1>
+					<p>Welcome to Work Hour Registration!</p>
+  				</div>
+				<span style="float:right; margin-top:-70px;">
+					<c:url var="logo" value="/static/images/HM_100x70.jpg" />
+				    <spring:message code="global.sponsored" var="sponsored"/>
+				    <span><a href="http://hajari.nl" title="${sponsored}"><img src="${logo}" alt="${sponsored}" align="right"/></a></span>
+				</span>
   			</div>  
-		  	<div id="menu">
-		    	<tiles:insertAttribute name="menu" ignore="true" />
-		    </div>	    
-	    	<div id="main">
-	    		<tiles:insertAttribute name="body" />
-	    		<div class="footer">				
+	    	<div id="content" class="clearfix">
+			  	<div id="nav">
+			    	<tiles:insertAttribute name="menu" ignore="true" />
+			    </div>	    
+	    		<div id="main">
+	    			<tiles:insertAttribute name="body" />
+			  	</div>
+	    		
+	    		<div id="sub">
+	    			<tiles:insertAttribute name="sub" ignore="true"/>
+			  	</div>
+	    		<div id="local">
+	    			<tiles:insertAttribute name="local" ignore="true"/>
+			  	</div>
+			  	
+			</div>
+    		<div id="footer" class="clearfix">
+   				<div id="divider"><div></div></div>
+    			<span class="left">
 				  	<c:url var="home" value="/" />
 				    <span><a href="${home}"><spring:message code="button.home"/></a></span>				    
 				    <c:if test="${pageContext.request.userPrincipal != null}">	
@@ -73,11 +93,13 @@
 				    
 				    <roo:language />
 				    <roo:theme />
-				    
-				    <c:url var="logo" value="/static/images/logo.png" />
+    			</span>				
+			    
+			    <span class="right">
+					<c:url var="logo" value="/static/images/hajari-sponsored.png" />
 				    <spring:message code="global.sponsored" var="sponsored"/>
 				    <span><a href="http://hajari.nl" title="${sponsored}"><img src="${logo}" alt="${sponsored}" align="right"/></a></span>
-				</div>
+				</span>
 			</div>
 		</div>		
 	</body>

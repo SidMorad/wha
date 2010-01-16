@@ -26,14 +26,16 @@
             <thead>
             <tr>
                 <th width="90px">Date</th>
-                <th width="148px">Customer</th>
-                <th width="148px">For</th>
-                <th colspan="3">Amount</th>
+                <th width="170px">Customer</th>
+                <th width="170px">For</th>
+                <th width="65px">Amount</th>
+                <th width="20px"></th>
+                <th width="20px"></th>
             </tr>
             </thead>
             <tr>
 				<td>
-	                <form:input cssStyle="width:90px" id="_dayDate_id" maxlength="30" path="dayDate" size="0"/>
+	                <form:input cssStyle="width:90%" id="_dayDate_id" maxlength="30" path="dayDate" size="0"/>
 	                <form:errors cssClass="errors" id="_dayDate_error_id" path="dayDate"/>
 	                <spring:message arguments="Day Date" code="field.invalid" var="field_invalid"/>
 	                <spring:message argumentSeparator="," arguments="Day Date,(${field_required})" code="field.simple.validation" var="field_validation"/>
@@ -42,34 +44,36 @@
 				<td>
                     <c:if test="${not empty customers}">
 		                <spring:message arguments="Customer" code="field.invalid" var="field_invalid"/>
-	                    <form:select cssStyle="width:130px" id="_customer_id" path="customer">
+	                    <form:select cssStyle="width:95%" id="_customer_id" path="customer">
 	                        <form:options itemValue="id" items="${customers}"/>
 	                    </form:select>
 	                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_customer_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true, value:${defaultCustomerId}}})); </script>
 	                </c:if>
 				</td>     
 				<td>
-					 <form:input cssStyle="width:130px" id="_expenseFor_id" maxlength="45" path="expenseFor" size="0"/>
+					 <form:input cssStyle="width:95%" id="_expenseFor_id" maxlength="45" path="expenseFor" size="0"/>
                     <form:errors cssClass="errors" id="_expenseFor_error_id" path="expenseFor"/>
                 	<spring:message arguments="Expense For" code="field.invalid" var="field_invalid"/>
                 	<spring:message code="field.required" var="field_required"/>
                 	<spring:message argumentSeparator="," arguments="Expense For,(${field_required})" code="field.simple.validation" var="field_validation"/>
                 	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_expenseFor_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
 				</td>
-				<td colspan="3">
-	                <form:input cssStyle="width:65px" id="_expenseAmount_id" maxlength="30" path="expenseAmount" size="0"/>
+				<td>
+	                <form:input cssStyle="width:95%" id="_expenseAmount_id" maxlength="30" path="expenseAmount" size="0"/>
 	                <form:errors cssClass="errors" id="_expenseAmount_error_id" path="expenseAmount"/>
 	                <spring:message code="field.invalid.decimal" var="field_invalid"/>
 	                <spring:message argumentSeparator="," arguments="Expense Amount,(${field_required})" code="field.simple.validation" var="field_validation"/>
 	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_expenseAmount_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]*\.[0-9]*', required : true}})); </script>
-				</td>     
+				</td>
+				<td></td>     
+				<td></td>     
             </tr>
             <tr>
             	<td>
                 	<label for="_comment_id"><b>Comment:</b></label>           		
             	</td>
             	<td colspan="6">
-					<form:textarea cssStyle="width:200px" id="_expenseComment_id" path="expenseComment"/>
+					<form:textarea cssStyle="width:95%" id="_expenseComment_id" path="expenseComment"/>
                 	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_expenseComment_id', widgetType: 'dijit.form.SimpleTextarea', widgetAttrs: {}})); </script>
                 	<form:errors cssClass="errors" id="_expenseComment_error_id" path="expenseComment"/>
             	</td>
@@ -82,14 +86,16 @@
         </div>
         </form:form>
 		<table width="600px">
-            <tr>
-                <th width="80px">Date</th>
-                <th width="120px">Customer</th>
-                <th width="120px">For</th>
-                <th width="55px">Amount</th>
-                <th width="100px">Comment</th>
-                <th width="20px"></th>      
-            </tr>
+			<thead>
+	            <tr>
+	                <th width="80px">Date</th>
+	                <th width="170px">Customer</th>
+	                <th width="170px">For</th>
+	                <th width="65px">Amount</th>
+	                <th width="100px">Comment</th>
+	                <th width="20px"></th>      
+	            </tr>
+			</thead>
             <c:set var="totalAmount" value="0"/>
             <c:forEach items="${dailyExpenses}" var="de">
             	<tr>

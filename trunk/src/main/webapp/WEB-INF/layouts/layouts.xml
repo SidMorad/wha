@@ -9,8 +9,8 @@
 		<put-attribute name="menu" value="/WEB-INF/views/menu.jspx" />
 	</definition>
 
-	<definition name="default2" template="/WEB-INF/layouts/default2.jspx">
-		<put-attribute name="menu" value="/WEB-INF/views/menu2.jspx" />
+	<definition name="defaultOld" template="/WEB-INF/layouts/defaultOld.jspx">
+		<put-attribute name="menu" value="/WEB-INF/views/menuOld.jspx" />
 	</definition>
 	
 	<definition name="public" template="/WEB-INF/layouts/default.jspx">
