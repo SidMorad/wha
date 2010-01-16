@@ -4,7 +4,7 @@
         <spring:message arguments="Users" code="entity.list.all" var="title"/>
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title}'}})); </script>
         <c:if test="${not empty users}">
-            <table width="300px">
+            <table style="width:98%">
                 <thead>
                     <tr>
                         <th>Id</th>

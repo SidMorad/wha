@@ -39,7 +39,7 @@
 		    <spring:message arguments="${entity_daily_label_plural}" code="entity.list.all" var="title_daily_msg"/>
 		    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_daily_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_daily_msg}'}})); </script>
 		    <c:if test="${not empty timesheet.dailyTimesheetsSortedList}">
-		        <table width="300px">
+		        <table style="width:98%">
 		            <thead>
 		                <tr>
 		                    <th>Day Date</th>
