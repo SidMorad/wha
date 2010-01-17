@@ -3,8 +3,7 @@
 
 <ul id="primary-nav" class="menuList" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:security="http://www.springframework.org/security/tags" xmlns:spring="http://www.springframework.org/tags">
     <security:authorize ifAllGranted="ROLE_ADMIN">
-	<li class="menubar">
-        <a class="menupanel" href="#">Administration Panel</a>
+	<li class="menubar"><a class="menupanel" href="#">Administration Panel</a>
         <ul>
             <li id="web_mvc_jsp_create_adminstration_menu_item">
                 <c:url value="/admin/signup" var="web_mvc_jsp_create_admin_signup_menu_item_url"/>
@@ -73,8 +72,7 @@
     </li>
 	</security:authorize>
 	<security:authorize ifAllGranted="ROLE_EMPLOYEE">
-	<li class="menubar">
-        <a class="menupanel" href="#">Employee Panel</a>
+	<li class="menubar"><a class="menupanel" href="#">Employee Panel</a>
         <ul>
             <li id="web_mvc_jsp_list_timesheet_daily_menu_item">
                 <c:url value="/time/timesheet?ent=daily" var="web_mvc_jsp_time_list_timesheet_daily_menu_item_url"/>
