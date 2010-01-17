@@ -1,9 +1,10 @@
 /* A CSS Framework by Mike Stenhouse of Content with Style - customized by Saeid Moradi*/
 
-* html div#nav 
+/* html div#nav 
 	{
-	height: 1%; /* hide ie-mac */
-	}
+	height: 1%; /* hide ie-mac *
+	}*/
+	
 div#nav div.wrapper 
 	{
 	position: absolute;
@@ -77,11 +78,12 @@ ul#primary-nav li a
 	white-space: nowrap;
 	}
 /* Fix IE. Hide from IE Mac */
+/*
 * html ul#primary-nav li {float: left; height: 1%; }
 * html ul#primary-nav li {height: 1%;}
 * html ul#primary-nav ul {width: 149px;}
 * html ul#primary-nav ul li {width: 149px;}
-/* End*/
+*/
 
 ul#primary-nav ul
 	{
@@ -135,11 +137,11 @@ ul#primary-nav li li li.over ul
 	{ 
 	display: block;  /* The magic */ 
 	}
-ul#primary-nav li.menubar
+ul#primary-nav li.menubar a.menupanel
 	{
 	background: transparent url("images/arrow.gif") right center no-repeat;
 	}
-ul#primary-nav li.menubar:hover
+ul#primary-nav li.menubar a.menupanel:hover
 	{
 	background: transparent url("images/arrow-down.gif") right center no-repeat;
 	}
