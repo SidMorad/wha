@@ -1,5 +1,9 @@
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:form="http://www.springframework.org/tags/form" xmlns:roo="urn:jsptagdir:/WEB-INF/tags" xmlns:spring="http://www.springframework.org/tags">
-    <script type="text/javascript">dojo.require('dijit.TitlePane');dojo.require('js.hajari.CustomDateTextBox');dojo.require('dijit.form.FilteringSelect');</script>
+    <script type="text/javascript">
+    	dojo.require('dijit.TitlePane');
+    	dojo.require('dijit.form.DateTextBox');
+    	dojo.require('dijit.form.FilteringSelect');
+   	</script>
     <div id="_title_div" style="width: 100%">
         <spring:message code="label.dailyexpense" var="entity_label"/>
         <spring:message code="label.dailyexpenses" var="entity_label_plural"/>
@@ -39,7 +43,7 @@
 	                <form:errors cssClass="errors" id="_dayDate_error_id" path="dayDate"/>
 	                <spring:message arguments="Day Date" code="field.invalid" var="field_invalid"/>
 	                <spring:message argumentSeparator="," arguments="Day Date,(${field_required})" code="field.simple.validation" var="field_validation"/>
-	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dayDate_id', widgetType : 'js.hajari.CustomDateTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true, datePattern : 'd/MM/yy'}})); </script>
+	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dayDate_id', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {constraints: {max: new Date(), min: new Date().setDate(0)}, promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true, datePattern : 'd/MM/yy'}})); </script>
 				</td>
 				<td>
                     <c:if test="${not empty customers}">
