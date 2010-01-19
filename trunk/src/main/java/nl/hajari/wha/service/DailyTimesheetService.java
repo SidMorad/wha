@@ -127,4 +127,17 @@ public class DailyTimesheetService {
 		return finalTimesheetList;
 	}
 	
+	public boolean checkIfDurationIsMoreThan24(DailyTimesheet dailyTimesheet, HttpServletRequest request){
+		Float twentyFour = new Float(24f);
+		if (dailyTimesheet.getDuration() > twentyFour) {
+			return true;
+		}
+		Long timesheetId = (Long) request.getSession().getAttribute(Timesheet.TIMESHEET_ID);
+		Float totalDuration = DailyTimesheet.findTotalDurationByTimesheetIdAndDayDate(timesheetId, dailyTimesheet.getDayDate());
+		if (dailyTimesheet.getDuration() + totalDuration > twentyFour) {
+			return true;
+		}		
+		return false;
+	}
+	
 }

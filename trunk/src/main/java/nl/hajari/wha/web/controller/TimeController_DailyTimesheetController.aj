@@ -72,6 +72,9 @@ privileged aspect TimeController_DailyTimesheetController {
 		} else {
 			result.rejectValue("projectName", "field.required");
 		}
+		if (dailyTimesheetService.checkIfDurationIsMoreThan24(dailyTimesheet, request)) {
+			result.rejectValue("duration", "error.time.duration.more.than.24");
+		}
 		if (result.hasErrors()) {
 			// Fill modelMap
 			Long employeeId = (Long) request.getSession().getAttribute(Employee.EMPLOYEE_ID);
