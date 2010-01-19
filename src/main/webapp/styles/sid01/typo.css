@@ -119,15 +119,12 @@ table td, table th {
     border: 1px solid silver;
     padding: 1px;
 	}
-table th {
-	background-color: #d7e9f5;
-	}	
-table thead th {
+table thead th, table th {
     border: 1px solid #e0e0e0;
     text-align: left;
     font-size: 12px;
     font-weight: bold;
-    background: #d7e9f5;
+	background-color: #d7e9f5;
 	}
 table tfoot th, tfoot td {
     border: 1px solid #e0e0e0;
