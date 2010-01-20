@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>nl.hajari.wha</groupId>
 	<artifactId>wha</artifactId>
@@ -384,7 +385,7 @@
 			<artifactId>poi</artifactId>
 			<version>3.2-FINAL</version>
 		</dependency>
-		
+
 	</dependencies>
 
 	<build>
@@ -419,7 +420,10 @@
 				<artifactId>aspectj-maven-plugin</artifactId>
 				<version>1.0</version>
 				<dependencies>
-					<!-- NB: You must use Maven 2.0.9 or above or these are ignored (see MNG-2972) -->
+					<!--
+						NB: You must use Maven 2.0.9 or above or these are ignored (see
+						MNG-2972)
+					-->
 					<dependency>
 						<groupId>org.aspectj</groupId>
 						<artifactId>com.springsource.org.aspectj.runtime</artifactId>
@@ -544,7 +548,7 @@
 				<version>2.0-beta-7</version>
 				<configuration>
 					<tagBase>https://wha.googlecode.com/svn/tags</tagBase>
-                    <scmCommentPrefix>Issue 35: [maven-release-plugin]</scmCommentPrefix>
+					<scmCommentPrefix>Issue 35: [maven-release-plugin]</scmCommentPrefix>
 				</configuration>
 			</plugin>
 			<!-- IDE -->
@@ -630,14 +634,14 @@
 					<!--
 						TODO:: I couldn't parameterized 'goal' value with
 						${dbunit.goal.type} We need to have goal 'operation' in normal
-						mode and 'export' in prod Profile . 
+						mode and 'export' in prod Profile .
 					-->
-						<execution>
-							<phase>test</phase> 
-							<goals> 
-								<goal>operation</goal> 
-							</goals>
-						</execution>
+					<execution>
+						<phase>test</phase>
+						<goals>
+							<goal>operation</goal>
+						</goals>
+					</execution>
 				</executions>
 				<dependencies>
 					<dependency>
@@ -689,7 +693,7 @@
 						<groupId>org.apache.log4j</groupId>
 						<artifactId>com.springsource.org.apache.log4j</artifactId>
 						<version>1.2.15</version>
-					</dependency>					
+					</dependency>
 				</dependencies>
 			</plugin>
 		</plugins>
@@ -760,7 +764,8 @@
 									specified
 								-->
 								<property name="test" value="run-all-tests" />
-								<property name="i18n.classpath" value="${basedir}/src/main/webapp/WEB-INF/i18n" />
+								<property name="i18n.classpath"
+									value="${basedir}/src/main/webapp/WEB-INF/i18n" />
 								<echo level="info">Testing '${project.build.finalName}' with
 									locale '${user.language}'</echo>
 								<ant antfile="src/test/resources/web-tests.xml" target="${test}">

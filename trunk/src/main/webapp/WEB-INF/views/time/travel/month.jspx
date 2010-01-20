@@ -29,12 +29,12 @@
         <table style="width:98%">
             <thead>
             <tr>
-                <th width="100px">Date</th>
-                <th width="85px">Origin</th>
-                <th width="85px">Destination</th>
-                <th width="55px">Return ?</th>
-                <th width="60px">Distance</th>
-                <th width="60px">Comment</th>
+                <th width="100px"><spring:message code="label.date"/> </th>
+                <th width="85px"><spring:message code="label.departure"/> </th>
+                <th width="85px"><spring:message code="label.destination"/> </th>
+                <th width="55px"><spring:message code="label.roundtrip"/> </th>
+                <th width="60px"><spring:message code="label.distance"/> </th>
+                <th width="60px"><spring:message code="label.comment"/> </th>
                 <th width="20px"></th>
             </tr>
             </thead>
@@ -75,7 +75,7 @@
             </tr>
             <tr>
             	<td>
-                	<label for="_comment_id"><b>Comment:</b></label>           		
+                	<label for="_comment_id"><b><spring:message code="label.comment"/> :</b></label>           		
             	</td>
             	<td colspan="6">
 	                <form:textarea cssStyle="width:95%" id="_comment_id" path="comment"/>
@@ -93,26 +93,25 @@
 		<table style="width:98%">
             <thead>		
 	            <tr>
-					<th width="80px">Date</th>
-					<th width="30px">Week</th>
-	                <th width="85px">Origin</th>
-	                <th width="85px">Destination</th>
-	                <th width="55px">Return ?</th>
-	                <th width="60px">Distance</th>
-	                <th width="60px">Comment</th>
-	                <th width="20px"></th>            
+	                <th width="100px"><spring:message code="label.date"/> </th>
+	                <th width="85px"><spring:message code="label.departure"/> </th>
+	                <th width="85px"><spring:message code="label.destination"/> </th>
+	                <th width="55px"><spring:message code="label.roundtrip"/> </th>
+	                <th width="60px"><spring:message code="label.distance"/> </th>
+	                <th width="60px"><spring:message code="label.comment"/> </th>
+	                <th width="20px"></th>
 	            </tr>
             </thead>
             <c:set var="totalDistance" value="0"/>
             <c:forEach items="${dailyTravels}" var="dt">
             	<tr>
-            		<td><fmt:formatDate pattern="d/MM/yy" type="DATE" value="${dt.dayDate}"/></td>
-            		<td><fmt:formatDate pattern="EEE" type="DATE" value="${dt.dayDate}"/></td>
+            		<td><fmt:formatDate pattern="EEE" type="DATE" value="${dt.dayDate}"/> - 
+            		    <fmt:formatDate pattern="d/MM/yyyy" type="DATE" value="${dt.dayDate}"/></td>
             		<td>${dt.origin}</td>
             		<td>${dt.destination}</td>
             		<td>
-                       	<c:if test="${dt.withReturn == true}">Yes</c:if>
-                       	<c:if test="${dt.withReturn == false}">No</c:if>
+                       	<c:if test="${dt.withReturn == true}"><spring:message code="label.yes"/></c:if>
+                       	<c:if test="${dt.withReturn == false}"><spring:message code="label.no"/></c:if>
 					</td>
             		<td>${dt.distance}</td>
             		<td>${dt.comment}</td>
@@ -140,7 +139,6 @@
             		<th>-</th>
             		<th><b>${totalDistance}</b></th>
             		<th>-</th>
-            		<th></th>
             </tr>
         </table>
     </div>
