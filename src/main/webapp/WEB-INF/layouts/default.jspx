@@ -47,7 +47,7 @@
   			<div id="header" class="clearfix">
   				<div id="branding">
 					<h1>WHA</h1>
-					<p>Welcome to Work Hour Registration!</p>
+					<p><spring:message code="welcome.h3" /></p>
   				</div>
 				<span style="float:right; margin-top:-70px;">
 					<c:url var="logo" value="/static/images/HM_100x70.jpg" />

@@ -29,10 +29,10 @@
         <table style="width:98%">
             <thead>
             <tr>
-                <th width="100px">Date</th>
-                <th width="170px">Customer</th>
-                <th width="170px">For</th>
-                <th width="65px">Amount</th>
+                <th width="100px"><spring:message code="label.date"/> </th>
+                <th width="170px"><spring:message code="label.customer" /> </th>
+                <th width="170px"><spring:message code="label.for"/> </th>
+                <th width="65px"><spring:message code="label.amount"/> </th>
                 <th width="20px"></th>
                 <th width="20px"></th>
             </tr>
@@ -74,7 +74,7 @@
             </tr>
             <tr>
             	<td>
-                	<label for="_comment_id"><b>Comment:</b></label>           		
+                	<label for="_comment_id"><b><spring:message code="label.comment"/>:</b></label>           		
             	</td>
             	<td colspan="6">
 					<form:textarea cssStyle="width:95%" id="_expenseComment_id" path="expenseComment"/>
@@ -92,24 +92,23 @@
 		<table style="width:98%">
 			<thead>
 	            <tr>
-	                <th width="80px">Date</th>
-	                <th width="30px">Week</th>
-	                <th width="170px">Customer</th>
-	                <th width="170px">For</th>
-	                <th width="65px">Amount</th>
-	                <th width="100px">Comment</th>
+	                <th width="100px"><spring:message code="label.date"/> </th>
+	                <th width="170px"><spring:message code="label.customer" /> </th>
+	                <th width="170px"><spring:message code="label.for"/> </th>
+	                <th width="65px"><spring:message code="label.amount"/> </th>
+	                <th width="100px"><spring:message code="label.comment"/> </th>
 	                <th width="20px"></th>      
 	            </tr>
 			</thead>
             <c:set var="totalAmount" value="0"/>
             <c:forEach items="${dailyExpenses}" var="de">
             	<tr>
-            		<td><fmt:formatDate pattern="d/MM/yy" type="DATE" value="${de.dayDate}"/></td>
-            		<td><fmt:formatDate pattern="EEE" type="DATE" value="${de.dayDate}"/></td>
-            		<td>${fn:substring(de.customer, 0, 14)}</td>
-            		<td>${fn:substring(de.expenseFor, 0, 14)}</td>
+            		<td><fmt:formatDate pattern="EEE" type="DATE" value="${de.dayDate}" /> -
+            		    <fmt:formatDate pattern="d/MM/yy" type="DATE" value="${de.dayDate}"/></td>
+            		<td>${fn:substring(de.customer, 0, 32)}</td>
+            		<td>${fn:substring(de.expenseFor, 0, 32)}</td>
             		<td>${de.expenseAmount}</td>
-            		<td>${fn:substring(de.expenseComment, 0, 10)}</td>
+            		<td>${fn:substring(de.expenseComment, 0, 32)}</td>
                     <td>
                         <spring:url value="/time/expense/delete/${de.id}" var="delete_form_url"/>
                         <spring:url value="/static/images/delete.png" var="delete_image_url"/>
@@ -128,7 +127,6 @@
             		<th>-</th>
             		<th><b>${totalAmount}</b></th>
             		<th>-</th>
-            		<th></th>
             </tr>
         </table>
     </div>

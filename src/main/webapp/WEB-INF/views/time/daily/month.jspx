@@ -14,11 +14,24 @@
         <spring:message code="field.invalid.decimal" var="field_invalid"/>
         
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
+        
+        <!-- Tips -->
+        <div id="_tips_div" style="width: 100%;">
+        	<ul>
+        		<li><spring:message code="tip.project.autocomplete"/> </li>
+        		<li><spring:message code="tip.project.hot.insert"/> </li>
+        	</ul>
+        	<spring:message code="tips.title" var="tips_title"/>
+        	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_tips_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${tips_title}', open : false}})); </script>
+        </div>
+        <p></p>
+        <p></p>
+        
         <c:url var="action_url" value="/time/view/month/update"/>
         <form:form action="${action_url}" modelAttribute="dailyTimesheet" method="POST">
         <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
-        <div style="border: none;">
-        	<table style="width:98%" border="0">
+        <div>
+        	<table style="width:100%" border="0">
 	        	<tr>
 		        	<td>
 			        	<span style="float: left; font-weight:bolder; font-size: larger;">${timesheet.description}</span>
@@ -28,15 +41,15 @@
         	</table>
         </div>
         <p></p>
-        <table style="width:98%">
+        <table style="width:100%">
             <thead>
             <tr>
-                <th width="100px">Date</th>
-                <th width="148px">Project</th>
-                <th width="59px">Working</th>
-                <th width="45px">Off</th>
-                <th width="56px">Training</th>
-                <th width="45px">Total</th>
+                <th width="100px"><spring:message code="label.date"/></th>
+                <th width="148px"><spring:message code="label.project"/> </th>
+                <th width="59px"><spring:message code="label.working" /> </th>
+                <th width="45px"><spring:message code="label.off"/> </th>
+                <th width="56px"><spring:message code="label.training" /> </th>
+                <th width="45px"><spring:message code="label.total"/> </th>
                 <th width="20px"></th>
             </tr>
             </thead>
@@ -51,13 +64,6 @@
 	                </script>
 				</td>
 				<td>
-					<!-- 
-                    <form:select cssStyle="width:130px" id="_project" path="project">
-                        <form:options itemValue="id" items="${projects}"/>
-                    </form:select> <b>OR</b> <br/>
-                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_project', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {invalidMessage: '${field_invalid}', hasDownArrow : false, required : false}})); </script>
-					-->
-                    
 					<spring:url value="/project/list/all" var="allProjects" />
 					<form:input cssStyle="width:95%" id="_projectName" maxlength="30" path="projectName" size="0"/>
 	                <form:errors cssClass="errors-in-table" id="_projectName_error" path="projectName"/>
@@ -68,29 +74,6 @@
 				    });
 					Spring.addDecoration(new Spring.ElementDecoration({elementId : '_projectName', widgetType: 'dijit.form.ComboBox', widgetAttrs: {id : '_projectName', name : 'projectName', value : '', store : new dojo.data.ItemFileReadStore({url:"${allProjects}"}), searchAttr : 'name', required: true}})); 
 					</script>
-                    
-                    <!-- 
-					<form:input cssStyle="width:130px" id="_projectName" maxlength="30" path="projectName" size="0"/>
-	                <spring:message arguments="Project" code="field.invalid" var="field_invalid"/>
-					<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_projectName', widgetType: 'dijit.form.ComboBox', widgetAttrs: {}})); </script>
-					<script type="text/javascript">
-					    dojo.addOnLoad(function() {
-					        var projectStore = new dojo.data.ItemFileReadStore({
-					            url: "${projectsByNameUrl}"
-					        });
-							alert("2");
-					        var filteringSelect = new dijit.form.ComboBox({
-					            id: "_projectName",
-					            name: "projectName",
-					            value: "Havij",
-					            store: projectStore,
-					            searchAttr: "name"
-					        },
-					        "_projectName");
-							alert("1");
-					    });
-					</script>
-                    -->
 				</td>
 				<td>
 	                <form:input cssStyle="width:95%" id="_duration" maxlength="30" path="duration" size="0"/>
@@ -124,15 +107,15 @@
 	            <input id="proceed" type="submit" value="${save_button}"/>
 		    </div>        
         </form:form>
-        <table style="width:98%">
+        <table style="width:100%">
             <thead>
 	            <tr>
-	                <th width="100px">Date</th>
-	                <th width="148px">Project</th>
-	                <th width="59px">Working</th>
-	                <th width="45px">Off</th>
-	                <th width="56px">Training</th>
-	                <th width="45px">Total</th>
+	                <th width="100px"><spring:message code="label.date"/></th>
+	                <th width="148px"><spring:message code="label.project"/> </th>
+	                <th width="59px"><spring:message code="label.working" /> </th>
+	                <th width="45px"><spring:message code="label.off"/> </th>
+	                <th width="56px"><spring:message code="label.training" /> </th>
+	                <th width="45px"><spring:message code="label.total"/> </th>
 	                <th width="20px"></th>
 	            </tr>
             </thead>
