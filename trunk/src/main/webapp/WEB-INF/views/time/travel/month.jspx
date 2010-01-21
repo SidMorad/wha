@@ -41,21 +41,21 @@
             <tr>
 				<td>
 	                <form:input cssStyle="width:90%" id="_dayDate_id" maxlength="30" path="dayDate" size="0"/>
-	                <form:errors cssClass="errors" id="_dayDate_error_id" path="dayDate"/>
+	                <form:errors cssClass="errors-in-table" id="_dayDate_error_id" path="dayDate"/>
 	                <spring:message arguments="Day Date" code="field.invalid" var="field_invalid"/>
 	                <spring:message argumentSeparator="," arguments="Day Date,(${field_required})" code="field.simple.validation" var="field_validation"/>
 	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dayDate_id', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {constraints: {min: new Date().setDate(0), max: new Date().setDate(31)}, promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true, datePattern : 'd/MM/yy'}})); </script>
 				</td>
 				<td>
 	                <form:input cssStyle="width:95%" id="_origin_id" maxlength="45" path="origin" size="0"/>
-	                <form:errors cssClass="errors" id="_origin_error_id" path="origin"/>
+	                <form:errors cssClass="errors-in-table" id="_origin_error_id" path="origin"/>
 	                <spring:message arguments="Origin" code="field.invalid" var="field_invalid"/>
 	                <spring:message argumentSeparator="," arguments="Origin,(${field_required})" code="field.simple.validation" var="field_validation"/>
 	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_origin_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
 				</td>     
 				<td>
 	                <form:input cssStyle="width:95%" id="_destination_id" maxlength="45" path="destination" size="0"/>
-	                <form:errors cssClass="errors" id="_destination_error_id" path="destination"/>
+	                <form:errors cssClass="errors-in-table" id="_destination_error_id" path="destination"/>
 	                <spring:message arguments="Destination" code="field.invalid" var="field_invalid"/>
 	                <spring:message argumentSeparator="," arguments="Destination,(${field_required})" code="field.simple.validation" var="field_validation"/>
 	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_destination_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
@@ -65,10 +65,10 @@
 				</td>     
 				<td >
 	                <form:input cssStyle="width:95%" id="_distance_id" maxlength="30" path="distance" size="0"/>
-	                <form:errors cssClass="errors" id="_distance_error_id" path="distance"/>
+	                <form:errors cssClass="errors-in-table" id="_distance_error_id" path="distance"/>
 	                <spring:message code="field.invalid.decimal" var="field_invalid"/>
 	                <spring:message argumentSeparator="," arguments="Distance,(${field_required})" code="field.simple.validation" var="field_validation"/>
-	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_distance_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]*\.[0-9]*', required : true}})); </script>
+	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_distance_id', widgetType : 'dijit.form.NumberTextBox', widgetAttrs : {constraints:{min:1}, promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
 				</td>
 				<td></td>
 				<td></td>
@@ -80,7 +80,7 @@
             	<td colspan="6">
 	                <form:textarea cssStyle="width:95%" id="_comment_id" path="comment"/>
 	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_comment_id', widgetType: 'dijit.form.SimpleTextarea'})); </script>
-	                <form:errors cssClass="errors" id="_comment_error_id" path="comment"/>
+	                <form:errors cssClass="errors-in-table" id="_comment_error_id" path="comment"/>
             	</td>
             </tr>
         </table>
