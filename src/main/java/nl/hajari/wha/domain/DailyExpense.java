@@ -1,6 +1,7 @@
 package nl.hajari.wha.domain;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,10 +11,12 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import nl.hajari.wha.web.validator.FloatPositive;
+
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
-import nl.hajari.wha.domain.Customer;
 
 @Entity
 @RooJavaBean
@@ -32,6 +35,7 @@ public class DailyExpense {
     private String expenseFor;
 
     @NotNull
+    @FloatPositive
     @Column(nullable = false)
     private Float expenseAmount;
 

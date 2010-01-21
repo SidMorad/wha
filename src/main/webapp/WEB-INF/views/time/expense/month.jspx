@@ -40,7 +40,7 @@
             <tr>
 				<td>
 	                <form:input cssStyle="width:90%" id="_dayDate_id" maxlength="30" path="dayDate" size="0"/>
-	                <form:errors cssClass="errors" id="_dayDate_error_id" path="dayDate"/>
+	                <form:errors cssClass="errors-in-table" id="_dayDate_error_id" path="dayDate"/>
 	                <spring:message arguments="Day Date" code="field.invalid" var="field_invalid"/>
 	                <spring:message argumentSeparator="," arguments="Day Date,(${field_required})" code="field.simple.validation" var="field_validation"/>
 	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dayDate_id', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {constraints: {min: new Date().setDate(0), max: new Date().setDate(31)}, promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true, datePattern : 'd/MM/yy'}})); </script>
@@ -56,7 +56,7 @@
 				</td>     
 				<td>
 					 <form:input cssStyle="width:95%" id="_expenseFor_id" maxlength="45" path="expenseFor" size="0"/>
-                    <form:errors cssClass="errors" id="_expenseFor_error_id" path="expenseFor"/>
+                    <form:errors cssClass="errors-in-table" id="_expenseFor_error_id" path="expenseFor"/>
                 	<spring:message arguments="Expense For" code="field.invalid" var="field_invalid"/>
                 	<spring:message code="field.required" var="field_required"/>
                 	<spring:message argumentSeparator="," arguments="Expense For,(${field_required})" code="field.simple.validation" var="field_validation"/>
@@ -64,10 +64,10 @@
 				</td>
 				<td>
 	                <form:input cssStyle="width:95%" id="_expenseAmount_id" maxlength="30" path="expenseAmount" size="0"/>
-	                <form:errors cssClass="errors" id="_expenseAmount_error_id" path="expenseAmount"/>
-	                <spring:message code="field.invalid.decimal" var="field_invalid"/>
+	                <form:errors cssClass="errors-in-table" id="_expenseAmount_error_id" path="expenseAmount"/>
+	                <spring:message code="field.invalid.float.positive" var="field_invalid"/>
 	                <spring:message argumentSeparator="," arguments="Expense Amount,(${field_required})" code="field.simple.validation" var="field_validation"/>
-	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_expenseAmount_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]*\.[0-9]*', required : true}})); </script>
+	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_expenseAmount_id', widgetType : 'dijit.form.NumberTextBox', widgetAttrs : {constraints: {min:1}, promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
 				</td>
 				<td></td>     
 				<td></td>     
@@ -79,7 +79,7 @@
             	<td colspan="6">
 					<form:textarea cssStyle="width:95%" id="_expenseComment_id" path="expenseComment"/>
                 	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_expenseComment_id', widgetType: 'dijit.form.SimpleTextarea', widgetAttrs: {}})); </script>
-                	<form:errors cssClass="errors" id="_expenseComment_error_id" path="expenseComment"/>
+                	<form:errors cssClass="errors-in-table" id="_expenseComment_error_id" path="expenseComment"/>
             	</td>
             </tr>
         </table>

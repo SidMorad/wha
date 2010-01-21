@@ -80,21 +80,21 @@
 	                <form:errors cssClass="errors-in-table" id="_duration_error" path="duration"/>
 	                <spring:message arguments="Duration" code="field.invalid" var="field_invalid"/>
 	                <spring:message argumentSeparator="," arguments="Duration,(${field_required})" code="field.simple.validation" var="field_validation"/>
-	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_duration', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: "-?[0-9 .]*", required : true}})); </script>
+	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_duration', widgetType : 'dijit.form.NumberTextBox', widgetAttrs : {constraints: {min:0, max:24},promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
 				</td>     
 				<td>
 	                <form:input cssStyle="width:95%" id="_durationOffs" maxlength="30" path="durationOffs" size="0"/>
 	                <form:errors cssClass="errors-in-table" id="_durationOffs_error" path="durationOffs"/>
 	                <spring:message arguments="Duration Offs" code="field.invalid" var="field_invalid"/>
 	                <spring:message argumentSeparator="," arguments="Duration Offs," code="field.simple.validation" var="field_validation"/>
-	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_durationOffs', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: "-?[0-9 .]*", required : true}})); </script>
+	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_durationOffs', widgetType : 'dijit.form.NumberTextBox', widgetAttrs : {constraints: {min:0, max:24},promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
 				</td>
 				<td>
 	                <form:input cssStyle="width:95%" id="_durationTraining" maxlength="30" path="durationTraining" size="0"/>
 	                <form:errors cssClass="errors-in-table" id="_durationTraining_error" path="durationTraining"/>
 	                <spring:message arguments="Duration Training" code="field.invalid" var="field_invalid"/>
 	                <spring:message argumentSeparator="," arguments="Duration Training," code="field.simple.validation" var="field_validation"/>
-	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_durationTraining', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: "-?[0-9 .]*", required : true}})); </script>
+	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_durationTraining', widgetType : 'dijit.form.NumberTextBox', widgetAttrs : {constraints: {min:0, max:24},promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
 				</td>     
 				<td>
 					-
