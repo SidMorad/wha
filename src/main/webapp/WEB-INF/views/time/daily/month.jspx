@@ -16,7 +16,7 @@
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
         
         <!-- Tips -->
-        <div id="_tips_div" style="width: 100%;">
+        <div id="_tips_div" style="width: 98%;">
         	<ul>
         		<li><spring:message code="tip.project.autocomplete"/> </li>
         		<li><spring:message code="tip.project.hot.insert"/> </li>
@@ -31,7 +31,7 @@
         <form:form action="${action_url}" modelAttribute="dailyTimesheet" method="POST">
         <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
         <div>
-        	<table style="width:100%" border="0">
+        	<table style="width:98%" border="0">
 	        	<tr>
 		        	<td>
 			        	<span style="float: left; font-weight:bolder; font-size: larger;">${timesheet.description}</span>
@@ -41,7 +41,7 @@
         	</table>
         </div>
         <p></p>
-        <table style="width:100%">
+        <table style="width:98%">
             <thead>
             <tr>
                 <th width="100px"><spring:message code="label.date"/></th>
@@ -60,7 +60,7 @@
 	                <spring:message arguments="Day Date" code="field.invalid" var="field_invalid"/>
 	                <spring:message argumentSeparator="," arguments="Day Date,(${field_required})" code="field.simple.validation" var="field_validation"/>
 	                <script type="text/javascript">
-	                Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dayDate', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {constraints: {max: new Date(), min: new Date().setDate(0)}, promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true, datePattern : 'd/MM/yy'}})); 
+	                Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dayDate', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {constraints: {min: new Date().setDate(0), max: new Date().setDate(31)}, promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true, datePattern : 'd/MM/yy'}})); 
 	                </script>
 				</td>
 				<td>
@@ -107,7 +107,7 @@
 	            <input id="proceed" type="submit" value="${save_button}"/>
 		    </div>        
         </form:form>
-        <table style="width:100%">
+        <table style="width:98%">
             <thead>
 	            <tr>
 	                <th width="100px"><spring:message code="label.date"/></th>

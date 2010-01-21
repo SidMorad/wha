@@ -43,7 +43,7 @@
 	                <form:errors cssClass="errors" id="_dayDate_error_id" path="dayDate"/>
 	                <spring:message arguments="Day Date" code="field.invalid" var="field_invalid"/>
 	                <spring:message argumentSeparator="," arguments="Day Date,(${field_required})" code="field.simple.validation" var="field_validation"/>
-	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dayDate_id', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {constraints: {max: new Date(), min: new Date().setDate(0)}, promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true, datePattern : 'd/MM/yy'}})); </script>
+	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dayDate_id', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {constraints: {min: new Date().setDate(0), max: new Date().setDate(31)}, promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true, datePattern : 'd/MM/yy'}})); </script>
 				</td>
 				<td>
                     <c:if test="${not empty customers}">
