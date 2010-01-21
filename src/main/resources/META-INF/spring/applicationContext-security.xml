@@ -14,15 +14,27 @@
     		authentication-success-handler-ref="customizedDefaultTargetUrlHandler" />
         <logout logout-url="/static/j_spring_security_logout"/>
         <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/constants/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/customer/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/dailyexpense/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/dailytimesheet/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/dailytravel/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/employee/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/role/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/techrole/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/timesheet/**" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/time/**" access="hasRole('ROLE_EMPLOYEE')"/>
         <intercept-url pattern="/member/**" access="isAuthenticated()"/>
         <intercept-url pattern="/resources/**" access="permitAll" />
         <intercept-url pattern="/static/**" access="permitAll" />
+        <intercept-url pattern="/project/**" access="hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLOYEE')" />
         <intercept-url pattern="/**" access="permitAll" />
 	    <custom-filter ref="sessionSecurityFilter" after="BASIC_AUTH_FILTER"/>
 	    <access-denied-handler error-page="/403.jspx" />
 	    <remember-me user-service-ref="userController" key="e37f4b31-0c45-11dd-bd0b-0800200c9a66"/>
     </http>
+    
+    <global-method-security pre-post-annotations="enabled"/>
     
 	<beans:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder"/>
     
