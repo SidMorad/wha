@@ -104,9 +104,10 @@
     			</span>				
 			    
 			    <span class="right">
-					<c:url var="logo" value="/static/images/hajari-sponsored.png" />
+					<c:url var="logo" value="/static/images/favicon.jpg" />
 				    <spring:message code="global.sponsored" var="sponsored"/>
-				    <span><a href="http://hajari.nl" title="${sponsored}"><img src="${logo}" alt="${sponsored}" align="right"/></a></span>
+				    <spring:message code="global.developed" var="developed"/>
+				    <span><a href="http://www.hmsolutions.nl" title="${sponsored}">${developed}<img src="${logo}" alt="${sponsored}" /></a></span>
 				</span>
 			</div>
 		</div>		
