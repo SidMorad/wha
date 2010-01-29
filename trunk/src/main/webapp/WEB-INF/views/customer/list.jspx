@@ -20,7 +20,7 @@
                 <c:forEach items="${customers}" var="customer">
                     <tr>
                         <td>${customer.id}</td>
-                        <td>${fn:substring(customer.name, 0, 10)}</td>
+                        <td>${customer.name}</td>
                         <td>
                             <spring:url value="/customer/${customer.id}" var="show_form_url"/>
                             <spring:url value="/static/images/show.png" var="show_image_url"/>

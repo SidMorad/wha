@@ -9,7 +9,7 @@
                     <tr>
                         <th>Id</th>
                         <th>Username</th>
-                        <th>Password</th>
+                        <!--th>Password</th-->
                         <th>Enabled</th>
                         <th>Email</th>
                         <th>Change Password</th>
@@ -21,10 +21,10 @@
                 <c:forEach items="${users}" var="user">
                     <tr>
                         <td>${user.id}</td>
-                        <td>${fn:substring(user.username, 0, 10)}</td>
-                        <td>${fn:substring(user.password, 0, 10)}</td>
-                        <td>${fn:substring(user.enabled, 0, 10)}</td>
-                        <td>${fn:substring(user.email, 0, 10)}</td>
+                        <td>${user.username}</td>
+                        <!--td>${fn:substring(user.password, 0, 10)}</td-->
+                        <td>${user.enabled}</td>
+                        <td>${user.email}</td>
                         <td>
                             <c:url value="/admin/user/change_password/${user.id}/form" var="change_password_url"/>
                             <c:url value="/static/images/update.png" var="update_image_url"/>
