@@ -105,10 +105,10 @@
             	<tr>
             		<td><fmt:formatDate pattern="EEE" type="DATE" value="${de.dayDate}" /> -
             		    <fmt:formatDate pattern="d/MM/yy" type="DATE" value="${de.dayDate}"/></td>
-            		<td>${fn:substring(de.customer, 0, 32)}</td>
-            		<td>${fn:substring(de.expenseFor, 0, 32)}</td>
+            		<td>${de.customer}</td>
+            		<td>${de.expenseFor}</td>
             		<td>${de.expenseAmount}</td>
-            		<td>${fn:substring(de.expenseComment, 0, 32)}</td>
+            		<td>${de.expenseComment}</td>
                     <td>
                         <spring:url value="/time/expense/delete/${de.id}" var="delete_form_url"/>
                         <spring:url value="/static/images/delete.png" var="delete_image_url"/>

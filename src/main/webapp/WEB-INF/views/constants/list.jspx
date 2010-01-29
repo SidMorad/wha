@@ -20,8 +20,8 @@
                 <c:forEach items="${constantses}" var="constants">
                     <tr>
                         <td>${constants.id}</td>
-                        <td>${fn:substring(constants.key, 0, 10)}</td>
-                        <td>${fn:substring(constants.value, 0, 10)}</td>
+                        <td>${constants.key}</td>
+                        <td>${constants.value}</td>
                         <td>
                             <spring:url value="/constants/${constants.id}" var="show_form_url"/>
                             <spring:url value="/static/images/show.png" var="show_image_url"/>

@@ -19,7 +19,7 @@
                 <c:forEach items="${roles}" var="role">
                     <tr>
                         <td>${role.id}</td>
-                        <td>${fn:substring(role.name, 0, 20)}</td>
+                        <td>${role.name}</td>
                         <td>
                             <spring:url value="/role/${role.id}" var="show_form_url"/>
                             <spring:url value="/static/images/show.png" var="show_image_url"/>

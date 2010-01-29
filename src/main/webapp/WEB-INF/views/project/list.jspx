@@ -21,8 +21,8 @@
                 <c:forEach items="${projects}" var="project">
                     <tr>
                         <td>${project.id}</td>
-                        <td>${fn:substring(project.name, 0, 10)}</td>
-                        <td>${fn:substring(project.customer, 0, 10)}</td>
+                        <td>${project.name}</td>
+                        <td>${project.customer}</td>
                         <td>
                             <spring:url value="/project/${project.id}" var="show_form_url"/>
                             <spring:url value="/static/images/show.png" var="show_image_url"/>

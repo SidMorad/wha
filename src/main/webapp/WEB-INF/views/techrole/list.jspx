@@ -21,8 +21,8 @@
                 <c:forEach items="${techroles}" var="techRole">
                     <tr>
                         <td>${techRole.id}</td>
-                        <td>${fn:substring(techRole.name, 0, 10)}</td>
-                        <td>${fn:substring(techRole.hourlyWage, 0, 10)}</td>
+                        <td>${techRole.name}</td>
+                        <td>${techRole.hourlyWage}</td>
                         <td>
                             <spring:url value="/techrole/${techRole.id}" var="show_form_url"/>
                             <spring:url value="/static/images/show.png" var="show_image_url"/>

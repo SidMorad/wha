@@ -24,11 +24,11 @@
                 <c:forEach items="${employees}" var="employee">
                     <tr>
                         <td>${employee.id}</td>
-                        <td>${fn:substring(employee.firstName, 0, 10)}</td>
-                        <td>${fn:substring(employee.lastName, 0, 10)}</td>
-                        <td>${fn:substring(employee.empId, 0, 10)}</td>
-                        <td>${fn:substring(employee.hourlyWage, 0, 10)}</td>
-                        <td>${fn:substring(employee.user, 0, 10)}</td>
+                        <td>${employee.firstName}</td>
+                        <td>${employee.lastName}</td>
+                        <td>${employee.empId}</td>
+                        <td>${employee.hourlyWage}</td>
+                        <td>${employee.user}</td>
                         <td>${fn:length(employee.techRoles)}</td>
                         <td>
                             <spring:url value="/employee/${employee.id}" var="show_form_url"/>
