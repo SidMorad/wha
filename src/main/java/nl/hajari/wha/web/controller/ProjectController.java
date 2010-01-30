@@ -3,7 +3,7 @@ package nl.hajari.wha.web.controller;
 import java.util.List;
 
 import nl.hajari.wha.domain.Project;
-import nl.hajari.wha.service.ProjectService;
+import nl.hajari.wha.service.impl.ProjectServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ProjectController {
 
 	@Autowired
-	protected ProjectService service;
+	protected ProjectServiceImpl service;
 
 	@RequestMapping(value = "/project/list/all", method = RequestMethod.GET)
 	public String findAllProjects(Model model) {
