@@ -12,6 +12,22 @@
         <spring:message code="field.invalid.decimal" var="field_invalid"/>
         
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
+        
+        <!-- Tips -->
+        <div id="_tips_div" style="width: 98%;">
+        	<ul>
+        		<spring:message code="label.expense.month.view" var="label_expense_motnth_view" />
+        		<li><spring:message code="tip.travel.notice1" arguments="${label_expense_motnth_view}"/> </li>
+        		<li><spring:message code="tip.travel.from_to"/> </li>
+        		<li><spring:message code="tip.travel.return"/> </li>
+        		<li><spring:message code="tip.travel.distance"/> </li>
+        	</ul>
+        	<spring:message code="tips.title" var="tips_title"/>
+        	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_tips_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${tips_title}', open : false}})); </script>
+        </div>
+        <p></p>
+        <p></p>
+        
         <c:url var="action_url" value="/time/travel/update"/>
         <form:form action="${action_url}" modelAttribute="dailyTravel" method="POST">
         <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
