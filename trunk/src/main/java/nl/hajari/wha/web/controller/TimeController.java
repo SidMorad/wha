@@ -5,10 +5,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import nl.hajari.wha.domain.Timesheet;
 import nl.hajari.wha.domain.User;
-import nl.hajari.wha.service.CustomerService;
-import nl.hajari.wha.service.DailyExpenseService;
-import nl.hajari.wha.service.DailyTimesheetService;
-import nl.hajari.wha.service.ProjectService;
+import nl.hajari.wha.service.impl.CustomerServiceImpl;
+import nl.hajari.wha.service.impl.DailyExpenseServiceImpl;
+import nl.hajari.wha.service.impl.DailyTimesheetServiceImpl;
+import nl.hajari.wha.service.impl.ProjectServiceImpl;
 import nl.hajari.wha.web.util.SecurityContextUtils;
 
 import org.apache.commons.logging.Log;
@@ -29,16 +29,16 @@ public class TimeController {
 	protected final Log logger = LogFactory.getLog(getClass());
 
 	@Autowired
-	protected DailyTimesheetService dailyTimesheetService;
+	protected DailyTimesheetServiceImpl dailyTimesheetService;
 
 	@Autowired
-	protected ProjectService projectService;
+	protected ProjectServiceImpl projectService;
 
 	@Autowired
-	protected CustomerService customerService;
+	protected CustomerServiceImpl customerService;
 	
 	@Autowired
-	protected DailyExpenseService dailyExpenseService; 
+	protected DailyExpenseServiceImpl dailyExpenseService; 
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
