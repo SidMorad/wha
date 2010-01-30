@@ -30,7 +30,12 @@ div#branding
     margin: 0;
     padding: 10px 0 10px 20px;
     text-align: left;
-	}	
+	}
+div#logo {
+	float:right;
+	margin-top:-70px;
+	margin-right: 10px;
+}		
 div#footer 
 	{
 	color: #444;

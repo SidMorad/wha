@@ -75,6 +75,10 @@ div#branding p {
     line-height: 1em;
     color: white;
 }
+div#logo {
+	float:right;
+	margin-top:-82px;
+}
 
 #nav {
     background: #eee;
@@ -440,6 +444,7 @@ div#main
 	width: 530px;
 	display: inline;
 	padding-left: 3px;
+	min-height: 430px;
 	}
 div#nav 
 	{
