@@ -55,6 +55,19 @@
     	</c:url>
     	<spring:message code="global.theme.sid01" var="theme_sid01" />
     	<a href="${url_theme4}" title="${theme_sid01}">${theme_sid01}</a>
+    	<c:out value="&#160;|&#160;"/>
+
+    	<c:url var="url_theme5" value="">
+    		<c:param name="theme" value="hmsolutions" />
+    		<c:if test="${not empty param.page}">
+    			<c:param name="page" value="${param.page}" />
+    		</c:if>
+    		<c:if test="${not empty param.size}">
+    			<c:param name="size" value="${param.size}" />
+    		</c:if>
+    	</c:url>
+    	<spring:message code="global.theme.hmsolutions" var="theme_hmsolutions" />
+    	<a href="${url_theme5}" title="${theme_hmsolutions}">${theme_hmsolutions}</a>
     </span>
     
 </jsp:root>

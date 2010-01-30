@@ -1,18 +1,9 @@
-/* GENERATED ELEMENTS BY ROO */
+/* A CSS Framework by Mike Stenhouse of Content with Style - customized by Saeid Moradi*/
 
 body,div,td {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	color: #666;
-}
-
-body {
-	background: #fff url(../images/banner-bg.png) repeat-x;
-	background-position: top center;
-	color: #303030;
-	margin:0;
-	padding:0;
-	text-align: center;
 }
 
 .formContainer {
@@ -75,7 +66,6 @@ div#branding p {
 div#logo {
 	float:right;
 	margin-top:-82px;
-	margin-right: 10px;
 }
 
 #nav {
@@ -106,10 +96,13 @@ div#logo {
 
 #nav a.menupanel, #nav a.menupanel:hover  {
 	color: #fff;
-	background: #648C1D;
-	text-transform: uppercase;
+	background: #c00101;
 	font-weight:bold;
-	font-size: 1em;
+	font-size: 12px;
+	height: 27px;
+	line-height: 26px;
+	border: none;
+	font-size: 13px;
 }
 
 #nav a {
@@ -117,11 +110,13 @@ div#logo {
 	background: #efefef;
 	text-decoration: none;
 	padding: 2px 12px;
+    border-left: 4px solid #cccccc;
 }
 
 #nav a:hover {
 	color: #648C1D;
 	background: #fff;
+    border-left: 4px solid #286ea0;
 }
 
 .footer {
@@ -368,124 +363,12 @@ fieldset th {
 	font-size:11px;
 	color:#888888;
 }
-/* END GENERATED ELEMENTS BY ROO*/
 
-/* LAYOUT (layout.css) */
-body 
-	{
-	margin: 0;
-	padding: 0;
-	text-align: center;
-	}
-
-div#page 
-	{
-	min-width: 780px;
-	width: 100%;
-	margin: 0 auto;
-	padding: 0;
-	text-align: center;
-	}
-div#header 
-	{
-	margin: 0 0 2em 0;
-	padding: 6px 0 2px 10px;
-	text-align: left;
-	height: 79px; /* needed by IE 7*/
-	}
-div#branding
-	{
-    float: left;
-    width: 98%;
-    margin: 0;
-    padding: 10px 0 10px 20px;
-    text-align: left;
-	}	
-div#footer 
-	{
-	color: #444;
-	padding: 0;
-	text-align: left;
-	font-size: 0.9em; 
-	}
-div#footer div#divider 
-	{
-	margin: 0 0 4px 0;
-	border-top: 1px solid #ccc;
-	}
-div#footer div#divider div 
-	{
-	margin: 1px 0 0 0;
-	border-top: 3px solid #ebf5fc;
-	}
-div#footer .left 
-	{
-	float: left;
-	}
-div#footer .right 
-	{
-	float: right; 
-	}
-/* END LAYOUT */
-
-/* 2 COLUMN LAYOUT (layout-2column.css)*/
-div#content 
-	{
-	position: relative;
-	min-width: 778px;
-	width:100%;
-	margin: 0 auto 20px auto;
-	padding: 0;
-	text-align: left;
-	}
-div#main
-	{
-	float: left;
-	width: 75.5%;
-	display: inline;
-	padding-left: 3px;
-	min-height: 430px;
-	}
-div#nav 
-	{
-	float: left;
-	width: 17%;
-	}
-/* END 2 COLUMN LAYOUT*/	
-
-/* TOOLS (tools.css)*/
-.clear {
-	clear: both;
-	height: 1px;
-	margin: 0;
-	padding: 0;
-	font-size: 15px;
-	line-height: 1px;
-}
-
-.clearfix:after {
-	content: ".";
-	display: block;
-	height: 0;
-	clear: both;
-	visibility: hidden;
-}
-
-* html>body .clearfix {
-	display: inline-block;
-	width: 100%;
-}
-
-* html .clearfix {
-	height: 1%; /* Hide from IE-MAC*/
-}
-
-.accessibility {
-	position: absolute;
-	top:-999em;
-	left: -999em;
-}
-
-span.accesskey {
-	text-decoration: none;
+.tundra .dijitTitlePane .dijitTitlePaneTitle {
+	height: 23px;
+	line-height: 22px;
+	color: white;
+	background: #c00101;
+	font-weight: bold;
+	font-size: 13px;
 }

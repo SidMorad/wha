@@ -13,6 +13,7 @@ div#main
 	margin: 0;	
 	padding-left: 3px;
 	text-align: left;
+	min-height: 405px;
 	}
 div#sub
 	{

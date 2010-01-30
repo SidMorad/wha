@@ -1,10 +1,9 @@
 /* A CSS Framework by Mike Stenhouse of Content with Style - customized by Saeid Moradi*/
 
-/* NAV BAR AT THE TOP AND TWO COLUMNS OF CONTENT */
 div#content 
 	{
 	position: relative;
-	width: 778px;
+	width: 849px;
 	margin: 0 auto 20px auto;
 	padding: 0;
 	text-align: left;
@@ -12,23 +11,14 @@ div#content
 div#main
 	{
 	float: left;
-	width: 530px;
+	width: 630px;
 	display: inline;
-	padding-left: 3px;
+	padding-left: 5px;
 	min-height: 312px;
-	}
-div#sub 
-	{
-	float: right;
-	width: 240px;
 	}
 div#nav 
 	{
-	position: absolute;
-	top: -11px;
-	left: 0px;
-	width: 100%;
-	text-align: left;
-	font-size: 100%;
-	}	
-			
+	float: left;
+	width: 191px;
+	}
+/* END CONTENT */
