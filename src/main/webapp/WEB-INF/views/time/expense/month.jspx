@@ -12,6 +12,20 @@
         <spring:message code="field.invalid.decimal" var="field_invalid"/>
         
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
+        
+        <!-- Tips -->
+        <div id="_tips_div" style="width: 98%;">
+        	<ul>
+        		<li><spring:message code="tip.expense.customer"/></li>
+        		<li><spring:message code="tip.expense.for"/> </li>
+        		<li><spring:message code="tip.expense.amount"/> </li>
+        	</ul>
+        	<spring:message code="tips.title" var="tips_title"/>
+        	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_tips_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${tips_title}', open : false}})); </script>
+        </div>
+        <p></p>
+        <p></p>
+        
         <c:url var="action_url" value="/time/expense/update"/>
         <form:form action="${action_url}" modelAttribute="dailyExpense" method="POST">
         <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
