@@ -30,6 +30,9 @@
 	<variable name="durationTraining_1" class="java.lang.Float" calculation="Sum">
 		<variableExpression><![CDATA[$F{durationTraining}]]></variableExpression>
 	</variable>
+	<variable name="dailyTotalDuration_1" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{dailyTotalDuration}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -193,7 +196,7 @@
 			<textField>
 				<reportElement x="509" y="9" width="54" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.Float"><![CDATA[$F{timesheet.monthlyTotal}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$V{dailyTotalDuration_1}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
