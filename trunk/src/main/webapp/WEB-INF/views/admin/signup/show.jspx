@@ -25,30 +25,86 @@
             </div>
             <br/>
             <div id="roo_employee_firstName">
-                <label for="_firstName"><spring:message code="employee.firstName"/>:</label>
+                <label for="_firstName"><spring:message code="label.firstName"/>:</label>
                 <div class="box" id="_firstName">${user.employee.firstName}</div>
             </div>
             <br/>
             <div id="roo_employee_lastName">
-                <label for="_lastName"><spring:message code="employee.lastName"/>:</label>
+                <label for="_lastName"><spring:message code="label.lastName"/>:</label>
                 <div class="box" id="_lastName">${user.employee.lastName}</div>
             </div>
             <br/>
             <div id="roo_employee_empId">
-                <label for="_empId"><spring:message code="employee.empId"/>:</label>
+                <label for="_empId"><spring:message code="label.empId"/>:</label>
                 <div class="box" id="_empId">${user.employee.empId}</div>
             </div>
             <br/>
             <div id="roo_employee_hourlyWage">
-                <label for="_hourlyWage"><spring:message code="employee.hourlyWage"/>:</label>
+                <label for="_hourlyWage"><spring:message code="label.hourlyWage"/>:</label>
                 <div class="box" id="_hourlyWage">${user.employee.hourlyWage}</div>
             </div>
             <br/>
             <div id="roo_employee_techRoles">
-                <label for="_techRoles"><spring:message code="employee.techRoles"/>:</label>
+                <label for="_techRoles"><spring:message code="label.techRoles"/>:</label>
                 <div class="box" id="_techRoles">${user.employee.techRoles}</div>
             </div>
             <br/>
+            
+            <div id="roo_employee_privateAddress">
+                <label for="_privateAddress_id"><spring:message code="label.privateAddress"/>:</label>
+                <div class="box" id="_privateAddress_id">${user.employee.privateAddress}</div>
+            </div>
+            <br/>
+            <div id="roo_employee_postcode">
+                <label for="_postcode_id"><spring:message code="label.postcode"/>:</label>
+                <div class="box" id="_postcode_id">${user.employee.postcode}</div>
+            </div>
+            <br/>
+            <div id="roo_employee_place">
+                <label for="_place_id"><spring:message code="label.place"/>:</label>
+                <div class="box" id="_place_id">${user.employee.place}</div>
+            </div>
+            <br/>
+            <div id="roo_employee_privatePhone">
+                <label for="_privatePhone_id"><spring:message code="label.privatePhone"/>:</label>
+                <div class="box" id="_privatePhone_id">${user.employee.privatePhone}</div>
+            </div>
+            <br/>
+            <div id="roo_employee_workPhone">
+                <label for="_workPhone_id"><spring:message code="label.workPhone"/>:</label>
+                <div class="box" id="_workPhone_id">${user.employee.workPhone}</div>
+            </div>
+            <br/>
+            <div id="roo_employee_mobile">
+                <label for="_mobile_id"><spring:message code="label.mobile"/>:</label>
+                <div class="box" id="_mobile_id">${user.employee.mobile}</div>
+            </div>
+            <br/>
+            <div id="roo_employee_birthday">
+                <label for="_birthday_id"><spring:message code="label.birthday"/>:</label>
+                <div class="box" id="_birthday_id">
+                    <fmt:formatDate pattern="d/MM/yy" value="${user.employee.birthday}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_employee_startDate">
+                <label for="_startDate_id"><spring:message code="label.startDate"/>:</label>
+                <div class="box" id="_startDate_id">
+                    <fmt:formatDate pattern="d/MM/yy" value="${user.employee.startDate}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_employee_organization">
+                <label for="_organization_id"><spring:message code="label.organization"/>:</label>
+                <div class="box" id="_organization_id">${user.employee.organization}</div>
+            </div>
+            <br/>
+            <div id="roo_employee_managementName">
+                <label for="_managementName_id"><spring:message code="label.managementName"/>:</label>
+                <div class="box" id="_managementName_id">${user.employee.managementName}</div>
+            </div>
+            <br/>
+            
             <div id="roo_user_enabled">
                 <label for="_enabled"><spring:message code="user.enabled"/>:</label>
                 <div class="box" id="_enabled">${user.enabled}</div>

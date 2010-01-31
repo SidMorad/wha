@@ -1,38 +1,93 @@
-<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:form="http://www.springframework.org/tags/form" xmlns:spring="http://www.springframework.org/tags">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
     <script type="text/javascript">dojo.require('dijit.TitlePane');</script>
-    <div id="_title_div" style="width: 100%">
+    <div id="_title_div">
         <spring:message code="label.employee" var="entity_label"/>
         <spring:message arguments="${entity_label}" code="entity.show" var="title_msg"/>
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
         <c:if test="${not empty employee}">
             <div id="roo_employee_firstName">
-                <label for="_firstName">First Name:</label>
-                <div class="box" id="_firstName">${employee.firstName}</div>
+                <label for="_firstName_id"><spring:message code="label.firstName"/></label>
+                <div class="box" id="_firstName_id">${employee.firstName}</div>
             </div>
             <br/>
             <div id="roo_employee_lastName">
-                <label for="_lastName">Last Name:</label>
-                <div class="box" id="_lastName">${employee.lastName}</div>
+                <label for="_lastName_id"><spring:message code="label.lastName"/>:</label>
+                <div class="box" id="_lastName_id">${employee.lastName}</div>
             </div>
             <br/>
             <div id="roo_employee_empId">
-                <label for="_empId">Emp Id:</label>
-                <div class="box" id="_empId">${employee.empId}</div>
+                <label for="_empId_id"><spring:message code="label.empId"/>:</label>
+                <div class="box" id="_empId_id">${employee.empId}</div>
             </div>
             <br/>
             <div id="roo_employee_hourlyWage">
-                <label for="_hourlyWage">Hourly Wage:</label>
-                <div class="box" id="_hourlyWage">${employee.hourlyWage}</div>
+                <label for="_hourlyWage_id"><spring:message code="label.hourlyWage"/>:</label>
+                <div class="box" id="_hourlyWage_id">${employee.hourlyWage}</div>
             </div>
             <br/>
             <div id="roo_employee_user">
-                <label for="_user">User:</label>
-                <div class="box" id="_user">${employee.user}</div>
+                <label for="_user_id"><spring:message code="label.user"/>:</label>
+                <div class="box" id="_user_id">${employee.user}</div>
             </div>
             <br/>
             <div id="roo_employee_techRoles">
-                <label for="_techRoles">Tech Roles:</label>
-                <div class="box" id="_techRoles">${employee.techRoles}</div>
+                <label for="_techRoles_id"><spring:message code="label.techRoles"/>:</label>
+                <div class="box" id="_techRoles_id">${employee.techRoles}</div>
+            </div>
+            <br/>
+            <div id="roo_employee_privateAddress">
+                <label for="_privateAddress_id"><spring:message code="label.privateAddress"/>:</label>
+                <div class="box" id="_privateAddress_id">${employee.privateAddress}</div>
+            </div>
+            <br/>
+            <div id="roo_employee_postcode">
+                <label for="_postcode_id"><spring:message code="label.postcode"/>:</label>
+                <div class="box" id="_postcode_id">${employee.postcode}</div>
+            </div>
+            <br/>
+            <div id="roo_employee_place">
+                <label for="_place_id"><spring:message code="label.place"/>:</label>
+                <div class="box" id="_place_id">${employee.place}</div>
+            </div>
+            <br/>
+            <div id="roo_employee_privatePhone">
+                <label for="_privatePhone_id"><spring:message code="label.privatePhone"/>:</label>
+                <div class="box" id="_privatePhone_id">${employee.privatePhone}</div>
+            </div>
+            <br/>
+            <div id="roo_employee_workPhone">
+                <label for="_workPhone_id"><spring:message code="label.workPhone"/>:</label>
+                <div class="box" id="_workPhone_id">${employee.workPhone}</div>
+            </div>
+            <br/>
+            <div id="roo_employee_mobile">
+                <label for="_mobile_id"><spring:message code="label.mobile"/>:</label>
+                <div class="box" id="_mobile_id">${employee.mobile}</div>
+            </div>
+            <br/>
+            <div id="roo_employee_birthday">
+                <label for="_birthday_id"><spring:message code="label.birthday"/>:</label>
+                <div class="box" id="_birthday_id">
+                    <fmt:formatDate pattern="d/MM/yy" value="${employee.birthday}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_employee_startDate">
+                <label for="_startDate_id"><spring:message code="label.startDate"/>:</label>
+                <div class="box" id="_startDate_id">
+                    <fmt:formatDate pattern="d/MM/yy" value="${employee.startDate}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_employee_organization">
+                <label for="_organization_id"><spring:message code="label.organization"/>:</label>
+                <div class="box" id="_organization_id">${employee.organization}</div>
+            </div>
+            <br/>
+            <div id="roo_employee_managementName">
+                <label for="_managementName_id"><spring:message code="label.managementName"/>:</label>
+                <div class="box" id="_managementName_id">${employee.managementName}</div>
             </div>
             <br/>
         </c:if>
