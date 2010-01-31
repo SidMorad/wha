@@ -1,5 +1,6 @@
 package nl.hajari.wha.domain;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -48,6 +49,36 @@ public class Employee {
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "employee_has_techrole", joinColumns = { @JoinColumn(name = "employee_id") }, inverseJoinColumns = @JoinColumn(name = "techrole_id"))
 	private Set<TechRole> techRoles = new HashSet<TechRole>();
+
+	@Column(name = "private_address", length = 255)
+	private String privateAddress;
+
+	@Column(name = "postcode", length = 10)
+	private Integer postcode;
+
+	@Column(name = "place", length = 50)
+	private String place;
+
+	@Column(name = "private_phone", length = 12)
+	private String privatePhone;
+
+	@Column(name = "work_phone", length = 12)
+	private String workPhone;
+
+	@Column(name = "mobile", length = 12)
+	private String mobile;
+
+	@Column(name = "birthday")
+	private Date birthday;
+	
+	@Column(name = "startDate")
+	private Date startDate;
+
+	@Column(name = "organization", length = 50)
+	private String organization;
+
+	@Column(name = "management_name", length = 50)
+	private String managementName;
 
 	@Override
 	public String toString() {
