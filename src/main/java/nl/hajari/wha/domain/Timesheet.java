@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import nl.hajari.wha.web.util.DateUtils;
@@ -25,6 +26,7 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 @Entity
 @RooJavaBean
 @RooEntity(finders = { "findTimesheetsByEmployeeAndSheetMonthAndSheetYearEquals", "findTimesheetsByEmployee" })
+@UniqueConstraint(columnNames = "sheetYear,sheetMonth,employee")
 public class Timesheet {
 
     public static final String TIMESHEET_ID = "timesheetId";

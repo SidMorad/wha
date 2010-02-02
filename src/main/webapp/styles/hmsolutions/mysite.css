@@ -203,7 +203,7 @@ tr:nth-child(even) {
 }
 
 a:link {
-	color: #7db223;
+	color: #003366;
 }
 
 a:hover {
@@ -211,11 +211,11 @@ a:hover {
 }
 
 a:active {
-	color: #7db223;
+	color: #003366;
 }
 
 a:visited {
-	color: #7db223;
+	color: #003366;
 }
 
 ul {

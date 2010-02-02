@@ -44,13 +44,14 @@
 	</head>
    	<body class="tundra spring">		
   		<div id="page">
+			<c:url var="home" value="/" />
   			<div id="header" class="clearfix">
   				<div id="branding">
-					<h1>WHA</h1>
+					<a href="${home}" title="${hajari}" style="text-decoration:none;"><h1>WHA</h1>
 					<p><spring:message code="welcome.h3" /></p>
+					</a>
   				</div>
 				<div id="logo">
-					<c:url var="home" value="/" />
 					<c:url var="logo" value="/static/images/logo-green.gif" />
 				    <spring:message code="global.hajari.multitasking" var="hajari"/>
 				    <a href="${home}" title="${hajari}"><img src="${logo}" alt="${hajari}" align="right"/></a>
