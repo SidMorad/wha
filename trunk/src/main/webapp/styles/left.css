@@ -77,7 +77,8 @@ div#branding p {
 }
 div#logo {
 	float:right;
-	margin-top:-82px;
+	margin-top:-78px;
+	margin-right: 20px;
 }
 
 #nav {
@@ -399,7 +400,7 @@ div#branding
     float: left;
     width: 100%;
     margin: 0;
-    padding: 10px 0 10px 20px;
+    padding: 0 0 10px 20px;
     text-align: left;
 	}	
 div#footer 

@@ -44,6 +44,7 @@
 	<mvc:view-controller path="/uncaughtException" />
 	<mvc:view-controller path="/resourceNotFound" />
 	<mvc:view-controller path="/dataAccessFailure" />
+	<mvc:view-controller path="/accessDenied" />
 
 	<!--
 		Resolves logical view names returned by Controllers to Tiles; a view
@@ -110,7 +111,7 @@
 				<prop key=".NoSuchRequestHandlingMethodException">resourceNotFound</prop>
 				<prop key=".TypeMismatchException">resourceNotFound</prop>
 				<prop key=".lang.Exception">uncaughtException</prop>
-				<prop key=".AccessDeniedException">403</prop>
+				<prop key=".AccessDeniedException">accessDenied</prop>
 			</props>
 		</property>
 	</bean>
