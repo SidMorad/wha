@@ -6,32 +6,32 @@
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
         <c:if test="${not empty employee}">
             <div id="roo_employee_firstName">
-                <label for="_firstName">First Name:</label>
+                <label for="_firstName"><spring:message code="label.firstName"/>:</label>
                 <div class="box" id="_firstName">${employee.firstName}</div>
             </div>
             <br/>
             <div id="roo_employee_lastName">
-                <label for="_lastName">Last Name:</label>
+                <label for="_lastName"><spring:message code="label.lastName"/>:</label>
                 <div class="box" id="_lastName">${employee.lastName}</div>
             </div>
             <br/>
             <div id="roo_employee_user_email">
-                <label for="_user">Email:</label>
+                <label for="_user"><spring:message code="label.email"/>:</label>
                 <div class="box" id="_user">${employee.user.email}</div>
             </div>
             <br/>
             <div id="roo_employee_empId">
-                <label for="_empId">Emp Id:</label>
+                <label for="_empId"><spring:message code="label.empId"/>:</label>
                 <div class="box" id="_empId">${employee.empId}</div>
             </div>
             <br/>
             <div id="roo_employee_hourlyWage">
-                <label for="_hourlyWage">Hourly Wage:</label>
+                <label for="_hourlyWage"><spring:message code="label.hourlyWage"/>:</label>
                 <div class="box" id="_hourlyWage">${employee.hourlyWage}</div>
             </div>
             <br/>
             <div id="roo_employee_techRoles">
-                <label for="_techRoles">Tech Roles:</label>
+                <label for="_techRoles"><spring:message code="label.techRoles"/>:</label>
                 <div class="box" id="_techRoles">${employee.techRoles}</div>
             </div>
             <br/>

@@ -14,7 +14,7 @@
             </font>
             </c:if>
             <div id="roo_user_username">
-            	<spring:message code="user.username" var="user_username"/>
+            	<spring:message code="label.username" var="user_username"/>
                 <label for="_username">${user_username}:</label>
                 <form:input cssStyle="width:250px" id="_username" maxlength="30" path="username" size="0"/>
                 <br/>
@@ -26,7 +26,7 @@
             </div>
             <br/>
             <div id="roo_user_password">
-            	<spring:message code="user.password" var="user_password"/>
+            	<spring:message code="label.password" var="user_password"/>
                 <label for="_password">${user_password}:</label>
                 <form:password cssStyle="width:250px" id="_password" maxlength="30" path="password" size="0"/>
                 <br/>
@@ -38,7 +38,7 @@
             </div>
             <br/>
             <div id="roo_user_confirmPassword">
-            	<spring:message code="user.confirmPassword" var="user_confirmPassword"/>
+            	<spring:message code="label.confirmPassword" var="user_confirmPassword"/>
                 <label for="_confirmPassword">${user_confirmPassword}:</label>
                 <form:password cssStyle="width:250px" id="_confirmPassword" maxlength="30" path="confirmPassword" size="0"/>
                 <br/>
@@ -50,7 +50,7 @@
             </div>
             <br/>
             <div id="roo_user_email">
-            	<spring:message code="user.email" var="user_email"/>
+            	<spring:message code="label.email" var="user_email"/>
                 <label for="_email">${user_email}:</label>
                 <form:input cssStyle="width:250px" id="_email" maxlength="30" path="email" size="0"/>
                 <br/>
@@ -242,22 +242,22 @@
             <br/>
             
             <div id="roo_user_enabled">
-                <label for="_enabled"><spring:message code="user.enabled"/>:</label>
+                <label for="_enabled"><spring:message code="label.enabled"/>:</label>
                 <form:checkbox id="_enabled" path="enabled" />
             </div>
             <br/>
             <div id="roo_user_accountExpired">
-                <label for="_accountExpired"><spring:message code="user.accountExpired"/>:</label>
+                <label for="_accountExpired"><spring:message code="label.accountExpired"/>:</label>
                 <form:checkbox id="_accountExpired" path="accountExpired"/>
             </div>
             <br/>
             <div id="roo_user_accountLocked">
-                <label for="_accountLocked"><spring:message code="user.accountLocked"/>:</label>
+                <label for="_accountLocked"><spring:message code="label.accountLocked"/>:</label>
                 <form:checkbox id="_accountLocked" path="accountLocked"/>
             </div>
             <br/>
             <div id="roo_user_credentialsExpired">
-                <label for="_credentialsExpired"><spring:message code="user.credentialsExpired"/>:</label>
+                <label for="_credentialsExpired"><spring:message code="label.credentialsExpired"/>:</label>
                 <form:checkbox id="_credentialsExpired" path="credentialsExpired"/>
             </div>
             <br/>

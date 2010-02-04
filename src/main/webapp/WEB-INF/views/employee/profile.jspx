@@ -8,7 +8,7 @@
         <form:form action="${form_url}" method="POST" modelAttribute="profileFormBean">
             <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
             <div id="roo_user_password">
-                <label for="_password"><spring:message code="user.password"/>:</label>
+                <label for="_password"><spring:message code="label.password"/>:</label>
                 <form:password cssStyle="width:250px" id="_password" maxlength="30" path="password" size="0"/>
                 <br/>
                 <form:errors cssClass="errors" id="_password" path="password"/>
@@ -19,7 +19,7 @@
             </div>
             <br/>
             <div id="roo_user_confirmPassword">
-                <label for="_confirmPassword"><spring:message code="user.confirmPassword"/>:</label>
+                <label for="_confirmPassword"><spring:message code="label.confirmPassword"/>:</label>
                 <form:password cssStyle="width:250px" id="_confirmPassword" maxlength="30" path="confirmPassword" size="0"/>
                 <br/>
                 <form:errors cssClass="errors" id="_confirmPassword" path="confirmPassword"/>
@@ -30,7 +30,7 @@
             </div>
             <br/>
             <div id="roo_user_email">
-                <label for="_email">Email:</label>
+                <label for="_email"><spring:message code="label.email"/>:</label>
                 <form:input cssStyle="width:250px" id="_email" maxlength="30" path="email" size="0"/>
                 <br/>
                 <form:errors cssClass="errors" id="_email" path="email"/>
