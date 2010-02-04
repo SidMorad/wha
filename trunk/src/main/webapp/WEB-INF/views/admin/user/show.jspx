@@ -1,59 +1,60 @@
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:form="http://www.springframework.org/tags/form" xmlns:spring="http://www.springframework.org/tags">
     <script type="text/javascript">dojo.require("dijit.TitlePane");</script>
     <div id="_title" style="width: 100%">
-        <spring:message arguments="User" code="entity.show" var="title"/>
+        <spring:message code="label.user" var="label_user"/>    
+        <spring:message arguments="${label_user}" code="entity.show" var="title"/>
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title}'}})); </script>
         <c:if test="${not empty user}">
             <div id="roo_user_username">
-                <label for="_username">Username:</label>
+                <label for="_username"><spring:message code="label.username"/>:</label>
                 <div class="box" id="_username">${user.username}</div>
             </div>
             <br/>
             <div id="roo_user_password">
-                <label for="_password">Password:</label>
+                <label for="_password"><spring:message code="label.password"/>:</label>
                 <div class="box" id="_password">${user.password}</div>
             </div>
             <br/>
             <div id="roo_user_email">
-                <label for="_email">Email:</label>
+                <label for="_email"><spring:message code="label.email"/>:</label>
                 <div class="box" id="_email">${user.email}</div>
             </div>
             <br/>
             <c:if test="${not empty user.employee}">
             <div id="roo_user_employee">
-                <label for="_employee">Employee:</label>
+                <label for="_employee"><spring:message code="label.employee"/>:</label>
                 <div class="box" id="_employee">${user.employee}</div>
             </div>
             <br/>
             </c:if>
             <div id="roo_user_roles">
-                <label for="_roles">Roles:</label>
+                <label for="_roles"><spring:message code="label.roles"/>:</label>
                 <div class="box" id="_roles">${user.roles}</div>
             </div>
             <br/>
             <div id="roo_user_enabled">
-                <label for="_enabled">Enabled:</label>
+                <label for="_enabled"><spring:message code="label.enabled"/>:</label>
                 <div class="box" id="_enabled">${user.enabled}</div>
             </div>
             <br/>
             <div id="roo_user_accountExpired">
-                <label for="_accountExpired">Account Expired:</label>
+                <label for="_accountExpired"><spring:message code="label.accountExpired"/>:</label>
                 <div class="box" id="_accountExpired">${user.accountExpired}</div>
             </div>
             <br/>
             <div id="roo_user_accountLocked">
-                <label for="_accountLocked">Account Locked:</label>
+                <label for="_accountLocked"><spring:message code="label.accountLocked"/>:</label>
                 <div class="box" id="_accountLocked">${user.accountLocked}</div>
             </div>
             <br/>
             <div id="roo_user_credentialsExpired">
-                <label for="_credentialsExpired">Credentials Expired:</label>
+                <label for="_credentialsExpired"><spring:message code="label.credentialsExpired"/>:</label>
                 <div class="box" id="_credentialsExpired">${user.credentialsExpired}</div>
             </div>
             <br/>
         </c:if>
         <c:if test="${empty user}">
-            <spring:message arguments="User" code="entity.not.found.single"/>
+            <spring:message arguments="${label_user}" code="entity.not.found.single"/>
         </c:if>
     </div>
 </div>

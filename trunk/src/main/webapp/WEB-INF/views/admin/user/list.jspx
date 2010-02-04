@@ -1,35 +1,35 @@
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:form="http://www.springframework.org/tags/form" xmlns:roo="urn:jsptagdir:/WEB-INF/tags" xmlns:spring="http://www.springframework.org/tags">
     <script type="text/javascript">dojo.require("dijit.TitlePane");</script>
     <div id="_title" style="width: 100%">
-        <spring:message arguments="Users" code="entity.list.all" var="title"/>
+        <spring:message code="label.user" var="label_user"/>
+        <spring:message code="label.users" var="label_users"/>
+        <spring:message arguments="${label_users}" code="entity.list.all" var="title"/>
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title}'}})); </script>
         <c:if test="${not empty users}">
             <table style="width:98%">
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Username</th>
-                        <!--th>Password</th-->
-                        <th>Enabled</th>
-                        <th>Email</th>
-                        <th>Change Password</th>
-                        <th/>
-                        <th/>
-                        <th/>
+                        <th><spring:message code="label.id"/></th>
+                        <th><spring:message code="label.username"/></th>
+                        <th><spring:message code="label.enabled"/></th>
+                        <th><spring:message code="label.email"/></th>
+                        <th><spring:message code="label.changePassword"/></th>
+                        <th></th>
+                        <th></th> 
+                        <th></th>
                     </tr>
                 </thead>
                 <c:forEach items="${users}" var="user">
                     <tr>
                         <td>${user.id}</td>
                         <td>${user.username}</td>
-                        <!--td>${fn:substring(user.password, 0, 10)}</td-->
                         <td>${user.enabled}</td>
                         <td>${user.email}</td>
                         <td>
                             <c:url value="/admin/user/change_password/${user.id}/form" var="change_password_url"/>
                             <c:url value="/static/images/update.png" var="update_image_url"/>
                             <form:form action="${change_password_url}" method="GET">
-                                <spring:message code="user.changePassword" var="update_label"/>
+                                <spring:message code="label.changePassword" var="update_label"/>
                                 <input alt="${update_label}" class="image" src="${update_image_url}" title="${update_label}" type="image" value="${update_label}"/>
                             </form:form>
                         </td>
@@ -37,7 +37,7 @@
                             <c:url value="/admin/user/${user.id}" var="show_form_url"/>
                             <c:url value="/static/images/show.png" var="show_image_url"/>
                             <form:form action="${show_form_url}" method="GET">
-                                <spring:message arguments="User" code="entity.show" var="show_label"/>
+                                <spring:message arguments="${label_user}" code="entity.show" var="show_label"/>
                                 <input alt="${show_label}" class="image" src="${show_image_url}" title="${show_label}" type="image" value="${show_label}"/>
                             </form:form>
                         </td>
@@ -45,7 +45,7 @@
                             <c:url value="/admin/user/${user.id}/form" var="update_form_url"/>
                             <c:url value="/static/images/update.png" var="update_image_url"/>
                             <form:form action="${update_form_url}" method="GET">
-                                <spring:message arguments="User" code="entity.update" var="update_label"/>
+                                <spring:message arguments="${label_user}" code="entity.update" var="update_label"/>
                                 <input alt="${update_label}" class="image" src="${update_image_url}" title="${update_label}" type="image" value="${update_label}"/>
                             </form:form>
                         </td>
@@ -53,7 +53,7 @@
                             <c:url value="/admin/user/${user.id}" var="delete_form_url"/>
                             <c:url value="/static/images/delete.png" var="delete_image_url"/>
                             <form:form action="${delete_form_url}" method="DELETE">
-                                <spring:message arguments="User" code="entity.delete" var="delete_label"/>
+                                <spring:message arguments="${label_user}" code="entity.delete" var="delete_label"/>
                                 <input alt="${delete_label}" class="image" src="${delete_image_url}" title="${delete_label}" type="image" value="${delete_label}"/>
                             </form:form>
                         </td>
@@ -65,7 +65,7 @@
                             <c:url value="/admin/user/form" var="create_url"/>
                             <a href="${create_url}">
                                 <c:url value="/static/images/add.png" var="create_img_url"/>
-                                <spring:message arguments="User" code="global.menu.new" var="add_message"/>
+                                <spring:message arguments="${label_user}" code="global.menu.new" var="add_message"/>
                                 <img alt="${add_message}" src="${create_img_url}" title="${add_message}"/>
                             </a>
                         </span>
@@ -77,7 +77,7 @@
             </table>
         </c:if>
         <c:if test="${empty users}">
-            <spring:message arguments="Users" code="entity.not.found"/>
+            <spring:message arguments="${label_users}" code="entity.not.found"/>
         </c:if>
     </div>
 </div>

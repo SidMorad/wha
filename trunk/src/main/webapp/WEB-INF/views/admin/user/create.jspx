@@ -1,12 +1,13 @@
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="http://www.springframework.org/tags/form" xmlns:spring="http://www.springframework.org/tags">
     <script type="text/javascript">dojo.require("dijit.TitlePane");dojo.require("dijit.form.MultiSelect");</script>
     <div id="_title" style="width: 100%">
-        <spring:message arguments="User" code="entity.create" var="title"/>
+        <spring:message code="label.user" var="label_user"/>    
+        <spring:message arguments="${label_user}" code="entity.create" var="title"/>
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title}'}})); </script>
         <c:url value="/admin/user" var="form_url"/>
         <form:form action="${form_url}" method="POST" modelAttribute="user">
             <div id="roo_user_username">
-                <label for="_username">Username:</label>
+                <label for="_username"><spring:message code="label.username"/>:</label>
                 <form:input cssStyle="width:250px" id="_username" maxlength="30" path="username" size="0"/>
                 <br/>
                 <form:errors cssClass="errors" id="_username" path="username"/>
@@ -17,7 +18,7 @@
             </div>
             <br/>
             <div id="roo_user_password">
-                <label for="_password">Password:</label>
+                <label for="_password"><spring:message code="label.password"/>:</label>
                 <form:password cssStyle="width:250px" id="_password" maxlength="30" path="password" size="0"/>
                 <br/>
                 <form:errors cssClass="errors" id="_password" path="password"/>
@@ -28,7 +29,7 @@
             </div>
             <br/>
             <div id="roo_user_confirmPassword">
-                <label for="_confirmPassword">Confirm Password:</label>
+                <label for="_confirmPassword"><spring:message code="label.confirmPassword"/>:</label>
                 <form:password cssStyle="width:250px" id="_confirmPassword" maxlength="30" path="confirmPassword" size="0"/>
                 <br/>
                 <form:errors cssClass="errors" id="_confirmPassword" path="confirmPassword"/>
@@ -39,7 +40,7 @@
             </div>
             <br/>
             <div id="roo_user_email">
-                <label for="_email">Email:</label>
+                <label for="_email"><spring:message code="label.email"/>:</label>
                 <form:input cssStyle="width:250px" id="_email" maxlength="30" path="email" size="0"/>
                 <br/>
                 <form:errors cssClass="errors" id="_email" path="email"/>
@@ -51,7 +52,7 @@
             <br/>
             <div id="roo_user_roles">
                 <c:if test="${not empty roles}">
-                    <label for="_roles">Roles:</label>
+                    <label for="_roles"><spring:message code="label.roles"/>:</label>
                     <form:select cssStyle="width:250px" id="_roles" path="roles">
                         <form:options itemValue="id" items="${roles}"/>
                     </form:select>
@@ -60,22 +61,22 @@
             </div>
             <br/>
             <div id="roo_user_enabled">
-                <label for="_enabled">Enabled:</label>
+                <label for="_enabled"><spring:message code="label.enabled"/>:</label>
                 <form:checkbox id="_enabled" path="enabled"/>
             </div>
             <br/>
             <div id="roo_user_accountExpired">
-                <label for="_accountExpired">Account Expired:</label>
+                <label for="_accountExpired"><spring:message code="label.accountExpired"/>:</label>
                 <form:checkbox id="_accountExpired" path="accountExpired"/>
             </div>
             <br/>
             <div id="roo_user_accountLocked">
-                <label for="_accountLocked">Account Locked:</label>
+                <label for="_accountLocked"><spring:message code="label.accountLocked"/>:</label>
                 <form:checkbox id="_accountLocked" path="accountLocked"/>
             </div>
             <br/>
             <div id="roo_user_credentialsExpired">
-                <label for="_credentialsExpired">Credentials Expired:</label>
+                <label for="_credentialsExpired"><spring:message code="label.credentialsExpired"/>:</label>
                 <form:checkbox id="_credentialsExpired" path="credentialsExpired"/>
             </div>
             <br/>
