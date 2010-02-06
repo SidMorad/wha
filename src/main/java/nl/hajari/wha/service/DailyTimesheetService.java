@@ -5,8 +5,6 @@ package nl.hajari.wha.service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import nl.hajari.wha.domain.DailyTimesheet;
 
 /**
@@ -17,15 +15,11 @@ import nl.hajari.wha.domain.DailyTimesheet;
 public interface DailyTimesheetService {
 
 	/**
-	 * 
-	 * 
 	 * @param dailyTimesheet
-	 * @param request
+	 * @param timesheetId
 	 * @return
 	 */
-	// TODO why HttpRequest is appeared in service layer?
-	DailyTimesheet createDailyTimesheet(DailyTimesheet dailyTimesheet,
-			HttpServletRequest request);
+	DailyTimesheet createDailyTimesheet(DailyTimesheet dailyTimesheet, Long timesheetId);
 
 	/**
 	 * @param dailyTimesheet
@@ -53,11 +47,9 @@ public interface DailyTimesheetService {
 
 	/**
 	 * @param dailyTimesheet
-	 * @param request
+	 * @param timesheetId
 	 * @return
 	 */
-	// TODO better name? such as 'validate'? and maybe the 'validate' may
-	// delegate to different method in different implementations
-	boolean checkIfDurationIsMoreThan24(DailyTimesheet dailyTimesheet, HttpServletRequest request);
+	boolean validateDailyHours(DailyTimesheet dailyTimesheet, Long timesheetId);
 
 }

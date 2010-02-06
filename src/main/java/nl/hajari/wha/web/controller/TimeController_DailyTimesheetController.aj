@@ -25,7 +25,7 @@ privileged aspect TimeController_DailyTimesheetController {
 
 	@RequestMapping(value = "/time/view/month", method = RequestMethod.GET)
 	public String TimeController.prepareTimesheetMonthView(HttpServletRequest request, ModelMap modelMap) {
-		Long employeeId = (Long) request.getSession().getAttribute(Employee.EMPLOYEE_ID);
+		Long employeeId = getEmployeeId(request);
 		logger.debug("Employee on the session: " + employeeId);
 		if (employeeId == null) {
 			throw new IllegalStateException("Month time sheet view requires registered emplpee. Employee ID is null.");
@@ -57,9 +57,9 @@ privileged aspect TimeController_DailyTimesheetController {
 		if (dailyTimesheet == null) {
 			throw new IllegalArgumentException("DailyTimesheet is null.");
 		}
-        if (!DateUtils.getCurrentMonth().equals(DateUtils.getMonthInteger(dailyTimesheet.getDayDate()))) {
-        	result.rejectValue("dayDate", "error.time.day.date.not.avaiable");
-        }
+		if (!DateUtils.getCurrentMonth().equals(DateUtils.getMonthInteger(dailyTimesheet.getDayDate()))) {
+			result.rejectValue("dayDate", "error.time.day.date.not.avaiable");
+		}
 		if (StringUtils.hasText(dailyTimesheet.getProjectName())) {
 			logger.debug("Recieved project name: " + dailyTimesheet.getProjectName());
 			try {
@@ -72,12 +72,12 @@ privileged aspect TimeController_DailyTimesheetController {
 		} else {
 			result.rejectValue("projectName", "field.required");
 		}
-		if (dailyTimesheetService.checkIfDurationIsMoreThan24(dailyTimesheet, request)) {
+		if (dailyTimesheetService.validateDailyHours(dailyTimesheet, getTimesheetId(request))) {
 			result.rejectValue("duration", "error.time.duration.more.than.24");
 		}
 		if (result.hasErrors()) {
 			// Fill modelMap
-			Long employeeId = (Long) request.getSession().getAttribute(Employee.EMPLOYEE_ID);
+			Long employeeId = getEmployeeId(request);
 			Timesheet timesheet = (Timesheet) Timesheet.findEmployeeCurrentTimesheet(employeeId).getSingleResult();
 			modelMap.put("employee", Employee.findEmployee(employeeId));
 			modelMap.put("timesheet", timesheet);
@@ -85,13 +85,13 @@ privileged aspect TimeController_DailyTimesheetController {
 
 			return "time/daily/month";
 		}
-		Long employeeId = (Long) request.getSession().getAttribute(Employee.EMPLOYEE_ID);
+		Long employeeId = getEmployeeId(request);
 		Timesheet timesheet = (Timesheet) Timesheet.findEmployeeCurrentTimesheet(employeeId).getSingleResult();
 		logger.debug("Resolving existent daily timesheet for: [" + timesheet + "] on [" + dailyTimesheet.getDayDate()
 				+ "]");
 
-
-		dailyTimesheet = dailyTimesheetService.createDailyTimesheet(dailyTimesheet, request);
+		Long timesheetId = getTimesheetId(request);
+		dailyTimesheet = dailyTimesheetService.createDailyTimesheet(dailyTimesheet, timesheetId);
 
 		/**
 		 * This was for updating an already existing daily time sheet!
@@ -126,7 +126,7 @@ privileged aspect TimeController_DailyTimesheetController {
 		dailyTimesheetService.deleteDailyTimesheet(dailyTimesheet);
 		return "redirect:/time/view/month";
 	}
-	
+
 	@RequestMapping(value = "/time/timesheet/dailytimesheet/{timesheetId}/report/{format}", method = RequestMethod.GET)
 	public String TimeController.reportDailyTimesheet(
 			@PathVariable("timesheetId") Long timesheetId,
@@ -156,7 +156,7 @@ privileged aspect TimeController_DailyTimesheetController {
 		authorizeAccessTimesheet(timesheetId, request, response);
 		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(
 				dailyTimesheetService.getDailyTimesheetListForReportPerProject(timesheetId), false);
-		
+
 		modelMap.put("timesheetDailyPerProjectReportList", jrDataSource);
 		modelMap.put("format", format);
 		modelMap.put(Constants.IMAGE_HM_LOGO, getFileFullPath(request, Constants.imageHMlogoAddress));

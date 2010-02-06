@@ -3,8 +3,6 @@ package nl.hajari.wha.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import nl.hajari.wha.domain.DailyTimesheet;
 import nl.hajari.wha.domain.Project;
 import nl.hajari.wha.domain.Timesheet;
@@ -17,19 +15,17 @@ import org.springframework.transaction.annotation.Transactional;
  * Default implementation of business logics in DailyTimesheet.
  * 
  * @author <a href="mailto:saeid3@gmail.com">Saeid Moradi</a>
+ * @author Behrooz Nobakht
  **/
 @Service
 public class DailyTimesheetServiceImpl extends AbstractService implements DailyTimesheetService {
 
 	@Transactional(readOnly = false)
 	public DailyTimesheet createDailyTimesheet(DailyTimesheet dailyTimesheet,
-			HttpServletRequest request) {
+			Long timesheetId) {
 		if (dailyTimesheet == null) {
 			throw new IllegalArgumentException("A dailyTimesheet is required");
 		}
-
-		Long timesheetId = (Long) request.getSession().getAttribute(
-				Timesheet.TIMESHEET_ID);
 		if (timesheetId == null) {
 			throw new IllegalStateException(
 					"Month Travel view requires current Timesheet. Timesheet ID is null.");
@@ -124,12 +120,11 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 		return finalTimesheetList;
 	}
 
-	public boolean checkIfDurationIsMoreThan24(DailyTimesheet dailyTimesheet, HttpServletRequest request) {
+	public boolean validateDailyHours(DailyTimesheet dailyTimesheet, Long timesheetId) {
 		Float twentyFour = new Float(24f);
 		if (dailyTimesheet.getDuration() > twentyFour) {
 			return true;
 		}
-		Long timesheetId = (Long) request.getSession().getAttribute(Timesheet.TIMESHEET_ID);
 		Float totalDuration = DailyTimesheet.findTotalDurationByTimesheetIdAndDayDate(timesheetId, dailyTimesheet
 				.getDayDate());
 		if (dailyTimesheet.getDuration() + totalDuration > twentyFour) {
