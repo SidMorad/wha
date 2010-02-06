@@ -3,6 +3,7 @@ package nl.hajari.wha.web.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.Timesheet;
 import nl.hajari.wha.domain.User;
 import nl.hajari.wha.service.impl.CustomerServiceImpl;
@@ -36,10 +37,10 @@ public class TimeController {
 
 	@Autowired
 	protected CustomerServiceImpl customerService;
-	
+
 	@Autowired
-	protected DailyExpenseServiceImpl dailyExpenseService; 
-	
+	protected DailyExpenseServiceImpl dailyExpenseService;
+
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(java.util.Date.class,
@@ -64,10 +65,18 @@ public class TimeController {
 		}
 		return true;
 	}
-	
-	public String getFileFullPath(HttpServletRequest request, String filePath){
+
+	public String getFileFullPath(HttpServletRequest request, String filePath) {
 		String appServerHome = request.getSession().getServletContext().getRealPath("/");
 		return appServerHome + filePath;
 	}
-	
+
+	protected Long getEmployeeId(HttpServletRequest request) {
+		return (Long) request.getSession().getAttribute(Employee.EMPLOYEE_ID);
+	}
+
+	protected Long getTimesheetId(HttpServletRequest request) {
+		return (Long) request.getSession().getAttribute(Timesheet.TIMESHEET_ID);
+	}
+
 }
