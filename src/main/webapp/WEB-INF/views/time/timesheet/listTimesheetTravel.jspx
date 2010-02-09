@@ -9,11 +9,11 @@
             <table style="width:98%">
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Year</th>
-                        <th>Month</th>
-                        <th>Total</th>
-                        <th>Daily Travels</th>
+                        <th><spring:message code="label.id"/></th>
+                        <th><spring:message code="label.year"/></th>
+                        <th><spring:message code="label.month"/></th>
+                        <th><spring:message code="label.total"/></th>
+                        <th><spring:message code="label.dailytravels"/></th>
                         <th/>
                     </tr>
                 </thead>
