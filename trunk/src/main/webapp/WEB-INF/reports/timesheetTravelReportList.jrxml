@@ -45,17 +45,17 @@
 				<reportElement x="0" y="30" width="572" height="1"/>
 			</line>
 			<textField>
-				<reportElement x="0" y="4" width="51" height="20"/>
+				<reportElement x="0" y="4" width="71" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.employee} + ":"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="58" y="4" width="120" height="20"/>
+				<reportElement x="71" y="4" width="320" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{timesheet.employee.firstName} + " " + $F{timesheet.employee.lastName} + " [" + $F{timesheet.employee.empId} + "]"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="451" y="4" width="46" height="20"/>
+				<reportElement x="451" y="4" width="50" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.billing.id} + ":"]]></textFieldExpression>
 			</textField>

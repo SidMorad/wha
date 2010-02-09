@@ -7,22 +7,22 @@
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
         <c:if test="${not empty timesheet}">
             <div id="roo_timesheet_employee">
-                <label for="_employee">Employee:</label>
+                <label for="_employee"><spring:message code="label.employee"/>:</label>
                 <div class="box" id="_employee">${timesheet.employee}</div>
             </div>
            <br/>
             <div id="roo_timesheet_sheetYear">
-                <label for="_sheetYear">Year:</label>
+                <label for="_sheetYear"><spring:message code="label.year"/>:</label>
                 <div class="box" id="_sheetYear">${timesheet.sheetYear}</div>
             </div>
             <br/>
             <div id="roo_timesheet_sheetMonth">
-                <label for="_sheetMonth">Month:</label>
+                <label for="_sheetMonth"><spring:message code="label.month"/>:</label>
                 <div class="box" id="_sheetMonth">${timesheet.sheetMonthShortName}</div>
             </div>
             <br/>
             <div id="roo_timesheet_monthlyTotal">
-                <label for="_monthlyTotal">Total:</label>
+                <label for="_monthlyTotal"><spring:message code="label.total"/>:</label>
                 <div class="box" id="_monthlyTotal">${timesheet.monthlyTotal}</div>
             </div>
             <br/>
@@ -42,12 +42,12 @@
 	            <table style="width:98%">
 	                <thead>
 	                    <tr>
-	                        <th width="80px">Day Date</th>
-	                        <th width="90px">Origin</th>
-	                        <th width="90px">Destination</th>
-	                        <th width="50px">Return?</th>
-	                        <th>Comment</th>
-	                        <th>Distance</th>
+	                        <th width="80px"><spring:message code="label.date"/></th>
+	                        <th width="90px"><spring:message code="label.origin"/></th>
+	                        <th width="90px"><spring:message code="label.destination"/></th>
+	                        <th width="50px"><spring:message code="label.return"/></th>
+	                        <th><spring:message code="label.comment"/></th>
+	                        <th><spring:message code="label.distance"/></th>
 	                    </tr>
 	                </thead>
                     <c:set var="totalDistance" value="0"/>
@@ -59,8 +59,8 @@
 	                        <td>${dailytravel.origin}</td>
 	                        <td>${dailytravel.destination}</td>
 	                        <td>
-	                        	<c:if test="${dailytravel.withReturn == true}">Yes</c:if>
-	                        	<c:if test="${dailytravel.withReturn == false}">No</c:if>
+	                        	<c:if test="${dailytravel.withReturn == true}"><spring:message code="label.yes"/></c:if>
+	                        	<c:if test="${dailytravel.withReturn == false}"><spring:message code="label.no"/></c:if>
 	                        </td>
 	                        <td>${dailytravel.comment}</td>
 	                        <td>${dailytravel.distance}</td>

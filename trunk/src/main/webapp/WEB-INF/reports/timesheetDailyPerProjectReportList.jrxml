@@ -56,6 +56,16 @@
 				<reportElement x="0" y="30" width="572" height="1"/>
 			</line>
 			<textField>
+				<reportElement x="0" y="6" width="71" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.employee} + ":"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="71" y="6" width="129" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{timesheet.employee.firstName} + " " + $F{timesheet.employee.lastName} + " [" + $F{timesheet.employee.empId} + "]"]]></textFieldExpression>
+			</textField>
+			<textField>
 				<reportElement x="202" y="6" width="52" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.customer} + ":"]]></textFieldExpression>
@@ -66,17 +76,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{project.customer.name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="6" width="51" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.employee} + ":"]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="51" y="6" width="120" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{timesheet.employee.firstName} + " " + $F{timesheet.employee.lastName} + " [" + $F{timesheet.employee.empId} + "]"]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="444" y="6" width="46" height="20"/>
+				<reportElement x="444" y="6" width="50" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.billing.id} + ":"]]></textFieldExpression>
 			</textField>
