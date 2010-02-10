@@ -10,6 +10,12 @@
         <spring:message arguments="${entity_label_plural}" code="entity.list.all" var="title_msg"/>
         <spring:message code="field.required" var="field_required"/>
         <spring:message code="field.invalid.decimal" var="field_invalid"/>
+        <spring:message code="label.date" var="label_date"/>
+        <spring:message code="label.origin" var="label_origin"/>
+        <spring:message code="label.destination" var="label_destination"/>
+        <spring:message code="label.return" var="label_return"/>
+        <spring:message code="label.distance" var="label_distance"/>
+        <spring:message code="label.comment" var="label_comment"/>     
         
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
         
@@ -45,12 +51,12 @@
         <table style="width:98%">
             <thead>
             <tr>
-                <th width="100px"><spring:message code="label.date"/> </th>
-                <th width="85px"><spring:message code="label.departure"/> </th>
-                <th width="85px"><spring:message code="label.destination"/> </th>
-                <th width="55px"><spring:message code="label.roundtrip"/> </th>
-                <th width="60px"><spring:message code="label.distance"/> </th>
-                <th width="60px"><spring:message code="label.comment"/> </th>
+                <th width="100px">${label_date}</th>
+                <th width="85px">${label_origin}</th>
+                <th width="85px">${label_destination}</th>
+                <th width="55px">${label_return}</th>
+                <th width="60px">${label_distance}</th>
+                <th width="60px">${label_comment}</th>
                 <th width="20px"></th>
             </tr>
             </thead>
@@ -58,22 +64,22 @@
 				<td>
 	                <form:input cssStyle="width:90%" id="_dayDate_id" maxlength="30" path="dayDate" size="0"/>
 	                <form:errors cssClass="errors-in-table" id="_dayDate_error_id" path="dayDate"/>
-	                <spring:message arguments="Day Date" code="field.invalid" var="field_invalid"/>
-	                <spring:message argumentSeparator="," arguments="Day Date,(${field_required})" code="field.simple.validation" var="field_validation"/>
+	                <spring:message arguments="${label_date}" code="field.invalid" var="field_invalid"/>
+	                <spring:message argumentSeparator="," arguments="${label_date},(${field_required})" code="field.simple.validation" var="field_validation"/>
 	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dayDate_id', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {constraints: {min: new Date().setDate(0), max: new Date().setDate(31)}, promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true, datePattern : 'd/MM/yy'}})); </script>
 				</td>
 				<td>
 	                <form:input cssStyle="width:95%" id="_origin_id" maxlength="45" path="origin" size="0"/>
 	                <form:errors cssClass="errors-in-table" id="_origin_error_id" path="origin"/>
-	                <spring:message arguments="Origin" code="field.invalid" var="field_invalid"/>
-	                <spring:message argumentSeparator="," arguments="Origin,(${field_required})" code="field.simple.validation" var="field_validation"/>
+	                <spring:message arguments="${label_origin}" code="field.invalid" var="field_invalid"/>
+	                <spring:message argumentSeparator="," arguments="${label_origin},(${field_required})" code="field.simple.validation" var="field_validation"/>
 	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_origin_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
 				</td>     
 				<td>
 	                <form:input cssStyle="width:95%" id="_destination_id" maxlength="45" path="destination" size="0"/>
 	                <form:errors cssClass="errors-in-table" id="_destination_error_id" path="destination"/>
-	                <spring:message arguments="Destination" code="field.invalid" var="field_invalid"/>
-	                <spring:message argumentSeparator="," arguments="Destination,(${field_required})" code="field.simple.validation" var="field_validation"/>
+	                <spring:message arguments="${label_destination}" code="field.invalid" var="field_invalid"/>
+	                <spring:message argumentSeparator="," arguments="${label_destination},(${field_required})" code="field.simple.validation" var="field_validation"/>
 	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_destination_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
 				</td>
 				<td>
@@ -83,7 +89,7 @@
 	                <form:input cssStyle="width:95%" id="_distance_id" maxlength="30" path="distance" size="0"/>
 	                <form:errors cssClass="errors-in-table" id="_distance_error_id" path="distance"/>
 	                <spring:message code="field.invalid.decimal" var="field_invalid"/>
-	                <spring:message argumentSeparator="," arguments="Distance,(${field_required})" code="field.simple.validation" var="field_validation"/>
+	                <spring:message argumentSeparator="," arguments="${label_distance},(${field_required})" code="field.simple.validation" var="field_validation"/>
 	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_distance_id', widgetType : 'dijit.form.NumberTextBox', widgetAttrs : {constraints:{min:1}, promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
 				</td>
 				<td></td>
@@ -91,7 +97,7 @@
             </tr>
             <tr>
             	<td>
-                	<label for="_comment_id"><b><spring:message code="label.comment"/> :</b></label>           		
+                	<label for="_comment_id"><b>${label_comment} :</b></label>           		
             	</td>
             	<td colspan="6">
 	                <form:textarea cssStyle="width:95%" id="_comment_id" path="comment"/>
@@ -109,12 +115,12 @@
 		<table style="width:98%">
             <thead>		
 	            <tr>
-	                <th width="100px"><spring:message code="label.date"/> </th>
-	                <th width="85px"><spring:message code="label.departure"/> </th>
-	                <th width="85px"><spring:message code="label.destination"/> </th>
-	                <th width="55px"><spring:message code="label.roundtrip"/> </th>
-	                <th width="60px"><spring:message code="label.distance"/> </th>
-	                <th width="60px"><spring:message code="label.comment"/> </th>
+	                <th width="100px">${label_date}</th>
+	                <th width="85px">${label_origin}</th>
+	                <th width="85px">${label_destination}</th>
+	                <th width="55px">${label_return}</th>
+	                <th width="60px">${label_distance}</th>
+	                <th width="60px">${label_comment}</th>
 	                <th width="20px"></th>
 	            </tr>
             </thead>

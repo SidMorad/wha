@@ -10,6 +10,11 @@
         <spring:message arguments="${entity_label_plural}" code="entity.list.all" var="title_msg"/>
         <spring:message code="field.required" var="field_required"/>
         <spring:message code="field.invalid.decimal" var="field_invalid"/>
+        <spring:message code="label.date" var="label_date"/>
+        <spring:message code="label.customer" var="label_customer"/>
+        <spring:message code="label.for" var="label_for"/> 
+        <spring:message code="label.amount" var="label_amount"/> 
+        <spring:message code="label.comment" var="label_comment"/>
         
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
         
@@ -43,10 +48,10 @@
         <table style="width:98%">
             <thead>
             <tr>
-                <th width="100px"><spring:message code="label.date"/> </th>
-                <th width="170px"><spring:message code="label.customer" /> </th>
-                <th width="170px"><spring:message code="label.for"/> </th>
-                <th width="65px"><spring:message code="label.amount"/> </th>
+                <th width="100px">${label_date}</th>
+                <th width="170px">${label_customer}</th>
+                <th width="170px">${label_for}</th>
+                <th width="65px">${label_amount}</th>
                 <th width="20px"></th>
                 <th width="20px"></th>
             </tr>
@@ -55,13 +60,13 @@
 				<td>
 	                <form:input cssStyle="width:90%" id="_dayDate_id" maxlength="30" path="dayDate" size="0"/>
 	                <form:errors cssClass="errors-in-table" id="_dayDate_error_id" path="dayDate"/>
-	                <spring:message arguments="Day Date" code="field.invalid" var="field_invalid"/>
-	                <spring:message argumentSeparator="," arguments="Day Date,(${field_required})" code="field.simple.validation" var="field_validation"/>
+	                <spring:message arguments="${label_date}" code="field.invalid" var="field_invalid"/>
+	                <spring:message argumentSeparator="," arguments="${label_date},(${field_required})" code="field.simple.validation" var="field_validation"/>
 	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dayDate_id', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {constraints: {min: new Date().setDate(0), max: new Date().setDate(31)}, promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true, datePattern : 'd/MM/yy'}})); </script>
 				</td>
 				<td>
                     <c:if test="${not empty customers}">
-		                <spring:message arguments="Customer" code="field.invalid" var="field_invalid"/>
+		                <spring:message arguments="${label_customer}" code="field.invalid" var="field_invalid"/>
 	                    <form:select cssStyle="width:95%" id="_customer_id" path="customer">
 	                        <form:options itemValue="id" items="${customers}"/>
 	                    </form:select>
@@ -69,18 +74,18 @@
 	                </c:if>
 				</td>     
 				<td>
-					 <form:input cssStyle="width:95%" id="_expenseFor_id" maxlength="45" path="expenseFor" size="0"/>
+					<form:input cssStyle="width:95%" id="_expenseFor_id" maxlength="45" path="expenseFor" size="0"/>
                     <form:errors cssClass="errors-in-table" id="_expenseFor_error_id" path="expenseFor"/>
-                	<spring:message arguments="Expense For" code="field.invalid" var="field_invalid"/>
+                	<spring:message arguments="${label_for}" code="field.invalid" var="field_invalid"/>
                 	<spring:message code="field.required" var="field_required"/>
-                	<spring:message argumentSeparator="," arguments="Expense For,(${field_required})" code="field.simple.validation" var="field_validation"/>
+                	<spring:message argumentSeparator="," arguments="${label_for},(${field_required})" code="field.simple.validation" var="field_validation"/>
                 	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_expenseFor_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
 				</td>
 				<td>
 	                <form:input cssStyle="width:95%" id="_expenseAmount_id" maxlength="30" path="expenseAmount" size="0"/>
 	                <form:errors cssClass="errors-in-table" id="_expenseAmount_error_id" path="expenseAmount"/>
 	                <spring:message code="field.invalid.float.positive" var="field_invalid"/>
-	                <spring:message argumentSeparator="," arguments="Expense Amount,(${field_required})" code="field.simple.validation" var="field_validation"/>
+	                <spring:message argumentSeparator="," arguments="${label_amount},(${field_required})" code="field.simple.validation" var="field_validation"/>
 	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_expenseAmount_id', widgetType : 'dijit.form.NumberTextBox', widgetAttrs : {constraints: {min:1}, promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
 				</td>
 				<td></td>     
@@ -88,7 +93,7 @@
             </tr>
             <tr>
             	<td>
-                	<label for="_comment_id"><b><spring:message code="label.comment"/>:</b></label>           		
+                	<label for="_comment_id"><b>${label_comment}:</b></label>           		
             	</td>
             	<td colspan="6">
 					<form:textarea cssStyle="width:95%" id="_expenseComment_id" path="expenseComment"/>
@@ -106,11 +111,11 @@
 		<table style="width:98%">
 			<thead>
 	            <tr>
-	                <th width="100px"><spring:message code="label.date"/> </th>
-	                <th width="170px"><spring:message code="label.customer" /> </th>
-	                <th width="170px"><spring:message code="label.for"/> </th>
-	                <th width="65px"><spring:message code="label.amount"/> </th>
-	                <th width="100px"><spring:message code="label.comment"/> </th>
+	                <th width="100px">${label_date}</th>
+	                <th width="170px">${label_customer}</th>
+	                <th width="170px">${label_for}</th>
+	                <th width="65px">${label_amount}</th>
+	                <th width="100px">${label_comment}</th>
 	                <th width="20px"></th>      
 	            </tr>
 			</thead>

@@ -12,6 +12,12 @@
         <spring:message arguments="${entity_label_plural}" code="entity.list.all" var="title_msg"/>
         <spring:message code="field.required" var="field_required"/>
         <spring:message code="field.invalid.decimal" var="field_invalid"/>
+        <spring:message code="label.date" var="label_date"/>
+        <spring:message code="label.project" var="label_project"/>
+        <spring:message code="label.working" var="label_working"/> 
+        <spring:message code="label.off" var="label_off"/>
+        <spring:message code="label.training" var="label_training"/>
+        <spring:message code="label.total" var="label_total"/>   
         
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
         
@@ -44,12 +50,12 @@
         <table style="width:98%">
             <thead>
             <tr>
-                <th width="100px"><spring:message code="label.date"/></th>
-                <th width="148px"><spring:message code="label.project"/> </th>
-                <th width="59px"><spring:message code="label.working" /> </th>
-                <th width="45px"><spring:message code="label.off"/> </th>
-                <th width="56px"><spring:message code="label.training" /> </th>
-                <th width="45px"><spring:message code="label.total"/> </th>
+                <th width="100px">${label_date}</th>
+                <th width="148px">${label_project}</th>
+                <th width="59px">${label_working}</th>
+                <th width="45px">${label_off}</th>
+                <th width="56px">${label_training}</th>
+                <th width="45px">${label_total}</th>
                 <th width="20px"></th>
             </tr>
             </thead>
@@ -57,8 +63,8 @@
 				<td>
 					<form:input cssStyle="width:90%" id="_dayDate" maxlength="30" path="dayDate" size="0"/>
 	                <form:errors cssClass="errors-in-table" id="_dayDate_error" path="dayDate"/>
-	                <spring:message arguments="Day Date" code="field.invalid" var="field_invalid"/>
-	                <spring:message argumentSeparator="," arguments="Day Date,(${field_required})" code="field.simple.validation" var="field_validation"/>
+	                <spring:message arguments="${label_date}" code="field.invalid" var="field_invalid"/>
+	                <spring:message argumentSeparator="," arguments="${label_date},(${field_required})" code="field.simple.validation" var="field_validation"/>
 	                <script type="text/javascript">
 	                Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dayDate', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {constraints: {min: new Date().setDate(0), max: new Date().setDate(31)}, promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true, datePattern : 'd/MM/yy'}})); 
 	                </script>
@@ -67,7 +73,7 @@
 					<spring:url value="/project/list/all" var="allProjects" />
 					<form:input cssStyle="width:95%" id="_projectName" maxlength="30" path="projectName" size="0"/>
 	                <form:errors cssClass="errors-in-table" id="_projectName_error" path="projectName"/>
-	                <spring:message arguments="Project" code="field.invalid" var="field_invalid"/>
+	                <spring:message arguments="${label_project}" code="field.invalid" var="field_invalid"/>
 					<script type="text/javascript">
 				    dojo.addOnLoad(function() {
 				        var projectStore = new dojo.data.ItemFileReadStore({url:"${allProjects}"});
@@ -78,22 +84,22 @@
 				<td>
 	                <form:input cssStyle="width:95%" id="_duration" maxlength="30" path="duration" size="0"/>
 	                <form:errors cssClass="errors-in-table" id="_duration_error" path="duration"/>
-	                <spring:message arguments="Duration" code="field.invalid" var="field_invalid"/>
-	                <spring:message argumentSeparator="," arguments="Duration,(${field_required})" code="field.simple.validation" var="field_validation"/>
+	                <spring:message arguments="${label_working}" code="field.invalid" var="field_invalid"/>
+	                <spring:message argumentSeparator="," arguments="${label_working},(${field_required})" code="field.simple.validation" var="field_validation"/>
 	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_duration', widgetType : 'dijit.form.NumberTextBox', widgetAttrs : {constraints: {min:0, max:24},promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
 				</td>     
 				<td>
 	                <form:input cssStyle="width:95%" id="_durationOffs" maxlength="30" path="durationOffs" size="0"/>
 	                <form:errors cssClass="errors-in-table" id="_durationOffs_error" path="durationOffs"/>
-	                <spring:message arguments="Duration Offs" code="field.invalid" var="field_invalid"/>
-	                <spring:message argumentSeparator="," arguments="Duration Offs," code="field.simple.validation" var="field_validation"/>
+	                <spring:message arguments="${label_off}" code="field.invalid" var="field_invalid"/>
+	                <spring:message argumentSeparator="," arguments="${label_off}," code="field.simple.validation" var="field_validation"/>
 	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_durationOffs', widgetType : 'dijit.form.NumberTextBox', widgetAttrs : {constraints: {min:0, max:24},promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
 				</td>
 				<td>
 	                <form:input cssStyle="width:95%" id="_durationTraining" maxlength="30" path="durationTraining" size="0"/>
 	                <form:errors cssClass="errors-in-table" id="_durationTraining_error" path="durationTraining"/>
-	                <spring:message arguments="Duration Training" code="field.invalid" var="field_invalid"/>
-	                <spring:message argumentSeparator="," arguments="Duration Training," code="field.simple.validation" var="field_validation"/>
+	                <spring:message arguments="${label_training}" code="field.invalid" var="field_invalid"/>
+	                <spring:message argumentSeparator="," arguments="${label_training}," code="field.simple.validation" var="field_validation"/>
 	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_durationTraining', widgetType : 'dijit.form.NumberTextBox', widgetAttrs : {constraints: {min:0, max:24},promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
 				</td>     
 				<td>
@@ -110,12 +116,12 @@
         <table style="width:98%">
             <thead>
 	            <tr>
-	                <th width="100px"><spring:message code="label.date"/></th>
-	                <th width="148px"><spring:message code="label.project"/> </th>
-	                <th width="59px"><spring:message code="label.working" /> </th>
-	                <th width="45px"><spring:message code="label.off"/> </th>
-	                <th width="56px"><spring:message code="label.training" /> </th>
-	                <th width="45px"><spring:message code="label.total"/> </th>
+	                <th width="100px">${label_date}</th>
+	                <th width="148px">${label_project}</th>
+	                <th width="59px">${label_working}</th>
+	                <th width="45px">${label_off}</th>
+	                <th width="56px">${labe_training}</th>
+	                <th width="45px">${label_total}</th>
 	                <th width="20px"></th>
 	            </tr>
             </thead>
