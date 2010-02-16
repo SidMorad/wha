@@ -9,13 +9,13 @@
             <table style="width:98%">
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Emp Id</th>
-                        <th>Hourly Wage</th>
-                        <th>User</th>
-                        <th>Tech Roles</th>
+                        <th><spring:message code="label.id"/></th>
+                        <th><spring:message code="label.firstName"/></th>
+                        <th><spring:message code="label.lastName"/></th>
+                        <th><spring:message code="label.empId"/></th>
+                        <th><spring:message code="label.hourlyWage"/></th>
+                        <th><spring:message code="label.user"/></th>
+                        <th><spring:message code="label.techRoles"/></th>
                         <th/>
                         <th/>
                         <th/>

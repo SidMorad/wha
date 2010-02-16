@@ -10,14 +10,14 @@
             <table style="width:98%">
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Year</th>
-                        <th>Month</th>
-                        <th>Total</th>
-                        <th>Employee</th>
-                        <th>Daily Timesheets</th>
-                        <th>Travels</th>
-                        <th>Expenses</th>
+                        <th><spring:message code="label.id"/></th>
+                        <th><spring:message code="label.year"/></th>
+                        <th><spring:message code="label.month"/></th>
+                        <th><spring:message code="label.total"/></th>
+                        <th><spring:message code="label.employee"/></th>
+                        <th><spring:message code="label.dailytimesheets"/></th>
+                        <th><spring:message code="label.dailytravels"/></th>
+                        <th><spring:message code="label.dailyexpenses"/></th>
                     </tr>
                 </thead>
                 <c:forEach items="${timesheets}" var="timesheet">
@@ -28,31 +28,37 @@
                         <td>${timesheet.monthlyTotal}</td>
                         <td>${timesheet.employee}</td>
                         <td align="center">
+                           	<span style="float: left;">
+                           		<c:out value="${fn:length(timesheet.dailyTimesheets)}"/>
+                           	</span>
                             <spring:url value="/admin/timesheet/daily/${timesheet.id}" var="show_form_url"/>
                             <spring:url value="/static/images/show.png" var="show_image_url"/>
                             <form:form action="${show_form_url}" method="GET">
                                 <spring:message arguments="${entity_label}" code="entity.show" var="show_label"/>
                                 <input alt="${show_label}" class="image" src="${show_image_url}" title="${show_label}" type="image" value="${show_label}"/>
                             </form:form>
-                           	<c:out value="${fn:length(timesheet.dailyTimesheets)}"/>
                         </td>
                         <td align="center">
+                           	<span style="float: left;">
+	                           	<c:out value="${fn:length(timesheet.dailyTravels)}"/>
+                           	</span>
                             <spring:url value="/admin/timesheet/travel/${timesheet.id}" var="show_form_url"/>
                             <spring:url value="/static/images/show.png" var="show_image_url"/>
                             <form:form action="${show_form_url}" method="GET">
                                 <spring:message arguments="${entity_label}" code="entity.show" var="show_label"/>
                                 <input alt="${show_label}" class="image" src="${show_image_url}" title="${show_label}" type="image" value="${show_label}"/>
                             </form:form>
-                           	<c:out value="${fn:length(timesheet.dailyTravels)}"/>
                         </td>
                         <td align="center">
+                           	<span style="float: left;">
+	                           	<c:out value="${fn:length(timesheet.dailyExpenses)}"/>
+                           	</span>
                             <spring:url value="/admin/timesheet/expense/${timesheet.id}" var="show_form_url"/>
                             <spring:url value="/static/images/show.png" var="show_image_url"/>
                             <form:form action="${show_form_url}" method="GET">
                                 <spring:message arguments="${entity_label}" code="entity.show" var="show_label"/>
                                 <input alt="${show_label}" class="image" src="${show_image_url}" title="${show_label}" type="image" value="${show_label}"/>
                             </form:form>
-                           	<c:out value="${fn:length(timesheet.dailyExpenses)}"/>
                         </td>
                     </tr>
                 </c:forEach>

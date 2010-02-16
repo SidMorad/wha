@@ -8,7 +8,7 @@
         <form:form action="${form_url}" method="POST" modelAttribute="constants">
             <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
             <div id="roo_constants_key">
-                <label for="_key">Key:</label>
+                <label for="_key"><spring:message code="label.key"/>:</label>
                 <form:input cssStyle="width:250px" id="_key" maxlength="30" path="key" size="0"/>
                 <br/>
                 <form:errors cssClass="errors" id="_key_error" path="key"/>
@@ -19,7 +19,7 @@
             </div>
             <br/>
             <div id="roo_constants_value">
-                <label for="_value">Value:</label>
+                <label for="_value"><spring:message code="label.value"/>:</label>
                 <form:input cssStyle="width:250px" id="_value" maxlength="30" path="value" size="0"/>
                 <br/>
                 <form:errors cssClass="errors" id="_value_error" path="value"/>

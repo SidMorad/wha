@@ -7,22 +7,22 @@
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
         <c:if test="${not empty timesheet}">
             <div id="roo_timesheet_employee">
-                <label for="_employee">Employee:</label>
+                <label for="_employee"><spring:message code="label.employee"/>:</label>
                 <div class="box" id="_employee">${timesheet.employee}</div>
             </div>
            <br/>
             <div id="roo_timesheet_sheetYear">
-                <label for="_sheetYear">Year:</label>
+                <label for="_sheetYear"><spring:message code="label.year"/>:</label>
                 <div class="box" id="_sheetYear">${timesheet.sheetYear}</div>
             </div>
             <br/>
             <div id="roo_timesheet_sheetMonth">
-                <label for="_sheetMonth">Month:</label>
+                <label for="_sheetMonth"><spring:message code="label.month"/>:</label>
                 <div class="box" id="_sheetMonth">${timesheet.sheetMonthShortName}</div>
             </div>
             <br/>
             <div id="roo_timesheet_monthlyTotal">
-                <label for="_monthlyTotal">Total:</label>
+                <label for="_monthlyTotal"><spring:message code="label.total"/>:</label>
                 <div class="box" id="_monthlyTotal">${timesheet.monthlyTotal}</div>
             </div>
             <br/>
@@ -42,12 +42,12 @@
 		        <table style="width:98%">
 		            <thead>
 		                <tr>
-		                    <th>Day Date</th>
-		                    <th>Project</th>
-		                    <th>Working</th>
-		                    <th>Off</th>
-		                    <th>Training</th>
-		                    <th>Total</th>
+		                    <th><spring:message code="label.date"/></th>
+		                    <th><spring:message code="label.project"/></th>
+		                    <th><spring:message code="label.working"/></th>
+		                    <th><spring:message code="label.off"/></th>
+		                    <th><spring:message code="label.training"/></th>
+		                    <th><spring:message code="label.total"/></th>
 		                    <th/>
 		                    <th/>
 		                    <th/>
@@ -153,7 +153,7 @@
 					            	<input type="hidden" name="timesheetId" value="${timesheet.id}" id="_timesheetId_id"/>
 			                		<div id="roo_project_customer" style="float: left;">
 						                <c:if test="${not empty customers}"> 
-						                    <label for="_customer" style="width:60px">Customer:</label>
+						                    <label for="_customer" style="width:60px"><spring:message code="label.customer"/>:</label>
 						                    <form:select cssStyle="width:200px;" id="_customer" path="customer">
 						                        <form:options itemValue="id" items="${customers}"/>
 						                    </form:select>

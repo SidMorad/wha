@@ -7,34 +7,34 @@
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
         <c:if test="${not empty dailyexpense}">
             <div id="roo_dailyexpense_dayDate">
-                <label for="_dayDate_id">Day Date:</label>
+                <label for="_dayDate_id"><spring:message code="label.date"/>:</label>
                 <div class="box" id="_dayDate_id">
                     <fmt:formatDate pattern="d/MM/yy" type="DATE" value="${dailyexpense.dayDate}"/>
                 </div>
             </div>
             <br/>
             <div id="roo_dailyexpense_expenseFor">
-                <label for="_expenseFor_id">Expense For:</label>
+                <label for="_expenseFor_id"><spring:message code="label.for"/>:</label>
                 <div class="box" id="_expenseFor_id">${dailyexpense.expenseFor}</div>
             </div>
             <br/>
             <div id="roo_dailyexpense_expenseAmount">
-                <label for="_expenseAmount_id">Expense Amount:</label>
+                <label for="_expenseAmount_id"><spring:message code="label.amount"/>:</label>
                 <div class="box" id="_expenseAmount_id">${dailyexpense.expenseAmount}</div>
             </div>
             <br/>
             <div id="roo_dailyexpense_expenseComment">
-                <label for="_expenseComment_id">Expense Comment:</label>
+                <label for="_expenseComment_id"><spring:message code="label.comment"/>:</label>
                 <div class="box" id="_expenseComment_id">${dailyexpense.expenseComment}</div>
             </div>
             <br/>
             <div id="roo_dailyexpense_timesheet">
-                <label for="_timesheet_id">Timesheet:</label>
+                <label for="_timesheet_id"><spring:message code="label.timesheet"/>:</label>
                 <div class="box" id="_timesheet_id">${dailyexpense.timesheet}</div>
             </div>
             <br/>
             <div id="roo_dailyexpense_customer">
-                <label for="_customer_id">Customer:</label>
+                <label for="_customer_id"><spring:message code="label.customer"/>:</label>
                 <div class="box" id="_customer_id">${dailyexpense.customer}</div>
             </div>
             <br/>

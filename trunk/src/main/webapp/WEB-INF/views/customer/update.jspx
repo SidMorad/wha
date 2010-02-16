@@ -9,7 +9,7 @@
         <form:form action="${form_url}" method="PUT" modelAttribute="customer">
             <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
             <div id="roo_customer_name">
-                <label for="_name">Name:</label>
+                <label for="_name"><spring:message code="label.name"/>:</label>
                 <form:input cssStyle="width:250px" id="_name" maxlength="45" path="name" size="0"/>
                 <br/>
                 <form:errors cssClass="errors" id="_name_error" path="name"/>

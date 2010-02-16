@@ -10,12 +10,12 @@
             <table style="width:98%">
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Year</th>
-                        <th>Month</th>
-                        <th>Total</th>
-                        <th>Employee</th>
-                        <th>Daily Timesheets</th>
+                        <th><spring:message code="label.id"/></th>
+                        <th><spring:message code="label.year"/></th>
+                        <th><spring:message code="label.month"/></th>
+                        <th><spring:message code="label.total"/></th>
+                        <th><spring:message code="label.employee"/></th>
+                        <th><spring:message code="label.dailytimesheets"/></th>
                         <th/>
                     </tr>
                 </thead>

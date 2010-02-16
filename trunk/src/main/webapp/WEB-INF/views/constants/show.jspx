@@ -6,12 +6,12 @@
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
         <c:if test="${not empty constants}">
             <div id="roo_constants_key">
-                <label for="_key">Key:</label>
+                <label for="_key"><spring:message code="label.key"/></label>
                 <div class="box" id="_key">${constants.key}</div>
             </div>
             <br/>
             <div id="roo_constants_value">
-                <label for="_value">Value:</label>
+                <label for="_value"><spring:message code="label.value"/>:</label>
                 <div class="box" id="_value">${constants.value}</div>
             </div>
             <br/>

@@ -7,39 +7,42 @@
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
         <c:if test="${not empty dailyTravel}">
             <div id="roo_dailyTravel_dayDate">
-                <label for="_dayDate_id">Day Date:</label>
+                <label for="_dayDate_id"><spring:message code="label.date"/>:</label>
                 <div class="box" id="_dayDate_id">
                     <fmt:formatDate pattern="d/MM/yy" type="DATE" value="${dailyTravel.dayDate}"/>
                 </div>
             </div>
             <br/>
             <div id="roo_dailyTravel_origin">
-                <label for="_origin_id">Origin:</label>
+                <label for="_origin_id"><spring:message code="label.origin"/>:</label>
                 <div class="box" id="_origin_id">${dailyTravel.origin}</div>
             </div>
             <br/>
             <div id="roo_dailyTravel_destination">
-                <label for="_destination_id">Destination:</label>
+                <label for="_destination_id"><spring:message code="label.destination"/>:</label>
                 <div class="box" id="_destination_id">${dailyTravel.destination}</div>
             </div>
             <br/>
             <div id="roo_dailyTravel_withReturn">
-                <label for="_withReturn_id">With Return:</label>
-                <div class="box" id="_withReturn_id">${dailyTravel.withReturn}</div>
+                <label for="_withReturn_id"><spring:message code="label.return"/>:</label>
+                <div class="box" id="_withReturn_id">
+					<c:if test="${dailyTravel.withReturn == true}"><spring:message code="label.yes"/></c:if>
+                   	<c:if test="${dailyTravel.withReturn == false}"><spring:message code="label.no"/></c:if>				
+				</div>
             </div>
             <br/>
             <div id="roo_dailyTravel_distance">
-                <label for="_distance_id">Distance:</label>
+                <label for="_distance_id"><spring:message code="label.distance"/>:</label>
                 <div class="box" id="_distance_id">${dailyTravel.distance}</div>
             </div>
             <br/>
             <div id="roo_dailyTravel_comment">
-                <label for="_comment_id">Comment:</label>
+                <label for="_comment_id"><spring:message code="label.comment"/>:</label>
                 <div class="box" id="_comment_id">${dailyTravel.comment}</div>
             </div>
             <br/>
             <div id="roo_dailyTravel_timesheet">
-                <label for="_timesheet_id">Timesheet:</label>
+                <label for="_timesheet_id"><spring:message code="label.timesheet"/>:</label>
                 <div class="box" id="_timesheet_id">${dailyTravel.timesheet}</div>
             </div>
             <br/>
