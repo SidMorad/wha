@@ -11,9 +11,11 @@ import javax.servlet.http.HttpSession;
 import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.Timesheet;
 import nl.hajari.wha.domain.User;
+import nl.hajari.wha.service.impl.LogServiceImpl;
 import nl.hajari.wha.web.util.DateUtils;
 import nl.hajari.wha.web.util.SecurityContextUtils;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -21,6 +23,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 public class UserEmployeeSecurityFilter extends OncePerRequestFilter {
 
+	@Autowired
+	LogServiceImpl logService;
+	
 	@Override
 	@Transactional
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -72,6 +77,7 @@ public class UserEmployeeSecurityFilter extends OncePerRequestFilter {
 			timesheet.setEmployee(currentEmployee);
 			timesheet.setMonthlyTotal(0f);
 			timesheet.persist();
+			logService.log(username, currentUser, currentEmployee,timesheet, "New Timesheet created for current Employee.");
 		}
 		session.setAttribute(Timesheet.TIMESHEET_ID, timesheet.getId());
 		
