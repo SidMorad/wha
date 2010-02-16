@@ -9,9 +9,9 @@
             <table style="width:98%">
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Key</th>
-                        <th>Value</th>
+                        <th><spring:message code="label.id"/></th>
+                        <th><spring:message code="label.key"/></th>
+                        <th><spring:message code="label.value"/></th>
                         <th/>
                         <th/>
                         <th/>

@@ -9,7 +9,7 @@
         <form:form action="${form_url}" method="POST" modelAttribute="dailyExpense">
             <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
             <div id="roo_dailyexpense_dayDate">
-                <label for="_dayDate_id">Day Date:</label>
+                <label for="_dayDate_id"><spring:message code="label.date"/>:</label>
                 <form:input cssStyle="width:250px" id="_dayDate_id" maxlength="30" path="dayDate" size="0"/>
                 <br/>
                 <form:errors cssClass="errors" id="_dayDate_error_id" path="dayDate"/>
@@ -20,7 +20,7 @@
            	</div>
             <br/>
             <div id="roo_dailyexpense_expenseFor">
-                <label for="_expenseFor_id">Expense For:</label>
+                <label for="_expenseFor_id"><spring:message code="label.for"/>:</label>
                 <form:input cssStyle="width:250px" id="_expenseFor_id" maxlength="45" path="expenseFor" size="0"/>
                 <br/>
                 <form:errors cssClass="errors" id="_expenseFor_error_id" path="expenseFor"/>
@@ -31,7 +31,7 @@
             </div>
             <br/>
             <div id="roo_dailyexpense_expenseAmount">
-                <label for="_expenseAmount_id">Expense Amount:</label>
+                <label for="_expenseAmount_id"><spring:message code="label.amount"/>:</label>
                 <form:input cssStyle="width:250px" id="_expenseAmount_id" maxlength="30" path="expenseAmount" size="0"/>
                 <br/>
                 <form:errors cssClass="errors" id="_expenseAmount_error_id" path="expenseAmount"/>
@@ -42,7 +42,7 @@
             </div>
             <br/>
             <div id="roo_dailyexpense_expenseComment">
-                <label for="_expenseComment_id">Expense Comment:</label>
+                <label for="_expenseComment_id"><spring:message code="label.comment"/>:</label>
                 <form:textarea cssStyle="width:250px" id="_expenseComment_id" path="expenseComment"/>
                 <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_expenseComment_id', widgetType: 'dijit.form.SimpleTextarea', widgetAttrs: {}})); </script>
                 <br/>
@@ -51,7 +51,7 @@
             <br/>
             <div id="roo_dailyexpense_timesheet">
                 <c:if test="${not empty timesheets}">
-                    <label for="_timesheet_id">Timesheet:</label>
+                    <label for="_timesheet_id"><spring:message code="label.timesheet"/>:</label>
                     <form:select cssStyle="width:250px" id="_timesheet_id" path="timesheet">
                         <form:options itemValue="id" itemLabel="readableTimesheetName" items="${timesheets}"/>
                     </form:select>
@@ -63,7 +63,7 @@
             <br/>
             <div id="roo_dailyexpense_customer">
                 <c:if test="${not empty customers}">
-                    <label for="_customer_id">Customer:</label>
+                    <label for="_customer_id"><spring:message code="label.customer"/>:</label>
                     <form:select cssStyle="width:250px" id="_customer_id" path="customer">
                         <form:options itemValue="id" items="${customers}"/>
                     </form:select>

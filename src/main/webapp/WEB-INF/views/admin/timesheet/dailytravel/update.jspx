@@ -9,7 +9,7 @@
         <form:form action="${form_url}" method="POST" modelAttribute="dailyTravel">
             <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
             <div id="roo_dailyTravel_dayDate">
-                <label for="_dayDate_id">Day Date:</label>
+                <label for="_dayDate_id"><spring:message code="label.date"/>:</label>
                 <form:input cssStyle="width:250px" id="_dayDate_id" maxlength="30" path="dayDate" size="0"/>
                 <br/>
                 <form:errors cssClass="errors" id="_dayDate_error_id" path="dayDate"/>
@@ -20,7 +20,7 @@
             </div>
             <br/>
             <div id="roo_dailyTravel_origin">
-                <label for="_origin_id">Origin:</label>
+                <label for="_origin_id"><spring:message code="label.origin"/>:</label>
                 <form:input cssStyle="width:250px" id="_origin_id" maxlength="45" path="origin" size="0"/>
                 <br/>
                 <form:errors cssClass="errors" id="_origin_error_id" path="origin"/>
@@ -31,7 +31,7 @@
             </div>
             <br/>
             <div id="roo_dailyTravel_destination">
-                <label for="_destination_id">Destination:</label>
+                <label for="_destination_id"><spring:message code="label.destination"/>:</label>
                 <form:input cssStyle="width:250px" id="_destination_id" maxlength="45" path="destination" size="0"/>
                 <br/>
                 <form:errors cssClass="errors" id="_destination_error_id" path="destination"/>
@@ -42,12 +42,12 @@
             </div>
             <br/>
             <div id="roo_dailyTravel_withReturn">
-                <label for="_withReturn_id">With Return:</label>
+                <label for="_withReturn_id"><spring:message code="label.return"/>:</label>
                 <form:checkbox id="_withReturn_id" path="withReturn"/>
             </div>
             <br/>
             <div id="roo_dailyTravel_distance">
-                <label for="_distance_id">Distance:</label>
+                <label for="_distance_id"><spring:message code="label.distance"/>:</label>
                 <form:input cssStyle="width:250px" id="_distance_id" maxlength="30" path="distance" size="0"/>
                 <br/>
                 <form:errors cssClass="errors" id="_distance_error_id" path="distance"/>
@@ -58,7 +58,7 @@
             </div>
             <br/>
             <div id="roo_dailyTravel_comment">
-                <label for="_comment_id">Comment:</label>
+                <label for="_comment_id"><spring:message code="label.comment"/>:</label>
                 <form:textarea cssStyle="width:250px" id="_comment_id" path="comment"/>
                 <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_comment_id', widgetType: 'dijit.form.SimpleTextarea', widgetAttrs: {}})); </script>
                 <br/>
@@ -67,7 +67,7 @@
             <br/>
             <div id="roo_dailytimesheet_timesheet">
                 <c:if test="${not empty timesheets}">
-                    <label for="_timesheet_id">Timesheet:</label>
+                    <label for="_timesheet_id"><spring:message code="label.timesheet"/>:</label>
                     <form:select cssStyle="width:250px" id="_timesheet_id" path="timesheet">
                         <form:options itemValue="id" itemLabel="readableTimesheetName" items="${timesheets}"/>
                     </form:select>

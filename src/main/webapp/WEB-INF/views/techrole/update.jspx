@@ -9,7 +9,7 @@
         <form:form action="${form_url}" method="PUT" modelAttribute="techRole">
             <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
             <div id="roo_techRole_name">
-                <label for="_name_id">Name:</label>
+                <label for="_name_id"><spring:message code="label.name"/>:</label>
                 <form:input cssStyle="width:250px" id="_name_id" maxlength="45" path="name" size="0"/>
                 <br/>
                 <form:errors cssClass="errors" id="_name_error_id" path="name"/>
@@ -20,7 +20,7 @@
             </div>
             <br/>
             <div id="roo_techRole_hourlyWage">
-                <label for="_hourlyWage_id">Hourly Wage:</label>
+                <label for="_hourlyWage_id"><spring:message code="label.hourlyWage"/>:</label>
                 <form:input cssStyle="width:250px" id="_hourlyWage_id" maxlength="30" path="hourlyWage" size="0"/>
                 <br/>
                 <form:errors cssClass="errors" id="_hourlyWage_error_id" path="hourlyWage"/>

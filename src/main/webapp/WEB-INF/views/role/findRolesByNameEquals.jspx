@@ -7,7 +7,7 @@
         <spring:url value="/role/find/ByNameEquals" var="form_url"/>
         <form:form action="${form_url}" method="GET">
             <div id="roo_role_name">
-                <label for="_name">Name:</label>
+                <label for="_name"><spring:message code="label.name"/>:</label>
                 <input id="_name" name="name" size="0" style="width:250px"/>
                 <spring:message code="field.required" var="field_required"/>
                 <spring:message argumentSeparator="," arguments="Name,(${field_required})" code="field.simple.validation" var="validation_required"/>

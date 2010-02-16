@@ -7,12 +7,12 @@
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
         <c:if test="${not empty techRole}">
             <div id="roo_techRole_name">
-                <label for="_name_id">Name:</label>
+                <label for="_name_id"><spring:message code="label.name"/>:</label>
                 <div class="box" id="_name_id">${techRole.name}</div>
             </div>
             <br/>
             <div id="roo_techRole_hourlyWage">
-                <label for="_hourlyWage_id">Hourly Wage:</label>
+                <label for="_hourlyWage_id"><spring:message code="label.hourlyWage"/>:</label>
                 <div class="box" id="_hourlyWage_id">${techRole.hourlyWage}</div>
             </div>
             <br/>

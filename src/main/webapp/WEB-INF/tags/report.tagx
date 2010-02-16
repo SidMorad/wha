@@ -1,6 +1,6 @@
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
 
-		<label for="_format_id" style="width: 45px">Format:</label>
+		<label for="_format_id" style="width: 45px"><spring:message code="label.format"/>:</label>
 		<select name="format" id="_format_id" style="width: 65px">
 			<option value="pdf">pdf</option>
 			<option value="xls">xls</option>
