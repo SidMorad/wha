@@ -39,7 +39,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
 	@Override
 	public void setPassword(String username, String newPassword) {
 		User user = load(username);
-		user.setPassword(passwordEncoder.encodePassword(user.getPassword(), null));
+		user.setPassword(passwordEncoder.encodePassword(newPassword, null));
 		user.merge();
 	}
 
