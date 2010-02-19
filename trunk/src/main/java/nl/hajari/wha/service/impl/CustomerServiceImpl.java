@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomerServiceImpl extends AbstractService implements CustomerService {
 
-	private static final String DEFAULT_EXPENSE_CUSTOMER_NAME = "Hajari Multitasking";
+	private static final String DEFAULT_EXPENSE_CUSTOMER_NAME = "HM Solutions";
 
 	private String defaultExpenseCustomerName = DEFAULT_EXPENSE_CUSTOMER_NAME;
 
