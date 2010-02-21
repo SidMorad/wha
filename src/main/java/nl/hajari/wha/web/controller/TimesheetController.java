@@ -9,5 +9,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RooWebScaffold(path = "timesheet", automaticallyMaintainView = false, formBackingObject = Timesheet.class, update = false, delete = false)
 @RequestMapping("/timesheet/**")
 @Controller
-public class TimesheetController {
+public class TimesheetController extends AbstractController {
 }

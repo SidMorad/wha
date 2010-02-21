@@ -15,15 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class BuildController {
+public class BuildController extends AbstractController {
 
 	@RequestMapping(value = "/build", method = RequestMethod.GET)
 	public String showBuildInfo(ModelMap modelMap, HttpServletRequest request) {
-
 		String appServerHome = request.getSession().getServletContext().getRealPath("/");
-
 		File manifestFile = new File(appServerHome, "META-INF/MANIFEST.MF");
-		 
 		Manifest mf = new Manifest();
 		try {
 			mf.read(new FileInputStream(manifestFile));
@@ -33,7 +30,6 @@ public class BuildController {
 			throw new IllegalStateException(e);
 		}
 		Attributes atts = mf.getMainAttributes();
-		
 		modelMap.addAttribute("implVersion", atts.getValue("Implementation-Version"));
 		modelMap.addAttribute("implBuild", atts.getValue("Implementation-Build"));
 		modelMap.addAttribute("implDate", atts.getValue("Implementation-Date"));
@@ -43,8 +39,7 @@ public class BuildController {
 		modelMap.addAttribute("createdBy", atts.getValue("Created-By"));
 		modelMap.addAttribute("buildJdk", atts.getValue("Build-Jdk"));
 		modelMap.addAttribute("buildBy", atts.getValue("Built-By"));
-		
 		return "build";
 	}
-	
+
 }

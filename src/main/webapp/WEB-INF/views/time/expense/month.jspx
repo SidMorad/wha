@@ -62,7 +62,9 @@
 	                <form:errors cssClass="errors-in-table" id="_dayDate_error_id" path="dayDate"/>
 	                <spring:message arguments="${label_date}" code="field.invalid" var="field_invalid"/>
 	                <spring:message argumentSeparator="," arguments="${label_date},(${field_required})" code="field.simple.validation" var="field_validation"/>
-	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dayDate_id', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {constraints: {min: new Date().setDate(0), max: new Date().setDate(31)}, promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true, datePattern : 'd/MM/yy'}})); </script>
+	                <script type="text/javascript">
+	                addDateDecoration('_dayDate_id', '${field_validation} - (<b>${datePattern}</b>)', '${field_invalid} - (<b>${datePattern}</b>)', true, '${datePattern}');
+	                </script>
 				</td>
 				<td>
                     <c:if test="${not empty customers}">
@@ -123,7 +125,7 @@
             <c:forEach items="${dailyExpenses}" var="de">
             	<tr>
             		<td><fmt:formatDate pattern="EEE" type="DATE" value="${de.dayDate}" /> -
-            		    <fmt:formatDate pattern="d/MM/yy" type="DATE" value="${de.dayDate}"/></td>
+            		    <fmt:formatDate pattern="${datePattern}" type="DATE" value="${de.dayDate}"/></td>
             		<td>${de.customer}</td>
             		<td>${de.expenseFor}</td>
             		<td>${de.expenseAmount}</td>

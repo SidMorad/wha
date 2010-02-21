@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RooWebScaffold(path = "project", automaticallyMaintainView = false, formBackingObject = Project.class)
 @RequestMapping("/project/**")
 @Controller
-public class ProjectController {
+public class ProjectController extends AbstractController {
 
 	@Autowired
 	protected ProjectServiceImpl service;

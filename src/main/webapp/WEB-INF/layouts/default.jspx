@@ -18,6 +18,7 @@
 		<spring:url value="/resources/spring/Spring.js" var="spring_url"/>
 		<spring:url value="/resources/spring/Spring-Dojo.js" var="spring_dojo_url"/>		
 		<spring:url value="/static/images/favicon.jpg" var="favicon" />
+		<spring:url value="/static/js/wha.js" var="wha_js" />
 		<link rel="stylesheet" type="text/css" href="${tundra_url}"><!-- //required for FF3 and Opera --></link>		
 		<link rel="stylesheet" type="text/css" media="screen" href="${roo_css_url}"><!-- //required for FF3 and Opera --></link>
 		<link rel="SHORTCUT ICON" href="${favicon}" />
@@ -38,11 +39,12 @@
 		<script src="${dojo_url}" type="text/javascript" ><!-- //required for FF3 and Opera --></script>
 		<script src="${spring_url}" type="text/javascript"><!-- //required for FF3 and Opera --></script>
 		<script src="${spring_dojo_url}" type="text/javascript"><!-- //required for FF3 and Opera --></script>
+		<script src="${wha_js}" type="text/javascript"><!-- //required for FF3 and Opera --></script>
 		<script language="JavaScript" type="text/javascript">dojo.require("dojo.parser");</script>
 		<title><spring:message code="welcome.h3" /></title>
 		<tiles:insertAttribute name="head" ignore="true"/>
 	</head>
-   	<body class="tundra spring">		
+   	<body class="tundra spring">
   		<div id="page">
 			<c:url var="home" value="/" />
   			<div id="header" class="clearfix">
@@ -57,6 +59,8 @@
 				    <a href="${home}" title="${hajari}"><img src="${logo}" alt="${hajari}" align="right"/></a>
 				</div>
   			</div>  
+  			<!-- There are some page variable useful in every page -->
+   			<spring:message code="date.pattern" var="datePattern" scope="request" />
 	    	<div id="content" class="clearfix">
 			  	<div id="nav">
 			    	<tiles:insertAttribute name="menu" ignore="true" />

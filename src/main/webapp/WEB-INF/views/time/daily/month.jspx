@@ -6,6 +6,7 @@
 	    dojo.require("dojo.data.ItemFileReadStore");
 	    dojo.require("dijit.form.DateTextBox");
     </script>
+    
     <div id="_title_div" style="width: 100%">
         <spring:message code="label.dailytimesheet" var="entity_label"/>
         <spring:message code="label.dailytimesheets" var="entity_label_plural"/>
@@ -66,7 +67,7 @@
 	                <spring:message arguments="${label_date}" code="field.invalid" var="field_invalid"/>
 	                <spring:message argumentSeparator="," arguments="${label_date},(${field_required})" code="field.simple.validation" var="field_validation"/>
 	                <script type="text/javascript">
-	                Spring.addDecoration(new Spring.ElementDecoration({elementId : '_dayDate', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {constraints: {min: new Date().setDate(0), max: new Date().setDate(31)}, promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true, datePattern : 'd/MM/yy'}})); 
+	                addDateDecoration('_dayDate', '${field_validation} - (<b>${datePattern}</b>)', '${field_invalid} - (<b>${datePattern}</b>)', true, '${datePattern}');
 	                </script>
 				</td>
 				<td>
@@ -127,7 +128,10 @@
             </thead>
             <c:forEach items="${dailyTimesheets}" var="dt">
             	<tr>
-            		<td><fmt:formatDate pattern="d/MM/yy" type="DATE" value="${dt.dayDate}"/></td>
+            		<td>
+            			<fmt:formatDate pattern="EEE" type="DATE" value="${dt.dayDate}" /> -	
+            			<fmt:formatDate pattern="${datePattern}" type="DATE" value="${dt.dayDate}"/>
+            		</td>
             		<td>${dt.project}</td>
             		<td>${dt.duration}</td>
             		<td>${dt.durationOffs}</td>

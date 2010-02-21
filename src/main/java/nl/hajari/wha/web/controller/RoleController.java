@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RooWebScaffold(path = "role", automaticallyMaintainView = false, formBackingObject = Role.class)
 @RequestMapping("/role/**")
 @Controller
-public class RoleController {
+public class RoleController extends AbstractController {
 	
 	public Role getRole(String name) {
 		List<Role> roles = Role.findRolesByNameEquals(name).getResultList();

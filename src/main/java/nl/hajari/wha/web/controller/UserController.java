@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RooWebScaffold(path = "admin/user", automaticallyMaintainView = false, formBackingObject = User.class)
 @RequestMapping("/admin/user/**")
 @Controller
-public class UserController {
+public class UserController extends AbstractController {
 
 	@Autowired
 	private UserService userService;
