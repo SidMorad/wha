@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
-				http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	<!--
 		The controllers are autodetected POJOs labeled with the @Controller
@@ -163,16 +163,14 @@
 
 	<bean id="projectSerializer" class="nl.hajari.wha.service.json.ProjectSerializer" />
 	<bean id="customerSerializer" class="nl.hajari.wha.service.json.CustomerSerializer" />
-	
+
 	<bean id="customerService" class="nl.hajari.wha.service.impl.CustomerServiceImpl">
-	<!-- 
-		<property name="expenseDefaultCustomerName" value="${default.expense.customer.name}" />
-	 -->
 	</bean>
 
 	<!-- Jasperreports configuration -->
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
-    	<property name="basename" value="views"/>
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
+		<property name="basename" value="views" />
 	</bean>
 	<bean id="jasperReportsMultiFormatView" name="jasperReportsMultiFormatViewBean"
 		class="nl.hajari.wha.web.report.CustomJasperReportsMultiFormatView">

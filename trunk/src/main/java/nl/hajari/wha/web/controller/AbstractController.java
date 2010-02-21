@@ -41,7 +41,7 @@ public class AbstractController implements MessageSourceAware {
 
 	protected CustomDateEditor getCustomDateEditor() {
 		String datePattern = messages.getMessage(Constants.DATE_PATTERN_KEY, new Object[] {}, getLocale());
-		logger.warn("Customer editor for date pattern: " + datePattern);
+		logger.debug("Customer editor for date pattern: " + datePattern);
 		return new CustomDateEditor(new SimpleDateFormat(datePattern), true);
 	}
 
@@ -51,7 +51,7 @@ public class AbstractController implements MessageSourceAware {
 			locale = LocaleContextHolder.getLocale();
 		} catch (Exception e) {
 		}
-		logger.warn("Current Locale: " + locale);
+		logger.debug("Current Locale: " + locale);
 		return locale;
 	}
 	
