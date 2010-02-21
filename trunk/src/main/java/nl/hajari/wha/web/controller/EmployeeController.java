@@ -6,24 +6,19 @@ import javax.validation.Valid;
 import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.web.controller.formbean.ProfileFormBean;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @RooWebScaffold(path = "employee", automaticallyMaintainView = false, formBackingObject = Employee.class, exposeFinders = false)
 @RequestMapping("/employee/**")
 @Controller
-public class EmployeeController {
-	protected final Log logger = LogFactory.getLog(getClass());
+public class EmployeeController extends AbstractController{
 	
 	@Autowired
 	protected PasswordEncoder passwordEncoder; 
@@ -89,11 +84,5 @@ public class EmployeeController {
 		return employee;
 	}
 
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		binder.registerCustomEditor(java.util.Date.class,
-				new org.springframework.beans.propertyeditors.CustomDateEditor(
-						new java.text.SimpleDateFormat("d/MM/yy"), true));
-	}
 }
 

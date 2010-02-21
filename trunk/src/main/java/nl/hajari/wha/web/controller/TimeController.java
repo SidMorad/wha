@@ -12,22 +12,16 @@ import nl.hajari.wha.service.impl.DailyTimesheetServiceImpl;
 import nl.hajari.wha.service.impl.ProjectServiceImpl;
 import nl.hajari.wha.web.util.SecurityContextUtils;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("/time/**")
 @Controller
-public class TimeController {
+public class TimeController extends AbstractController {
 
 	protected static final String WORKING_DAILY_TIMESHEET_KEY = "WORKING_DAILY_TIMESHEET_KEY";
-
-	protected final Log logger = LogFactory.getLog(getClass());
 
 	@Autowired
 	protected DailyTimesheetServiceImpl dailyTimesheetService;
@@ -40,13 +34,6 @@ public class TimeController {
 
 	@Autowired
 	protected DailyExpenseServiceImpl dailyExpenseService;
-
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		binder.registerCustomEditor(java.util.Date.class,
-				new org.springframework.beans.propertyeditors.CustomDateEditor(
-				new java.text.SimpleDateFormat("d/MM/yy"), true));
-	}
 
 	public boolean authorizeAccessTimesheet(Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {

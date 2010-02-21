@@ -57,6 +57,7 @@ privileged aspect TimeController_DailyTimesheetController {
 		if (dailyTimesheet == null) {
 			throw new IllegalArgumentException("DailyTimesheet is null.");
 		}
+		logger.warn(dailyTimesheet.getDayDate());
 		if (!DateUtils.getCurrentMonth().equals(DateUtils.getMonthInteger(dailyTimesheet.getDayDate()))) {
 			result.rejectValue("dayDate", "error.time.day.date.not.avaiable");
 		}

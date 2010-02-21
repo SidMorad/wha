@@ -8,5 +8,5 @@ import org.springframework.stereotype.Controller;
 @RooWebScaffold(path = "constants", automaticallyMaintainView = false, formBackingObject = Constants.class)
 @RequestMapping("/constants/**")
 @Controller
-public class ConstantsController {
+public class ConstantsController extends AbstractController {
 }

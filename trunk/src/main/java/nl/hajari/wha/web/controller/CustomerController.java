@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RooWebScaffold(path = "customer", automaticallyMaintainView = false, formBackingObject = Customer.class)
 @RequestMapping("/customer/**")
 @Controller
-public class CustomerController {
+public class CustomerController extends AbstractController {
 
-	@RequestMapping(value ="/customer/report/pdf", method = RequestMethod.GET)
+	@RequestMapping(value = "/customer/report/pdf", method = RequestMethod.GET)
 	public String fireReport(ModelMap modelMap) {
-		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(Customer.findAllCustomers(),false);
+		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(Customer.findAllCustomers(), false);
 		modelMap.put("customerListData", jrDataSource);
 		return "customerList";
 	}

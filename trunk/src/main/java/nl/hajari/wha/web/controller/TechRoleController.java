@@ -8,5 +8,5 @@ import org.springframework.stereotype.Controller;
 @RooWebScaffold(path = "techrole", automaticallyMaintainView = false, formBackingObject = TechRole.class)
 @RequestMapping("/techrole/**")
 @Controller
-public class TechRoleController {
+public class TechRoleController extends AbstractController {
 }
