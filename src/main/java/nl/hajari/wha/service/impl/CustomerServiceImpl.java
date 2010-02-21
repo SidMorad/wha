@@ -8,6 +8,7 @@ import java.util.List;
 import nl.hajari.wha.domain.Customer;
 import nl.hajari.wha.service.CustomerService;
 
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,11 +17,21 @@ import org.springframework.stereotype.Service;
  * @author Behrooz Nobakht [behrooz dot nobakht at gmail dot nl]
  */
 @Service
-public class CustomerServiceImpl extends AbstractService implements CustomerService {
+public class CustomerServiceImpl extends AbstractService implements CustomerService, InitializingBean {
 
 	private static final String DEFAULT_EXPENSE_CUSTOMER_NAME = "HM Solutions";
 
-	private String defaultExpenseCustomerName = DEFAULT_EXPENSE_CUSTOMER_NAME;
+	private String DEFAULT_EXPENSE_CUSTOMER_NAME_KEY = "default.expense.customer.name";
+	private String defaultExpenseCustomerName;
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		if (null == defaultExpenseCustomerName) {
+			String value = getConfig(DEFAULT_EXPENSE_CUSTOMER_NAME_KEY);
+			defaultExpenseCustomerName = (null == value) ? DEFAULT_EXPENSE_CUSTOMER_NAME : value;
+		}
+		logger.debug("Using [" + defaultExpenseCustomerName + "] as the default customer name for expenses.");
+	}
 
 	public List<Customer> findAll() {
 		List<Customer> list = Customer.findAllCustomers();
