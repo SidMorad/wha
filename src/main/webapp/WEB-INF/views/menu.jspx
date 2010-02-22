@@ -93,21 +93,21 @@
                 </a>
             </li>
             <li id="web_mvc_jsp_list_timesheet_daily_menu_item">
-                <c:url value="/time/timesheet?ent=daily" var="web_mvc_jsp_time_list_timesheet_daily_menu_item_url"/>
+                <c:url value="/time/timesheet/daily" var="web_mvc_jsp_time_list_timesheet_daily_menu_item_url"/>
                 <a href="${web_mvc_jsp_time_list_timesheet_daily_menu_item_url}">
                     <spring:message code="label.timesheets" var="label_timesheets"/>
                     <spring:message arguments="${label_timesheets}" code="global.menu.list"/>
                 </a>
             </li>
             <li id="web_mvc_jsp_list_timesheet_travel_menu_item">
-                <c:url value="/time/timesheet?ent=travel" var="web_mvc_jsp_time_list_timesheet_travel_menu_item_url"/>
+                <c:url value="/time/timesheet/travel" var="web_mvc_jsp_time_list_timesheet_travel_menu_item_url"/>
                 <a href="${web_mvc_jsp_time_list_timesheet_travel_menu_item_url}">
                     <spring:message code="label.travels" var="label_travels"/>
                     <spring:message arguments="${label_travels}" code="global.menu.list"/>
                 </a>
             </li>
             <li id="web_mvc_jsp_list_timesheet_expense_menu_item">
-                <c:url value="/time/timesheet?ent=expense" var="web_mvc_jsp_time_list_timesheet_expense_menu_item_url"/>
+                <c:url value="/time/timesheet/expense" var="web_mvc_jsp_time_list_timesheet_expense_menu_item_url"/>
                 <a href="${web_mvc_jsp_time_list_timesheet_expense_menu_item_url}">
                     <spring:message code="label.expenses" var="label_expenses"/>
                     <spring:message arguments="${label_expenses}" code="global.menu.list"/>
