@@ -145,9 +145,9 @@
             		<th>-</th>
             		<th>-</th>
             		<th>-</th>
-            		<th>-</th>
             		<th><b>${totalAmount}</b></th>
             		<th>-</th>
+            		<th></th>
             </tr>
         </table>
     </div>

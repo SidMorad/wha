@@ -11,8 +11,8 @@
         <spring:message code="field.required" var="field_required"/>
         <spring:message code="field.invalid.decimal" var="field_invalid"/>
         <spring:message code="label.date" var="label_date"/>
-        <spring:message code="label.origin" var="label_origin"/>
-        <spring:message code="label.destination" var="label_destination"/>
+        <spring:message code="label.from" var="label_from"/>
+        <spring:message code="label.to" var="label_to"/>
         <spring:message code="label.return" var="label_return"/>
         <spring:message code="label.distance" var="label_distance"/>
         <spring:message code="label.comment" var="label_comment"/>     
@@ -52,8 +52,8 @@
             <thead>
             <tr>
                 <th width="100px">${label_date}</th>
-                <th width="85px">${label_origin}</th>
-                <th width="85px">${label_destination}</th>
+                <th width="85px">${label_from}</th>
+                <th width="85px">${label_to}</th>
                 <th width="55px">${label_return}</th>
                 <th width="60px">${label_distance}</th>
                 <th width="60px">${label_comment}</th>
@@ -73,15 +73,15 @@
 				<td>
 	                <form:input cssStyle="width:95%" id="_origin_id" maxlength="45" path="origin" size="0"/>
 	                <form:errors cssClass="errors-in-table" id="_origin_error_id" path="origin"/>
-	                <spring:message arguments="${label_origin}" code="field.invalid" var="field_invalid"/>
-	                <spring:message argumentSeparator="," arguments="${label_origin},(${field_required})" code="field.simple.validation" var="field_validation"/>
+	                <spring:message arguments="${label_from}" code="field.invalid" var="field_invalid"/>
+	                <spring:message argumentSeparator="," arguments="${label_from},(${field_required})" code="field.simple.validation" var="field_validation"/>
 	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_origin_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
 				</td>     
 				<td>
 	                <form:input cssStyle="width:95%" id="_destination_id" maxlength="45" path="destination" size="0"/>
 	                <form:errors cssClass="errors-in-table" id="_destination_error_id" path="destination"/>
-	                <spring:message arguments="${label_destination}" code="field.invalid" var="field_invalid"/>
-	                <spring:message argumentSeparator="," arguments="${label_destination},(${field_required})" code="field.simple.validation" var="field_validation"/>
+	                <spring:message arguments="${label_to}" code="field.invalid" var="field_invalid"/>
+	                <spring:message argumentSeparator="," arguments="${label_to},(${field_required})" code="field.simple.validation" var="field_validation"/>
 	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_destination_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
 				</td>
 				<td>
@@ -118,8 +118,8 @@
             <thead>		
 	            <tr>
 	                <th width="100px">${label_date}</th>
-	                <th width="85px">${label_origin}</th>
-	                <th width="85px">${label_destination}</th>
+	                <th width="85px">${label_from}</th>
+	                <th width="85px">${label_to}</th>
 	                <th width="55px">${label_return}</th>
 	                <th width="60px">${label_distance}</th>
 	                <th width="60px">${label_comment}</th>
@@ -160,9 +160,9 @@
             		<th>-</th>
             		<th>-</th>
             		<th>-</th>
-            		<th>-</th>
             		<th><b>${totalDistance}</b></th>
             		<th>-</th>
+            		<th></th>
             </tr>
         </table>
     </div>
