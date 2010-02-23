@@ -3,7 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
@@ -166,6 +168,23 @@
 
 	<bean id="customerService" class="nl.hajari.wha.service.impl.CustomerServiceImpl">
 	</bean>
+	<bean id="constantsService" class="nl.hajari.wha.service.impl.ConstantsServiceImpl" />
+
+	<bean id="notificationService" class="nl.hajari.wha.service.impl.NotificationServiceImpl">
+		<property name="mailSender" ref="mailSender" />
+	</bean>
+
+	<bean id="employeeService" class="nl.hajari.wha.service.impl.EmployeeServiceImpl">
+		<property name="notificationService" ref="notificationService" />
+	</bean>
+
+	<!-- Notification Scheduling -->
+	<task:scheduled-tasks>
+		<!--  run at 10:00A.M. of the last day of month (~~ 28th): 0 0 10 28 * * -->
+		<!-- For test:  0 */2 * * * * -->
+		<task:scheduled ref="employeeService"
+			method="sendMonthlyTimesheetUpdateNotification" cron="0 0 10 28 * *" />
+	</task:scheduled-tasks>
 
 	<!-- Jasperreports configuration -->
 	<bean id="viewResolver"

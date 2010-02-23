@@ -84,6 +84,8 @@
 		<property name="host" value="${email.host}" />
 		<property name="protocol" value="${email.protocol}" />
 		<property name="port" value="${email.port}" />
+		<property name="username" value="${email.username}" />
+		<property name="password" value="${email.password}" />
 	</bean>
 
 	<util:properties id="configs" location="classpath:config.properties" />

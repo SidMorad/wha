@@ -20,7 +20,7 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 
 @Entity
 @RooJavaBean
-@RooEntity(finders = { "findEmployeesByUser" })
+@RooEntity(finders = { "findEmployeesByUser", "findEmployeesByRole" })
 public class Employee {
 
 	public static final String EMPLOYEE_ID = "employeeId";
