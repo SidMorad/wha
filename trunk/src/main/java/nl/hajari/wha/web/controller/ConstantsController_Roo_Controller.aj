@@ -75,4 +75,16 @@ privileged aspect ConstantsController_Roo_Controller {
         return "redirect:/constants?page=" + ((page == null) ? "1" : page.toString()) + "&size=" + ((size == null) ? "10" : size.toString());        
     }    
     
+    @RequestMapping(value = "find/ByKeyEquals/form", method = RequestMethod.GET)    
+    public String ConstantsController.findConstantsesByKeyEqualsForm(ModelMap modelMap) {    
+        return "constants/findConstantsesByKeyEquals";        
+    }    
+    
+    @RequestMapping(value = "find/ByKeyEquals", method = RequestMethod.GET)    
+    public String ConstantsController.findConstantsesByKeyEquals(@RequestParam("key") String key, ModelMap modelMap) {    
+        if (key == null || key.length() == 0) throw new IllegalArgumentException("A Key is required.");        
+        modelMap.addAttribute("constantses", Constants.findConstantsesByKeyEquals(key).getResultList());        
+        return "constants/list";        
+    }    
+    
 }
