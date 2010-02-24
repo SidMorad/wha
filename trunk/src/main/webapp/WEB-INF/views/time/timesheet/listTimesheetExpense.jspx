@@ -12,7 +12,9 @@
                         <th><spring:message code="label.id"/></th>
                         <th><spring:message code="label.year"/></th>
                         <th><spring:message code="label.month"/></th>
+                        <!-- 
                         <th><spring:message code="label.total"/></th>
+                        -->
                         <th><spring:message code="label.dailyexpenses"/></th>
                         <th/>
                     </tr>
@@ -22,7 +24,9 @@
                         <td>${timesheet.id}</td>
                         <td>${timesheet.sheetYear}</td>
                         <td>${timesheet.sheetMonthShortName}</td>
+                        <!-- 
                         <td>${timesheet.monthlyTotal}</td>
+                        -->
                         <td>${fn:length(timesheet.dailyExpenses)}</td>
                         <td>
                             <spring:url value="/time/timesheet/expense/${timesheet.id}" var="show_form_url"/>
