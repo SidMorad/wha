@@ -21,10 +21,12 @@
                 <div class="box" id="_sheetMonth">${timesheet.sheetMonthShortName}</div>
             </div>
             <br/>
+            <!-- 
             <div id="roo_timesheet_monthlyTotal">
                 <label for="_monthlyTotal"><spring:message code="label.total"/>:</label>
                 <div class="box" id="_monthlyTotal">${timesheet.monthlyTotal}</div>
             </div>
+            -->
             <br/>
          </c:if>
         <c:if test="${empty timesheet}">

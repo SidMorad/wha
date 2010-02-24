@@ -5,6 +5,7 @@
 			  name="dailyTravelList" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" 
 			  rightMargin="20" topMargin="20" bottomMargin="20" resourceBundle="reportlabels">
 	<parameter name="IMAGE_HM_LOGO" class="java.lang.String"/>
+	<parameter name="total_distance" class="java.lang.String"/>
 	<field name="dayDate" class="java.util.Date"/>
 	<field name="origin" class="java.lang.String"/>
 	<field name="destination" class="java.lang.String"/>
@@ -159,7 +160,10 @@
 			<textField>
 				<reportElement x="500" y="8" width="75" height="20"/>
 				<textElement/>
+				<!--
 				<textFieldExpression class="java.lang.Float"><![CDATA[$V{distance_1}]]></textFieldExpression>
+				-->
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{total_distance}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="549" y="8" width="23" height="20"/>
