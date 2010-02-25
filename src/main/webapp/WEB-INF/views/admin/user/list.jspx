@@ -13,7 +13,7 @@
                         <th><spring:message code="label.username"/></th>
                         <th><spring:message code="label.enabled"/></th>
                         <th><spring:message code="label.email"/></th>
-                        <th><spring:message code="label.changePassword"/></th>
+                        <th></th>
                         <th></th>
                         <th></th> 
                         <th></th>
@@ -28,9 +28,10 @@
                         <td>
                             <c:url value="/admin/user/change_password/${user.id}/form" var="change_password_url"/>
                             <c:url value="/static/images/update.png" var="update_image_url"/>
+                            <spring:url value="/static/images/password.png" var="password_image_url"/>
                             <form:form action="${change_password_url}" method="GET">
                                 <spring:message code="label.changePassword" var="update_label"/>
-                                <input alt="${update_label}" class="image" src="${update_image_url}" title="${update_label}" type="image" value="${update_label}"/>
+                                <input alt="${update_label}" class="image" src="${password_image_url}" title="${update_label}" type="image" value="${update_label}"/>
                             </form:form>
                         </td>
                         <td>

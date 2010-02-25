@@ -61,8 +61,12 @@
 	                        <td>${dailytravel.origin}</td>
 	                        <td>${dailytravel.destination}</td>
 	                        <td>
-	                        	<c:if test="${dailytravel.withReturn == true}"><spring:message code="label.yes"/></c:if>
-	                        	<c:if test="${dailytravel.withReturn == false}"><spring:message code="label.no"/></c:if>
+	                        	<c:if test="${dailytravel.withReturn == true}">
+	                        	<img src="${image_yes_url}" class="image"/>
+	                        	</c:if>
+	                        	<c:if test="${dailytravel.withReturn == false}">
+	                        	<img src="${image_no_url}" class="image"/>
+	                        	</c:if>
 	                        </td>
 	                        <td>${dailytravel.comment}</td>
 	                        <td>${dailytravel.distance}</td>
