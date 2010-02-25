@@ -61,6 +61,9 @@
   			</div>  
   			<!-- There are some page variable useful in every page -->
    			<spring:message code="date.pattern" var="datePattern" scope="request" />
+   			<spring:url value="/static/images/yes.png" var="image_yes_url" scope="request" />
+   			<spring:url value="/static/images/no.png" var="image_no_url" scope="request" />
+   			
 	    	<div id="content" class="clearfix">
 			  	<div id="nav">
 			    	<tiles:insertAttribute name="menu" ignore="true" />
