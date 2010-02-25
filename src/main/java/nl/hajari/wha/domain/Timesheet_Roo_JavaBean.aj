@@ -64,6 +64,14 @@ privileged aspect Timesheet_Roo_JavaBean {
     
     public void Timesheet.setDailyExpenses(Set<DailyExpense> dailyExpenses) {    
         this.dailyExpenses = dailyExpenses;        
-    }    
+    }
+    
+    public String Timesheet.getPoNumber() {
+    	return this.poNumber;
+    }
+    
+    public void Timesheet.setPoNumber(String poNumber) {
+    	this.poNumber = poNumber;
+    }
     
 }
