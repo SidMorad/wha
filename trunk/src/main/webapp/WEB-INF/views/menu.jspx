@@ -13,56 +13,56 @@
                 </a>
             </li>
         	<li id="web_mvc_jsp_list_admin_user_menu_item">
-                <c:url value="/admin/user?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_admin_user_menu_item_url"/>
+                <c:url value="/admin/user?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 25 : param.size}" var="web_mvc_jsp_list_admin_user_menu_item_url"/>
                 <a href="${web_mvc_jsp_list_admin_user_menu_item_url}">
                     <spring:message code="label.users" var="label_users"/>
                     <spring:message arguments="${label_users}" code="global.menu.list"/>
                 </a>
             </li>
         	<li id="web_mvc_jsp_list_employee_menu_item">
-                <c:url value="/employee?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_employee_menu_item_url"/>
+                <c:url value="/employee?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 25 : param.size}" var="web_mvc_jsp_list_employee_menu_item_url"/>
                 <a href="${web_mvc_jsp_list_employee_menu_item_url}">
                     <spring:message code="label.employees" var="label_employees"/>
                     <spring:message arguments="${label_employees}" code="global.menu.list"/>
                 </a>
             </li>
         	<li id="web_mvc_jsp_list_admin_timesheet_menu_item">
-                <spring:url value="/admin/timesheet?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_admin_timesheet_menu_item_url"/>
+                <spring:url value="/admin/timesheet?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 25 : param.size}" var="web_mvc_jsp_list_admin_timesheet_menu_item_url"/>
                 <a href="${web_mvc_jsp_list_admin_timesheet_menu_item_url}">
                     <spring:message code="label.timesheets" var="label_timesheets"/>
                     <spring:message arguments="${label_timesheets}" code="global.menu.list"/>
                 </a>
             </li>
 	        <li id="web_mvc_jsp_list_project_menu_item">
-                <spring:url value="/project?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_project_menu_item_url"/>
+                <spring:url value="/project?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 25 : param.size}" var="web_mvc_jsp_list_project_menu_item_url"/>
                 <a href="${web_mvc_jsp_list_project_menu_item_url}">
                     <spring:message code="label.projects" var="label_projects"/>
                     <spring:message arguments="${label_projects}" code="global.menu.list"/>
                 </a>
             </li>
     	    <li id="web_mvc_jsp_list_customer_menu_item">
-                <spring:url value="/customer?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_customer_menu_item_url"/>
+                <spring:url value="/customer?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 25 : param.size}" var="web_mvc_jsp_list_customer_menu_item_url"/>
                 <a href="${web_mvc_jsp_list_customer_menu_item_url}">
                     <spring:message code="label.customers" var="label_customers"/>
                     <spring:message arguments="${label_customers}" code="global.menu.list"/>
                 </a>
             </li>
 	        <li id="web_mvc_jsp_list_techrole_menu_item">
-               <spring:url value="/techrole?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_techrole_menu_item_url"/>
+               <spring:url value="/techrole?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 25 : param.size}" var="web_mvc_jsp_list_techrole_menu_item_url"/>
                <a href="${web_mvc_jsp_list_techrole_menu_item_url}">
                    <spring:message code="label.techroles" var="label_techroles"/>
                    <spring:message arguments="${label_techroles}" code="global.menu.list"/>
                </a>
 	        </li>
      		<li id="web_mvc_jsp_list_role_menu_item">
-                <c:url value="/role?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_role_menu_item_url"/>
+                <c:url value="/role?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 25 : param.size}" var="web_mvc_jsp_list_role_menu_item_url"/>
                 <a href="${web_mvc_jsp_list_role_menu_item_url}">
                     <spring:message code="label.roles" var="label_roles"/>
                     <spring:message arguments="${label_roles}" code="global.menu.list"/>
                 </a>
             </li>
         	<li id="web_mvc_jsp_list_constants_menu_item">
-                <spring:url value="/constants?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_constants_menu_item_url"/>
+                <spring:url value="/constants?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 25 : param.size}" var="web_mvc_jsp_list_constants_menu_item_url"/>
                 <a href="${web_mvc_jsp_list_constants_menu_item_url}">
                     <spring:message code="label.constantses" var="label_constantses"/>
                     <spring:message arguments="${label_constantses}" code="global.menu.list"/>
