@@ -1,6 +1,7 @@
 
 package nl.hajari.wha.web.util;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -35,6 +36,16 @@ public class DateUtils {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(dayDate);
 		return calendar.get(Calendar.MONTH);
+	}
+
+	public static String getMonthAndYearString(Date date) {
+		SimpleDateFormat format = new SimpleDateFormat("MMyy");
+		return format.format(date);
+	}
+
+	public static String formatDate(Date date, String pattern) {
+		SimpleDateFormat format = new SimpleDateFormat(pattern);
+		return format.format(date);
 	}
 
 }

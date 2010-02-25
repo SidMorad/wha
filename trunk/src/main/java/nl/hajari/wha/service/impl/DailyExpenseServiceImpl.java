@@ -44,4 +44,16 @@ public class DailyExpenseServiceImpl extends AbstractService implements DailyExp
 		}
 		return notHajariList;
 	}
+
+	public Double getDailyExpenseTotalForOthers(Long timesheetId) {
+		List<DailyExpense> dailyExpensesForOthers = getDailyExpensesForOthers(timesheetId);
+		double total = 0.0;
+		if (null == dailyExpensesForOthers || dailyExpensesForOthers.isEmpty()) {
+			return total;
+		}
+		for (DailyExpense de : dailyExpensesForOthers) {
+			total += de.getExpenseAmount();
+		}
+		return total;
+	}
 }

@@ -13,4 +13,10 @@
     <definition extends="default" name="admin/timesheet/expense/show">
         <put-attribute name="body" value="/WEB-INF/views/admin/timesheet/showTimesheetExpense.jspx"/>
     </definition>    
+    <definition extends="default" name="admin/timesheet/ponumber">
+        <put-attribute name="body" value="/WEB-INF/views/admin/timesheet/ponumber.jspx"/>
+    </definition>    
+    <definition extends="default" name="admin/timesheet/invoice">
+        <put-attribute name="body" value="/WEB-INF/views/admin/timesheet/invoice.jspx"/>
+    </definition>    
 </tiles-definitions>

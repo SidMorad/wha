@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
+import org.springframework.context.NoSuchMessageException;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -54,9 +55,18 @@ public class AbstractController implements MessageSourceAware {
 		logger.debug("Current Locale: " + locale);
 		return locale;
 	}
-	
+
 	protected Locale getDefaultLocale() {
 		return Locale.US;
+	}
+
+	protected String getMessage(String key, Object... params) {
+		try {
+			String value = messages.getMessage(key, params, getLocale());
+			return value;
+		} catch (NoSuchMessageException e) {
+			return null;
+		}
 	}
 
 	@Override

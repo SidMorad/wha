@@ -1,0 +1,55 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:roo="urn:jsptagdir:/WEB-INF/tags" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
+    <script type="text/javascript">dojo.require('dijit.TitlePane');</script>
+    <div id="_title_div">
+        <spring:message code="label.timesheet" var="entity_label"/>
+        <spring:message code="label.timesheets" var="entity_label_plural"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: 'Timesheet PO Number'}})); </script>
+        <c:if test="${not empty timesheet}">
+            <div id="roo_timesheet_employee">
+                <label for="_employee"><spring:message code="label.employee"/>:</label>
+                <div class="box" id="_employee">${timesheet.employee}</div>
+            </div>
+           <br/>
+            <div id="roo_timesheet_sheetYear">
+                <label for="_sheetYear"><spring:message code="label.year"/>:</label>
+                <div class="box" id="_sheetYear">${timesheet.sheetYear}</div>
+            </div>
+            <br/>
+            <div id="roo_timesheet_sheetMonth">
+                <label for="_sheetMonth"><spring:message code="label.month"/>:</label>
+                <div class="box" id="_sheetMonth">${timesheet.sheetMonthShortName}</div>
+            </div>
+            <br/>
+            <div id="roo_timesheet_monthlyTotal">
+                <label for="_monthlyTotal"><spring:message code="label.total"/>:</label>
+                <div class="box" id="_monthlyTotal">${timesheet.monthlyTotal}</div>
+            </div>
+            <br/>
+           	<spring:url value="/admin/timsheet/ponumber/update" var="timsheet_update_ponumber_url"/>
+           	<form:form action="${timsheet_update_ponumber_url}" method="POST" modelAttribute="timesheet">
+            <div id="roo_timesheet_ponumber">
+	                <label for="_poNumber"><spring:message code="label.ponumber"/>:</label>
+	                <form:input cssStyle="width:250px" id="_poNumber" maxlength="30" path="poNumber" size="0"/>
+	                <br/>
+	                <form:errors cssClass="errors" id="_ponumber_error_id" path="poNumber"/>
+	                <spring:message code="field.invalid" var="field_invalid"/>
+	                <spring:message code="field.required" var="field_required"/>
+	                <spring:message argumentSeparator="," arguments="PO Number,(${field_required})" code="field.simple.validation" var="field_validation"/>
+	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_poNumber', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
+            </div>
+            <div class="submit" id="roo_ponumber_submit">
+                <spring:message code="button.update" var="update_button"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
+                <input id="proceed" type="submit" value="${update_button}"/>
+            </div>
+            <form:hidden id="_id_id" path="id"/>
+            <form:hidden id="_version_id" path="version"/>
+           	</form:form>
+            <br/>
+         </c:if>
+        <c:if test="${empty timesheet}">
+            <spring:message arguments="${entity_label}" code="entity.not.found.single"/>
+        </c:if>
+    </div>
+</div>
