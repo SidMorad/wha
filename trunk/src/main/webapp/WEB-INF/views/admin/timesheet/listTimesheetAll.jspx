@@ -9,6 +9,34 @@
         <c:if test="${not empty timesheets}">
             <table style="width:98%">
                 <thead>
+	            	<tr>
+	            		<td colspan="10">
+	            			<spring:url value="/admin/timesheet/refresh" var="form_url"/>
+	            			<form:form action="${form_url}" method="POST" modelAttribute="timesheetYearMonthFormBean">
+	            				<div id="roo_year" style="float: left;">
+							    	<label for="_year" style="width:40px"><spring:message code="label.year"/>:</label>
+				                    <form:select cssStyle="width:90px;" id="_year" path="year">
+				                        <form:option value="2009">2009</form:option>
+				                        <form:option value="2009">2010</form:option>
+				                    </form:select>
+				                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_year', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+				            	</div>
+	            				<div id="roo_month" style="float: left;">
+							    	<label for="_year" style="width:50px"><spring:message code="label.month"/>:</label>
+				                    <form:select cssStyle="width:90px;" id="_month" path="month">
+				                        <form:option value="1">Jun</form:option>
+				                        <form:option value="2">Feb</form:option>
+				                    </form:select>
+				                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_month', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+				            	</div>
+								<div class="submit" id="roo_submit" >
+					                <spring:message code="button.submit" var="submit_button"/>
+					                <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
+					                <input id="proceed" type="submit" value="${submit_button}" style="margin-left: 5px;"/>
+					            </div>			            	
+	            			</form:form>	
+	            		</td>
+	            	</tr>
                     <tr>
                         <th><spring:message code="label.id"/></th>
                         <th><spring:message code="label.year"/></th>
