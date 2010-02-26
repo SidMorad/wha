@@ -28,7 +28,7 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 
 @Entity
 @RooJavaBean
-@RooEntity(finders = { "findTimesheetsByEmployeeAndSheetMonthAndSheetYearEquals", "findTimesheetsByEmployee" })
+@RooEntity(finders = { "findTimesheetsByEmployeeAndSheetMonthAndSheetYearEquals", "findTimesheetsByEmployee", "findAllTimesheetYears" })
 @UniqueConstraint(columnNames = "sheetYear,sheetMonth,employee")
 public class Timesheet {
 

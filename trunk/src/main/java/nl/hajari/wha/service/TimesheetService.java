@@ -3,6 +3,8 @@
  */
 package nl.hajari.wha.service;
 
+import java.util.List;
+
 import nl.hajari.wha.domain.Timesheet;
 
 /**
@@ -28,5 +30,10 @@ public interface TimesheetService {
 	 * @return
 	 */
 	Double calculateTotalAmountInvoice(Timesheet timesheet);
+
+	/**
+	 * @return
+	 */
+	List<Integer> findAllTimesheetYears();
 
 }

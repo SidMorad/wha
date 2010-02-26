@@ -17,33 +17,38 @@ public class TimesheetYearMonthFormBean {
 	private Integer year;
 
 	@NotNull
-	@Min(value = 1)
-	@Max(value = 12)
+	@Min(value = 0)
+	@Max(value = 11)
 	@Size(min = 1, max = 2)
 	private Integer month;
 
 	public TimesheetYearMonthFormBean() {
 	}
-	
+
 	public TimesheetYearMonthFormBean(Integer year, Integer month) {
 		this.year = year;
 		this.month = month;
 	}
-	
+
 	public Integer getYear() {
 		return year;
 	}
-	
+
 	public void setYear(Integer year) {
 		this.year = year;
 	}
-	
+
 	public Integer getMonth() {
 		return month;
 	}
-	
+
 	public void setMonth(Integer month) {
 		this.month = month;
 	}
-	
+
+	@Override
+	public String toString() {
+		return year + "-" + month;
+	}
+
 }
