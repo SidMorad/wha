@@ -1,4 +1,3 @@
-
 package nl.hajari.wha.web.util;
 
 import java.text.SimpleDateFormat;
@@ -13,7 +12,7 @@ public class DateUtils {
 	}
 
 	public static String getCurrentMonthShortName() {
-		return Calendar.getInstance().getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.getDefault());
+		return Calendar.getInstance().getDisplayName(Calendar.MONTH, Calendar.SHORT, getCurrentLocale());
 	}
 
 	public static Integer getCurrentMonth() {
@@ -23,13 +22,13 @@ public class DateUtils {
 	public static String getSheetMonthShortName(Integer month) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.MONTH, month);
-		return calendar.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.getDefault());
+		return calendar.getDisplayName(Calendar.MONTH, Calendar.SHORT, getCurrentLocale());
 	}
 
 	public static String getSheetMonthLongName(Integer month) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.MONTH, month);
-		return calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
+		return calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, getCurrentLocale());
 	}
 
 	public static Integer getMonthInteger(Date dayDate) {
@@ -46,6 +45,10 @@ public class DateUtils {
 	public static String formatDate(Date date, String pattern) {
 		SimpleDateFormat format = new SimpleDateFormat(pattern);
 		return format.format(date);
+	}
+
+	private static Locale getCurrentLocale() {
+		return LocaleUtils.getCurrentLocale();
 	}
 
 }

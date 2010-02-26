@@ -25,6 +25,12 @@ privileged aspect Timesheet_Roo_Finder {
         Query q = em.createQuery("SELECT Timesheet FROM Timesheet AS timesheet WHERE timesheet.employee = :employee");        
         q.setParameter("employee", employee);        
         return q;        
-    }    
+    }
+    
+    public static Query Timesheet.findAllTimesheetYears() {
+    	EntityManager em = Timesheet.entityManager();
+    	Query q = em.createQuery("SELECT DISTINCT t.sheetYear FROM Timesheet AS t");
+    	return q;
+    }
     
 }

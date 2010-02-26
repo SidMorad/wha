@@ -3,6 +3,10 @@
  */
 package nl.hajari.wha.service.impl;
 
+import java.util.List;
+
+import javax.persistence.Query;
+
 import nl.hajari.wha.domain.Timesheet;
 import nl.hajari.wha.service.TimesheetService;
 
@@ -24,6 +28,18 @@ public class TimesheetServiceImpl extends AbstractService implements TimesheetSe
 	@Override
 	public void update(Timesheet timesheet) {
 		timesheet.merge();
+	}
+
+	@Override
+	public List<Integer> findAllTimesheetYears() {
+		Query q = Timesheet.findAllTimesheetYears();
+		try {
+			List<Integer> years = q.getResultList();
+			return years;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override
