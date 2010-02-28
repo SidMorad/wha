@@ -8,17 +8,17 @@
         <c:if test="${not empty timesheet}">
             <div id="roo_timesheet_employee">
                 <label for="_employee"><spring:message code="label.employee"/>:</label>
-                <div class="box" id="_employee">${timesheet.employee}</div>
+                <div class="box" id="_employee"><b>${timesheet.employee}</b></div>
             </div>
            <br/>
             <div id="roo_timesheet_sheetYear">
                 <label for="_sheetYear"><spring:message code="label.year"/>:</label>
-                <div class="box" id="_sheetYear">${timesheet.sheetYear}</div>
+                <div class="box" id="_sheetYear"><b>${timesheet.sheetYear}</b></div>
             </div>
             <br/>
             <div id="roo_timesheet_sheetMonth">
                 <label for="_sheetMonth"><spring:message code="label.month"/>:</label>
-                <div class="box" id="_sheetMonth">${timesheet.sheetMonthShortName}</div>
+                <div class="box" id="_sheetMonth"><b>${timesheet.sheetMonthShortName}</b></div>
             </div>
             <br/>
             <!-- 
@@ -52,7 +52,7 @@
 		            <c:set var="totalAmount" value="0"/>
 		            <c:forEach items="${timesheet.dailyExpensesSortedList}" var="de">
 		            	<tr>
-		            		<td><fmt:formatDate pattern="d/MM/yy" type="DATE" value="${de.dayDate}"/></td>
+		            		<td><fmt:formatDate pattern="${datePattern}" type="DATE" value="${de.dayDate}"/></td>
 		            		<td>${de.customer}</td>
 		            		<td>${de.expenseFor}</td>
 		            		<td>${de.expenseComment}</td>
