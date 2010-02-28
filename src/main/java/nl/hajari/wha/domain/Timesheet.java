@@ -28,7 +28,8 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 
 @Entity
 @RooJavaBean
-@RooEntity(finders = { "findTimesheetsByEmployeeAndSheetMonthAndSheetYearEquals", "findTimesheetsByEmployee", "findAllTimesheetYears" })
+@RooEntity(finders = { "findTimesheetsByEmployeeAndSheetMonthAndSheetYearEquals", "findTimesheetsByEmployee",
+		"findAllTimesheetYears" })
 @UniqueConstraint(columnNames = "sheetYear,sheetMonth,employee")
 public class Timesheet {
 
@@ -69,8 +70,7 @@ public class Timesheet {
 
 	@Transient
 	public String getDescription() {
-		return sheetYear + ", "
-				+ Calendar.getInstance().getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
+		return sheetYear + ", " + DateUtils.getSheetMonthLongName(Calendar.getInstance().get(Calendar.MONTH));
 	}
 
 	@Transient
