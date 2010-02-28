@@ -11,15 +11,15 @@ import nl.hajari.wha.service.LogService;
 import org.springframework.stereotype.Service;
 
 /**
- *
- * @author <a href="mailto:saeid3@gmail.com">Saeid Moradi</a>	
+ * 
+ * @author <a href="mailto:saeid3@gmail.com">Saeid Moradi</a>
  */
-@Service
+@Service("logService")
 public class LogServiceImpl implements LogService {
 
 	@Override
 	public void log(String username, User user, Employee employee, Timesheet timesheet, String details) {
-		BizLog bizLog = createBizLog(username, user, employee,timesheet,details);
+		BizLog bizLog = createBizLog(username, user, employee, timesheet, details);
 		bizLog.persist();
 	}
 
