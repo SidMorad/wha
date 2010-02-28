@@ -170,20 +170,48 @@
 	</bean>
 	<bean id="constantsService" class="nl.hajari.wha.service.impl.ConstantsServiceImpl" />
 
+	<bean id="logService" class="nl.hajari.wha.service.impl.LogServiceImpl" />
+
 	<bean id="notificationService" class="nl.hajari.wha.service.impl.NotificationServiceImpl">
 		<property name="mailSender" ref="mailSender" />
+		<property name="logService" ref="logService" />
 	</bean>
 
 	<bean id="employeeService" class="nl.hajari.wha.service.impl.EmployeeServiceImpl">
 		<property name="notificationService" ref="notificationService" />
+		<property name="monthlyTimesheetUpdateSubject">
+			<value><![CDATA[HM Solutions - WHA - Timesheet Update Notice]]></value>
+		</property>
+		<property name="monthlyTimesheetUpdateMessage">
+			<value><![CDATA[
+			Dear HM Solutions Employee,
+			
+			As the end of the month is approaching, please take your time 
+			and update your monthly work log at WHA available at 
+			http://hajari.webfactional.com
+			
+			After 23:59:59 of the last day of the month, you have only a read-only access
+			to your previous time sheets, and further changes would require you to contact
+			HM Solutions officials.
+			
+			PLEASE DO NOT REPLY TO THIS MESSAGE.
+			
+			Regards,
+			HM Solutions
+			WHA
+			]]>
+			</value>
+		</property>
 	</bean>
 
 	<!-- Notification Scheduling -->
 	<task:scheduled-tasks>
-		<!--  run at 10:00A.M. of the last day of month (~~ 28th): 0 0 10 28 * * -->
+		<!--
+			run at 10:00A.M. of the last day of month (~~ 28th): 0 30 10 28 * *
+		-->
 		<!-- For test:  0 */2 * * * * -->
 		<task:scheduled ref="employeeService"
-			method="sendMonthlyTimesheetUpdateNotification" cron="0 */10 * * * *" />
+			method="sendMonthlyTimesheetUpdateNotification" cron="0 30 10 28 * *" />
 	</task:scheduled-tasks>
 
 	<!-- Jasperreports configuration -->

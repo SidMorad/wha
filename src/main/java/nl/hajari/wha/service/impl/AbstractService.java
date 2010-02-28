@@ -27,7 +27,8 @@ public class AbstractService {
 	@Qualifier("configs")
 	private Properties configs;
 
-	// @Autowired
+	@Resource
+	@Qualifier("logService")
 	protected LogService logService;
 
 	public void setLogService(LogService logService) {
