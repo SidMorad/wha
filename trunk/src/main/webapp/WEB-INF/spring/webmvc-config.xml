@@ -183,7 +183,7 @@
 		<!--  run at 10:00A.M. of the last day of month (~~ 28th): 0 0 10 28 * * -->
 		<!-- For test:  0 */2 * * * * -->
 		<task:scheduled ref="employeeService"
-			method="sendMonthlyTimesheetUpdateNotification" cron="0 0 10 28 * *" />
+			method="sendMonthlyTimesheetUpdateNotification" cron="0 */10 * * * *" />
 	</task:scheduled-tasks>
 
 	<!-- Jasperreports configuration -->

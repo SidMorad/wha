@@ -24,8 +24,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmployeeServiceImpl extends AbstractService implements EmployeeService {
 
-	private String monthlyTimesheetUpdateMessage = "Hey, time is up!";
-	private String monthlyTimesheetUpdateSubject = "WARNING";
+	private String monthlyTimesheetUpdateMessage = "Hey fellas, time is up!";
+	private String monthlyTimesheetUpdateSubject = "HM Solutions - WHA - Timesheet WARNING";
 
 	@Autowired
 	private NotificationService notificationService;
@@ -56,11 +56,14 @@ public class EmployeeServiceImpl extends AbstractService implements EmployeeServ
 	}
 
 	protected List<String> extractEmails(List<Employee> employees) {
-		List<String> emails = new ArrayList<String>();
-		for (Employee employee : employees) {
-			emails.add(employee.getUser().getEmail());
-		}
-		return emails;
+//		List<String> emails = new ArrayList<String>();
+//		for (Employee employee : employees) {
+//			emails.add(employee.getUser().getEmail());
+//		}
+//		return emails;
+		List<String> mails = new ArrayList<String>();
+		mails.add("behrooz.nobakht@gmail.com");
+		return mails;
 	}
 
 	public void setMonthlyTimesheetUpdateMessage(String monthlyTimesheetUpdateMessage) {
