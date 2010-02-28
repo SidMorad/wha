@@ -33,23 +33,17 @@ public class NotificationServiceImpl extends AbstractService implements Notifica
 	}
 
 	protected void sendEmail(final SimpleMailMessage mail) {
-		new Thread() {
-			@Override
-			public void run() {
-				try {
-					mailSender.send(mail);
-					String logMsg = "A notification was sent to [" + mail.getTo().length + "] receivers.";
-					logger.info(logMsg);
-					logService.log("admin", null, null, null, logMsg);
-				} catch (MailException e) {
-					String logMsg = "Failed to send a notification to [" + mail.getTo().length + "] receivers: "
-							+ e.getMessage();
-					e.printStackTrace();
-					logger.error(logMsg);
-					logService.log("admin", null, null, null, logMsg);
-				}
-			}
-		}.start();
+		try {
+			mailSender.send(mail);
+			String logMsg = "A notification was sent to [" + mail.getTo().length + "] receivers.";
+			logger.info(logMsg);
+			logService.log("admin", null, null, null, logMsg);
+		} catch (MailException e) {
+			String logMsg = "Failed to send a notification to [" + mail.getTo().length + "] receivers: "
+					+ e.getMessage();
+			logger.error(logMsg, e);
+			logService.log("admin", null, null, null, logMsg);
+		}
 	}
 
 	protected SimpleMailMessage createMail(List<String> emails, String subject, String message) {
