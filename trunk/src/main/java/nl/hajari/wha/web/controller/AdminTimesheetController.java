@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import nl.hajari.wha.Constants;
 import nl.hajari.wha.domain.Customer;
 import nl.hajari.wha.domain.Invoice;
 import nl.hajari.wha.domain.Timesheet;
+import nl.hajari.wha.service.InvoiceService;
 import nl.hajari.wha.service.TimesheetService;
 import nl.hajari.wha.service.impl.DailyExpenseServiceImpl;
 import nl.hajari.wha.service.impl.DailyTimesheetServiceImpl;
@@ -23,6 +23,7 @@ import nl.hajari.wha.web.util.DateUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,6 +49,9 @@ public class AdminTimesheetController extends AbstractController {
 	@Autowired
 	protected TimesheetPossibleYearsOptionsProvider timesheetPossibleYearsOptionsProvider;
 
+	@Autowired
+	protected InvoiceService invoiceService;
+	
 	@RequestMapping(value = "/admin/timesheet", method = RequestMethod.GET)
 	public String listTimesheetAll(@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "size", required = false) Integer size, ModelMap modelMap) {
@@ -158,6 +162,7 @@ public class AdminTimesheetController extends AbstractController {
 		return "admin/timesheet/invoice";
 	}
 
+	@Transactional
 	@RequestMapping(value = "/admin/timsheet/invoice/generate", method = RequestMethod.POST)
 	public String generateTimesheetInvoice(Invoice invoice, BindingResult result, ModelMap modelMap,
 			HttpServletRequest request) {
@@ -173,9 +178,12 @@ public class AdminTimesheetController extends AbstractController {
 
 		String invoicePrefixId = DateUtils.getMonthAndYearString(invoice.getInvoiceDate());
 		String invoiceId = invoicePrefixId + "-" + invoice.getSerialNumber();
-		invoice.setId(invoiceId);
+		invoice.setInvoiceId(invoiceId);
 		String invoiceDate = DateUtils.formatDate(invoice.getInvoiceDate(), getMessage(Constants.DATE_PATTERN_KEY));
 
+		// Persist Invoice entity
+		invoiceService.saveOrUpdate(invoice);
+		
 		List<Invoice> invoices = new ArrayList<Invoice>();
 		invoices.add(invoice);
 		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(invoices, false);
