@@ -1,6 +1,7 @@
 package nl.hajari.wha.web.security;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -69,15 +70,22 @@ public class UserEmployeeSecurityFilter extends OncePerRequestFilter {
 		try {
 			timesheet = (Timesheet) Timesheet.findTimesheetsByEmployeeAndSheetMonthAndSheetYearEquals(currentEmployee, sheetMonth, sheetYear).getSingleResult();
 		} catch (DataAccessException dae) {
-			logger.debug("Looks like there is no timesheet for this employee[" + currentEmployee + "] , " +
-					"let's create one for [" + sheetYear + " / " + sheetMonth + "]");
-			// if timesheet doesn't exist make one. 
-			timesheet.setSheetYear(sheetYear);
-			timesheet.setSheetMonth(sheetMonth);
-			timesheet.setEmployee(currentEmployee);
-			timesheet.setMonthlyTotal(0f);
-			timesheet.persist();
-			logService.log(username, currentUser, currentEmployee,timesheet, "New Timesheet created for current Employee.");
+			//double check
+			List<Timesheet> timesheets = Timesheet.findTimesheetsByEmployeeAndSheetMonthAndSheetYearEquals(currentEmployee, sheetMonth, sheetYear).getResultList();
+			if (timesheets.size() == 0) {
+				logger.debug("Looks like there is no timesheet for this employee[" + currentEmployee + "] , " +
+						"let's create one for [" + sheetYear + " / " + sheetMonth + "]");
+				// if timesheet doesn't exist make one. 
+				timesheet.setSheetYear(sheetYear);
+				timesheet.setSheetMonth(sheetMonth);
+				timesheet.setEmployee(currentEmployee);
+				timesheet.setMonthlyTotal(0f);
+				timesheet.persist();
+				logService.log(username, currentUser, currentEmployee,timesheet, "New Timesheet created for current Employee.");
+			} else {
+				// This will not happen , but we have it in case .
+				timesheet = timesheets.get(0);
+			}
 		}
 		session.setAttribute(Timesheet.TIMESHEET_ID, timesheet.getId());
 		

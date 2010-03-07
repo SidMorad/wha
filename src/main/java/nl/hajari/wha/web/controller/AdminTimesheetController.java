@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import nl.hajari.wha.Constants;
 import nl.hajari.wha.domain.Customer;
+import nl.hajari.wha.domain.DailyTimesheet;
 import nl.hajari.wha.domain.Invoice;
 import nl.hajari.wha.domain.Timesheet;
 import nl.hajari.wha.service.InvoiceService;
@@ -199,6 +200,10 @@ public class AdminTimesheetController extends AbstractController {
 		modelMap.put(Constants.IMAGE_HM_LOGO, getFileFullPath(request, Constants.imageHMlogoAddress));
 		modelMap.put("reportFileName", invoiceId + "___" + timesheet.getEmployee().toString().replaceAll(" ", ""));
 
+		// Fill ProjectSubReport
+		List<DailyTimesheet> dts = dailyTimesheetService.getDailyTimesheetListForReportPerProject(invoice.getTimesheet().getId());
+		modelMap.put("ProjectSubReportData", new JRBeanCollectionDataSource(dts,false));
+		
 		return "timesheetInvoiceList";
 	}
 
