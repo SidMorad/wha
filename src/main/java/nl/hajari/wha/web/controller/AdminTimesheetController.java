@@ -52,7 +52,7 @@ public class AdminTimesheetController extends AbstractController {
 
 	@Autowired
 	protected InvoiceService invoiceService;
-	
+
 	@RequestMapping(value = "/admin/timesheet", method = RequestMethod.GET)
 	public String listTimesheetAll(@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "size", required = false) Integer size, ModelMap modelMap) {
@@ -155,8 +155,11 @@ public class AdminTimesheetController extends AbstractController {
 		if (null == id) {
 			throw new IllegalArgumentException("Timesheet ID is required.");
 		}
-		Invoice invoice = new Invoice();
 		Timesheet timesheet = timesheetService.load(id);
+		Invoice invoice = invoiceService.loadByTimesheet(timesheet);
+		if (null == invoice) {
+			invoice = new Invoice();
+		}
 		invoice.setTimesheet(timesheet);
 		modelMap.addAttribute("timesheet", timesheet);
 		modelMap.addAttribute("invoice", invoice);
@@ -183,8 +186,8 @@ public class AdminTimesheetController extends AbstractController {
 		String invoiceDate = DateUtils.formatDate(invoice.getInvoiceDate(), getMessage(Constants.DATE_PATTERN_KEY));
 
 		// Persist Invoice entity
-		invoiceService.saveOrUpdate(invoice);
-		
+		invoice = invoiceService.saveOrUpdate(invoice);
+
 		List<Invoice> invoices = new ArrayList<Invoice>();
 		invoices.add(invoice);
 		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(invoices, false);
@@ -201,9 +204,10 @@ public class AdminTimesheetController extends AbstractController {
 		modelMap.put("reportFileName", invoiceId + "___" + timesheet.getEmployee().toString().replaceAll(" ", ""));
 
 		// Fill ProjectSubReport
-		List<DailyTimesheet> dts = dailyTimesheetService.getDailyTimesheetListForReportPerProject(invoice.getTimesheet().getId());
-		modelMap.put("ProjectSubReportData", new JRBeanCollectionDataSource(dts,false));
-		
+		List<DailyTimesheet> dts = dailyTimesheetService.getDailyTimesheetListForReportPerProject(invoice
+				.getTimesheet().getId());
+		modelMap.put("ProjectSubReportData", new JRBeanCollectionDataSource(dts, false));
+
 		return "timesheetInvoiceList";
 	}
 

@@ -59,6 +59,8 @@
             </div>
             <form:hidden id="_invoice_timesheet" path="timesheet"/>
             <form:hidden id="_invoice_timesheet_id" path="timesheet.id"/>
+            <form:hidden id="_invoice_id" path="id" />
+            <form:hidden id="_invoice_version" path="version" />
            	</form:form>
             <br/>
          </c:if>
