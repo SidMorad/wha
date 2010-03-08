@@ -29,13 +29,10 @@ public class CustomJasperReportsMultiFormatView extends JasperReportsMultiFormat
 
 		// replace content disposition header filename with report names.
 		Properties contentDispositions = this.getContentDispositionMappings();
-
-		if (contentDispositions.isEmpty()) {
-			contentDispositions.setProperty("pdf", "attachment; filename=" + currentReportName + ".pdf");
-			contentDispositions.setProperty("csv", "attachment; filename=" + currentReportName + ".csv");
-			contentDispositions.setProperty("xls", "attachment; filename=" + currentReportName + ".xls");
-			contentDispositions.setProperty("html", "attachment; filename=" + currentReportName + ".html");
-		}
+		contentDispositions.setProperty("pdf", "attachment; filename=" + currentReportName + ".pdf");
+		contentDispositions.setProperty("csv", "attachment; filename=" + currentReportName + ".csv");
+		contentDispositions.setProperty("xls", "attachment; filename=" + currentReportName + ".xls");
+		contentDispositions.setProperty("html", "attachment; filename=" + currentReportName + ".html");
 
 		logger.debug(contentDispositions);
 

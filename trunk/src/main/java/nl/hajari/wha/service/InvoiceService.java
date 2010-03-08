@@ -4,6 +4,7 @@
 package nl.hajari.wha.service;
 
 import nl.hajari.wha.domain.Invoice;
+import nl.hajari.wha.domain.Timesheet;
 
 /**
  * 
@@ -16,5 +17,11 @@ public interface InvoiceService {
 	 * 
 	 * @param invoice
 	 */
-	void saveOrUpdate(Invoice invoice);
+	Invoice saveOrUpdate(Invoice invoice);
+
+	/**
+	 * @param timesheet
+	 * @return
+	 */
+	Invoice loadByTimesheet(Timesheet timesheet);
 }

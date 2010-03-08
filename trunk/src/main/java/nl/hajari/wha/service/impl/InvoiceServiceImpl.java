@@ -4,34 +4,47 @@
 package nl.hajari.wha.service.impl;
 
 import nl.hajari.wha.domain.Invoice;
+import nl.hajari.wha.domain.Timesheet;
 import nl.hajari.wha.service.InvoiceService;
 
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 /**
- *
- *
- * @author <a href="mailto:saeid3@gmail.com">Saeid Moradi</a>	
+ * 
+ * 
+ * @author <a href="mailto:saeid3@gmail.com">Saeid Moradi</a>
  */
 @Service
-public class InvoiceServiceImpl extends AbstractService implements InvoiceService{
+public class InvoiceServiceImpl extends AbstractService implements InvoiceService {
 
 	@Override
-	public void saveOrUpdate(Invoice invoice) {
-		Invoice checkInvoice = null;
+	public Invoice loadByTimesheet(Timesheet timesheet) {
 		try {
-			// We check if any Invoice exist for selected timesheet
-			checkInvoice = (Invoice) Invoice.findInvoicesByTimesheet(invoice.getTimesheet()).getSingleResult();
+			Invoice invoice = (Invoice) Invoice.findInvoicesByTimesheet(timesheet).getSingleResult();
+			return invoice;
+		} catch (Exception e) {
+		}
+		return null;
+	}
 
-			// If Invoice founded , set id and version then merge the entity
-			invoice.setId(checkInvoice.getId());
-			invoice.setVersion(checkInvoice.getVersion());
-			invoice.merge();
+	@Override
+	public Invoice saveOrUpdate(Invoice invoice) {
+		Timesheet timesheet = invoice.getTimesheet();
+		// We check if any Invoice exist for selected timesheet
+		Invoice currInvoice = loadByTimesheet(timesheet);
+		if (null != currInvoice) {
+			// If Invoice found, set id and version then merge the entity
+			currInvoice.setId(invoice.getId());
+			currInvoice.setInvoiceDate(invoice.getInvoiceDate());
+			currInvoice.setSerialNumber(invoice.getSerialNumber());
+			currInvoice.setInvoiceId(invoice.getInvoiceId());
+			currInvoice.merge();
 			logService.log(null, null, null, invoice.getTimesheet(), "Invoice Updated");
-		} catch (DataAccessException e) {
+			return currInvoice;
+		} else {
 			invoice.persist();
 			logService.log(null, null, null, invoice.getTimesheet(), "Invoice Created");
+			return invoice;
 		}
 	}
 
