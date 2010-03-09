@@ -3,7 +3,6 @@
 	<property name="subReportDataKeys" value="ProjectSubReportData"/>
 	<parameter name="ProjectSubReport" class="net.sf.jasperreports.engine.JasperReport"/>
 	<parameter name="ProjectSubReportData" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
-	
 	<parameter name="IMAGE_HM_LOGO" class="java.lang.String"/>
 	<parameter name="timesheetTotalWorking" class="java.lang.Double"/>
 	<parameter name="timesheetTotalExpense" class="java.lang.Double"/>
@@ -16,24 +15,22 @@
 	<field name="timesheet.employee.firstName" class="java.lang.String"/>
 	<field name="timesheet.employee.lastName" class="java.lang.String"/>
 	<field name="timesheet.employee.empId" class="java.lang.String"/>
-
 	<background>
 		<band splitType="Stretch"/>
 	</background>
-	
 	<title>
 		<band height="82" splitType="Stretch">
 			<image>
-				<reportElement x="239" y="0" width="100" height="70"/>
+				<reportElement x="0" y="0" width="100" height="70"/>
 				<imageExpression class="java.lang.String"><![CDATA[$P{IMAGE_HM_LOGO}]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="0" y="0" width="25" height="20"/>
+				<reportElement x="424" y="0" width="18" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.to}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="25" y="0" width="130" height="82"/>
+				<reportElement x="442" y="0" width="130" height="80"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.address}]]></textFieldExpression>
 			</textField>
@@ -91,11 +88,9 @@
 	<detail>
 		<band height="21">
 			<subreport>
-				<reportElement isPrintRepeatedValues="false" width="325" y="0" x="0" 
-					height="20" isRemoveLineWhenBlank="true"/>
+				<reportElement isPrintRepeatedValues="false" x="0" y="0" width="325" height="20" isRemoveLineWhenBlank="true"/>
 				<dataSourceExpression><![CDATA[$P{ProjectSubReportData}]]></dataSourceExpression>
-				<subreportExpression class="net.sf.jasperreports.engine.JasperReport">
-							<![CDATA[$P{ProjectSubReport}]]></subreportExpression>	
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{ProjectSubReport}]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>
