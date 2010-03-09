@@ -12,6 +12,8 @@ import nl.hajari.wha.service.TimesheetService;
 
 import org.springframework.stereotype.Service;
 
+import com.sun.xml.internal.bind.v2.TODO;
+
 /**
  * 
  * 
@@ -44,6 +46,7 @@ public class TimesheetServiceImpl extends AbstractService implements TimesheetSe
 
 	@Override
 	public Double calculateTotalAmountInvoice(Timesheet timesheet) {
+		//TODO:: 
 		// 1. Each employee should have an hourly wage
 		// 2. Compute Total expense for others
 		// 3. total travels of the month ratio
