@@ -8,6 +8,7 @@ public abstract class Constants {
 	public static final String IMAGE_HM_LOGO = "IMAGE_HM_LOGO";
 	public static final String imageHMlogoAddress = "images/HM_100x70.jpg";
 	public static final String DATE_PATTERN_KEY = "date.pattern";
+	public static final String VAT_RATIO = "salary_tax_ratio";
 	
 	
 	/**

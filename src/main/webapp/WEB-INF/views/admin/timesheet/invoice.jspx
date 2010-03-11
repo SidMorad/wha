@@ -35,7 +35,8 @@
            	<spring:url value="/admin/timsheet/invoice/generate" var="timsheet_gen_invoice_url"/>
            	<form:form action="${timsheet_gen_invoice_url}" method="POST" modelAttribute="invoice">
             <div id="roo_timesheet_invoicedate">
-	                <label for="_invoiceDate"><spring:message code="label.date"/>:</label>
+            		<spring:message code="label.date" var="label_date"/>
+	                <label for="_invoiceDate">${label_date}:</label>
 					<form:input cssStyle="width:100px" id="_invoiceDate" maxlength="30" path="invoiceDate" size="0"/>
 	                <form:errors cssClass="errors-in-table" id="_invoice_error" path="invoiceDate"/>
 	                <spring:message arguments="${label_date}" code="field.invalid" var="field_invalid"/>
@@ -45,12 +46,22 @@
 	                </script>
             </div>
             <div>
-            		<label for="_serialNumber"><spring:message code="label.serialnumber"/>:</label>
+            		<spring:message code="label.serialnumber" var="label_serialnumber"/>
+            		<label for="_serialNumber">${label_serialnumber}:</label>
 	                <form:input cssStyle="width:100px" id="_serialNumber" maxlength="30" path="serialNumber" size="0"/>
 	                <form:errors cssClass="errors-in-table" id="_serialNumber_error" path="serialNumber"/>
-	                <spring:message arguments="${label.serialnumber}" code="field.invalid" var="field_invalid"/>
-	                <spring:message argumentSeparator="," arguments="${label.serialnumber},(${field_required})" code="field.simple.validation" var="field_validation"/>
+	                <spring:message arguments="${label_serialnumber}" code="field.invalid" var="field_invalid"/>
+	                <spring:message argumentSeparator="," arguments="${label_serialnumber},(${field_required})" code="field.simple.validation" var="field_validation"/>
 	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_serialNumber', widgetType : 'dijit.form.NumberTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
+            </div>
+            <div>
+            		<spring:message code="label.opdracht" var="label_opdracht"/>
+            		<label for="_opdracht">${label_opdracht}:</label>
+	                <form:input cssStyle="width:100px" id="_opdracht" maxlength="30" path="opdracht" size="0"/>
+	                <form:errors cssClass="errors-in-table" id="_opdracht_error" path="opdracht"/>
+	                <spring:message arguments="${label_opdracht}" code="field.invalid" var="field_invalid"/>
+	                <spring:message argumentSeparator="," arguments="${label_opdracht},(${field_required})" code="field.simple.validation" var="field_validation"/>
+	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_opdracht', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
             </div>
             <div class="submit" id="roo_invoice_submit">
                 <spring:message code="button.report" var="report_button"/>

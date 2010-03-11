@@ -39,4 +39,12 @@ privileged aspect Invoice_Roo_JavaBean {
         this.timesheet = timesheet;        
     }    
     
+    public String Invoice.getOpdracht() {    
+        return this.opdracht;        
+    }    
+    
+    public void Invoice.setOpdracht(String opdracht) {    
+        this.opdracht = opdracht;        
+    }    
+    
 }

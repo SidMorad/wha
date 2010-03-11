@@ -11,7 +11,8 @@ privileged aspect Invoice_Roo_ToString {
         sb.append("InvoiceId: ").append(getInvoiceId()).append(", ");        
         sb.append("InvoiceDate: ").append(getInvoiceDate()).append(", ");        
         sb.append("SerialNumber: ").append(getSerialNumber()).append(", ");        
-        sb.append("Timesheet: ").append(getTimesheet());        
+        sb.append("Timesheet: ").append(getTimesheet()).append(", ");        
+        sb.append("Opdracht: ").append(getOpdracht());        
         return sb.toString();        
     }    
     

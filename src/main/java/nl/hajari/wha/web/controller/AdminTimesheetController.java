@@ -22,6 +22,7 @@ import nl.hajari.wha.web.controller.formbean.TimesheetDailyReportFormBean;
 import nl.hajari.wha.web.controller.formbean.TimesheetYearMonthFormBean;
 import nl.hajari.wha.web.util.DateUtils;
 
+import org.apache.tiles.evaluator.el.TomcatExpressionFactoryFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -177,8 +178,6 @@ public class AdminTimesheetController extends AbstractController {
 		Double timesheetTotalWorking = timesheet.getMonthlyTotal().doubleValue();
 		Double timesheetTotalExpense = dailyExpenseService
 				.getDailyExpenseTotalForOthers(invoice.getTimesheet().getId());
-		Double timesheetTotalTravel = timesheet.getTotalTravelDistance();
-		Double totalAmount = timesheetService.calculateTotalAmountInvoice(timesheet);
 
 		String invoicePrefixId = DateUtils.getMonthAndYearString(invoice.getInvoiceDate());
 		String invoiceId = invoicePrefixId + "-" + invoice.getSerialNumber();
@@ -194,19 +193,29 @@ public class AdminTimesheetController extends AbstractController {
 
 		modelMap.put("invoiceId", invoiceId);
 		modelMap.put("invoiceDate", invoiceDate);
-		modelMap.put("totalAmount", totalAmount);
+		modelMap.put("opdracht", invoice.getOpdracht());
 		modelMap.put("timesheetTotalExpense", timesheetTotalExpense);
-		modelMap.put("timesheetTotalTravel", timesheetTotalTravel);
 		modelMap.put("timesheetTotalWorking", timesheetTotalWorking);
 		modelMap.put("timesheetInvoiceList", jrDataSource);
 		modelMap.put("format", "pdf");
 		modelMap.put(Constants.IMAGE_HM_LOGO, getFileFullPath(request, Constants.imageHMlogoAddress));
-		modelMap.put("reportFileName", invoiceId + "___" + timesheet.getEmployee().toString().replaceAll(" ", ""));
+		modelMap.put("reportFileName", "FAK-" + invoiceId );
 
 		// Fill ProjectSubReport
 		List<DailyTimesheet> dts = dailyTimesheetService.getDailyTimesheetListForReportPerProject(invoice
 				.getTimesheet().getId());
 		modelMap.put("ProjectSubReportData", new JRBeanCollectionDataSource(dts, false));
+		
+		// Calacuate subtotal
+		Float subTotal = dailyTimesheetService.cacluateSubtotalForInvocieReport(dts,timesheet.getEmployee().getHourlyWage());
+		modelMap.put("subTotal", subTotal.doubleValue());
+		Float timesheetTotalTax = dailyTimesheetService.calcuateTotalTax(subTotal);
+		modelMap.put("timesheetTotalTax", timesheetTotalTax.doubleValue());
+		
+//		Double totalAmount = timesheetService.calculateTotalAmountInvoice(timesheet);
+		// Let's use calcuated values from top !
+		Float totalAmount = subTotal + timesheetTotalTax + timesheetTotalExpense.floatValue(); 
+		modelMap.put("totalAmount", totalAmount.doubleValue());
 
 		return "timesheetInvoiceList";
 	}
