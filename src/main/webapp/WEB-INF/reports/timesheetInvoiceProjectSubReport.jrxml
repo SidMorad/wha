@@ -3,7 +3,7 @@
 			  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 			  xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" 
 			  name="ProjectSubReport" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="20" 
-			  bottomMargin="20" resourceBundle="reportlabels" >
+			  bottomMargin="60" resourceBundle="reportlabels" >
 	<field name="project.customer.name" class="java.lang.String"/>
 	<field name="project.name" class="java.lang.String"/>
 	<field name="dailyTotalDuration" class="java.lang.Float"/>
