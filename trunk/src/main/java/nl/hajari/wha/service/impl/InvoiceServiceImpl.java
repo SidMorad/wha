@@ -38,6 +38,7 @@ public class InvoiceServiceImpl extends AbstractService implements InvoiceServic
 			currInvoice.setInvoiceDate(invoice.getInvoiceDate());
 			currInvoice.setSerialNumber(invoice.getSerialNumber());
 			currInvoice.setInvoiceId(invoice.getInvoiceId());
+			currInvoice.setOpdracht(invoice.getOpdracht());
 			currInvoice.merge();
 			logService.log(null, null, null, invoice.getTimesheet(), "Invoice Updated");
 			return currInvoice;

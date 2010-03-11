@@ -21,8 +21,8 @@ import nl.hajari.wha.service.impl.TimesheetPossibleYearsOptionsProvider;
 import nl.hajari.wha.web.controller.formbean.TimesheetDailyReportFormBean;
 import nl.hajari.wha.web.controller.formbean.TimesheetYearMonthFormBean;
 import nl.hajari.wha.web.util.DateUtils;
+import nl.hajari.wha.web.util.MathUtils;
 
-import org.apache.tiles.evaluator.el.TomcatExpressionFactoryFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -171,7 +171,6 @@ public class AdminTimesheetController extends AbstractController {
 	@RequestMapping(value = "/admin/timsheet/invoice/generate", method = RequestMethod.POST)
 	public String generateTimesheetInvoice(Invoice invoice, BindingResult result, ModelMap modelMap,
 			HttpServletRequest request) {
-
 		Timesheet timesheet = timesheetService.load(invoice.getTimesheet().getId());
 		invoice.setTimesheet(timesheet);
 
@@ -191,10 +190,8 @@ public class AdminTimesheetController extends AbstractController {
 		invoices.add(invoice);
 		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(invoices, false);
 
-		modelMap.put("invoiceId", invoiceId);
 		modelMap.put("invoiceDate", invoiceDate);
-		modelMap.put("opdracht", invoice.getOpdracht());
-		modelMap.put("timesheetTotalExpense", timesheetTotalExpense);
+		modelMap.put("timesheetTotalExpense", MathUtils.roundToTwoDecimalPlaces(timesheetTotalExpense));
 		modelMap.put("timesheetTotalWorking", timesheetTotalWorking);
 		modelMap.put("timesheetInvoiceList", jrDataSource);
 		modelMap.put("format", "pdf");
@@ -208,14 +205,14 @@ public class AdminTimesheetController extends AbstractController {
 		
 		// Calacuate subtotal
 		Float subTotal = dailyTimesheetService.cacluateSubtotalForInvocieReport(dts,timesheet.getEmployee().getHourlyWage());
-		modelMap.put("subTotal", subTotal.doubleValue());
+		modelMap.put("subTotal", MathUtils.roundToTwoDecimalPlaces(subTotal));
 		Float timesheetTotalTax = dailyTimesheetService.calcuateTotalTax(subTotal);
-		modelMap.put("timesheetTotalTax", timesheetTotalTax.doubleValue());
+		modelMap.put("timesheetTotalTax", MathUtils.roundToTwoDecimalPlaces(timesheetTotalTax));
 		
-//		Double totalAmount = timesheetService.calculateTotalAmountInvoice(timesheet);
-		// Let's use calcuated values from top !
+		// Double totalAmount = timesheetService.calculateTotalAmountInvoice(timesheet);
+		// Let's use calculated values from top !
 		Float totalAmount = subTotal + timesheetTotalTax + timesheetTotalExpense.floatValue(); 
-		modelMap.put("totalAmount", totalAmount.doubleValue());
+		modelMap.put("totalAmount", MathUtils.roundToTwoDecimalPlaces(totalAmount));
 
 		return "timesheetInvoiceList";
 	}
