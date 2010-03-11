@@ -1,17 +1,18 @@
 package nl.hajari.wha.domain;
 
-import javax.persistence.Entity;
-import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.tostring.RooToString;
-import org.springframework.roo.addon.entity.RooEntity;
-import javax.persistence.Column;
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 import org.springframework.format.annotation.DateTimeFormat;
-import nl.hajari.wha.domain.Timesheet;
-import javax.persistence.ManyToOne;
-import javax.persistence.JoinColumn;
+import org.springframework.roo.addon.entity.RooEntity;
+import org.springframework.roo.addon.javabean.RooJavaBean;
+import org.springframework.roo.addon.tostring.RooToString;
 
 /**
  * 
@@ -39,4 +40,8 @@ public class Invoice {
     @ManyToOne(targetEntity = Timesheet.class)
     @JoinColumn(name = "timesheet_id", nullable = false)
     private Timesheet timesheet;
+    
+    @Column(nullable = true)
+    private String opdracht;
+
 }
