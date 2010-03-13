@@ -36,4 +36,11 @@ public interface TimesheetService {
 	 */
 	List<Integer> findAllTimesheetYears();
 
+	/**
+	 * 
+	 * @param id
+	 * @return true if success .
+	 */
+	boolean delete(Long id);
+
 }

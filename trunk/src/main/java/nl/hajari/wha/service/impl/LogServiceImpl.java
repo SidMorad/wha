@@ -1,6 +1,7 @@
 package nl.hajari.wha.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import nl.hajari.wha.domain.BizLog;
 import nl.hajari.wha.domain.Employee;
@@ -32,6 +33,19 @@ public class LogServiceImpl implements LogService {
 		bl.setEmployee(employee);
 		bl.setTimesheet(timesheet);
 		return bl;
+	}
+
+	@Override
+	public boolean deleteLogByTimesheet(Timesheet timesheet) {
+		List<BizLog> bls = BizLog.findBizLogsByTimesheet(timesheet).getResultList();
+		try {
+			for (BizLog bl : bls) {
+				bl.remove();
+			}
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 }

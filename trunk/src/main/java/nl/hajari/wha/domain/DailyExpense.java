@@ -21,7 +21,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 @Entity
 @RooJavaBean
 @RooToString
-@RooEntity
+@RooEntity(finders = { "findDailyExpensesByTimesheet" })
 public class DailyExpense {
 
     @NotNull
@@ -51,4 +51,5 @@ public class DailyExpense {
     @ManyToOne(targetEntity = Customer.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
+    
 }

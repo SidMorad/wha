@@ -23,4 +23,8 @@ function addDateDecoration(eid, pm, im, isRequired, dp) {
 	}));
 }
 
-
+function deleteObjectByAdmin(id, name) {
+	if (confirm("Are you sure for delete ["+ name +"] with id ["+ id +"] ?")) {
+		window.location = "../admin/"+ name +"/delete/" + id;
+	}
+}

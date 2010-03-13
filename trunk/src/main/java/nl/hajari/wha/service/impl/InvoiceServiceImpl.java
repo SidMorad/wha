@@ -3,6 +3,8 @@
  */
 package nl.hajari.wha.service.impl;
 
+import java.util.List;
+
 import nl.hajari.wha.domain.Invoice;
 import nl.hajari.wha.domain.Timesheet;
 import nl.hajari.wha.service.InvoiceService;
@@ -47,6 +49,19 @@ public class InvoiceServiceImpl extends AbstractService implements InvoiceServic
 			invoice.persist();
 			logService.log(null, null, null, invoice.getTimesheet(), "Invoice Created");
 			return invoice;
+		}
+	}
+
+	@Override
+	public boolean deleteInvoiceByTimesheet(Timesheet timesheet) {
+		List<Invoice> ins = Invoice.findInvoicesByTimesheet(timesheet).getResultList();
+		try {
+			for (Invoice in : ins) {
+				in.remove();
+			}
+			return true;
+		} catch (Exception e) {
+			return false;
 		}
 	}
 

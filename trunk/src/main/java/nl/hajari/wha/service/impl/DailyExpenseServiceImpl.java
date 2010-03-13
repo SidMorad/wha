@@ -68,4 +68,17 @@ public class DailyExpenseServiceImpl extends AbstractService implements DailyExp
 		}
 		return total;
 	}
+
+	@Override
+	public boolean deleteDailyExpenseByTimesheet(Timesheet timesheet) {
+		List<DailyExpense> des = DailyExpense.findDailyExpensesByTimesheet(timesheet).getResultList();
+		try {
+			for (DailyExpense de : des) {
+				de.remove();
+			}
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 }

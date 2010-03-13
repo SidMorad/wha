@@ -3,6 +3,8 @@
  */
 package nl.hajari.wha.service;
 
+import nl.hajari.wha.domain.Timesheet;
+
 /**
  *
  *
@@ -16,4 +18,11 @@ public interface DailyTravelService {
 	 * @return travelTotalDistance
 	 */
 	Float calculateTravelTotalDistance(Long timesheetId);
+
+	/**
+	 * 
+	 * @param timesheet
+	 * @return true if succeed .
+	 */
+	boolean deleteDailyTravelByTimesheet(Timesheet timesheet);
 }

@@ -8,11 +8,15 @@ import java.util.List;
 import javax.persistence.Query;
 
 import nl.hajari.wha.domain.Timesheet;
+import nl.hajari.wha.service.DailyExpenseService;
+import nl.hajari.wha.service.DailyTimesheetService;
+import nl.hajari.wha.service.DailyTravelService;
+import nl.hajari.wha.service.InvoiceService;
 import nl.hajari.wha.service.TimesheetService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.sun.xml.internal.bind.v2.TODO;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 
@@ -22,6 +26,18 @@ import com.sun.xml.internal.bind.v2.TODO;
 @Service
 public class TimesheetServiceImpl extends AbstractService implements TimesheetService {
 
+	@Autowired
+	protected DailyTimesheetService dailyTimesheetService;
+	
+	@Autowired
+	protected DailyTravelService dailyTravelService;
+	
+	@Autowired
+	protected DailyExpenseService dailyExpenseService;
+	
+	@Autowired
+	protected InvoiceService invoiceService;
+	
 	@Override
 	public Timesheet load(Long id) {
 		return Timesheet.findTimesheet(id);
@@ -53,6 +69,19 @@ public class TimesheetServiceImpl extends AbstractService implements TimesheetSe
 		// 4. tax rate
 		// 5. bonus rate
 		return 100.0;
+	}
+
+	@Override
+	@Transactional
+	public boolean delete(Long id) {
+		Timesheet timesheet = load(id);
+		dailyTimesheetService.deleteDailyTimesheetByTimesheet(timesheet);
+		dailyTravelService.deleteDailyTravelByTimesheet(timesheet);
+		dailyExpenseService.deleteDailyExpenseByTimesheet(timesheet);
+		logService.deleteLogByTimesheet(timesheet);
+		invoiceService.deleteInvoiceByTimesheet(timesheet);
+		timesheet.remove();
+		return true;
 	}
 
 }

@@ -24,4 +24,11 @@ public interface InvoiceService {
 	 * @return
 	 */
 	Invoice loadByTimesheet(Timesheet timesheet);
+
+	/**
+	 * 
+	 * @param timesheet
+	 * @return true if succeed
+	 */
+	boolean deleteInvoiceByTimesheet(Timesheet timesheet);
 }

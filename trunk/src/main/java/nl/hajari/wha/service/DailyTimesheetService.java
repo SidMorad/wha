@@ -6,6 +6,7 @@ package nl.hajari.wha.service;
 import java.util.List;
 
 import nl.hajari.wha.domain.DailyTimesheet;
+import nl.hajari.wha.domain.Timesheet;
 
 /**
  * 
@@ -66,5 +67,12 @@ public interface DailyTimesheetService {
 	 * @return amount * VAT_RATIO
 	 */
 	Float calcuateTotalTax(Float amount);
+
+	/**
+	 * 
+	 * @param timesheet
+	 * @return true if succeed
+	 */
+	boolean deleteDailyTimesheetByTimesheet(Timesheet timesheet);
 	
 }

@@ -157,4 +157,17 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 		return total;
 	}
 
+	@Override
+	public boolean deleteDailyTimesheetByTimesheet(Timesheet timesheet) {
+		List<DailyTimesheet> dts = DailyTimesheet.findDailyTimesheetsByTimesheet(timesheet).getResultList();
+		try {
+			for (DailyTimesheet dt : dts) {
+				dt.remove();
+			}
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
 }

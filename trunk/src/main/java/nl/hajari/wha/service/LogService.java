@@ -24,4 +24,11 @@ public interface LogService {
 	 */
 	void log(String username, User user, Employee employee,
 			Timesheet timesheet, String details);
+
+	/**
+	 * 
+	 * @param timesheet
+	 * @return true if succeed
+	 */
+	boolean deleteLogByTimesheet(Timesheet timesheet);
 }
