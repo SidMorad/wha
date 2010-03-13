@@ -103,4 +103,11 @@ public class ConstantsServiceImpl extends AbstractService implements ConstantsSe
 		}
 	}
 
+	@Override
+	public Float findFloatValueByKey(String key) {
+		String value = findValue(key);
+		value = (value == null ? "0" : value);
+		return Float.valueOf(value);
+	}
+
 }

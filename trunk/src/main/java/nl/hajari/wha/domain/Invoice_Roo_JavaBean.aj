@@ -3,6 +3,7 @@ package nl.hajari.wha.domain;
 import java.lang.Long;
 import java.lang.String;
 import java.util.Date;
+import nl.hajari.wha.domain.InvoiceType;
 import nl.hajari.wha.domain.Timesheet;
 
 privileged aspect Invoice_Roo_JavaBean {
@@ -45,6 +46,14 @@ privileged aspect Invoice_Roo_JavaBean {
     
     public void Invoice.setOpdracht(String opdracht) {    
         this.opdracht = opdracht;        
+    }    
+    
+    public InvoiceType Invoice.getInvoiceType() {    
+        return this.invoiceType;        
+    }    
+    
+    public void Invoice.setInvoiceType(InvoiceType invoiceType) {    
+        this.invoiceType = invoiceType;        
     }    
     
 }

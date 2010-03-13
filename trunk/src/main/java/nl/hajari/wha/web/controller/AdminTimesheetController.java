@@ -10,7 +10,10 @@ import nl.hajari.wha.Constants;
 import nl.hajari.wha.domain.Customer;
 import nl.hajari.wha.domain.DailyTimesheet;
 import nl.hajari.wha.domain.Invoice;
+import nl.hajari.wha.domain.InvoiceType;
 import nl.hajari.wha.domain.Timesheet;
+import nl.hajari.wha.service.ConstantsService;
+import nl.hajari.wha.service.DailyTravelService;
 import nl.hajari.wha.service.InvoiceService;
 import nl.hajari.wha.service.TimesheetService;
 import nl.hajari.wha.service.impl.DailyExpenseServiceImpl;
@@ -53,7 +56,13 @@ public class AdminTimesheetController extends AbstractController {
 
 	@Autowired
 	protected InvoiceService invoiceService;
+	
+	@Autowired
+	protected DailyTravelService dailyTravelService;
 
+	@Autowired
+	protected ConstantsService constantsService;
+	
 	@RequestMapping(value = "/admin/timesheet", method = RequestMethod.GET)
 	public String listTimesheetAll(@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "size", required = false) Integer size, ModelMap modelMap) {
@@ -164,6 +173,7 @@ public class AdminTimesheetController extends AbstractController {
 		invoice.setTimesheet(timesheet);
 		modelMap.addAttribute("timesheet", timesheet);
 		modelMap.addAttribute("invoice", invoice);
+        modelMap.addAttribute("invoicetype_enum", InvoiceType.class.getEnumConstants());  
 		return "admin/timesheet/invoice";
 	}
 
@@ -173,8 +183,26 @@ public class AdminTimesheetController extends AbstractController {
 			HttpServletRequest request) {
 		Timesheet timesheet = timesheetService.load(invoice.getTimesheet().getId());
 		invoice.setTimesheet(timesheet);
+		if (result.hasErrors()) {
+			modelMap.addAttribute("timesheet", timesheet);
+			modelMap.addAttribute("invoice", invoice);
+			modelMap.addAttribute("invoicetype_enum", InvoiceType.class.getEnumConstants());  
+			return "admin/timesheet/invoice";
+		}	
 
-		Double timesheetTotalWorking = timesheet.getMonthlyTotal().doubleValue();
+		if (invoice.getInvoiceType().equals(InvoiceType.timesheet)) {
+			return generateTimesheetInvoiceForTimesheet(invoice, modelMap,
+					result, request);
+		} else {
+			// If InvoiceType is not InvoiceType.timesheet then it only can be InvoiceType.expense .
+			return generateTimesheetInvoiceForExpense(invoice, modelMap,
+					result, request);
+		}
+	}
+
+	private String generateTimesheetInvoiceForTimesheet(Invoice invoice,
+			ModelMap modelMap, BindingResult result, HttpServletRequest request) {
+		Double timesheetTotalWorking = invoice.getTimesheet().getMonthlyTotal().doubleValue();
 		Double timesheetTotalExpense = dailyExpenseService
 				.getDailyExpenseTotalForOthers(invoice.getTimesheet().getId());
 
@@ -204,7 +232,7 @@ public class AdminTimesheetController extends AbstractController {
 		modelMap.put("ProjectSubReportData", new JRBeanCollectionDataSource(dts, false));
 		
 		// Calacuate subtotal
-		Float subTotal = dailyTimesheetService.cacluateSubtotalForInvocieReport(dts,timesheet.getEmployee().getHourlyWage());
+		Float subTotal = dailyTimesheetService.cacluateSubtotalForInvocieReport(dts,invoice.getTimesheet().getEmployee().getHourlyWage());
 		modelMap.put("subTotal", MathUtils.roundToTwoDecimalPlaces(subTotal));
 		Float timesheetTotalTax = dailyTimesheetService.calcuateTotalTax(subTotal);
 		modelMap.put("timesheetTotalTax", MathUtils.roundToTwoDecimalPlaces(timesheetTotalTax));
@@ -215,6 +243,50 @@ public class AdminTimesheetController extends AbstractController {
 		modelMap.put("totalAmount", MathUtils.roundToTwoDecimalPlaces(totalAmount));
 
 		return "timesheetInvoiceList";
+	}
+	
+	private String generateTimesheetInvoiceForExpense(Invoice invoice,
+			ModelMap modelMap, BindingResult result, HttpServletRequest request) {
+		Long timesheetId = invoice.getTimesheet().getId();		
+		
+		String invoicePrefixId = DateUtils.getMonthAndYearString(invoice.getInvoiceDate());
+		String invoiceId = invoicePrefixId + "-" + invoice.getSerialNumber();
+		invoice.setInvoiceId(invoiceId);
+		String invoiceDate = DateUtils.formatDate(invoice.getInvoiceDate(), getMessage(Constants.DATE_PATTERN_KEY));
+
+
+		// Persist Invoice entity
+		invoice = invoiceService.saveOrUpdate(invoice);
+
+		List<Invoice> invoices = new ArrayList<Invoice>();
+		invoices.add(invoice);
+		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(invoices, false);
+
+		Float travelTotalDistance = dailyTravelService.calculateTravelTotalDistance(timesheetId) ;
+		Float timesheetTotalExpense = dailyExpenseService.calculateDailyExpenseTotalForHajari(timesheetId);
+		Float ratioPerKilometer = constantsService.findFloatValueByKey(ConstantsService.CONST_KEY_EXPENSE_GAS_SUBSIDY_PER_KILOMETER);
+
+		modelMap.put("invoiceDate", invoiceDate);
+		modelMap.put("travelTotalDistance", travelTotalDistance);
+		modelMap.put("ratioPerKilometer", ratioPerKilometer);
+		modelMap.put("timesheetTotalExpense", MathUtils.roundToTwoDecimalPlaces(timesheetTotalExpense));
+		modelMap.put("timesheetInvoiceExpenseList", jrDataSource);
+		modelMap.put("format", "pdf");
+		modelMap.put(Constants.IMAGE_HM_LOGO, getFileFullPath(request, Constants.imageHMlogoAddress));
+		modelMap.put("reportFileName", "FAK-" + invoiceId );
+
+		// Calacuate subtotal
+		Float subTotal = travelTotalDistance * ratioPerKilometer + timesheetTotalExpense;
+		modelMap.put("subTotal", MathUtils.roundToTwoDecimalPlaces(subTotal));
+		Float timesheetTravelTax = dailyTimesheetService.calcuateTotalTax(travelTotalDistance * ratioPerKilometer);
+		modelMap.put("timesheetTravelTax", MathUtils.roundToTwoDecimalPlaces(timesheetTravelTax));
+		
+		// Double totalAmount = timesheetService.calculateTotalAmountInvoice(timesheet);
+		// Let's use calculated values from top !
+		Float totalAmount = subTotal + timesheetTravelTax ; 
+		modelMap.put("totalAmount", MathUtils.roundToTwoDecimalPlaces(totalAmount));
+
+		return "timesheetInvoiceExpenseList";
 	}
 
 	public String getFileFullPath(HttpServletRequest request, String filePath) {

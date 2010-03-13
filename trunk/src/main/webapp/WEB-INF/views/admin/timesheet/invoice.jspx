@@ -63,6 +63,14 @@
 	                <spring:message argumentSeparator="," arguments="${label_opdracht},(${field_required})" code="field.simple.validation" var="field_validation"/>
 	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_opdracht', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
             </div>
+            <br/>
+            <div id="roo_invoice_invoiceType">
+                <label for="_invoiceType_id"><spring:message code="label.invoiceType"/>:</label>
+                <form:errors cssClass="errors" id="_invoiceType_error_id" path="invoiceType"/>
+                <form:select cssStyle="width:100px" id="_invoiceType_id" items="${invoicetype_enum}" path="invoiceType"/>
+                <br/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_invoiceType_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true, required: true}})); </script>
+            </div>
             <div class="submit" id="roo_invoice_submit">
                 <spring:message code="button.report" var="report_button"/>
                 <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
