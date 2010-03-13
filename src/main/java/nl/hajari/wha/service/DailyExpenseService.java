@@ -6,6 +6,7 @@ package nl.hajari.wha.service;
 import java.util.List;
 
 import nl.hajari.wha.domain.DailyExpense;
+import nl.hajari.wha.domain.Timesheet;
 
 /**
  * 
@@ -25,5 +26,12 @@ public interface DailyExpenseService {
 	 * @return
 	 */
 	List<DailyExpense> getDailyExpensesForOthers(Long timesheetId);
+
+	/**
+	 * 
+	 * @param timesheet
+	 * @return true if succeed
+	 */
+	boolean deleteDailyExpenseByTimesheet(Timesheet timesheet);
 
 }

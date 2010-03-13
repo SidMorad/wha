@@ -113,6 +113,19 @@ public class AdminTimesheetController extends AbstractController {
 		return "admin/timesheet/list";
 	}
 
+	@RequestMapping(value = "/admin/timesheet/delete/{id}")
+	public String deleteTimesheet(@PathVariable("id") Long id) {
+		timesheetService.delete(id);
+		return "redirect:/admin/timesheet";
+	}
+
+	// This method exist only for solve Javascript relative path issue 
+	@RequestMapping(value = "/admin/admin/timesheet/delete/{id}")
+	public String deleteTimesheet2(@PathVariable("id") Long id) {
+		timesheetService.delete(id);
+		return "redirect:/admin/timesheet";
+	}
+	
 	@RequestMapping(value = "/admin/timesheet/daily/{id}", method = RequestMethod.GET)
 	public String showTimesheetDaily(@PathVariable("id") Long id, ModelMap modelMap) {
 		if (id == null)

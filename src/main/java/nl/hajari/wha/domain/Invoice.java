@@ -28,7 +28,7 @@ import javax.validation.constraints.NotNull;
 public class Invoice {
 
     @NotNull
-	@Column(nullable = false)
+    @Column(nullable = false)
     private String invoiceId;
 
     @NotNull

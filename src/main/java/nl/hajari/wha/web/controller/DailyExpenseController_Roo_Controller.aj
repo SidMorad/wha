@@ -85,4 +85,17 @@ privileged aspect DailyExpenseController_Roo_Controller {
         return "redirect:/dailyexpense?page=" + ((page == null) ? "1" : page.toString()) + "&size=" + ((size == null) ? "10" : size.toString());        
     }    
     
+    @RequestMapping(value = "find/ByTimesheet/form", method = RequestMethod.GET)    
+    public String DailyExpenseController.findDailyExpensesByTimesheetForm(ModelMap modelMap) {    
+        modelMap.addAttribute("timesheets", Timesheet.findAllTimesheets());        
+        return "dailyexpense/findDailyExpensesByTimesheet";        
+    }    
+    
+    @RequestMapping(value = "find/ByTimesheet", method = RequestMethod.GET)    
+    public String DailyExpenseController.findDailyExpensesByTimesheet(@RequestParam("timesheet") Timesheet timesheet, ModelMap modelMap) {    
+        if (timesheet == null) throw new IllegalArgumentException("A Timesheet is required.");        
+        modelMap.addAttribute("dailyexpenses", DailyExpense.findDailyExpensesByTimesheet(timesheet).getResultList());        
+        return "dailyexpense/list";        
+    }    
+    
 }

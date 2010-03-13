@@ -42,6 +42,7 @@
                     <th><spring:message code="label.year"/></th>
                     <th><spring:message code="label.month"/></th>
                     <th><spring:message code="label.total"/></th>
+                    <th></th>
                     <th><spring:message code="label.employee"/></th>
                     <th><spring:message code="label.dailytimesheets"/></th>
                     <th><spring:message code="label.dailytravels"/></th>
@@ -56,6 +57,13 @@
                     <td>${timesheet.sheetYear}</td>
                     <td>${timesheet.sheetMonthShortName}</td>
                     <td>${timesheet.monthlyTotal}</td>
+                    <td>
+	                    <spring:url value="/static/images/delete.png" var="delete_image_url"/>
+                        <spring:message arguments="${entity_label}" code="entity.delete" var="delete_label"/>
+                    	<a href="javascript:deleteObjectByAdmin(${timesheet.id},'timesheet')">
+                    		<img alt="${delete_label}" src="${delete_image_url}"/>
+                    	</a> 	
+                    </td>
                     <td>${timesheet.employee}</td>
                     <td align="center">
                        	<span style="float: left;">

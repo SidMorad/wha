@@ -3,13 +3,15 @@
  */
 package nl.hajari.wha.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import java.util.List;
 
 import nl.hajari.wha.domain.DailyTravel;
 import nl.hajari.wha.domain.Timesheet;
 import nl.hajari.wha.service.DailyTravelService;
 import nl.hajari.wha.service.TimesheetService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
@@ -36,6 +38,19 @@ public class DailyTravelServiceImpl extends AbstractService implements DailyTrav
 		}
 		
 		return totalDistance;
+	}
+
+	@Override
+	public boolean deleteDailyTravelByTimesheet(Timesheet timesheet) {
+		List<DailyTravel> dts = DailyTravel.findDailyTravelsByTimesheet(timesheet).getResultList();
+		try {
+			for (DailyTravel dt : dts) {
+				dt.remove();
+			}
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 }
