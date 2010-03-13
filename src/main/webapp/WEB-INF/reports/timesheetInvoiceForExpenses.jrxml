@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" 
+	name="TimesheetInvoiceForExpenses" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" 
+	rightMargin="20" topMargin="20" bottomMargin="20" resourceBundle="reportlabels">
+	<parameter name="IMAGE_HM_LOGO" class="java.lang.String"/>
+	<parameter name="timesheetTotalExpense" class="java.lang.Double"/>
+	<parameter name="timesheetTravelTax" class="java.lang.Double"/>
+	<parameter name="subTotal" class="java.lang.Double"/>
+	<parameter name="totalAmount" class="java.lang.Double"/>
+	<parameter name="invoiceDate" class="java.lang.String"/>
+	<parameter name="ratioPerKilometer" class="java.lang.Float"/>
+	<parameter name="travelTotalDistance" class="java.lang.Float"/>
+
+	<field name="invoiceId" class="java.lang.String"/>
+	<field name="opdracht" class="java.lang.String"/>
+	<field name="timesheet.poNumber" class="java.lang.String"/>
+	<field name="timesheet.description" class="java.lang.String"/>
+	<field name="timesheet.employee.firstName" class="java.lang.String"/>
+	<field name="timesheet.employee.lastName" class="java.lang.String"/>
+	<field name="timesheet.employee.empId" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="82" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="100" height="70"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{IMAGE_HM_LOGO}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="424" y="0" width="18" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.to}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="442" y="0" width="130" height="80"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.address}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="130" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="109" width="252" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.itSpecialist} + " : " + $F{timesheet.employee.firstName} + " " + $F{timesheet.employee.lastName} + " [" + $F{timesheet.employee.empId} + "]"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="62" width="139" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.opdracht}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="82" width="139" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.ponumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="2" width="139" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="22" width="139" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.billing.id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="42" width="139" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.monthYear}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="139" y="62" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{opdracht}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="139" y="82" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{timesheet.poNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="139" y="42" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{timesheet.description}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="139" y="22" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{invoiceId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="139" y="2" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{invoiceDate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="1" width="572" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="24" width="572" height="1"/>
+			</line>
+			<textField>
+				<reportElement x="0" y="5" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.project}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="5" width="113" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.distance}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="5" width="170" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.feePerKM}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="472" y="5" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>	
+	<detail>
+		<band height="44" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="138" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.travels}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$P{travelTotalDistance}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="0" width="170"  height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["€ " + $P{ratioPerKilometer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="472" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["€ " + $P{travelTotalDistance} * $P{ratioPerKilometer}]]></textFieldExpression>
+			</textField>
+
+			<textField>
+				<reportElement x="0" y="20" width="138" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.expenses}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="472" y="20" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["€ " + $P{timesheetTotalExpense}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="103" splitType="Stretch">
+			<line>
+				<reportElement x="120" y="26" width="452" height="3"/>
+			</line>
+			<line>
+				<reportElement x="120" y="3" width="452" height="1"/>
+			</line>
+			<textField>
+				<reportElement x="120" y="6" width="71" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.distance}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="29" width="71" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$P{travelTotalDistance}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="197" y="7" width="71" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.subTotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="197" y="27" width="71" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["€ " + $P{subTotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="279" y="7" width="79" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.timesheetTax}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="279" y="29" width="80" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["€ " + $P{timesheetTravelTax}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="363" y="7" width="73" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.timesheetExpense}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="363" y="29" width="73" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["€ 0.0"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="472" y="7" width="92" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.totalAmount} + ":"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="472" y="29" width="92" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["€ " + $P{totalAmount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

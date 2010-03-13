@@ -151,7 +151,7 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 	}
 
 	public Float calcuateTotalTax(Float amount) {
-		Constants vatRatioCons = constantsService.findByKey(nl.hajari.wha.Constants.VAT_RATIO);
+		Constants vatRatioCons = constantsService.findByKey(ConstantsService.CONST_KEY_SALARY_TAX_RATIO);
 		Float vatRatio = Float.valueOf(vatRatioCons.getValue());
 		Float total = amount * vatRatio;
 		return total;

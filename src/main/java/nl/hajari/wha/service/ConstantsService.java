@@ -78,4 +78,11 @@ public interface ConstantsService {
 	 */
 	Map<String, String> getDefaultValues();
 
+	/**
+	 * 
+	 * @param key
+	 * @return Float value
+	 */
+	Float findFloatValueByKey(String key);
+	
 }
