@@ -12,6 +12,7 @@
 	<parameter name="invoiceDate" class="java.lang.String"/>
 	<parameter name="ratioPerKilometer" class="java.lang.Float"/>
 	<parameter name="travelTotalDistance" class="java.lang.Float"/>
+	<parameter name="onkosten" class="java.lang.Double"/>
 
 	<field name="invoiceId" class="java.lang.String"/>
 	<field name="opdracht" class="java.lang.String"/>
@@ -214,7 +215,7 @@
 			<textField>
 				<reportElement x="363" y="29" width="73" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA["€ 0.0"]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["€ " + $P{onkosten}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="472" y="7" width="92" height="20"/>

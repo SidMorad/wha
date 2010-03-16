@@ -24,7 +24,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @RooJavaBean
 @RooToString
-@RooEntity(finders = { "findInvoicesByTimesheet" })
+@RooEntity(finders = { "findInvoicesByTimesheet", "findInvoicesByTimesheetAndInvoiceTypeEquals" })
 public class Invoice {
 
     @NotNull

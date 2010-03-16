@@ -6,6 +6,7 @@ package nl.hajari.wha.service.impl;
 import java.util.List;
 
 import nl.hajari.wha.domain.Invoice;
+import nl.hajari.wha.domain.InvoiceType;
 import nl.hajari.wha.domain.Timesheet;
 import nl.hajari.wha.service.InvoiceService;
 
@@ -33,7 +34,7 @@ public class InvoiceServiceImpl extends AbstractService implements InvoiceServic
 	public Invoice saveOrUpdate(Invoice invoice) {
 		Timesheet timesheet = invoice.getTimesheet();
 		// We check if any Invoice exist for selected timesheet
-		Invoice currInvoice = loadByTimesheet(timesheet);
+		Invoice currInvoice = findByTimesheetAndInvoiceType(timesheet, invoice.getInvoiceType());
 		if (null != currInvoice) {
 			// If Invoice found, set id and version then merge the entity
 			currInvoice.setId(invoice.getId());
@@ -62,6 +63,16 @@ public class InvoiceServiceImpl extends AbstractService implements InvoiceServic
 			return true;
 		} catch (Exception e) {
 			return false;
+		}
+	}
+
+	@Override
+	public Invoice findByTimesheetAndInvoiceType(Timesheet timesheet, InvoiceType invoiceType) {
+		try {
+			Invoice invoice = (Invoice) Invoice.findInvoicesByTimesheetAndInvoiceTypeEquals(timesheet, invoiceType).getSingleResult();
+			return invoice;
+		} catch (Exception e) {
+			return null;
 		}
 	}
 
