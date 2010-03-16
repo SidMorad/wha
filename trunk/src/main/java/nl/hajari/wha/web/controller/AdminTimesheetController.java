@@ -216,8 +216,6 @@ public class AdminTimesheetController extends AbstractController {
 	private String generateTimesheetInvoiceForTimesheet(Invoice invoice,
 			ModelMap modelMap, BindingResult result, HttpServletRequest request) {
 		Double timesheetTotalWorking = invoice.getTimesheet().getMonthlyTotal().doubleValue();
-		Double timesheetTotalExpense = dailyExpenseService
-				.getDailyExpenseTotalForOthers(invoice.getTimesheet().getId());
 
 		String invoicePrefixId = DateUtils.getMonthAndYearString(invoice.getInvoiceDate());
 		String invoiceId = invoicePrefixId + "-" + invoice.getSerialNumber();
@@ -232,7 +230,7 @@ public class AdminTimesheetController extends AbstractController {
 		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(invoices, false);
 
 		modelMap.put("invoiceDate", invoiceDate);
-		modelMap.put("timesheetTotalExpense", MathUtils.roundToTwoDecimalPlaces(timesheetTotalExpense));
+		modelMap.put("onkosten", 0.0);
 		modelMap.put("timesheetTotalWorking", timesheetTotalWorking);
 		modelMap.put("timesheetInvoiceList", jrDataSource);
 		modelMap.put("format", "pdf");
@@ -252,7 +250,7 @@ public class AdminTimesheetController extends AbstractController {
 		
 		// Double totalAmount = timesheetService.calculateTotalAmountInvoice(timesheet);
 		// Let's use calculated values from top !
-		Float totalAmount = subTotal + timesheetTotalTax + timesheetTotalExpense.floatValue(); 
+		Float totalAmount = subTotal + timesheetTotalTax; 
 		modelMap.put("totalAmount", MathUtils.roundToTwoDecimalPlaces(totalAmount));
 
 		return "timesheetInvoiceList";
@@ -280,6 +278,7 @@ public class AdminTimesheetController extends AbstractController {
 		Float ratioPerKilometer = constantsService.findFloatValueByKey(ConstantsService.CONST_KEY_EXPENSE_GAS_SUBSIDY_PER_KILOMETER);
 
 		modelMap.put("invoiceDate", invoiceDate);
+		modelMap.put("onkosten", 0.0);
 		modelMap.put("travelTotalDistance", travelTotalDistance);
 		modelMap.put("ratioPerKilometer", ratioPerKilometer);
 		modelMap.put("timesheetTotalExpense", MathUtils.roundToTwoDecimalPlaces(timesheetTotalExpense));

@@ -4,6 +4,7 @@
 package nl.hajari.wha.service;
 
 import nl.hajari.wha.domain.Invoice;
+import nl.hajari.wha.domain.InvoiceType;
 import nl.hajari.wha.domain.Timesheet;
 
 /**
@@ -31,4 +32,13 @@ public interface InvoiceService {
 	 * @return true if succeed
 	 */
 	boolean deleteInvoiceByTimesheet(Timesheet timesheet);
+
+	/**
+	 * 
+	 * @param timesheet
+	 * @param invoiceType
+	 * @return invoice
+	 */
+	Invoice findByTimesheetAndInvoiceType(Timesheet timesheet, InvoiceType invoiceType);
+
 }

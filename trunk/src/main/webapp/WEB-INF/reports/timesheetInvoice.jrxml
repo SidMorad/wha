@@ -5,11 +5,12 @@
 	<parameter name="ProjectSubReportData" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<parameter name="IMAGE_HM_LOGO" class="java.lang.String"/>
 	<parameter name="timesheetTotalWorking" class="java.lang.Double"/>
-	<parameter name="timesheetTotalExpense" class="java.lang.Double"/>
 	<parameter name="timesheetTotalTax" class="java.lang.Double"/>
 	<parameter name="subTotal" class="java.lang.Double"/>
 	<parameter name="totalAmount" class="java.lang.Double"/>
 	<parameter name="invoiceDate" class="java.lang.String"/>
+	<parameter name="onkosten" class="java.lang.Double"/>
+
 	<field name="invoiceId" class="java.lang.String"/>
 	<field name="opdracht" class="java.lang.String"/>
 	<field name="timesheet.poNumber" class="java.lang.String"/>
@@ -155,7 +156,7 @@
 			<textField>
 				<reportElement x="363" y="29" width="73" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA["€ " + $P{timesheetTotalExpense}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["€ " + $P{onkosten}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="472" y="7" width="92" height="20"/>
