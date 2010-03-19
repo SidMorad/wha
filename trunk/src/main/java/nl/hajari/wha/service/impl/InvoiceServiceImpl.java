@@ -32,21 +32,20 @@ public class InvoiceServiceImpl extends AbstractService implements InvoiceServic
 
 	@Override
 	public Invoice saveOrUpdate(Invoice invoice) {
-		Timesheet timesheet = invoice.getTimesheet();
-		// We check if any Invoice exist for selected timesheet
-		Invoice currInvoice = findByTimesheetAndInvoiceType(timesheet, invoice.getInvoiceType());
+		// We check if any Invoice exist for selected Timesheet and InvoiceType
+		Invoice currInvoice = findByTimesheetAndInvoiceType(invoice.getTimesheet(), invoice.getInvoiceType());
 		if (null != currInvoice) {
-			// If Invoice found, set id and version then merge the entity
-			currInvoice.setId(invoice.getId());
+			// If Invoice found, Update dynamic fields and merge the entity
 			currInvoice.setInvoiceDate(invoice.getInvoiceDate());
 			currInvoice.setSerialNumber(invoice.getSerialNumber());
 			currInvoice.setInvoiceId(invoice.getInvoiceId());
 			currInvoice.setOpdracht(invoice.getOpdracht());
-			currInvoice.setInvoiceType(invoice.getInvoiceType());
 			currInvoice.merge();
 			logService.log(null, null, null, invoice.getTimesheet(), "Invoice Updated");
 			return currInvoice;
 		} else {
+			invoice.setId(null);
+			invoice.setVersion(null);
 			invoice.persist();
 			logService.log(null, null, null, invoice.getTimesheet(), "Invoice Created");
 			return invoice;
