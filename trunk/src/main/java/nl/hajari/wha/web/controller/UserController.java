@@ -102,4 +102,9 @@ public class UserController extends AbstractController {
 		return "redirect:/admin/user/" + user.getId();
 	}
 
+	@RequestMapping(value = "/admin/user/onlineUsers")
+	public String listOnlineUsers() {
+		return "admin/user/onlineUsers";
+	}
+	
 }

@@ -19,6 +19,13 @@
                     <spring:message arguments="${label_users}" code="global.menu.list"/>
                 </a>
             </li>
+        	<li id="admin_user_online_users">
+                <c:url value="/admin/user/onlineUsers" var="admin_user_online_users_url"/>
+                <a href="${admin_user_online_users_url}">
+                    <spring:message code="label.online.users" var="label_online_users"/>
+                    <spring:message arguments="${label_online_users}" code="global.menu.list"/>
+                </a>
+            </li>
         	<li id="web_mvc_jsp_list_employee_menu_item">
                 <c:url value="/employee?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 25 : param.size}" var="web_mvc_jsp_list_employee_menu_item_url"/>
                 <a href="${web_mvc_jsp_list_employee_menu_item_url}">
