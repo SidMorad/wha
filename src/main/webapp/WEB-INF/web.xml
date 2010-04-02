@@ -88,6 +88,9 @@
     <listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	<listener>
+		<listener-class>nl.hajari.wha.web.listener.UserCounterListener</listener-class>
+	</listener>
 
 	<servlet>
 		<servlet-name>wha</servlet-name>

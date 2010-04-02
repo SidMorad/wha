@@ -19,4 +19,8 @@
     <definition extends="default" name="admin/user/changePassword">
         <put-attribute name="body" value="/WEB-INF/views/admin/user/changePassword.jspx"/>
     </definition>
+	<definition extends="default" name="admin/user/onlineUsers">
+		<put-attribute name="body" value="/WEB-INF/views/admin/user/onlineUsers.jspx"/>
+	</definition>
+
 </tiles-definitions>
