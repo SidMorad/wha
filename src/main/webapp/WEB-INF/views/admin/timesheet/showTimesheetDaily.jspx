@@ -107,7 +107,7 @@
 	                <tr class="footer">
 	                    <td colspan="9">
 	                        <span class="new">
-                                <spring:url value="/admin/timesheet/dailytimesheet/form/${timesheet.employee.id}" var="create_url"/>
+                                <spring:url value="/admin/timesheet/dailytimesheet/form/${timesheet.id}" var="create_url"/>
                                 <spring:url value="/static/images/add.png" var="create_img_url"/>
 					            <form:form action="${create_url}" method="GET">
 	                                <spring:message arguments="${entity_daily_label}" code="global.menu.new" var="add_message"/>
@@ -179,7 +179,7 @@
 		    <c:if test="${empty timesheet.dailyTimesheetsSortedList}">
 	        	<spring:message arguments="${entity_daily_label_plural}" code="entity.not.found"/>
 				<span class="new"> 
-					<spring:url value="/admin/timesheet/dailytimesheet/form/${timesheet.employee.id}" var="create_url" /> 
+					<spring:url value="/admin/timesheet/dailytimesheet/form/${timesheet.id}" var="create_url" /> 
 					<spring:url value="/static/images/add.png" var="create_img_url" /> 
 					<form:form action="${create_url}" method="GET">
 						<spring:message arguments="${entity_daily_label}" code="global.menu.new" var="add_message" />
