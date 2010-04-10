@@ -47,7 +47,7 @@ public class AbstractController implements MessageSourceAware {
 
 	protected CustomDateEditor getCustomDateEditor() {
 		String datePattern = messages.getMessage(Constants.DATE_PATTERN_KEY, new Object[] {}, getLocale());
-		logger.debug("Customer editor for date pattern: " + datePattern);
+		logger.debug("Custom editor for date pattern: " + datePattern);
 		return new CustomDateEditor(new SimpleDateFormat(datePattern), true);
 	}
 
