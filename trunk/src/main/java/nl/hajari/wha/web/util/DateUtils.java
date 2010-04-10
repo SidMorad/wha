@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import nl.hajari.wha.domain.Timesheet;
+
 public class DateUtils {
 
 	public static Integer getCurrentYear() {
@@ -51,4 +53,10 @@ public class DateUtils {
 		return LocaleUtils.getCurrentLocale();
 	}
 
+	public static Date getFirstDateOfRelatedYearAndMonth(Timesheet timesheet) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(timesheet.getSheetYear(), timesheet.getSheetMonth(), 1);
+		return calendar.getTime();
+	}
+	
 }

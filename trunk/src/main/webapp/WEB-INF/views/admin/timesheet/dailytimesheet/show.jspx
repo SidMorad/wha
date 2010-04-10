@@ -43,6 +43,14 @@
                 <div class="box" id="_project_id">${dailytimesheet.project}</div>
             </div>
             <br/>
+			<span class="new"> 
+				<spring:url value="/admin/timesheet/dailytimesheet/form/${dailytimesheet.timesheet.id}" var="create_url" /> 
+				<spring:url value="/static/images/add.png" var="create_img_url" /> 
+				<form:form action="${create_url}" method="GET">
+					<spring:message arguments="${entity_label}" code="global.menu.new" var="add_message" />
+					<input alt="${add_message}" class="image" src="${create_img_url}" title="${add_message}" type="image" value="${timesheet.id}" />
+				</form:form> 
+			</span>            
             <spring:url value="/admin/timesheet/daily/${dailytimesheet.timesheet.id}" var="show_form_url"/>
             <form:form action="${show_form_url}" method="GET">
                 <spring:message arguments="${entity_label}" code="entity.back.list" var="show_label"/>

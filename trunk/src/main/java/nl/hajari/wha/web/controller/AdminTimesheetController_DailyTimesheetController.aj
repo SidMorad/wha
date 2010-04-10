@@ -9,7 +9,6 @@ import javax.validation.Valid;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import nl.hajari.wha.Constants;
 import nl.hajari.wha.domain.DailyTimesheet;
-import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.Project;
 import nl.hajari.wha.domain.Timesheet;
 import nl.hajari.wha.web.controller.formbean.TimesheetDailyReportFormBean;
@@ -28,7 +27,7 @@ privileged aspect AdminTimesheetController_DailyTimesheetController {
     public String AdminTimesheetController.createDailyTimesheet(@Valid DailyTimesheet dailyTimesheet, BindingResult result, ModelMap modelMap) {    
         if (dailyTimesheet == null) throw new IllegalArgumentException("A dailytimesheet is required");        
         if (!dailyTimesheet.getTimesheet().getSheetMonth().equals(DateUtils.getMonthInteger(dailyTimesheet.getDayDate()))) {
-        	result.rejectValue("timesheet", "error.time.day.date.not.match");
+        	result.rejectValue("dayDate", "error.time.day.date.not.match");
         }
         if (StringUtils.hasText(dailyTimesheet.getProjectName())) {
         	logger.debug("Recieved project name: " + dailyTimesheet.getProjectName());
@@ -51,13 +50,17 @@ privileged aspect AdminTimesheetController_DailyTimesheetController {
         return "redirect:/admin/timesheet/dailytimesheet/" + dailyTimesheet.getId();        
     }    
     
-    @RequestMapping(value = "/admin/timesheet/dailytimesheet/form/{employeeId}", method = RequestMethod.GET)    
-    public String AdminTimesheetController.createFormDailyTimesheet(@PathVariable("employeeId") Long employeeId, ModelMap modelMap) {
+    @RequestMapping(value = "/admin/timesheet/dailytimesheet/form/{timesheetId}", method = RequestMethod.GET)    
+    public String AdminTimesheetController.createFormDailyTimesheet(@PathVariable("timesheetId") Long timesheetId, ModelMap modelMap) {
+    	Timesheet timesheet = Timesheet.findTimesheet(timesheetId);  
     	DailyTimesheet dailyTimesheet = new DailyTimesheet();
+    	dailyTimesheet.setTimesheet(timesheet);
     	dailyTimesheet.setDurationOffs(0f);
     	dailyTimesheet.setDurationTraining(0f);
+    	//select first day for related year and month.
+    	dailyTimesheet.setDayDate(DateUtils.getFirstDateOfRelatedYearAndMonth(timesheet));
         modelMap.addAttribute("dailyTimesheet", dailyTimesheet);        
-        modelMap.addAttribute("timesheets", Timesheet.findTimesheetsByEmployee(Employee.findEmployee(employeeId)).getResultList());        
+        modelMap.addAttribute("timesheets", getListByOnlyOneTimesheet(timesheet));        
         return "admin/timesheet/dailytimesheet/create";        
     }    
     @RequestMapping(value = "/admin/timesheet/dailytimesheet/{id}", method = RequestMethod.GET)    
@@ -138,4 +141,9 @@ privileged aspect AdminTimesheetController_DailyTimesheetController {
     	return "timesheetDailyReportList";
     }
     
+    private List<Timesheet> AdminTimesheetController.getListByOnlyOneTimesheet(Timesheet timesheet) {
+    	List<Timesheet> timesheets = new ArrayList<Timesheet>();
+    	timesheets.add(timesheet);
+    	return timesheets;
+    }
 }
