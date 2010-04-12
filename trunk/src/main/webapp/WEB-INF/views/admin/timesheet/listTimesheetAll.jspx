@@ -11,25 +11,32 @@
          		<td colspan="10">
          			<spring:url value="/admin/timesheet/refresh" var="form_url"/>
          			<form:form action="${form_url}" method="POST" modelAttribute="timesheetYearMonthFormBean">
-         				<div id="roo_year" style="float: left;">
-			    	<label for="_year" style="width:40px"><spring:message code="label.year"/>:</label>
-                    <form:select cssStyle="width:90px;" id="_year" path="year">
-                    	<form:options items="${timesheetPossibleYears}"/>
-                    </form:select>
-                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_year', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
-            	</div>
-         				<div id="roo_month" style="float: left;">
-			    	<label for="_year" style="width:50px"><spring:message code="label.month"/>:</label>
-                    <form:select cssStyle="width:90px;" id="_month" path="month">
-                    	<form:options items="${possibleTimesheetMonthts}" />
-                    </form:select>
-                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_month', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
-            	</div>
-				<div class="submit" id="roo_submit" >
-	                <spring:message code="button.submit" var="submit_button"/>
-	                <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
-	                <input id="proceed" type="submit" value="${submit_button}" style="margin-left: 5px;"/>
-	            </div>			            	
+	         			<div id="roo_year" style="float: left;">
+					    	<label for="_year" style="width:40px"><spring:message code="label.year"/>:</label>
+		                    <form:select cssStyle="width:90px;" id="_year" path="year">
+		                    	<form:options items="${timesheetPossibleYears}"/>
+		                    </form:select>
+		                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_year', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+		            	</div>
+		         		<div id="roo_month" style="float: left;">
+					    	<label for="_year" style="width:50px"><spring:message code="label.month"/>:</label>
+		                    <form:select cssStyle="width:90px;" id="_month" path="month">
+		                    	<form:options items="${possibleTimesheetMonthts}" />
+		                    </form:select>
+		                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_month', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+	            		</div>
+	            		<div style="float: left;">
+	            			<form:checkbox path="archived" id="_archived"/>
+	            		</div>
+	            		<div style="float: left;">
+	            			<spring:message code="label.archived" var="label_archived"/>
+	            			<label>${label_archived}</label>
+	            		</div>
+						<div class="submit" id="roo_submit" >
+			                <spring:message code="button.submit" var="submit_button"/>
+			                <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
+			                <input id="proceed" type="submit" value="${submit_button}" style="margin-left: 5px;"/>
+			            </div>			            	
          			</form:form>	
          		</td>
          	</tr>
@@ -42,7 +49,8 @@
                     <th><spring:message code="label.year"/></th>
                     <th><spring:message code="label.month"/></th>
                     <th><spring:message code="label.total"/></th>
-                    <th></th>
+                    <th>Del</th>
+                    <th>Arc</th>
                     <th><spring:message code="label.employee"/></th>
                     <th><spring:message code="label.dailytimesheets"/></th>
                     <th><spring:message code="label.dailytravels"/></th>
@@ -63,6 +71,23 @@
                     	<a href="javascript:deleteObjectByAdmin(${timesheet.id},'timesheet')">
                     		<img alt="${delete_label}" src="${delete_image_url}"/>
                     	</a> 	
+                    </td>
+                    <td>
+                    	<c:if test="${!timesheet.archived}">
+	                    <spring:url value="/static/images/archive.png" var="archive_image_url"/>
+                        <spring:message arguments="${entity_label}" code="entity.archive" var="archive_label"/>
+                    	<a href="javascript:archiveObjectByAdmin(${timesheet.id},'timesheet')">
+                    		<img alt="${archive_label}" src="${archive_image_url}"/>
+                    	</a> 	
+                    	</c:if>
+                    	<c:if test="${timesheet.archived}">
+                        <spring:url value="/admin/timesheet/archive/undo/${timesheet.id}" var="archive_undo_form_url"/>
+	                    <spring:url value="/static/images/archive-undo.png" var="archive_undo_image_url"/>
+                        <form:form action="${archive_undo_form_url}" method="GET">
+                            <spring:message arguments="${entity_label}" code="entity.archive.undo" var="undo_label"/>
+                            <input alt="${undo_label}" class="image" src="${archive_undo_image_url}" title="${undo_label}" type="image" value="${show_label}"/>
+                        </form:form>
+                    	</c:if>
                     </td>
                     <td>${timesheet.employee}</td>
                     <td align="center">
@@ -125,7 +150,7 @@
                 </tr>
             </c:forEach>
             <tr class="footer">
-                <td colspan="11">
+                <td colspan="12">
                     <c:if test="${not empty maxPages}">
                         <roo:pagination maxPages="${maxPages}" page="${param.page}" size="${param.size}"/>
                     </c:if>

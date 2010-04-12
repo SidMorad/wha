@@ -48,12 +48,13 @@ privileged aspect Timesheet_Wha_Entity {
     	return query.getResultList();
     } 
     
-	public static List<Timesheet> Timesheet.findTimesheetEntriesByYearAndMonth(int firstResult, int maxResults, Integer year, Integer month) {
+	public static List<Timesheet> Timesheet.findTimesheetEntriesByYearAndMonth(int firstResult, int maxResults, Integer year, Integer month, boolean archived) {
 		year = (year == null ? DateUtils.getCurrentYear() : year);
 		month = (month == null ? DateUtils.getCurrentMonth() : month);
-		Query query = entityManager().createQuery("select o from Timesheet o where o.sheetYear= :sheetYear and o.sheetMonth= :sheetMonth");
+		Query query = entityManager().createQuery("select o from Timesheet o where o.sheetYear= :sheetYear and o.sheetMonth= :sheetMonth and o.archived= :archived");
 		query.setParameter("sheetYear", year);
 		query.setParameter("sheetMonth", month);
+		query.setParameter("archived", archived);
 		if (firstResult != -1) {
 			query.setFirstResult(firstResult);
 		}

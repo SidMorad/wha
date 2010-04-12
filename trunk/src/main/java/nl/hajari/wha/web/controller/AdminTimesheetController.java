@@ -70,14 +70,14 @@ public class AdminTimesheetController extends AbstractController {
 			int sizeNo = size == null ? 10 : size.intValue();
 			modelMap.addAttribute("timesheets", Timesheet.findTimesheetEntriesByYearAndMonth(page == null ? 0 : (page
 					.intValue() - 1)
-					* sizeNo, sizeNo, null, null));
+					* sizeNo, sizeNo, null, null, false));
 			float nrOfPages = (float) Timesheet.countTimesheets() / sizeNo;
 			modelMap.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1
 					: nrOfPages));
 		} else {
 			// -1 will ignore pagination and null will replace with current Year
 			// and Month
-			modelMap.addAttribute("timesheets", Timesheet.findTimesheetEntriesByYearAndMonth(-1, -1, null, null));
+			modelMap.addAttribute("timesheets", Timesheet.findTimesheetEntriesByYearAndMonth(-1, -1, null, null, false));
 		}
 		modelMap.addAttribute("timesheetYearMonthFormBean", new TimesheetYearMonthFormBean(DateUtils.getCurrentYear(),
 				DateUtils.getCurrentMonth()));
@@ -88,23 +88,22 @@ public class AdminTimesheetController extends AbstractController {
 		return "admin/timesheet/list";
 	}
 
-	@RequestMapping(value = "/admin/timesheet/refresh", method = { RequestMethod.POST, RequestMethod.GET })
+	@RequestMapping(value = "/admin/timesheet/refresh", method = {RequestMethod.POST, RequestMethod.GET})
 	public String listTimesheetByYearAndMonth(TimesheetYearMonthFormBean yearMonthFormBean,
 			@RequestParam(value = "page", required = false) Integer page,
-			@RequestParam(value = "size", required = false) Integer size, ModelMap modelMap) {
+			@RequestParam(value = "size", required = false) Integer size,ModelMap modelMap) {
 		if (page != null || size != null) {
 			int sizeNo = size == null ? 10 : size.intValue();
 			modelMap.addAttribute("timesheets", Timesheet.findTimesheetEntriesByYearAndMonth(page == null ? 0 : (page
 					.intValue() - 1)
-					* sizeNo, sizeNo, yearMonthFormBean.getYear(), yearMonthFormBean.getMonth()));
+					* sizeNo, sizeNo, yearMonthFormBean.getYear(), yearMonthFormBean.getMonth(), yearMonthFormBean.isArchived()));
 			float nrOfPages = (float) Timesheet.countTimesheets() / sizeNo;
 			modelMap.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1
 					: nrOfPages));
 		} else {
-			// -1 will ignore pagination and null will replace with current Year
-			// and Month
+			// -1 will ignore pagination
 			modelMap.addAttribute("timesheets", Timesheet.findTimesheetEntriesByYearAndMonth(-1, -1, yearMonthFormBean
-					.getYear(), yearMonthFormBean.getMonth()));
+					.getYear(), yearMonthFormBean.getMonth(), yearMonthFormBean.isArchived()));
 		}
 		modelMap.addAttribute(LocaleAwareCalendarOptionsProvider.POSSIBLE_TIMESHEET_MONTHS_KEY, calendarOptionsProvider
 				.getOptions());
@@ -112,18 +111,38 @@ public class AdminTimesheetController extends AbstractController {
 				timesheetPossibleYearsOptionsProvider.getOptions());
 		return "admin/timesheet/list";
 	}
-
+	
+	@RequestMapping(value = "/admin/timesheet/redirect", method = RequestMethod.GET)
+	public String listTimesheetByYearAndMonth(ModelMap modelMap,
+			@RequestParam(value = "year", required = true) Integer year,
+			@RequestParam(value = "month", required = true) Integer month,
+			@RequestParam(value = "archived", required = false) boolean archived) {
+		modelMap.addAttribute("timesheets", Timesheet.findTimesheetEntriesByYearAndMonth(-1, -1, year, month, archived));
+		modelMap.addAttribute(LocaleAwareCalendarOptionsProvider.POSSIBLE_TIMESHEET_MONTHS_KEY, calendarOptionsProvider.getOptions());
+		modelMap.addAttribute(TimesheetPossibleYearsOptionsProvider.TIMESHEET_POSSIBLE_YEARS_KEY,timesheetPossibleYearsOptionsProvider.getOptions());
+		modelMap.addAttribute("timesheetYearMonthFormBean", new TimesheetYearMonthFormBean(year,month, archived));
+		return "admin/timesheet/list";
+	}
+	
 	@RequestMapping(value = "/admin/timesheet/delete/{id}")
 	public String deleteTimesheet(@PathVariable("id") Long id) {
+		Timesheet timesheet = timesheetService.load(id);
 		timesheetService.delete(id);
-		return "redirect:/admin/timesheet";
+		return "redirect:/admin/timesheet/redirect?year="+timesheet.getSheetYear()+"&month="+timesheet.getSheetMonth()+"&archived="+timesheet.isArchived();
 	}
 
-	// This method exist only for solve Javascript relative path issue 
-	@RequestMapping(value = "/admin/admin/timesheet/delete/{id}")
-	public String deleteTimesheet2(@PathVariable("id") Long id) {
-		timesheetService.delete(id);
-		return "redirect:/admin/timesheet";
+	@RequestMapping(value = "/admin/timesheet/archive/{id}")
+	public String archiveTimesheet(@PathVariable("id") Long id) {
+		Timesheet timesheet = timesheetService.load(id);
+		timesheetService.archive(id);
+		return "redirect:/admin/timesheet/redirect?year="+timesheet.getSheetYear()+"&month="+timesheet.getSheetMonth()+"&archived="+false;
+	}
+	
+	@RequestMapping(value = "/admin/timesheet/archive/undo/{id}") 
+	public String archiveUndoTimesheet (@PathVariable("id") Long id){
+		Timesheet timesheet = timesheetService.load(id);
+		timesheetService.archiveUndo(id);
+		return "redirect:/admin/timesheet/redirect?year="+timesheet.getSheetYear()+"&month="+timesheet.getSheetMonth() +"&archived="+true;
 	}
 	
 	@RequestMapping(value = "/admin/timesheet/daily/{id}", method = RequestMethod.GET)
@@ -306,4 +325,15 @@ public class AdminTimesheetController extends AbstractController {
 		return appServerHome + filePath;
 	}
 
+	// This method exist only for solve Javascript relative path issue 
+	@RequestMapping(value = "/admin/admin/timesheet/delete/{id}")
+	public String deleteTimesheet2(@PathVariable("id") Long id) {
+		return deleteTimesheet(id);
+	}
+	
+	// This method exist only for solve Javascript relative path issue 
+	@RequestMapping(value = "/admin/admin/timesheet/archive/{id}")
+	public String archiveTimesheet2(@PathVariable("id") Long id) {
+		return archiveTimesheet(id);
+	}
 }
