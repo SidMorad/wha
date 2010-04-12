@@ -1,7 +1,6 @@
 package nl.hajari.wha.domain;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -62,13 +61,16 @@ public class Timesheet {
 
 	private String poNumber;
 
+	@Column(nullable= false)
+	private boolean archived;
+	
 	public String toString() {
 		return sheetYear + ", " + sheetMonth + ", " + monthlyTotal;
 	}
 
 	@Transient
 	public String getDescription() {
-		return sheetYear + ", " + DateUtils.getSheetMonthLongName(Calendar.getInstance().get(Calendar.MONTH));
+		return sheetYear + ", " + DateUtils.getSheetMonthLongName(sheetMonth);
 	}
 
 	@Transient

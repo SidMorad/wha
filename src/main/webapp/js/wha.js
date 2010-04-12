@@ -28,3 +28,9 @@ function deleteObjectByAdmin(id, name) {
 		window.location = "../admin/"+ name +"/delete/" + id;
 	}
 }
+
+function archiveObjectByAdmin(id, name) {
+	if (confirm("Are you sure for archive ["+ name +"] with id ["+ id +"] ?")) {
+		window.location = "../admin/"+ name +"/archive/" + id;
+	}
+}

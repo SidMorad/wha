@@ -22,12 +22,20 @@ public class TimesheetYearMonthFormBean {
 	@Size(min = 1, max = 2)
 	private Integer month;
 
+	private boolean archived;
+	
 	public TimesheetYearMonthFormBean() {
 	}
 
 	public TimesheetYearMonthFormBean(Integer year, Integer month) {
 		this.year = year;
 		this.month = month;
+	}
+
+	public TimesheetYearMonthFormBean(Integer year, Integer month, boolean archived) {
+		this.year = year;
+		this.month = month;
+		this.archived = archived;
 	}
 
 	public Integer getYear() {
@@ -44,6 +52,14 @@ public class TimesheetYearMonthFormBean {
 
 	public void setMonth(Integer month) {
 		this.month = month;
+	}
+
+	public boolean isArchived() {
+		return archived;
+	}
+
+	public void setArchived(boolean archived) {
+		this.archived = archived;
 	}
 
 	@Override

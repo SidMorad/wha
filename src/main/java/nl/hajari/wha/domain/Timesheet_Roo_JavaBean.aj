@@ -75,4 +75,12 @@ privileged aspect Timesheet_Roo_JavaBean {
         this.poNumber = poNumber;        
     }    
     
+    public boolean Timesheet.isArchived() {    
+        return this.archived;        
+    }    
+    
+    public void Timesheet.setArchived(boolean archived) {    
+        this.archived = archived;        
+    }    
+    
 }

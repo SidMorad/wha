@@ -84,4 +84,18 @@ public class TimesheetServiceImpl extends AbstractService implements TimesheetSe
 		return true;
 	}
 
+	@Override
+	public void archive(Long id) {
+		Timesheet timesheet = load(id);
+		timesheet.setArchived(true);
+		timesheet.merge();
+	}
+
+	@Override
+	public void archiveUndo(Long id) {
+		Timesheet timesheet = load(id);
+		timesheet.setArchived(false);
+		timesheet.merge();
+	}
+
 }

@@ -43,4 +43,16 @@ public interface TimesheetService {
 	 */
 	boolean delete(Long id);
 
+	/**
+	 * 
+	 * @param id
+	 */
+	void archive(Long id);
+
+	/**
+	 * 
+	 * @param id
+	 */
+	void archiveUndo(Long id);
+
 }
