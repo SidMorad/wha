@@ -39,9 +39,14 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 		Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
 		dailyTimesheet.setTimesheet(timesheet);
 
-		// calculate dailyTotalDuration = duration - durationOffs
-		dailyTimesheet.setDailyTotalDuration(dailyTimesheet.getDuration()
-				- dailyTimesheet.getDurationOffs());
+		// Check dailyTotalDuration to be positive 
+		if (dailyTimesheet.getDuration() > dailyTimesheet.getDurationOffs()) {
+			// dailyTotalDuration = duration - durationOffs
+			dailyTimesheet.setDailyTotalDuration(dailyTimesheet.getDuration()
+					- dailyTimesheet.getDurationOffs());
+		} else {
+			dailyTimesheet.setDailyTotalDuration(0f);
+		}
 		dailyTimesheet.persist();
 		dailyTimesheet.flush();
 		// now we update monthlyTotalDuration in timesheet entity
@@ -52,20 +57,8 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 
 	@Transactional(readOnly = false)
 	public DailyTimesheet createDailyTimesheet(DailyTimesheet dailyTimesheet) {
-		if (dailyTimesheet == null) {
-			throw new IllegalArgumentException("A dailyTimesheet is required");
-		}
-
-		// calculate dailyTotalDuration = duration - durationOffs
-		dailyTimesheet.setDailyTotalDuration(dailyTimesheet.getDuration()
-				- dailyTimesheet.getDurationOffs());
-		dailyTimesheet.persist();
-		dailyTimesheet.flush();
 		Long timesheetId = dailyTimesheet.getTimesheet().getId();
-		// now we update monthlyTotalDuration in timesheet entity
-		Timesheet.updateTimesheetTotalMonthly(timesheetId, DailyTimesheet
-				.findTimesheetTotalMonthly(timesheetId));
-		return dailyTimesheet;
+		return createDailyTimesheet(dailyTimesheet, timesheetId);
 	}
 
 	@Transactional(readOnly = false)
@@ -73,9 +66,14 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 		if (dailyTimesheet == null) {
 			throw new IllegalArgumentException("A dailytimesheet is required");
 		}
-		// calculate dailyTotalDuration = duration - durationOffs
-		dailyTimesheet.setDailyTotalDuration(dailyTimesheet.getDuration()
-				- dailyTimesheet.getDurationOffs());
+		// Check dailyTotalDuration to be positive 
+		if (dailyTimesheet.getDuration() > dailyTimesheet.getDurationOffs()) {
+			// calculate dailyTotalDuration = duration - durationOffs
+			dailyTimesheet.setDailyTotalDuration(dailyTimesheet.getDuration()
+					- dailyTimesheet.getDurationOffs());
+		} else {
+			dailyTimesheet.setDailyTotalDuration(0f);
+		}
 		dailyTimesheet.merge();
 		dailyTimesheet.flush();
 		// now we update monthlyTotal in Timesheet
