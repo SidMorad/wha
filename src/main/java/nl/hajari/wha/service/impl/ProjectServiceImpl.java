@@ -3,6 +3,7 @@
  */
 package nl.hajari.wha.service.impl;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -11,6 +12,7 @@ import nl.hajari.wha.domain.Customer;
 import nl.hajari.wha.domain.Project;
 import nl.hajari.wha.service.ProjectService;
 
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +22,25 @@ import org.springframework.transaction.annotation.Transactional;
  * @author <a href="mailto:saeid3@gmail.com">Saeid Moradi</a>
  */
 @Service
-public class ProjectServiceImpl extends AbstractService implements ProjectService {
+public class ProjectServiceImpl extends AbstractService implements ProjectService, InitializingBean {
+
+	private String OFF_TIME_KEYWORDS_KEY = "off.time.keywords";
+	private String DEFULAT_OFF_TIME_PROJECT_COMPLETE_NAME_KEY = "default.off.time.project.complete.name";
+
+	private String offTimeKeywords;
+	private List<String> offTimeKeywordList;
+	private String offTimeProjectCompleteName;
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		if (null == offTimeKeywords) {
+			offTimeKeywords = getConfig(OFF_TIME_KEYWORDS_KEY);
+			offTimeKeywordList = Arrays.asList(offTimeKeywords.split(","));
+		}
+		if (null == offTimeProjectCompleteName) {
+			offTimeProjectCompleteName = getConfig(DEFULAT_OFF_TIME_PROJECT_COMPLETE_NAME_KEY);
+		}
+	}
 
 	public List<Project> findProjectsByName(String projectName) {
 		Query query = Project.findProjectsByNameLike(projectName);
@@ -39,6 +59,10 @@ public class ProjectServiceImpl extends AbstractService implements ProjectServic
 	@Transactional(readOnly = false)
 	public Project loadOrCreateProject(String name) {
 		String projectName = name;
+		if (looksLikeAnOffTimeProject(projectName)) {
+			logger.debug("Project [" + projectName + "] looks to be meant to be [" + offTimeProjectCompleteName + "]");
+			projectName = offTimeProjectCompleteName;
+		}
 		String customerName = null;
 		int atSign = projectName.indexOf('@');
 		if (atSign > 0) {
@@ -59,6 +83,24 @@ public class ProjectServiceImpl extends AbstractService implements ProjectServic
 			return project;
 		}
 		return project;
+	}
+
+	public void setOffTimeKeywords(String offTimeKeywords) {
+		this.offTimeKeywords = offTimeKeywords;
+	}
+
+	public void setOffTimeProjectCompleteName(String offTimeProjectCompleteName) {
+		this.offTimeProjectCompleteName = offTimeProjectCompleteName;
+	}
+
+	private boolean looksLikeAnOffTimeProject(String projectName) {
+		String projectNameLowered = projectName.toLowerCase();
+		for (String keyword : offTimeKeywordList) {
+			if (projectNameLowered.contains(keyword)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Transactional(readOnly = false)
