@@ -121,7 +121,7 @@
 	                <th width="148px">${label_project}</th>
 	                <th width="59px">${label_working}</th>
 	                <th width="45px">${label_off}</th>
-	                <th width="56px">${labe_training}</th>
+	                <th width="56px">${label_training}</th>
 	                <th width="45px">${label_total}</th>
 	                <th width="20px"></th>
 	            </tr>

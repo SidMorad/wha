@@ -4,6 +4,9 @@
 			  xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" 
 			  name="TimesheetList" pageWidth="612" pageHeight="792" columnWidth="555" 
 			  leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" resourceBundle="reportlabels">
+	<property name="subReportDataKeys" value="ProjectSubReportData"/>
+	<parameter name="ProjectSubReport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="ProjectSubReportData" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<parameter name="IMAGE_HM_LOGO" class="java.lang.String"/>
 	<field name="id" class="java.lang.Long"/>
 	<field name="dayDate" class="java.util.Date"/>
@@ -18,10 +21,7 @@
 	<field name="timesheet.employee.empId" class="java.lang.String"/>
 	<field name="timesheet.monthlyTotal" class="java.lang.Float"/>
 	<field name="timesheet.description" class="java.lang.String"/>
-	<variable name="timesheet.monthlyTotal_1" class="java.lang.Float" resetType="Column" calculation="Sum">
-		<variableExpression><![CDATA[$F{timesheet.monthlyTotal}]]></variableExpression>
-	</variable>
-	<variable name="duration_1" class="java.lang.Float" resetType="Column" calculation="Sum">
+	<variable name="duration_1" class="java.lang.Float" calculation="Sum">
 		<variableExpression><![CDATA[$F{duration}]]></variableExpression>
 	</variable>
 	<variable name="durationOffs_1" class="java.lang.Float" calculation="Sum">
@@ -109,7 +109,7 @@
 			<textField>
 				<reportElement x="326" y="0" width="61" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.duration}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.work}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="390" y="0" width="50" height="20"/>
@@ -129,7 +129,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="26" splitType="Stretch">
+		<band height="22" splitType="Stretch">
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="0" y="0" width="70" height="20"/>
 				<textElement/>
@@ -167,12 +167,6 @@
 			</textField>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
 	<summary>
 		<band height="42" splitType="Stretch">
 			<line>
@@ -198,6 +192,11 @@
 				<textElement/>
 				<textFieldExpression class="java.lang.Float"><![CDATA[$V{dailyTotalDuration_1}]]></textFieldExpression>
 			</textField>
+			<subreport>
+				<reportElement isPrintRepeatedValues="false" x="0" y="0" width="325" height="20" isRemoveLineWhenBlank="true"/>
+				<dataSourceExpression><![CDATA[$P{ProjectSubReportData}]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{ProjectSubReport}]]></subreportExpression>
+			</subreport>
 		</band>
 	</summary>
 </jasperReport>

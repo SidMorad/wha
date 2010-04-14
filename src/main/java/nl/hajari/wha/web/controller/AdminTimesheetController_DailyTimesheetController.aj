@@ -119,6 +119,11 @@ privileged aspect AdminTimesheetController_DailyTimesheetController {
     	Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
     	JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(timesheet.getDailyTimesheetsSortedList(),false);
     	modelMap.put("timesheetDailyReportList", jrDataSource);
+    	
+		// Fill ProjectSubReport
+		List<DailyTimesheet> dts = dailyTimesheetService.getDailyTimesheetListForReportPerProject(timesheetId);
+		modelMap.put("ProjectSubReportData", new JRBeanCollectionDataSource(dts, false));
+    	
     	modelMap.put("format", format);
     	modelMap.put(Constants.IMAGE_HM_LOGO, getFileFullPath(request, Constants.imageHMlogoAddress));
     	return "timesheetDailyReportList";
