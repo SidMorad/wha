@@ -119,7 +119,7 @@
 			<textField>
 				<reportElement x="0" y="0" width="389" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{project.name}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{project.name} +" @ "+$F{project.customer.name}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="390" y="0" width="50" height="20"/>
