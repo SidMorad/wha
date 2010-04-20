@@ -5,4 +5,7 @@
     	<put-attribute name="head" value="/WEB-INF/views/time/daily/head.jspx"/>
         <put-attribute name="body" value="/WEB-INF/views/time/daily/month.jspx"/>
     </definition>
+    <definition extends="default" name="time/daily/weekly">
+        <put-attribute name="body" value="/WEB-INF/views/time/daily/weekly.jspx"/>
+    </definition>
 </tiles-definitions>
