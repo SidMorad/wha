@@ -1,0 +1,147 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:form="http://www.springframework.org/tags/form" xmlns:roo="urn:jsptagdir:/WEB-INF/tags" xmlns:spring="http://www.springframework.org/tags">
+    <script type="text/javascript">
+	    dojo.require('dijit.TitlePane');
+	    dojo.require('dijit.form.FilteringSelect');
+	    dojo.require("dijit.form.ComboBox");
+	    dojo.require("dojo.data.ItemFileReadStore");
+	    dojo.require("dijit.form.DateTextBox");
+    </script>
+    
+    <div id="_title_div" style="width: 100%">
+        <spring:message code="label.dailytimesheet" var="entity_label"/>
+        <spring:message code="label.dailytimesheets" var="entity_label_plural"/>
+        <spring:message arguments="${entity_label_plural}" code="entity.list.all" var="title_msg"/>
+        <spring:message code="field.required" var="field_required"/>
+        <spring:message code="field.invalid.decimal" var="field_invalid"/>
+        <spring:message code="label.date" var="label_date"/>
+        <spring:message code="label.project" var="label_project"/>
+        <spring:message code="label.working" var="label_working"/> 
+        <spring:message code="label.off" var="label_off"/>
+        <spring:message code="label.training" var="label_training"/>
+        <spring:message code="label.total" var="label_total"/>   
+        
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
+        
+        <!-- Tips -->
+        <div id="_tips_div" style="width: 98%;">
+        	<ul>
+        		<li><spring:message code="tip.project.autocomplete"/> </li>
+        		<li><spring:message code="tip.project.hot.insert"/> </li>
+        	</ul>
+        	<spring:message code="tips.title" var="tips_title"/>
+        	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_tips_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${tips_title}', open : false}})); </script>
+        </div>
+        <p></p>
+        <p></p>
+        
+        <c:url var="action_url" value="/time/view/weekly/update"/>
+        <form:form action="${action_url}" modelAttribute="timesheetWeeklyFormBean" method="POST">
+        <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
+        <div>
+        	<table style="width:98%" border="0">
+	        	<tr>
+		        	<td>
+			        	<span style="float: left; font-weight:bolder; font-size: larger;">${timesheet.description}</span>
+			        	<span style="float: right; font-weight:bolder; font-size: larger;">${employee}</span>
+		        	</td>
+	        	</tr>
+        	</table>
+        </div>
+        <p></p>
+        <table style="width:98%">
+            <thead>
+            <tr>
+                <th width="100px">Week time</th>
+                <th width="108px">${label_project}</th>
+                <th width="40px">Sun</th>
+                <th width="40px">Mon</th>
+                <th width="40px">Tue</th>
+                <th width="40px">Wed</th>
+                <th width="40px">Thu</th>
+                <th width="40px">Fri</th>
+                <th width="40px">Sat</th>
+            </tr>
+            </thead>
+            <tr>
+				<td>
+
+				</td>
+				<td>
+					<spring:url value="/project/list/all" var="allProjects" />
+					<form:input cssStyle="width:95%" id="_projectName" maxlength="30" path="projectName" size="0"/>
+	                <form:errors cssClass="errors-in-table" id="_projectName_error" path="projectName"/>
+	                <spring:message arguments="${label_project}" code="field.invalid" var="field_invalid"/>
+					<script type="text/javascript">
+				    dojo.addOnLoad(function() {
+				        var projectStore = new dojo.data.ItemFileReadStore({url:"${allProjects}"});
+				    });
+					Spring.addDecoration(new Spring.ElementDecoration({elementId : '_projectName', widgetType: 'dijit.form.ComboBox', widgetAttrs: {id : '_projectName', name : 'projectName', value : '', store : new dojo.data.ItemFileReadStore({url:"${allProjects}"}), searchAttr : 'name', required: true}})); 
+					</script>
+				</td>
+				<td>
+				</td>     
+				<td>
+				</td>
+				<td>
+				</td>     
+				<td>
+				</td>  		
+				<td>
+				</td>  		
+				<td>
+				</td>  		
+				<td>
+				</td>  		
+            </tr>
+        </table>    
+            <div class="submit" id="roo_dailytimesheet_submit">
+	            <spring:message code="button.save" var="save_button"/>
+	            <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
+	            <input id="proceed" type="submit" value="${save_button}"/>
+		    </div>        
+        </form:form>
+        <table style="width:98%">
+            <thead>
+	            <tr>
+	                <th width="100px">${label_date}</th>
+	                <th width="148px">${label_project}</th>
+	                <th width="59px">${label_working}</th>
+	                <th width="45px">${label_off}</th>
+	                <th width="56px">${label_training}</th>
+	                <th width="45px">${label_total}</th>
+	                <th width="20px"></th>
+	            </tr>
+            </thead>
+            <c:forEach items="${dailyTimesheets}" var="dt">
+            	<tr>
+            		<td>
+            			<fmt:formatDate pattern="EEE" type="DATE" value="${dt.dayDate}" /> -	
+            			<fmt:formatDate pattern="${datePattern}" type="DATE" value="${dt.dayDate}"/>
+            		</td>
+            		<td>${dt.project}</td>
+            		<td>${dt.duration}</td>
+            		<td>${dt.durationOffs}</td>
+            		<td>${dt.durationTraining}</td>
+            		<td align="left">${dt.dailyTotalDuration}</td>
+            		<td>
+            			<spring:url value="/time/view/month/delete/${dt.id}" var="delete_form_url"/>
+                        <spring:url value="/static/images/delete.png" var="delete_image_url"/>
+                        <form:form action="${delete_form_url}" method="DELETE">
+                            <spring:message arguments="${entity_label}" code="entity.delete" var="delete_label"/>
+                            <input alt="${delete_label}" class="image" src="${delete_image_url}" title="${delete_label}" type="image" value="${delete_label}"/>
+                        </form:form>
+            		</td>
+           		</tr>
+            </c:forEach>
+            <tr align="right"> 
+            		<th>-</th>
+            		<th>-</th>
+            		<th>-</th>
+            		<th>-</th>
+            		<th>-</th>
+            		<th align="right"><span style="text-align: right"><b>${timesheet.monthlyTotal}</b></span></th>
+            		<th></th>
+            </tr>
+        </table>
+    </div>
+</div>

@@ -12,6 +12,7 @@ import nl.hajari.wha.domain.DailyTimesheet;
 import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.Project;
 import nl.hajari.wha.domain.Timesheet;
+import nl.hajari.wha.web.controller.formbean.TimesheetWeeklyFormBean;
 import nl.hajari.wha.web.util.DateUtils;
 
 import org.springframework.ui.ModelMap;
@@ -23,6 +24,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 privileged aspect TimeController_DailyTimesheetController {
 
+	@RequestMapping(value = "/time/view/weekly", method = RequestMethod.GET)
+	public String TimeController.prepareTimesheetWeeklyView(HttpServletRequest request, ModelMap modelMap) {
+		Long employeeId = getEmployeeId(request);
+		logger.debug("Employee on the session: " + employeeId);
+		if (employeeId == null) {
+			throw new IllegalStateException("Month time sheet view requires registered emplpee. Employee ID is null.");
+		}		
+		Timesheet timesheet = (Timesheet) Timesheet.findEmployeeCurrentTimesheet(employeeId).getSingleResult();
+		logger.debug("Employee Timesheet found: " + timesheet);
+
+		modelMap.put("timesheetWeeklyFormBean", new TimesheetWeeklyFormBean());
+		modelMap.put("dailyTimesheets", timesheet.getDailyTimesheetsSortedList());
+		modelMap.put("timesheet", timesheet);
+		modelMap.put("employee", Employee.findEmployee(employeeId));		
+		return "time/daily/weekly";
+	}
+	
+	
 	@RequestMapping(value = "/time/view/month", method = RequestMethod.GET)
 	public String TimeController.prepareTimesheetMonthView(HttpServletRequest request, ModelMap modelMap) {
 		Long employeeId = getEmployeeId(request);

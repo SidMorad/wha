@@ -87,6 +87,12 @@
                 	<spring:message code="label.timesheet.month.view"/>
                 </a>
             </li>
+            <li id="web_mvc_jsp_list_timesheet_weekly_view_menu_item">
+                <c:url value="/time/view/weekly" var="web_mvc_jsp_time_list_timesheet_weekly_view_menu_item_url"/>
+                <a href="${web_mvc_jsp_time_list_timesheet_weekly_view_menu_item_url}">
+                	<spring:message code="label.timesheet.weekly.view"/>
+                </a>
+            </li>
             <li id="web_mvc_jsp_list_travel_month_view_menu_item">
                 <c:url value="/time/travel" var="web_mvc_jsp_time_list_travel_month_view_menu_item_url"/>
                 <a href="${web_mvc_jsp_time_list_travel_month_view_menu_item_url}">
