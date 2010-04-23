@@ -12,6 +12,7 @@ import nl.hajari.wha.domain.DailyTimesheet;
 import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.Project;
 import nl.hajari.wha.domain.Timesheet;
+import nl.hajari.wha.service.impl.TimesheetPossibleWeeksOptionsProvider;
 import nl.hajari.wha.web.controller.formbean.TimesheetWeeklyFormBean;
 import nl.hajari.wha.web.util.DateUtils;
 
@@ -37,7 +38,8 @@ privileged aspect TimeController_DailyTimesheetController {
 		modelMap.put("timesheetWeeklyFormBean", new TimesheetWeeklyFormBean());
 		modelMap.put("dailyTimesheets", timesheet.getDailyTimesheetsSortedList());
 		modelMap.put("timesheet", timesheet);
-		modelMap.put("employee", Employee.findEmployee(employeeId));		
+		modelMap.put("employee", Employee.findEmployee(employeeId));
+		modelMap.put(TimesheetPossibleWeeksOptionsProvider.TIMESHEET_POSSIBLE_WEEKS_KEY, timesheetPossibleWeeksOptionsProvider.getOptions());
 		return "time/daily/weekly";
 	}
 	

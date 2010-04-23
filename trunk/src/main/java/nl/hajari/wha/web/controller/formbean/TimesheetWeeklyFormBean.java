@@ -11,10 +11,20 @@ import nl.hajari.wha.domain.Project;
  * @author <a href="mailto:saeid3@gmail.com">Saeid Moradi</a>
  */
 public class TimesheetWeeklyFormBean {
+
+	private Integer week;
 	
 	private String projectName;
 
 	private Project project;
+	
+	public Integer getWeek() {
+		return week;
+	}
+
+	public void setWeek(Integer week) {
+		this.week = week;
+	}
 
 	public String getProjectName() {
 		return projectName;
