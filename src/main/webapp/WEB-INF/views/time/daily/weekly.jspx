@@ -64,7 +64,10 @@
             </thead>
             <tr>
 				<td>
-
+					<form:select cssStyle="width:90px;" id="_week" path="week">
+						<form:options items="${timesheetPossibleWeeks}" />
+					</form:select>
+					<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_week', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
 				</td>
 				<td>
 					<spring:url value="/project/list/all" var="allProjects" />

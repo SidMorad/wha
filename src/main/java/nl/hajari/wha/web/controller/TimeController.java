@@ -10,6 +10,7 @@ import nl.hajari.wha.service.impl.CustomerServiceImpl;
 import nl.hajari.wha.service.impl.DailyExpenseServiceImpl;
 import nl.hajari.wha.service.impl.DailyTimesheetServiceImpl;
 import nl.hajari.wha.service.impl.ProjectServiceImpl;
+import nl.hajari.wha.service.impl.TimesheetPossibleWeeksOptionsProvider;
 import nl.hajari.wha.web.util.SecurityContextUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,9 @@ public class TimeController extends AbstractController {
 	@Autowired
 	protected DailyExpenseServiceImpl dailyExpenseService;
 
+	@Autowired
+	protected TimesheetPossibleWeeksOptionsProvider timesheetPossibleWeeksOptionsProvider;
+	
 	public boolean authorizeAccessTimesheet(Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		Timesheet timesheet = Timesheet.findTimesheet(id);
