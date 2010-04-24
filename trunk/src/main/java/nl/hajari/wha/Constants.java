@@ -7,7 +7,8 @@ public abstract class Constants {
 	public static final String ROLE_EMPLOYEE = Role.Employee.toString();
 	public static final String IMAGE_HM_LOGO = "IMAGE_HM_LOGO";
 	public static final String imageHMlogoAddress = "images/HM_100x70.jpg";
-	public static final String DATE_PATTERN_KEY = "date.pattern";	
+	public static final String DATE_PATTERN_KEY = "date.pattern";
+	public static final String DATE_FULL_PATTERN_KEY = "date.pattern.full";	
 	
 	/**
 	 * An enumerated type to hold the types of roles we have in the system.

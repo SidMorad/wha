@@ -16,6 +16,7 @@ import nl.hajari.wha.web.util.SecurityContextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("/time/**")
@@ -38,7 +39,7 @@ public class TimeController extends AbstractController {
 
 	@Autowired
 	protected TimesheetPossibleWeeksOptionsProvider timesheetPossibleWeeksOptionsProvider;
-	
+
 	public boolean authorizeAccessTimesheet(Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		Timesheet timesheet = Timesheet.findTimesheet(id);
@@ -68,6 +69,19 @@ public class TimeController extends AbstractController {
 
 	protected Long getTimesheetId(HttpServletRequest request) {
 		return (Long) request.getSession().getAttribute(Timesheet.TIMESHEET_ID);
+	}
+
+	protected void prepareOrInitializeCommonTimesheetInformation(HttpServletRequest request, ModelMap modelMap) {
+		Long employeeId = getEmployeeId(request);
+		logger.debug("Employee on the session: " + employeeId);
+		if (employeeId == null) {
+			throw new IllegalStateException("Month time sheet view requires registered emplpee. Employee ID is null.");
+		}
+		Timesheet timesheet = (Timesheet) Timesheet.findEmployeeCurrentTimesheet(employeeId).getSingleResult();
+		logger.debug("Employee Timesheet found: " + timesheet);
+		modelMap.put("dailyTimesheets", timesheet.getDailyTimesheetsSortedList());
+		modelMap.put("timesheet", timesheet);
+		modelMap.put("employee", Employee.findEmployee(employeeId));
 	}
 
 }

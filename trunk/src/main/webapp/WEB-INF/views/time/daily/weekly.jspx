@@ -34,10 +34,28 @@
         <p></p>
         <p></p>
         
+        <c:url var="action_url" value="/time/view/weekly/refresh"/>
+        <form:form action="${action_url}" modelAttribute="timesheetWeeklyFormBean" method="POST" id="refreshForm">
+        <div>
+        <table border="0">
+        <tr style="border: none;">
+        	<c:forEach items="${timesheetPossibleWeeks}" var="w">
+        		<td style="border: none;">
+	        		<form:radiobutton id="id_${w}" path="week" label="${w.value}" value="${w.key}" 
+	        			onclick="document.getElementById('refreshForm').submit()" />
+        		</td>
+        	</c:forEach>
+        </tr>
+        </table>
+        </div>
+        </form:form>
+        <p><br/></p>
+        
         <c:url var="action_url" value="/time/view/weekly/update"/>
         <form:form action="${action_url}" modelAttribute="timesheetWeeklyFormBean" method="POST">
+        <form:hidden path="week" />
         <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
-        <div>
+        <div> 
         	<table style="width:98%" border="0">
 	        	<tr>
 		        	<td>
@@ -47,28 +65,14 @@
 	        	</tr>
         	</table>
         </div>
-        <p></p>
-        <table style="width:98%">
-            <thead>
-            <tr>
-                <th width="100px">Week time</th>
+        <p><br/></p>
+        <table width="98%">
+        	<thead>
+        		<tr>
                 <th width="108px">${label_project}</th>
-                <th width="40px">Sun</th>
-                <th width="40px">Mon</th>
-                <th width="40px">Tue</th>
-                <th width="40px">Wed</th>
-                <th width="40px">Thu</th>
-                <th width="40px">Fri</th>
-                <th width="40px">Sat</th>
-            </tr>
-            </thead>
-            <tr>
-				<td>
-					<form:select cssStyle="width:90px;" id="_week" path="week">
-						<form:options items="${timesheetPossibleWeeks}" />
-					</form:select>
-					<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_week', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
-				</td>
+        		</tr>
+        	</thead>
+        	<tr>
 				<td>
 					<spring:url value="/project/list/all" var="allProjects" />
 					<form:input cssStyle="width:95%" id="_projectName" maxlength="30" path="projectName" size="0"/>
@@ -81,20 +85,31 @@
 					Spring.addDecoration(new Spring.ElementDecoration({elementId : '_projectName', widgetType: 'dijit.form.ComboBox', widgetAttrs: {id : '_projectName', name : 'projectName', value : '', store : new dojo.data.ItemFileReadStore({url:"${allProjects}"}), searchAttr : 'name', required: true}})); 
 					</script>
 				</td>
+        	</tr>
+        </table>
+        <p></p>
+        <table style="width:98%">
+            <thead>
+            <tr>
+                <c:forEach items="${weekLabels}" var="w">
+                <th width="40px">${w.value}</th>
+                </c:forEach>
+            </tr>
+            </thead>
+            <tr>
+				<c:forEach items="${weekLabels}" var="w">
 				<td>
-				</td>     
-				<td>
+					<c:if test="${w.value ne '---'}">
+	                <form:input cssStyle="width:95%" id="${w.key}" maxlength="2" path="${w.key}" size="0"/>
+	                <form:errors cssClass="errors-in-table" id="_duration_error" path="${w.key}"/>
+	                <spring:message arguments="${label_working}" code="field.invalid" var="field_invalid"/>
+	                <spring:message argumentSeparator="," arguments="${label_working},(${field_required})" code="field.simple.validation" var="field_validation"/>
+	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '${w.key}', widgetType : 'dijit.form.NumberTextBox', widgetAttrs : {constraints: {min:0, max:24},promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : false}})); </script>
+					</c:if>
+					<c:if test="${w.value eq '---'}">
+					</c:if>
 				</td>
-				<td>
-				</td>     
-				<td>
-				</td>  		
-				<td>
-				</td>  		
-				<td>
-				</td>  		
-				<td>
-				</td>  		
+				</c:forEach>
             </tr>
         </table>    
             <div class="submit" id="roo_dailytimesheet_submit">

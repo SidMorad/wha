@@ -1,6 +1,7 @@
 package nl.hajari.wha.web.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,23 +28,43 @@ privileged aspect TimeController_DailyTimesheetController {
 
 	@RequestMapping(value = "/time/view/weekly", method = RequestMethod.GET)
 	public String TimeController.prepareTimesheetWeeklyView(HttpServletRequest request, ModelMap modelMap) {
-		Long employeeId = getEmployeeId(request);
-		logger.debug("Employee on the session: " + employeeId);
-		if (employeeId == null) {
-			throw new IllegalStateException("Month time sheet view requires registered emplpee. Employee ID is null.");
-		}		
-		Timesheet timesheet = (Timesheet) Timesheet.findEmployeeCurrentTimesheet(employeeId).getSingleResult();
-		logger.debug("Employee Timesheet found: " + timesheet);
-
-		modelMap.put("timesheetWeeklyFormBean", new TimesheetWeeklyFormBean());
-		modelMap.put("dailyTimesheets", timesheet.getDailyTimesheetsSortedList());
-		modelMap.put("timesheet", timesheet);
-		modelMap.put("employee", Employee.findEmployee(employeeId));
-		modelMap.put(TimesheetPossibleWeeksOptionsProvider.TIMESHEET_POSSIBLE_WEEKS_KEY, timesheetPossibleWeeksOptionsProvider.getOptions());
+		prepareOrInitializeCommonTimesheetInformation(request, modelMap);
+		TimesheetWeeklyFormBean bean = new TimesheetWeeklyFormBean();
+		bean.setWeeks(DateUtils.getCurrentMonthWeeks());
+		modelMap.put("timesheetWeeklyFormBean", bean);
+		modelMap.put(TimesheetPossibleWeeksOptionsProvider.TIMESHEET_POSSIBLE_WEEKS_KEY,
+				timesheetPossibleWeeksOptionsProvider.buildWeeks(getFullDatePattern()));
 		return "time/daily/weekly";
 	}
-	
-	
+
+	@RequestMapping(value = "/time/view/weekly/refresh", method = RequestMethod.POST)
+	public String TimeController.refreshTimesheetWeeklyView(TimesheetWeeklyFormBean bean, HttpServletRequest request,
+			ModelMap modelMap) {
+		prepareOrInitializeCommonTimesheetInformation(request, modelMap);
+		modelMap.put(TimesheetPossibleWeeksOptionsProvider.TIMESHEET_POSSIBLE_WEEKS_KEY,
+				timesheetPossibleWeeksOptionsProvider.buildWeeks(getFullDatePattern()));
+		bean.setWeeks(DateUtils.getCurrentMonthWeeks());
+		Map<String, String> labels = timesheetPossibleWeeksOptionsProvider.buildWeekLabels(bean.getWeeks().get(
+				bean.getWeek()), getFullDatePattern());
+		modelMap.put("weekLabels", labels);
+		return "time/daily/weekly";
+	}
+
+	@RequestMapping(value = "/time/view/weekly/update", method = RequestMethod.POST)
+	public String TimeController.updateTimesheetWeekly(TimesheetWeeklyFormBean bean, BindingResult bindingResult,
+			HttpServletRequest request, ModelMap modelMap) {
+		prepareOrInitializeCommonTimesheetInformation(request, modelMap);
+		// TODO
+		// 1. find the Project reference
+		// 2. find the Week reference
+		// 3. iterate over days with proper date
+		//		3.1 if day > 0
+		//				create new daily timesheet
+		// 				save it
+		logger.warn(bean);
+		return refreshTimesheetWeeklyView(bean, request, modelMap);
+	}
+
 	@RequestMapping(value = "/time/view/month", method = RequestMethod.GET)
 	public String TimeController.prepareTimesheetMonthView(HttpServletRequest request, ModelMap modelMap) {
 		Long employeeId = getEmployeeId(request);
@@ -161,11 +182,11 @@ privileged aspect TimeController_DailyTimesheetController {
 		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(
 				timesheet.getDailyTimesheetsSortedList(), false);
 		modelMap.put("timesheetDailyReportList", jrDataSource);
-		
+
 		// Fill ProjectSubReport
 		List<DailyTimesheet> dts = dailyTimesheetService.getDailyTimesheetListForReportPerProject(timesheetId);
 		modelMap.put("ProjectSubReportData", new JRBeanCollectionDataSource(dts, false));
-		
+
 		modelMap.put("format", format);
 		modelMap.put(Constants.IMAGE_HM_LOGO, getFileFullPath(request, Constants.imageHMlogoAddress));
 		return "timesheetDailyReportList";
