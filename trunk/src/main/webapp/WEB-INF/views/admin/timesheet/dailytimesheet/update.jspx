@@ -52,6 +52,17 @@
                 <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_durationTraining_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]*\.[0-9]*', required : true}})); </script>
             </div>
             <br/>
+            <div id="roo_dailytimesheet_durationSickness">
+            	<spring:message code="label.sickness" var="label_sickness"/>
+                <label for="_durationSickness_id">${label_sickness}:</label>
+                <form:input cssStyle="width:250px" id="_durationSickness_id" maxlength="30" path="durationSickness" size="0"/>
+                <br/>
+                <form:errors cssClass="errors" id="_durationSickness_error_id" path="durationSickness"/>
+                <spring:message code="field.invalid.decimal" var="field_invalid"/>
+                <spring:message code="field.required" var="field_required"/>
+                <spring:message argumentSeparator="," arguments="${label_sickness},(${field_required})" code="field.simple.validation" var="field_validation"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_durationSickness_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]*\.[0-9]*', required : true}})); </script>
+            </div>
             <div id="roo_dailytimesheet_timesheet">
                 <c:if test="${not empty timesheets}">
                     <label for="_timesheet_id"><spring:message code="label.timesheet"/>:</label>

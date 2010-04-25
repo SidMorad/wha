@@ -27,9 +27,9 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 	protected ConstantsService constantsService;
 	
 	@Transactional(readOnly = false)
-	public DailyTimesheet createDailyTimesheet(DailyTimesheet dailyTimesheet,
+	public DailyTimesheet createDailyTimesheet(DailyTimesheet dt,
 			Long timesheetId) {
-		if (dailyTimesheet == null) {
+		if (dt == null) {
 			throw new IllegalArgumentException("A dailyTimesheet is required");
 		}
 		if (timesheetId == null) {
@@ -37,22 +37,20 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 					"Month Travel view requires current Timesheet. Timesheet ID is null.");
 		}
 		Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
-		dailyTimesheet.setTimesheet(timesheet);
+		dt.setTimesheet(timesheet);
 
 		// Check dailyTotalDuration to be positive 
-		if (dailyTimesheet.getDuration() > dailyTimesheet.getDurationOffs()) {
-			// dailyTotalDuration = duration - durationOffs
-			dailyTimesheet.setDailyTotalDuration(dailyTimesheet.getDuration()
-					- dailyTimesheet.getDurationOffs());
+		if (dt.getDuration() > dt.getDurationOffs() + dt.getDurationSickness()) {
+			// dailyTotalDuration = duration - durationOffs - durationSickness
+			dt.setDailyTotalDuration(dt.getDuration() - dt.getDurationOffs() - dt.getDurationSickness());
 		} else {
-			dailyTimesheet.setDailyTotalDuration(0f);
+			dt.setDailyTotalDuration(0f);
 		}
-		dailyTimesheet.persist();
-		dailyTimesheet.flush();
+		dt.persist();
+		dt.flush();
 		// now we update monthlyTotalDuration in timesheet entity
-		Timesheet.updateTimesheetTotalMonthly(timesheetId, DailyTimesheet
-				.findTimesheetTotalMonthly(timesheetId));
-		return dailyTimesheet;
+		Timesheet.updateTimesheetTotalMonthly(timesheetId, DailyTimesheet.findTimesheetTotalMonthly(timesheetId));
+		return dt;
 	}
 
 	@Transactional(readOnly = false)
@@ -62,26 +60,25 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 	}
 
 	@Transactional(readOnly = false)
-	public DailyTimesheet updateDailyTimesheet(DailyTimesheet dailyTimesheet) {
-		if (dailyTimesheet == null) {
+	public DailyTimesheet updateDailyTimesheet(DailyTimesheet dt) {
+		if (dt == null) {
 			throw new IllegalArgumentException("A dailytimesheet is required");
 		}
 		// Check dailyTotalDuration to be positive 
-		if (dailyTimesheet.getDuration() > dailyTimesheet.getDurationOffs()) {
-			// calculate dailyTotalDuration = duration - durationOffs
-			dailyTimesheet.setDailyTotalDuration(dailyTimesheet.getDuration()
-					- dailyTimesheet.getDurationOffs());
+		if (dt.getDuration() > dt.getDurationOffs() + dt.getDurationSickness()) {
+			// calculate dailyTotalDuration = duration - durationOffs - durationSickness
+			dt.setDailyTotalDuration(dt.getDuration() - dt.getDurationOffs() - dt.getDurationSickness());
 		} else {
-			dailyTimesheet.setDailyTotalDuration(0f);
+			dt.setDailyTotalDuration(0f);
 		}
-		dailyTimesheet.merge();
-		dailyTimesheet.flush();
+		dt.merge();
+		dt.flush();
 		// now we update monthlyTotal in Timesheet
-		Long tsId = dailyTimesheet.getTimesheet().getId();
+		Long tsId = dt.getTimesheet().getId();
 		Float total = DailyTimesheet.findTimesheetTotalMonthly(tsId);
 		logger.debug("Updating timesheet[" + tsId + "] to total [" + total + "]");
 		Timesheet.updateTimesheetTotalMonthly(tsId, total);
-		return dailyTimesheet;
+		return dt;
 	}
 
 	@Transactional(readOnly = false)
@@ -103,7 +100,7 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 		// listOfTheOnes is a list of 'project' that we already 'group by' them
 		List<Project> listOfTheOnes = new ArrayList<Project>();
 		for (DailyTimesheet dt : dailies) {
-			DailyTimesheet newDt = new DailyTimesheet(timesheet, 0f, 0f, 0f, 0f);
+			DailyTimesheet newDt = new DailyTimesheet(timesheet, 0f, 0f, 0f, 0f,0f);
 			// check if theOne is not in the list
 			Project theOne = dt.getProject();
 			if (!listOfTheOnes.contains(theOne)) {
@@ -113,6 +110,7 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 						newDt.setDuration(newDt.getDuration() + dt2.getDuration());
 						newDt.setDurationOffs(newDt.getDurationOffs() + dt2.getDurationOffs());
 						newDt.setDurationTraining(newDt.getDurationTraining() + dt2.getDurationTraining());
+						newDt.setDurationSickness(newDt.getDurationSickness() + dt2.getDurationSickness());
 						newDt.setDailyTotalDuration(newDt.getDailyTotalDuration() + dt2.getDailyTotalDuration());
 					}
 				}

@@ -3,6 +3,7 @@ package nl.hajari.wha.domain;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -40,6 +41,10 @@ public class DailyTimesheet {
 	@Column(nullable = false)
 	private Float dailyTotalDuration;
 
+	@NotNull
+	@Column(nullable = false)
+	private Float durationSickness;
+
 	@ManyToOne(targetEntity = Timesheet.class)
 	@JoinColumn(name = "timesheet_id", nullable = false)
 	private Timesheet timesheet;
@@ -53,12 +58,13 @@ public class DailyTimesheet {
 	public DailyTimesheet() {
 	}
 
-	public DailyTimesheet(Timesheet timesheet, Float duration, Float offs, Float training,
-			Float total) {
+	public DailyTimesheet(Timesheet timesheet, Float duration, Float offs,
+			Float training, Float sickness, Float total) {
 		this.timesheet = timesheet;
 		this.duration = duration;
 		this.durationOffs = offs;
 		this.durationTraining = training;
+		this.durationSickness = sickness;
 		this.dailyTotalDuration = total;
 	}
 

@@ -15,6 +15,7 @@
 	<field name="project.name" class="java.lang.String"/>
 	<field name="durationOffs" class="java.lang.Float"/>
 	<field name="durationTraining" class="java.lang.Float"/>
+	<field name="durationSickness" class="java.lang.Float"/>
 	<field name="dailyTotalDuration" class="java.lang.Float"/>
 	<field name="timesheet.employee.firstName" class="java.lang.String"/>
 	<field name="timesheet.employee.lastName" class="java.lang.String"/>
@@ -29,6 +30,9 @@
 	</variable>
 	<variable name="durationTraining_1" class="java.lang.Float" calculation="Sum">
 		<variableExpression><![CDATA[$F{durationTraining}]]></variableExpression>
+	</variable>
+	<variable name="durationSickness_1" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{durationSickness}]]></variableExpression>
 	</variable>
 	<variable name="dailyTotalDuration_1" class="java.lang.Float" calculation="Sum">
 		<variableExpression><![CDATA[$F{dailyTotalDuration}]]></variableExpression>
@@ -102,24 +106,29 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.day}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="110" y="0" width="206" height="20"/>
+				<reportElement x="110" y="0" width="180" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.project}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="326" y="0" width="61" height="20"/>
+				<reportElement x="290" y="0" width="50" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.work}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="390" y="0" width="50" height="20"/>
+				<reportElement x="340" y="0" width="50" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.offs}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="440" y="0" width="50" height="20"/>
+				<reportElement x="390" y="0" width="50" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.training}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="0" width="50" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.sickness}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="509" y="0" width="63" height="20"/>
@@ -141,29 +150,34 @@
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{dayDate}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="390" y="0" width="50" height="20"/>
+				<reportElement x="110" y="0" width="180" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{project.name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="0" width="50" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{duration}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="340" y="0" width="50" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.Float"><![CDATA[$F{durationOffs}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="440" y="0" width="50" height="20"/>
+				<reportElement x="390" y="0" width="50" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.Float"><![CDATA[$F{durationTraining}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="0" width="50" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{durationSickness}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="509" y="0" width="63" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.Float"><![CDATA[$F{dailyTotalDuration}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="326" y="0" width="61" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.Float"><![CDATA[$F{duration}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="110" y="0" width="206" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{project.name}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -173,19 +187,24 @@
 				<reportElement x="0" y="5" width="572" height="1"/>
 			</line>
 			<textField>
-				<reportElement x="326" y="9" width="61" height="20"/>
+				<reportElement x="290" y="9" width="50" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.Float"><![CDATA[$V{duration_1}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="390" y="9" width="50" height="20"/>
+				<reportElement x="340" y="9" width="50" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.Float"><![CDATA[$V{durationOffs_1}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="440" y="9" width="50" height="20"/>
+				<reportElement x="390" y="9" width="50" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.Float"><![CDATA[$V{durationTraining_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="9" width="50" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$V{durationSickness_1}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="509" y="9" width="54" height="20"/>

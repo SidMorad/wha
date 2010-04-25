@@ -49,6 +49,7 @@
 		                    <th><spring:message code="label.working"/></th>
 		                    <th><spring:message code="label.off"/></th>
 		                    <th><spring:message code="label.training"/></th>
+		                    <th><spring:message code="label.sickness"/></th>
 		                    <th><spring:message code="label.total"/></th>
 		                    <th/>
 		                    <th/>
@@ -65,6 +66,7 @@
 		                    <td>${dailytimesheet.duration}</td>
 		                    <td>${dailytimesheet.durationOffs}</td>
 		                    <td>${dailytimesheet.durationTraining}</td>
+		                    <td>${dailytimesheet.durationSickness}</td>
 		                    <td>${dailytimesheet.dailyTotalDuration}</td>
 	                        <td>
 	                            <spring:url value="/admin/timesheet/dailytimesheet/${dailytimesheet.id}" var="show_form_url"/>
@@ -99,13 +101,14 @@
 		            	<td/>
 		            	<td/>
 		            	<td/>
+		            	<td/>
 		            	<td><b>${totalMonthly}</b></td>
 		            	<td/>
 		            	<td/>
 		            	<td/>
 		            </tr>
 	                <tr class="footer">
-	                    <td colspan="9">
+	                    <td colspan="10">
 	                        <span class="new">
                                 <spring:url value="/admin/timesheet/dailytimesheet/form/${timesheet.id}" var="create_url"/>
                                 <spring:url value="/static/images/add.png" var="create_img_url"/>
@@ -149,7 +152,7 @@
 	                    </td>
 	                </tr>
 	                <tr>
-	                	<td colspan="9">
+	                	<td colspan="10">
 	                	        <spring:url value="/admin/timesheet/dailytimesheet/percustomer/report" var="form_url"/>
         						<form:form action="${form_url}" method="POST" modelAttribute="timesheetDailyReportFormBean">
 					            	<input type="hidden" name="timesheetId" value="${timesheet.id}" id="_timesheetId_id"/>

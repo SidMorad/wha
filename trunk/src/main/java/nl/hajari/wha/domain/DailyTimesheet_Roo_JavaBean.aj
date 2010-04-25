@@ -47,6 +47,14 @@ privileged aspect DailyTimesheet_Roo_JavaBean {
         this.dailyTotalDuration = dailyTotalDuration;        
     }    
     
+    public Float DailyTimesheet.getDurationSickness() {    
+        return this.durationSickness;        
+    }    
+    
+    public void DailyTimesheet.setDurationSickness(Float durationSickness) {    
+        this.durationSickness = durationSickness;        
+    }    
+    
     public Timesheet DailyTimesheet.getTimesheet() {    
         return this.timesheet;        
     }    
