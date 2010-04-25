@@ -19,6 +19,7 @@
         <spring:message code="label.off" var="label_off"/>
         <spring:message code="label.training" var="label_training"/>
         <spring:message code="label.total" var="label_total"/>   
+        <spring:message code="label.sickness" var="label_sickness"/>
         
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
         
@@ -52,17 +53,18 @@
             <thead>
             <tr>
                 <th width="100px">${label_date}</th>
-                <th width="148px">${label_project}</th>
-                <th width="59px">${label_working}</th>
-                <th width="45px">${label_off}</th>
-                <th width="56px">${label_training}</th>
-                <th width="45px">${label_total}</th>
+                <th width="140px">${label_project}</th>
+                <th width="50px">${label_working}</th>
+                <th width="40px">${label_off}</th>
+                <th width="40px">${label_training}</th>
+                <th width="40px">${label_sickness}</th>
+                <th width="40px">${label_total}</th>
                 <th width="20px"></th>
             </tr>
             </thead>
             <tr>
 				<td>
-					<form:input cssStyle="width:90%" id="_dayDate" maxlength="30" path="dayDate" size="0"/>
+					<form:input cssStyle="width:100px" id="_dayDate" path="dayDate"/>
 	                <form:errors cssClass="errors-in-table" id="_dayDate_error" path="dayDate"/>
 	                <spring:message arguments="${label_date}" code="field.invalid" var="field_invalid"/>
 	                <spring:message argumentSeparator="," arguments="${label_date},(${field_required})" code="field.simple.validation" var="field_validation"/>
@@ -72,7 +74,7 @@
 				</td>
 				<td>
 					<spring:url value="/project/list/all" var="allProjects" />
-					<form:input cssStyle="width:95%" id="_projectName" maxlength="30" path="projectName" size="0"/>
+					<form:input cssStyle="width:140px" id="_projectName" path="projectName"/>
 	                <form:errors cssClass="errors-in-table" id="_projectName_error" path="projectName"/>
 	                <spring:message arguments="${label_project}" code="field.invalid" var="field_invalid"/>
 					<script type="text/javascript">
@@ -83,29 +85,35 @@
 					</script>
 				</td>
 				<td>
-	                <form:input cssStyle="width:95%" id="_duration" maxlength="30" path="duration" size="0"/>
+	                <form:input cssStyle="width:50px" id="_duration" path="duration"/>
 	                <form:errors cssClass="errors-in-table" id="_duration_error" path="duration"/>
 	                <spring:message arguments="${label_working}" code="field.invalid" var="field_invalid"/>
 	                <spring:message argumentSeparator="," arguments="${label_working},(${field_required})" code="field.simple.validation" var="field_validation"/>
 	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_duration', widgetType : 'dijit.form.NumberTextBox', widgetAttrs : {constraints: {min:0, max:24},promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
 				</td>     
 				<td>
-	                <form:input cssStyle="width:95%" id="_durationOffs" maxlength="30" path="durationOffs" size="0"/>
+	                <form:input cssStyle="width:40px" id="_durationOffs" path="durationOffs"/>
 	                <form:errors cssClass="errors-in-table" id="_durationOffs_error" path="durationOffs"/>
 	                <spring:message arguments="${label_off}" code="field.invalid" var="field_invalid"/>
 	                <spring:message argumentSeparator="," arguments="${label_off}," code="field.simple.validation" var="field_validation"/>
 	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_durationOffs', widgetType : 'dijit.form.NumberTextBox', widgetAttrs : {constraints: {min:0, max:24},promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
 				</td>
 				<td>
-	                <form:input cssStyle="width:95%" id="_durationTraining" maxlength="30" path="durationTraining" size="0"/>
+	                <form:input cssStyle="width:40px" id="_durationTraining" path="durationTraining"/>
 	                <form:errors cssClass="errors-in-table" id="_durationTraining_error" path="durationTraining"/>
 	                <spring:message arguments="${label_training}" code="field.invalid" var="field_invalid"/>
 	                <spring:message argumentSeparator="," arguments="${label_training}," code="field.simple.validation" var="field_validation"/>
 	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_durationTraining', widgetType : 'dijit.form.NumberTextBox', widgetAttrs : {constraints: {min:0, max:24},promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
 				</td>     
 				<td>
-					-
-				</td>  		
+	                <form:input cssStyle="width:40px" id="_durationSickness" path="durationSickness"/>
+	                <form:errors cssClass="errors-in-table" id="_durationSickness_error" path="durationSickness"/>
+	                <spring:message arguments="${label_sickness}" code="field.invalid" var="field_invalid"/>
+	                <spring:message argumentSeparator="," arguments="${label_sickness}," code="field.simple.validation" var="field_validation"/>
+	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_durationSickness', widgetType : 'dijit.form.NumberTextBox', widgetAttrs : {constraints: {min:0, max:24},promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
+				</td>
+				<td align="center">-</td>  		
+				<td></td>  		
             </tr>
         </table>    
             <div class="submit" id="roo_dailytimesheet_submit">
@@ -118,11 +126,12 @@
             <thead>
 	            <tr>
 	                <th width="100px">${label_date}</th>
-	                <th width="148px">${label_project}</th>
-	                <th width="59px">${label_working}</th>
-	                <th width="45px">${label_off}</th>
-	                <th width="56px">${label_training}</th>
-	                <th width="45px">${label_total}</th>
+	                <th width="130px">${label_project}</th>
+	                <th width="50px">${label_working}</th>
+	                <th width="40px">${label_off}</th>
+	                <th width="40px">${label_training}</th>
+	                <th width="40px">${label_sickness}</th>
+	                <th width="40px">${label_total}</th>
 	                <th width="20px"></th>
 	            </tr>
             </thead>
@@ -136,6 +145,7 @@
             		<td>${dt.duration}</td>
             		<td>${dt.durationOffs}</td>
             		<td>${dt.durationTraining}</td>
+            		<td>${dt.durationSickness}</td>
             		<td align="left">${dt.dailyTotalDuration}</td>
             		<td>
             			<spring:url value="/time/view/month/delete/${dt.id}" var="delete_form_url"/>
@@ -148,6 +158,7 @@
            		</tr>
             </c:forEach>
             <tr align="right"> 
+            		<th>-</th>
             		<th>-</th>
             		<th>-</th>
             		<th>-</th>

@@ -57,6 +57,7 @@ privileged aspect AdminTimesheetController_DailyTimesheetController {
     	dailyTimesheet.setTimesheet(timesheet);
     	dailyTimesheet.setDurationOffs(0f);
     	dailyTimesheet.setDurationTraining(0f);
+    	dailyTimesheet.setDurationSickness(0f);
     	//select first day for related year and month.
     	dailyTimesheet.setDayDate(DateUtils.getFirstDateOfRelatedYearAndMonth(timesheet));
         modelMap.addAttribute("dailyTimesheet", dailyTimesheet);        
