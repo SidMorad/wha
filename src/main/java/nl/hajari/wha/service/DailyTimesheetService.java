@@ -6,7 +6,9 @@ package nl.hajari.wha.service;
 import java.util.List;
 
 import nl.hajari.wha.domain.DailyTimesheet;
+import nl.hajari.wha.domain.Project;
 import nl.hajari.wha.domain.Timesheet;
+import nl.hajari.wha.web.controller.formbean.TimesheetWeeklyFormBean;
 
 /**
  * 
@@ -52,17 +54,19 @@ public interface DailyTimesheetService {
 	 * @return
 	 */
 	boolean validateDailyHours(DailyTimesheet dailyTimesheet, Long timesheetId);
-	
+
 	/**
 	 * 
-	 * @param dts is result of getDailyTimesheetListForReportPerProject(Long timesheetId)
-	 * @param hourlyWage 
+	 * @param dts
+	 *            is result of getDailyTimesheetListForReportPerProject(Long
+	 *            timesheetId)
+	 * @param hourlyWage
 	 * @return subtotal for Invoice report
 	 */
 	Float cacluateSubtotalForInvocieReport(List<DailyTimesheet> dts, Float hourlyWage);
-	
+
 	/**
-	 * 	
+	 * 
 	 * @param amount
 	 * @return amount * VAT_RATIO
 	 */
@@ -74,5 +78,12 @@ public interface DailyTimesheetService {
 	 * @return true if succeed
 	 */
 	boolean deleteDailyTimesheetByTimesheet(Timesheet timesheet);
-	
+
+	/**
+	 * @param bean
+	 * @param timesheet
+	 * @param project
+	 */
+	void saveOrUpdateWeeklyTimesheet(TimesheetWeeklyFormBean bean, Timesheet timesheet, Project project);
+
 }

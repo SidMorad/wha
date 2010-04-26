@@ -20,13 +20,13 @@ public class TimesheetWeeklyFormBean {
 	private String projectName;
 	private Project project;
 
-	private Integer day1 = 0;
-	private Integer day2 = 0;
-	private Integer day3 = 0;
-	private Integer day4 = 0;
-	private Integer day5 = 0;
-	private Integer day6 = 0;
-	private Integer day7 = 0;
+	private Float day1 = 0f;
+	private Float day2 = 0f;
+	private Float day3 = 0f;
+	private Float day4 = 0f;
+	private Float day5 = 0f;
+	private Float day6 = 0f;
+	private Float day7 = 0f;
 
 	public Integer getWeek() {
 		return week;
@@ -52,60 +52,64 @@ public class TimesheetWeeklyFormBean {
 		this.project = project;
 	}
 
-	public Integer getDay1() {
+	public Float getDay1() {
 		return day1;
 	}
 
-	public void setDay1(Integer day1) {
+	public void setDay1(Float day1) {
 		this.day1 = day1;
 	}
 
-	public Integer getDay2() {
+	public Float getDay2() {
 		return day2;
 	}
 
-	public void setDay2(Integer day2) {
+	public void setDay2(Float day2) {
 		this.day2 = day2;
 	}
 
-	public Integer getDay3() {
+	public Float getDay3() {
 		return day3;
 	}
 
-	public void setDay3(Integer day3) {
+	public void setDay3(Float day3) {
 		this.day3 = day3;
 	}
 
-	public Integer getDay4() {
+	public Float getDay4() {
 		return day4;
 	}
 
-	public void setDay4(Integer day4) {
+	public void setDay4(Float day4) {
 		this.day4 = day4;
 	}
 
-	public Integer getDay5() {
+	public Float getDay5() {
 		return day5;
 	}
 
-	public void setDay5(Integer day5) {
+	public void setDay5(Float day5) {
 		this.day5 = day5;
 	}
 
-	public Integer getDay6() {
+	public Float getDay6() {
 		return day6;
 	}
 
-	public void setDay6(Integer day6) {
+	public void setDay6(Float day6) {
 		this.day6 = day6;
 	}
 
-	public Integer getDay7() {
+	public Float getDay7() {
 		return day7;
 	}
 
-	public void setDay7(Integer day7) {
+	public void setDay7(Float day7) {
 		this.day7 = day7;
+	}
+
+	public Float[] getDays() {
+		return new Float[] { day1, day2, day3, day4, day5, day6, day7 };
 	}
 
 	public Map<Integer, Week> getWeeks() {
@@ -118,7 +122,7 @@ public class TimesheetWeeklyFormBean {
 
 	@Override
 	public String toString() {
-		int total = day1 + day2 + day3 + day4 + day5 + day6 + day7;
+		float total = day1 + day2 + day3 + day4 + day5 + day6 + day7;
 		return "[" + total + ", " + projectName + ", " + week + " ]";
 	}
 

@@ -28,16 +28,16 @@ public class TimesheetServiceImpl extends AbstractService implements TimesheetSe
 
 	@Autowired
 	protected DailyTimesheetService dailyTimesheetService;
-	
+
 	@Autowired
 	protected DailyTravelService dailyTravelService;
-	
+
 	@Autowired
 	protected DailyExpenseService dailyExpenseService;
-	
+
 	@Autowired
 	protected InvoiceService invoiceService;
-	
+
 	@Override
 	public Timesheet load(Long id) {
 		return Timesheet.findTimesheet(id);
@@ -62,7 +62,7 @@ public class TimesheetServiceImpl extends AbstractService implements TimesheetSe
 
 	@Override
 	public Double calculateTotalAmountInvoice(Timesheet timesheet) {
-		//TODO:: 
+		// TODO::
 		// 1. Each employee should have an hourly wage
 		// 2. Compute Total expense for others
 		// 3. total travels of the month ratio
