@@ -51,18 +51,40 @@ privileged aspect TimeController_DailyTimesheetController {
 	}
 
 	@RequestMapping(value = "/time/view/weekly/update", method = RequestMethod.POST)
-	public String TimeController.updateTimesheetWeekly(TimesheetWeeklyFormBean bean, BindingResult bindingResult,
+	public String TimeController.updateTimesheetWeekly(TimesheetWeeklyFormBean bean, BindingResult result,
 			HttpServletRequest request, ModelMap modelMap) {
-		prepareOrInitializeCommonTimesheetInformation(request, modelMap);
-		// TODO
-		// 1. find the Project reference
-		// 2. find the Week reference
-		// 3. iterate over days with proper date
-		//		3.1 if day > 0
-		//				create new daily timesheet
-		// 				save it
-		logger.warn(bean);
-		return refreshTimesheetWeeklyView(bean, request, modelMap);
+		Long employeeId = getEmployeeId(request);
+		if (employeeId == null) {
+			throw new IllegalStateException("Month time sheet view requires registered emplpee. Employee ID is null.");
+		}
+		logger.debug("Processing weekly timesheet: " + bean);
+		Timesheet timesheet = (Timesheet) Timesheet.findEmployeeCurrentTimesheet(employeeId).getSingleResult();
+		String projectName = bean.getProjectName();
+		Project project = null;
+		if (StringUtils.hasText(projectName)) {
+			logger.debug("Recieved project name: " + projectName);
+			try {
+				project = projectService.loadOrCreateProject(projectName);
+			} catch (Exception e) {
+				logger.error("", e);
+				result.rejectValue("projectName", "field.invalid");
+			}
+		} else {
+			result.rejectValue("projectName", "field.required");
+		}
+		if (null == project || result.hasErrors()) {
+			prepareOrInitializeCommonTimesheetInformation(request, modelMap);
+			modelMap.put(TimesheetPossibleWeeksOptionsProvider.TIMESHEET_POSSIBLE_WEEKS_KEY,
+					timesheetPossibleWeeksOptionsProvider.buildWeeks(getFullDatePattern()));
+			bean.setWeeks(DateUtils.getCurrentMonthWeeks());
+			Map<String, String> labels = timesheetPossibleWeeksOptionsProvider.buildWeekLabels(bean.getWeeks().get(
+					bean.getWeek()), getFullDatePattern());
+			modelMap.put("weekLabels", labels);
+			return "time/daily/weekly";
+		}
+		dailyTimesheetService.saveOrUpdateWeeklyTimesheet(bean, timesheet, project);
+		logger.debug("Update a weekly timesheet [" + timesheet + "] with weekly information: " + bean);
+		return prepareTimesheetWeeklyView(request, modelMap);
 	}
 
 	@RequestMapping(value = "/time/view/month", method = RequestMethod.GET)

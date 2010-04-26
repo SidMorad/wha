@@ -53,6 +53,7 @@
         
         <c:url var="action_url" value="/time/view/weekly/update"/>
         <form:form action="${action_url}" modelAttribute="timesheetWeeklyFormBean" method="POST">
+        <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
         <form:hidden path="week" />
         <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
         <div> 

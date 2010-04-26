@@ -1,7 +1,10 @@
 package nl.hajari.wha.service.impl;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import nl.hajari.wha.domain.Constants;
 import nl.hajari.wha.domain.DailyTimesheet;
@@ -9,6 +12,10 @@ import nl.hajari.wha.domain.Project;
 import nl.hajari.wha.domain.Timesheet;
 import nl.hajari.wha.service.ConstantsService;
 import nl.hajari.wha.service.DailyTimesheetService;
+import nl.hajari.wha.web.controller.formbean.TimesheetWeeklyFormBean;
+import nl.hajari.wha.web.controller.formbean.Week;
+import nl.hajari.wha.web.util.DateUtils;
+import nl.hajari.wha.web.util.LocaleUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +32,7 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 
 	@Autowired
 	protected ConstantsService constantsService;
-	
+
 	@Transactional(readOnly = false)
 	public DailyTimesheet createDailyTimesheet(DailyTimesheet dt,
 			Long timesheetId) {
@@ -39,7 +46,7 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 		Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
 		dt.setTimesheet(timesheet);
 
-		// Check dailyTotalDuration to be positive 
+		// Check dailyTotalDuration to be positive
 		if (dt.getDuration() > dt.getDurationOffs() + dt.getDurationSickness()) {
 			// dailyTotalDuration = duration - durationOffs - durationSickness
 			dt.setDailyTotalDuration(dt.getDuration() - dt.getDurationOffs() - dt.getDurationSickness());
@@ -64,9 +71,10 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 		if (dt == null) {
 			throw new IllegalArgumentException("A dailytimesheet is required");
 		}
-		// Check dailyTotalDuration to be positive 
+		// Check dailyTotalDuration to be positive
 		if (dt.getDuration() > dt.getDurationOffs() + dt.getDurationSickness()) {
-			// calculate dailyTotalDuration = duration - durationOffs - durationSickness
+			// calculate dailyTotalDuration = duration - durationOffs -
+			// durationSickness
 			dt.setDailyTotalDuration(dt.getDuration() - dt.getDurationOffs() - dt.getDurationSickness());
 		} else {
 			dt.setDailyTotalDuration(0f);
@@ -100,7 +108,7 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 		// listOfTheOnes is a list of 'project' that we already 'group by' them
 		List<Project> listOfTheOnes = new ArrayList<Project>();
 		for (DailyTimesheet dt : dailies) {
-			DailyTimesheet newDt = new DailyTimesheet(timesheet, 0f, 0f, 0f, 0f,0f);
+			DailyTimesheet newDt = new DailyTimesheet(timesheet, 0f, 0f, 0f, 0f, 0f);
 			// check if theOne is not in the list
 			Project theOne = dt.getProject();
 			if (!listOfTheOnes.contains(theOne)) {
@@ -138,8 +146,10 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 	public Float cacluateSubtotalForInvocieReport(List<DailyTimesheet> dts, Float hourlyWage) {
 		Float totalDuration = 0f;
 		for (DailyTimesheet dailyTimesheet : dts) {
-			// Note 1: getDailyTotalDuration is actually total duration of month! for mentioned project 
-			// Note 2: we expect employees work with one project per month but we also can support more than one  
+			// Note 1: getDailyTotalDuration is actually total duration of
+			// month! for mentioned project
+			// Note 2: we expect employees work with one project per month but
+			// we also can support more than one
 			totalDuration += dailyTimesheet.getDailyTotalDuration();
 		}
 		Float subtotal = totalDuration * hourlyWage;
@@ -164,6 +174,54 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	@Transactional(readOnly = false)
+	@Override
+	public void saveOrUpdateWeeklyTimesheet(TimesheetWeeklyFormBean bean, Timesheet timesheet, Project project) {
+		Map<Integer, Week> weeks = DateUtils.getCurrentMonthWeeks();
+		Week week = weeks.get(bean.getWeek());
+		if (null == week) {
+			logger.warn("No week is selected for timesheet [" + timesheet + "] to update.");
+			return;
+		}
+		Date startDate = week.getStartDate();
+		Calendar c = Calendar.getInstance(LocaleUtils.getCurrentLocale());
+		c.setTime(startDate);
+		Float[] days = bean.getDays();
+		for (int i = 1; i <= 7; ++i) {
+			Date date = c.getTime();
+			Float working = days[i - 1];
+			if (working > 0f && date.getTime() <= week.getEndDate().getTime()) {
+				DailyTimesheet dt = findDailyTimesheet(timesheet, date);
+				if (null == dt) {
+					dt = new DailyTimesheet();
+					dt.setDayDate(date);
+					dt.setProject(project);
+					dt.setTimesheet(timesheet);
+					dt.setDuration(working);
+					dt.setDailyTotalDuration(0f);
+					dt.setDurationOffs(0f);
+					dt.setDurationSickness(0f);
+					dt.setDurationTraining(0f);
+					createDailyTimesheet(dt);
+				} else {
+					dt.setDuration(working);
+					dt.setProject(project);
+					updateDailyTimesheet(dt);
+				}
+			}
+			c.add(Calendar.DAY_OF_MONTH, 1);
+		}
+	}
+
+	private DailyTimesheet findDailyTimesheet(Timesheet timesheet, Date date) {
+		try {
+			return (DailyTimesheet) DailyTimesheet.findDailyTimesheetsByDayDateAndTimesheet(date, timesheet)
+					.getSingleResult();
+		} catch (Exception e) {
+		}
+		return null;
 	}
 
 }
