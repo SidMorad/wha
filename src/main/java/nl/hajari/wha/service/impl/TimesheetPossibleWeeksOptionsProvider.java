@@ -86,7 +86,7 @@ public class TimesheetPossibleWeeksOptionsProvider implements OptionsProvider<In
 			}
 			c.add(Calendar.DAY_OF_MONTH, 1);
 		}
-		logger.warn("Week [" + week + "] labels: " + labels);
+		logger.debug("Week [" + week + "] labels: " + labels);
 		return labels;
 	}
 

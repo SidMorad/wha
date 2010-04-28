@@ -46,13 +46,18 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 		Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
 		dt.setTimesheet(timesheet);
 
-		// Check dailyTotalDuration to be positive
-		if (dt.getDuration() > dt.getDurationOffs() + dt.getDurationSickness()) {
-			// dailyTotalDuration = duration - durationOffs - durationSickness
-			dt.setDailyTotalDuration(dt.getDuration() - dt.getDurationOffs() - dt.getDurationSickness());
-		} else {
-			dt.setDailyTotalDuration(0f);
-		}
+		/*
+		 * NEW RULE: TOTAL DAILY DURATION = WORKING HOURS we'll use other data
+		 * in future reports and calculations
+		 */
+		/*
+		 * // Check dailyTotalDuration to be positive if (dt.getDuration() >
+		 * dt.getDurationOffs() + dt.getDurationSickness()) { //
+		 * dailyTotalDuration = duration - durationOffs - durationSickness
+		 * dt.setDailyTotalDuration(dt.getDuration() - dt.getDurationOffs() -
+		 * dt.getDurationSickness()); } else { dt.setDailyTotalDuration(0f); }
+		 */
+		dt.setDailyTotalDuration(dt.getDuration());
 		dt.persist();
 		dt.flush();
 		// now we update monthlyTotalDuration in timesheet entity
@@ -71,14 +76,18 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 		if (dt == null) {
 			throw new IllegalArgumentException("A dailytimesheet is required");
 		}
-		// Check dailyTotalDuration to be positive
-		if (dt.getDuration() > dt.getDurationOffs() + dt.getDurationSickness()) {
-			// calculate dailyTotalDuration = duration - durationOffs -
-			// durationSickness
-			dt.setDailyTotalDuration(dt.getDuration() - dt.getDurationOffs() - dt.getDurationSickness());
-		} else {
-			dt.setDailyTotalDuration(0f);
-		}
+		/*
+		 * NEW RULE: TOTAL DAILY DURATION = WORKING HOURS we'll use other data
+		 * in future reports and calculations
+		 */
+		/*
+		 * // Check dailyTotalDuration to be positive if (dt.getDuration() >
+		 * dt.getDurationOffs() + dt.getDurationSickness()) { // calculate
+		 * dailyTotalDuration = duration - durationOffs - // durationSickness
+		 * dt.setDailyTotalDuration(dt.getDuration() - dt.getDurationOffs() -
+		 * dt.getDurationSickness()); } else { dt.setDailyTotalDuration(0f); }
+		 */
+		dt.setDailyTotalDuration(dt.getDuration());
 		dt.merge();
 		dt.flush();
 		// now we update monthlyTotal in Timesheet
@@ -189,10 +198,14 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 		Calendar c = Calendar.getInstance(LocaleUtils.getCurrentLocale());
 		c.setTime(startDate);
 		Float[] days = bean.getDays();
-		for (int i = 1; i <= 7; ++i) {
+		logger.debug("Processing a weekly timesheet " + bean + " with days (" + days + ")");
+		int i = c.get(Calendar.DAY_OF_WEEK);
+		for (; i <= 7; ++i) {
 			Date date = c.getTime();
 			Float working = days[i - 1];
-			if (working > 0f && date.getTime() <= week.getEndDate().getTime()) {
+			logger.debug("Checking working [" + working + "] with dates (" + date + ", " + week.getEndDate() + ")");
+			boolean inWeek = date.getTime() <= week.getEndDate().getTime();
+			if (working > 0f && inWeek) {
 				DailyTimesheet dt = findDailyTimesheet(timesheet, date);
 				if (null == dt) {
 					dt = new DailyTimesheet();
@@ -210,6 +223,22 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 					dt.setProject(project);
 					updateDailyTimesheet(dt);
 				}
+				logger.debug("Created or updated daily timesheet: " + dt);
+			} else if (working == 0f && inWeek) {
+				// maybe is updating a currently stored daily time sheet now
+				// with 0 hours so it means
+				// 1. to delete the daily time sheet!
+				// 2. leave the daily time sheet ALONE!
+
+				// we choose 2 at this moment
+
+				// this is for option 1
+				/*
+				 * DailyTimesheet dt = findDailyTimesheet(timesheet, date); if
+				 * (null != dt) { logger.debug("Deleting daily timesheet " + dt
+				 * + " since it says to have 0 working hours.");
+				 * deleteDailyTimesheet(dt); }
+				 */
 			}
 			c.add(Calendar.DAY_OF_MONTH, 1);
 		}

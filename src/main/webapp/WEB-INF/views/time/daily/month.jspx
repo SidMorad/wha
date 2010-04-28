@@ -58,7 +58,9 @@
                 <th width="40px">${label_off}</th>
                 <th width="40px">${label_training}</th>
                 <th width="40px">${label_sickness}</th>
+                <!-- 
                 <th width="40px">${label_total}</th>
+                -->
                 <th width="20px"></th>
             </tr>
             </thead>
@@ -112,7 +114,9 @@
 	                <spring:message argumentSeparator="," arguments="${label_sickness}," code="field.simple.validation" var="field_validation"/>
 	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_durationSickness', widgetType : 'dijit.form.NumberTextBox', widgetAttrs : {constraints: {min:0, max:24},promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
 				</td>
+				<!-- 
 				<td align="center">-</td>  		
+				-->
 				<td></td>  		
             </tr>
         </table>    
@@ -131,10 +135,15 @@
 	                <th width="40px">${label_off}</th>
 	                <th width="40px">${label_training}</th>
 	                <th width="40px">${label_sickness}</th>
+	                <!-- 
 	                <th width="40px">${label_total}</th>
+	                -->
 	                <th width="20px"></th>
 	            </tr>
             </thead>
+            <c:set var="totalOff" value="0" />
+            <c:set var="totalSickness" value="0" />
+            <c:set var="totalTraining" value="0" />
             <c:forEach items="${dailyTimesheets}" var="dt">
             	<tr>
             		<td>
@@ -146,7 +155,9 @@
             		<td>${dt.durationOffs}</td>
             		<td>${dt.durationTraining}</td>
             		<td>${dt.durationSickness}</td>
+            		<!-- 
             		<td align="left">${dt.dailyTotalDuration}</td>
+            		-->
             		<td>
             			<spring:url value="/time/view/month/delete/${dt.id}" var="delete_form_url"/>
                         <spring:url value="/static/images/delete.png" var="delete_image_url"/>
@@ -156,15 +167,20 @@
                         </form:form>
             		</td>
            		</tr>
+           		<c:set var="totalOff" value="${totalOff + dt.durationOffs}" />
+           		<c:set var="totalTraining" value="${totalTraining + dt.durationTraining}" />
+           		<c:set var="totalSickness" value="${totalSickness + dt.durationSickness}" />
             </c:forEach>
             <tr align="right"> 
             		<th>-</th>
-            		<th>-</th>
-            		<th>-</th>
-            		<th>-</th>
-            		<th>-</th>
-            		<th>-</th>
-            		<th align="right"><span style="text-align: right"><b>${timesheet.monthlyTotal}</b></span></th>
+            		<th><span style="font-size: 13px;">${label_total}:</span></th>
+            		<th><span style="font-size: 13px;"><b>${timesheet.monthlyTotal}</b></span></th>
+            		<th><span style="font-size: 13px;"><b>${totalOff}</b></span></th>
+            		<th><span style="font-size: 13px;"><b>${totalTraining}</b></span></th>
+            		<th><span style="font-size: 13px;"><b>${totalSickness}</b></span></th>
+            		<!-- 
+            		<th></th>
+            		-->
             		<th></th>
             </tr>
         </table>

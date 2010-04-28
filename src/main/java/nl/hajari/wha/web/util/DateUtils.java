@@ -49,7 +49,7 @@ public class DateUtils {
 	}
 
 	public static String formatDate(Date date, String pattern) {
-		SimpleDateFormat format = new SimpleDateFormat(pattern);
+		SimpleDateFormat format = new SimpleDateFormat(pattern, getCurrentLocale());
 		return format.format(date);
 	}
 
@@ -61,22 +61,6 @@ public class DateUtils {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(timesheet.getSheetYear(), timesheet.getSheetMonth(), 1);
 		return calendar.getTime();
-	}
-
-	public static String getWeek(int i) {
-		// TODO::return correct values!
-		Calendar calendar = Calendar.getInstance();
-		int currentMonth = calendar.get(Calendar.MONTH);
-		if (i == 1) {
-			return " 1-" + currentMonth + " - " + " 7-" + currentMonth;
-		} else if (i == 2) {
-			return " 8-" + currentMonth + " - " + "15-" + currentMonth;
-		} else if (i == 3) {
-			return "16-" + currentMonth + " - " + "23-" + currentMonth;
-		} else if (i == 4) {
-			return "24-" + currentMonth + " - " + "30-" + currentMonth;
-		}
-		return null;
 	}
 
 	public static Map<Integer, Week> getCurrentMonthWeeks() {
