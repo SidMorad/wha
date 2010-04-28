@@ -55,7 +55,6 @@
         <form:form action="${action_url}" modelAttribute="timesheetWeeklyFormBean" method="POST">
         <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
         <form:hidden path="week" />
-        <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
         <div> 
         	<table style="width:98%" border="0">
 	        	<tr>
@@ -127,10 +126,16 @@
 	                <th width="59px">${label_working}</th>
 	                <th width="45px">${label_off}</th>
 	                <th width="56px">${label_training}</th>
+	                <th width="40px">${label_sickness}</th>
+	                <!-- 
 	                <th width="45px">${label_total}</th>
+	                -->
 	                <th width="20px"></th>
 	            </tr>
             </thead>
+            <c:set var="totalOff" value="0" />
+            <c:set var="totalSickness" value="0" />
+            <c:set var="totalTraining" value="0" />
             <c:forEach items="${dailyTimesheets}" var="dt">
             	<tr>
             		<td>
@@ -141,7 +146,10 @@
             		<td>${dt.duration}</td>
             		<td>${dt.durationOffs}</td>
             		<td>${dt.durationTraining}</td>
+            		<td>${dt.durationSickness}</td>
+            		<!-- 
             		<td align="left">${dt.dailyTotalDuration}</td>
+            		-->
             		<td>
             			<spring:url value="/time/view/month/delete/${dt.id}" var="delete_form_url"/>
                         <spring:url value="/static/images/delete.png" var="delete_image_url"/>
@@ -151,14 +159,20 @@
                         </form:form>
             		</td>
            		</tr>
+	       		<c:set var="totalOff" value="${totalOff + dt.durationOffs}" />
+	       		<c:set var="totalTraining" value="${totalTraining + dt.durationTraining}" />
+	       		<c:set var="totalSickness" value="${totalSickness + dt.durationSickness}" />
             </c:forEach>
             <tr align="right"> 
             		<th>-</th>
-            		<th>-</th>
-            		<th>-</th>
-            		<th>-</th>
-            		<th>-</th>
-            		<th align="right"><span style="text-align: right"><b>${timesheet.monthlyTotal}</b></span></th>
+            		<th><span style="font-size: 13px;">${label_total}:</span></th>
+            		<th><span style="font-size: 13px;"><b>${timesheet.monthlyTotal}</b></span></th>
+            		<th><span style="font-size: 13px;"><b>${totalOff}</b></span></th>
+            		<th><span style="font-size: 13px;"><b>${totalTraining}</b></span></th>
+            		<th><span style="font-size: 13px;"><b>${totalSickness}</b></span></th>
+            		<!-- 
+            		<th></th>
+            		-->
             		<th></th>
             </tr>
         </table>

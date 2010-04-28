@@ -33,6 +33,8 @@
             <spring:message arguments="${entity_label}" code="entity.not.found.single"/>
         </c:if>
     </div>
+    
+    <spring:message code="label.total" var="label_total"/>   
 
     <c:if test="${not empty timesheet}">
 		<div id="_title_daily_div" style="width: 100%">
@@ -50,13 +52,18 @@
 		                    <th><spring:message code="label.off"/></th>
 		                    <th><spring:message code="label.training"/></th>
 		                    <th><spring:message code="label.sickness"/></th>
+		                    <!-- 
 		                    <th><spring:message code="label.total"/></th>
+		                    -->
 		                    <th/>
 		                    <th/>
 		                    <th/>
 		                </tr>
 		            </thead>
 		            <c:set var="totalMonthly" value="0" />	
+		            <c:set var="totalOff" value="0" />	
+		            <c:set var="totalTraining" value="0" />	
+		            <c:set var="totalSickness" value="0" />	
 		            <c:forEach items="${timesheet.dailyTimesheetsSortedList}" var="dailytimesheet">
 		                <tr>
 		                    <td>
@@ -67,7 +74,9 @@
 		                    <td>${dailytimesheet.durationOffs}</td>
 		                    <td>${dailytimesheet.durationTraining}</td>
 		                    <td>${dailytimesheet.durationSickness}</td>
+		                    <!-- 
 		                    <td>${dailytimesheet.dailyTotalDuration}</td>
+		                    -->
 	                        <td>
 	                            <spring:url value="/admin/timesheet/dailytimesheet/${dailytimesheet.id}" var="show_form_url"/>
 	                            <spring:url value="/static/images/show.png" var="show_image_url"/>
@@ -93,19 +102,24 @@
 	                            </form:form>
 	                        </td>
 		                </tr>
-		                <c:set var="totalMonthly" value="${totalMonthly + dailytimesheet.dailyTotalDuration}"/>
+		                <c:set var="totalMonthly" value="${totalMonthly + dailytimesheet.duration}"/>
+		                <c:set var="totalOff" value="${totalOff + dailytimesheet.durationOffs}"/>
+		                <c:set var="totalTraining" value="${totalTraining + dailytimesheet.durationTraining}"/>
+		                <c:set var="totalSickness" value="${totalSickness + dailytimesheet.durationSickness}"/>
 		            </c:forEach>
 		            <tr>
-		            	<td/>
-		            	<td/>
-		            	<td/>
-		            	<td/>
-		            	<td/>
-		            	<td/>
+		            	<th />
+		            	<th><span style="font-size: 13px;">${label_total}:</span></th>
+		            	<th><span style="font-size: 13px;"><b>${totalMonthly}</b></span></th>
+		            	<th><span style="font-size: 13px;"><b>${totalOff}</b></span></th>
+		            	<th><span style="font-size: 13px;"><b>${totalTraining}</b></span></th>
+		            	<th><span style="font-size: 13px;"><b>${totalSickness}</b></span></th>
+		            	<!-- 
 		            	<td><b>${totalMonthly}</b></td>
-		            	<td/>
-		            	<td/>
-		            	<td/>
+		            	-->
+		            	<th/>
+		            	<th/>
+		            	<th/>
 		            </tr>
 	                <tr class="footer">
 	                    <td colspan="10">
