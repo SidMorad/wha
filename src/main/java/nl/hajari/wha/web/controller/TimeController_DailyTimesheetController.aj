@@ -46,6 +46,7 @@ privileged aspect TimeController_DailyTimesheetController {
 		bean.setWeeks(DateUtils.getCurrentMonthWeeks());
 		Map<String, String> labels = timesheetPossibleWeeksOptionsProvider.buildWeekLabels(bean.getWeeks().get(
 				bean.getWeek()), getFullDatePattern());
+		logger.debug("Week day labels for week [" + bean.getWeek() + "]: " + labels);
 		modelMap.put("weekLabels", labels);
 		return "time/daily/weekly";
 	}

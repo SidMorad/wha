@@ -17,7 +17,7 @@ function addDateDecoration(eid, pm, im, isRequired, dp) {
 			promptMessage : pm,
 			invalidMessage : im,
 			required : isRequired,
-			datePattern : dp,
+			datePattern : dp
 			//value : dojo.date.locale.parse(dojo.byId(eid).value, {selector : 'date', datePattern : dp, locale: djConfig.locale}),
 		}
 	}));
