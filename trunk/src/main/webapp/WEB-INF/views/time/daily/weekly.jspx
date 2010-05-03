@@ -41,8 +41,8 @@
         <tr style="border: none;">
         	<c:forEach items="${timesheetPossibleWeeks}" var="w">
         		<td style="border: none;">
-	        		<form:radiobutton id="id_${w}" path="week" label="${w.value}" value="${w.key}" 
-	        			onclick="document.getElementById('refreshForm').submit()" />
+	        		<form:radiobutton id="id_radio_${w.key}" path="week" label="${w.value}" value="${w.key}" 
+	        			onclick="this.form.submit()" />
         		</td>
         	</c:forEach>
         </tr>
