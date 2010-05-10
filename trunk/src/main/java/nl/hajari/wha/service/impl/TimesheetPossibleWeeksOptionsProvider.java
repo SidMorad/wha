@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import nl.hajari.wha.Constants;
 import nl.hajari.wha.service.OptionsProvider;
 import nl.hajari.wha.web.controller.formbean.Week;
 import nl.hajari.wha.web.util.DateUtils;
@@ -73,20 +74,24 @@ public class TimesheetPossibleWeeksOptionsProvider implements OptionsProvider<In
 		Calendar c = Calendar.getInstance(LocaleUtils.getCurrentLocale());
 		c.setTime(week.getStartDate());
 		int day = c.get(Calendar.DAY_OF_WEEK);
-		if (day != Calendar.SUNDAY) {
-			for (int i = 1; i < day; ++i) {
+		if (day != Constants.WEEK_FIRST_DAY) {
+			for (int i = Constants.WEEK_FIRST_DAY; i < day; ++i) {
 				labels.put("day" + i, "---");
 			}
 		}
-		for (int i = day; i <= 7; ++i) {
+		for (int i = day, count = 1; count <= 7; ++count) {
 			if (c.getTime().getTime() <= week.getEndDate().getTime()) {
 				labels.put("day" + i, DateUtils.formatDate(c.getTime(), datePattern));
 			} else {
 				labels.put("day" + i, "---");
 			}
 			c.add(Calendar.DAY_OF_MONTH, 1);
+			++i;
+			if (7 < i) {
+				i = 1;
+			}
 		}
-		logger.debug("Week [" + week + "] labels: " + labels);
+		logger.warn("Week [" + week + "] labels: " + labels);
 		return labels;
 	}
 

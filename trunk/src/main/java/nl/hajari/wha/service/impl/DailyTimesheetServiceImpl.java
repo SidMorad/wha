@@ -1,6 +1,7 @@
 package nl.hajari.wha.service.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -198,9 +199,9 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 		Calendar c = Calendar.getInstance(LocaleUtils.getCurrentLocale());
 		c.setTime(startDate);
 		Float[] days = bean.getDays();
-		logger.debug("Processing a weekly timesheet " + bean + " with days (" + days + ")");
+		logger.warn("Processing a weekly timesheet " + bean + " with days (" + Arrays.toString(days) + ")");
 		int i = c.get(Calendar.DAY_OF_WEEK);
-		for (; i <= 7; ++i) {
+		for (int count = 1; count <= 7; ++count) {
 			Date date = c.getTime();
 			Float working = days[i - 1];
 			logger.debug("Checking working [" + working + "] with dates (" + date + ", " + week.getEndDate() + ")");
@@ -241,6 +242,10 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 				 */
 			}
 			c.add(Calendar.DAY_OF_MONTH, 1);
+			++i;
+			if (7 < i) {
+				i = 1;
+			}
 		}
 	}
 

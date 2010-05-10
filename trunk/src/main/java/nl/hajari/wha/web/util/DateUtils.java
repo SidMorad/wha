@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 
+import nl.hajari.wha.Constants;
 import nl.hajari.wha.domain.Timesheet;
 import nl.hajari.wha.web.controller.formbean.Week;
 
@@ -67,17 +68,20 @@ public class DateUtils {
 		Map<Integer, Week> weeks = new ListOrderedMap();
 
 		Calendar c = Calendar.getInstance(getCurrentLocale());
-		c.setFirstDayOfWeek(Calendar.SUNDAY);
+		c.setFirstDayOfWeek(Constants.WEEK_FIRST_DAY);
 		c.setTime(new Date());
 		c.set(Calendar.DAY_OF_MONTH, 1);
+		
+		int delta = Constants.WEEK_FIRST_DAY - Calendar.SUNDAY;
+		int relativeWeekDays = 7 - Constants.WEEK_FIRST_DAY;
 
 		Week week1 = new Week();
 		week1.setStartDate(c.getTime());
-		if (c.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
-			c.add(Calendar.DAY_OF_MONTH, 6);
+		if (c.get(Calendar.DAY_OF_WEEK) == Constants.WEEK_FIRST_DAY) {
+			c.add(Calendar.DAY_OF_MONTH, relativeWeekDays);
 			week1.setEndDate(c.getTime());
 		} else {
-			c.add(Calendar.DAY_OF_MONTH, (7 - c.get(Calendar.DAY_OF_WEEK)));
+			c.add(Calendar.DAY_OF_MONTH, ((7 + delta) - c.get(Calendar.DAY_OF_WEEK)));
 			week1.setEndDate(c.getTime());
 		}
 		weeks.put(1, week1);
@@ -126,6 +130,22 @@ public class DateUtils {
 			weeks.put(5, week5);
 		}
 
+		dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
+		if (dayOfMonth < maxMonthDays) {
+			Week week6 = new Week();
+			c.add(Calendar.DAY_OF_MONTH, 1);
+			week6.setStartDate(c.getTime());
+			dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
+			if (dayOfMonth + 6 <= maxMonthDays) {
+				c.add(Calendar.DAY_OF_MONTH, 6);
+				week6.setEndDate(c.getTime());
+			} else {
+				c.add(Calendar.DAY_OF_MONTH, maxMonthDays - dayOfMonth);
+				week6.setEndDate(c.getTime());
+			}
+			weeks.put(6, week6);
+		}
+		
 		return weeks;
 	}
 

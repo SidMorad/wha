@@ -1,5 +1,7 @@
 package nl.hajari.wha;
 
+import java.util.Calendar;
+
 public abstract class Constants {
 
 	public static final String ROLE_PREFIX = "ROLE_";
@@ -9,6 +11,7 @@ public abstract class Constants {
 	public static final String imageHMlogoAddress = "images/HM_100x70.jpg";
 	public static final String DATE_PATTERN_KEY = "date.pattern";
 	public static final String DATE_FULL_PATTERN_KEY = "date.pattern.full";	
+	public static final int WEEK_FIRST_DAY = Calendar.MONDAY;
 	
 	/**
 	 * An enumerated type to hold the types of roles we have in the system.
