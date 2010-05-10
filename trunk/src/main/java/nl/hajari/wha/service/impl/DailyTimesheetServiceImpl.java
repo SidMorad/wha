@@ -13,6 +13,7 @@ import nl.hajari.wha.domain.Project;
 import nl.hajari.wha.domain.Timesheet;
 import nl.hajari.wha.service.ConstantsService;
 import nl.hajari.wha.service.DailyTimesheetService;
+import nl.hajari.wha.service.ProjectService;
 import nl.hajari.wha.web.controller.formbean.TimesheetWeeklyFormBean;
 import nl.hajari.wha.web.controller.formbean.Week;
 import nl.hajari.wha.web.util.DateUtils;
@@ -33,6 +34,9 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 
 	@Autowired
 	protected ConstantsService constantsService;
+
+	@Autowired
+	protected ProjectService projectService;
 
 	@Transactional(readOnly = false)
 	public DailyTimesheet createDailyTimesheet(DailyTimesheet dt,
@@ -58,6 +62,7 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 		 * dt.setDailyTotalDuration(dt.getDuration() - dt.getDurationOffs() -
 		 * dt.getDurationSickness()); } else { dt.setDailyTotalDuration(0f); }
 		 */
+		refineDailyTimesheetBasedOnProject(dt);
 		dt.setDailyTotalDuration(dt.getDuration());
 		dt.persist();
 		dt.flush();
@@ -256,6 +261,53 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 		} catch (Exception e) {
 		}
 		return null;
+	}
+
+	private void refineDailyTimesheetBasedOnProject(DailyTimesheet dt) {
+		Float duration = dt.getDuration();
+		Float offs = dt.getDurationOffs();
+		Float sickness = dt.getDurationSickness();
+		Float training = dt.getDurationTraining();
+		Project p = dt.getProject();
+		Project defaultOffTimeProject = projectService.getDefaultOffTimeProject();
+		Project defaultSicknessProject = projectService.getDefaultSicknessProject();
+		if (!p.equals(defaultOffTimeProject) && !p.equals(defaultSicknessProject)) {
+			return;
+		}
+		if (p.equals(defaultSicknessProject)) {
+			if (sickness == 0f) {
+				if (offs > 0) {
+					dt.setDurationSickness(offs);
+				}
+				if (training > 0) {
+					dt.setDurationSickness(training);
+				}
+				if (duration > 0) {
+					dt.setDurationSickness(duration);
+				}
+			}
+			dt.setDuration(0f);
+			dt.setDurationOffs(0f);
+			dt.setDurationTraining(0f);
+			return;
+		}
+		if (p.equals(defaultOffTimeProject)) {
+			if (offs == 0f) {
+				if (sickness > 0) {
+					dt.setDurationOffs(sickness);
+				}
+				if (training > 0) {
+					dt.setDurationOffs(training);
+				}
+				if (duration > 0) {
+					dt.setDurationOffs(duration);
+				}
+			}
+			dt.setDuration(0f);
+			dt.setDurationSickness(0f);
+			dt.setDurationTraining(0f);
+			return;
+		}
 	}
 
 }

@@ -31,4 +31,14 @@ public interface ProjectService {
 	 */
 	Project loadOrCreateProject(String name);
 
+	/**
+	 * @return
+	 */
+	Project getDefaultOffTimeProject();
+
+	/**
+	 * @return
+	 */
+	Project getDefaultSicknessProject();
+
 }
