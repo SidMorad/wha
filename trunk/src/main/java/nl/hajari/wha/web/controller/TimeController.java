@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.Timesheet;
 import nl.hajari.wha.domain.User;
+import nl.hajari.wha.service.DailyTravelService;
 import nl.hajari.wha.service.impl.CustomerServiceImpl;
 import nl.hajari.wha.service.impl.DailyExpenseServiceImpl;
 import nl.hajari.wha.service.impl.DailyTimesheetServiceImpl;
@@ -29,13 +30,16 @@ public class TimeController extends AbstractController {
 	protected DailyTimesheetServiceImpl dailyTimesheetService;
 
 	@Autowired
+	protected DailyExpenseServiceImpl dailyExpenseService;
+	
+	@Autowired
+	protected DailyTravelService dailyTravelService;
+	
+	@Autowired
 	protected ProjectServiceImpl projectService;
 
 	@Autowired
 	protected CustomerServiceImpl customerService;
-
-	@Autowired
-	protected DailyExpenseServiceImpl dailyExpenseService;
 
 	@Autowired
 	protected TimesheetPossibleWeeksOptionsProvider timesheetPossibleWeeksOptionsProvider;
@@ -84,4 +88,17 @@ public class TimeController extends AbstractController {
 		modelMap.put("employee", Employee.findEmployee(employeeId));
 	}
 
+	protected void prepareOrInitializeCommonTimesheetTravelsInformation(HttpServletRequest request, ModelMap modelMap) {
+		Long employeeId = getEmployeeId(request);
+		logger.debug("Employee on the session: " + employeeId);
+		if (employeeId == null) {
+			throw new IllegalStateException("Month time sheet view requires registered emplpee. Employee ID is null.");
+		}
+		Timesheet timesheet = (Timesheet) Timesheet.findEmployeeCurrentTimesheet(employeeId).getSingleResult();
+		logger.debug("Employee Timesheet found: " + timesheet);
+		modelMap.put("timesheet", timesheet);
+		modelMap.put("dailyTravels", timesheet.getDailyTravelsSortedList());
+		modelMap.put("employee", Employee.findEmployee(employeeId));
+	}
+	
 }

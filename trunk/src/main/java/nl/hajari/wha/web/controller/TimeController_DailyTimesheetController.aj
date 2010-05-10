@@ -84,7 +84,7 @@ privileged aspect TimeController_DailyTimesheetController {
 			return "time/daily/weekly";
 		}
 		dailyTimesheetService.saveOrUpdateWeeklyTimesheet(bean, timesheet, project);
-		logger.debug("Update a weekly timesheet [" + timesheet + "] with weekly information: " + bean);
+		logger.debug("Updated a weekly timesheet [" + timesheet + "] with weekly information: " + bean);
 		return prepareTimesheetWeeklyView(request, modelMap);
 	}
 

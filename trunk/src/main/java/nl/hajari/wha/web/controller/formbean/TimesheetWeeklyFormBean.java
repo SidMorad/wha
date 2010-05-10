@@ -15,10 +15,17 @@ import nl.hajari.wha.domain.Project;
 public class TimesheetWeeklyFormBean {
 
 	private Map<Integer, Week> weeks;
-
 	private Integer week;
+
+	// Timesheet
 	private String projectName;
 	private Project project;
+
+	// Travel
+	private String origin;
+	private String destination;
+	private boolean withReturn = false;
+	private String comment;
 
 	private Float day1 = 0f;
 	private Float day2 = 0f;
@@ -120,10 +127,42 @@ public class TimesheetWeeklyFormBean {
 		this.weeks = weeks;
 	}
 
+	public String getOrigin() {
+		return origin;
+	}
+
+	public void setOrigin(String origin) {
+		this.origin = origin;
+	}
+
+	public String getDestination() {
+		return destination;
+	}
+
+	public void setDestination(String destination) {
+		this.destination = destination;
+	}
+
+	public boolean getWithReturn() {
+		return withReturn;
+	}
+
+	public void setWithReturn(boolean withReturn) {
+		this.withReturn = withReturn;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
 	@Override
 	public String toString() {
 		float total = day1 + day2 + day3 + day4 + day5 + day6 + day7;
-		return "[" + total + ", " + projectName + ", " + week + " ]";
+		return "[" + total + ", " + week + " ]";
 	}
 
 }

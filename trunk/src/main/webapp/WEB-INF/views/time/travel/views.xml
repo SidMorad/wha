@@ -4,4 +4,7 @@
     <definition extends="default" name="time/travel/month">
         <put-attribute name="body" value="/WEB-INF/views/time/travel/month.jspx"/>
     </definition>
+    <definition extends="default" name="time/travel/weekly">
+        <put-attribute name="body" value="/WEB-INF/views/time/travel/weekly.jspx"/>
+    </definition>
 </tiles-definitions>

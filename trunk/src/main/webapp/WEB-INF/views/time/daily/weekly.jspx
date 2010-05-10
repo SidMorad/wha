@@ -34,6 +34,18 @@
         <p></p>
         <p></p>
         
+        <div> 
+        	<table style="width:98%" border="0">
+	        	<tr>
+		        	<td>
+			        	<span style="float: left; font-weight:bolder; font-size: larger;">${timesheet.description}</span>
+			        	<span style="float: right; font-weight:bolder; font-size: larger;">${employee}</span>
+		        	</td>
+	        	</tr>
+        	</table>
+        </div>
+        <p><br/></p>
+        
         <c:url var="action_url" value="/time/view/weekly/refresh"/>
         <form:form action="${action_url}" modelAttribute="timesheetWeeklyFormBean" method="POST" id="refreshForm">
         <div>
@@ -49,23 +61,11 @@
         </table>
         </div>
         </form:form>
-        <p><br/></p>
         
         <c:url var="action_url" value="/time/view/weekly/update"/>
         <form:form action="${action_url}" modelAttribute="timesheetWeeklyFormBean" method="POST">
         <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
         <form:hidden path="week" />
-        <div> 
-        	<table style="width:98%" border="0">
-	        	<tr>
-		        	<td>
-			        	<span style="float: left; font-weight:bolder; font-size: larger;">${timesheet.description}</span>
-			        	<span style="float: right; font-weight:bolder; font-size: larger;">${employee}</span>
-		        	</td>
-	        	</tr>
-        	</table>
-        </div>
-        <p><br/></p>
         <table width="98%">
         	<thead>
         		<tr>

@@ -52,7 +52,9 @@ public class AbstractController implements MessageSourceAware {
 	}
 
 	protected Locale getLocale() {
-		return LocaleUtils.getCurrentLocale();
+		Locale locale = LocaleUtils.getCurrentLocale();
+		logger.debug("Current locale: " + locale);
+		return locale;
 	}
 
 	protected String getDatePattern() {
