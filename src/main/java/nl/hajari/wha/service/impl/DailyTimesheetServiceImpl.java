@@ -199,7 +199,7 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 		Calendar c = Calendar.getInstance(LocaleUtils.getCurrentLocale());
 		c.setTime(startDate);
 		Float[] days = bean.getDays();
-		logger.warn("Processing a weekly timesheet " + bean + " with days (" + Arrays.toString(days) + ")");
+		logger.debug("Processing a weekly timesheet " + bean + " with days (" + Arrays.toString(days) + ")");
 		int i = c.get(Calendar.DAY_OF_WEEK);
 		for (int count = 1; count <= 7; ++count) {
 			Date date = c.getTime();

@@ -1,5 +1,6 @@
 package nl.hajari.wha.web.controller;
 
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,9 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import nl.hajari.wha.Constants;
 import nl.hajari.wha.domain.DailyTravel;
 import nl.hajari.wha.domain.Timesheet;
+import nl.hajari.wha.service.impl.TimesheetPossibleWeeksOptionsProvider;
+import nl.hajari.wha.web.controller.formbean.TimesheetWeeklyFormBean;
+import nl.hajari.wha.web.util.DateUtils;
 
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -22,6 +26,45 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author <a href="mailto:saeid3@gmail.com">Saeid Moradi</a>
  **/
 privileged aspect TimeController_DailyTravelController {
+	
+	@RequestMapping(value = "/time/travel/weekly", method = RequestMethod.GET)
+	public String TimeController.prepareTravelWeeklyView(HttpServletRequest request, ModelMap modelMap) {
+		prepareOrInitializeCommonTimesheetTravelsInformation(request, modelMap);
+		TimesheetWeeklyFormBean bean = new TimesheetWeeklyFormBean();
+		bean.setWeeks(DateUtils.getCurrentMonthWeeks());
+		modelMap.put("timesheetWeeklyFormBean", bean);
+		modelMap.put(TimesheetPossibleWeeksOptionsProvider.TIMESHEET_POSSIBLE_WEEKS_KEY,
+				timesheetPossibleWeeksOptionsProvider.buildWeeks(getFullDatePattern()));
+		return "time/travel/weekly";
+	}
+	
+	@RequestMapping(value = "/time/travel/weekly/refresh", method = RequestMethod.POST)
+	public String TimeController.refreshTravelWeeklyView(TimesheetWeeklyFormBean bean, HttpServletRequest request,
+			ModelMap modelMap) {
+		prepareOrInitializeCommonTimesheetTravelsInformation(request, modelMap);
+		modelMap.put(TimesheetPossibleWeeksOptionsProvider.TIMESHEET_POSSIBLE_WEEKS_KEY,
+				timesheetPossibleWeeksOptionsProvider.buildWeeks(getFullDatePattern()));
+		bean.setWeeks(DateUtils.getCurrentMonthWeeks());
+		Map<String, String> labels = timesheetPossibleWeeksOptionsProvider.buildWeekLabels(bean.getWeeks().get(
+				bean.getWeek()), getFullDatePattern());
+		logger.debug("Week day labels for week [" + bean.getWeek() + "]: " + labels);
+		modelMap.put("weekLabels", labels);
+		return "time/travel/weekly";
+	}
+	
+	@RequestMapping(value = "/time/travel/weekly/update", method = RequestMethod.POST)
+	public String TimeController.updateTravelWeekly(TimesheetWeeklyFormBean bean, BindingResult result,
+			HttpServletRequest request, ModelMap modelMap) {
+		Long employeeId = getEmployeeId(request);
+		if (employeeId == null) {
+			throw new IllegalStateException("Month time sheet view requires registered emplpee. Employee ID is null.");
+		}
+		logger.debug("Processing weekly travels: " + bean);
+		Timesheet timesheet = (Timesheet) Timesheet.findEmployeeCurrentTimesheet(employeeId).getSingleResult();
+		dailyTravelService.saveOrUpdateWeeklyTravels(bean, timesheet);
+		logger.debug("Updated weekly travels [" + timesheet + "] with weekly information: " + bean);
+		return prepareTravelWeeklyView(request, modelMap);
+	}
 
 	@RequestMapping(value = "/time/travel", method = RequestMethod.GET)
 	public String TimeController.prepareTravelMonthView(HttpServletRequest request, ModelMap modelMap) {
