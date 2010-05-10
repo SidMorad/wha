@@ -103,6 +103,7 @@ privileged aspect TimeController_DailyTimesheetController {
 		dailyTimesheet.setDurationOffs(0f);
 		dailyTimesheet.setDurationTraining(0f);
 		dailyTimesheet.setDurationSickness(0f);
+		dailyTimesheet.setDuration(0f);
 		if (modelMap.containsAttribute(WORKING_DAILY_TIMESHEET_KEY)) {
 			DailyTimesheet current = (DailyTimesheet) modelMap.get(WORKING_DAILY_TIMESHEET_KEY);
 			dailyTimesheet.setDayDate(current.getDayDate());
