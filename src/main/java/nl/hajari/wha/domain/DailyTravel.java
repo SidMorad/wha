@@ -18,7 +18,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 @Entity
 @RooJavaBean
 @RooToString
-@RooEntity(finders = { "findDailyTravelsByTimesheet" })
+@RooEntity(finders = { "findDailyTravelsByTimesheet","findDailyTravelsByDayDateAndTimesheet" })
 public class DailyTravel {
 
     @NotNull

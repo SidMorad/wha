@@ -1,0 +1,56 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
+    <script type="text/javascript">dojo.require('dijit.TitlePane');</script>
+    <div id="_title_div">
+        <spring:message code="label.bizlog" var="entity_label"/>
+        <spring:message arguments="${entity_label}" code="entity.show" var="title_msg"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
+        <c:if test="${not empty bizLog}">
+            <div id="roo_bizLog_time">
+                <label for="_time_id">Time:</label>
+                <div class="box" id="_time_id">
+                    <fmt:formatDate pattern="${datePattern}" value="${bizLog.time}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_bizLog_details">
+                <label for="_details_id">Details:</label>
+                <div class="box" id="_details_id">
+                    <c:out value="${bizLog.details}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_bizLog_username">
+                <label for="_username_id">Username:</label>
+                <div class="box" id="_username_id">
+                    <c:out value="${bizLog.username}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_bizLog_user">
+                <label for="_user_id">User:</label>
+                <div class="box" id="_user_id">
+                    <c:out value="${bizLog.user}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_bizLog_employee">
+                <label for="_employee_id">Employee:</label>
+                <div class="box" id="_employee_id">
+                    <c:out value="${bizLog.employee}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_bizLog_timesheet">
+                <label for="_timesheet_id">Timesheet:</label>
+                <div class="box" id="_timesheet_id">
+                    <c:out value="${bizLog.timesheet}"/>
+                </div>
+            </div>
+            <br/>
+        </c:if>
+        <c:if test="${empty bizLog}">
+            <spring:message arguments="${entity_label}" code="entity.not.found.single"/>
+        </c:if>
+    </div>
+</div>
