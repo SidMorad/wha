@@ -9,6 +9,7 @@ import nl.hajari.wha.domain.Invoice;
 import nl.hajari.wha.domain.InvoiceType;
 import nl.hajari.wha.domain.Timesheet;
 import nl.hajari.wha.service.InvoiceService;
+import nl.hajari.wha.web.util.SecurityContextUtils;
 
 import org.springframework.stereotype.Service;
 
@@ -41,13 +42,13 @@ public class InvoiceServiceImpl extends AbstractService implements InvoiceServic
 			currInvoice.setInvoiceId(invoice.getInvoiceId());
 			currInvoice.setOpdracht(invoice.getOpdracht());
 			currInvoice.merge();
-			logService.log(null, null, null, invoice.getTimesheet(), "Invoice Updated");
+			logService.log(SecurityContextUtils.getCurrentUsername(),null, null, invoice.getTimesheet(), "Invoice Updated");
 			return currInvoice;
 		} else {
 			invoice.setId(null);
 			invoice.setVersion(null);
 			invoice.persist();
-			logService.log(null, null, null, invoice.getTimesheet(), "Invoice Created");
+			logService.log(SecurityContextUtils.getCurrentUsername(), null, null, invoice.getTimesheet(), "Invoice Created");
 			return invoice;
 		}
 	}

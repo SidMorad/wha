@@ -1,0 +1,81 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
+    <script type="text/javascript">dojo.require('dijit.TitlePane');dojo.require('dijit.form.FilteringSelect');</script>
+    <div id="_title_div">
+        <spring:message code="label.bizlog" var="entity_label"/>
+        <spring:message arguments="${entity_label}" code="entity.create" var="title_msg"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
+        <spring:url value="/bizlog" var="form_url"/>
+        <form:form action="${form_url}" method="POST" modelAttribute="bizLog">
+            <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
+            <div id="roo_bizLog_time">
+                <label for="_time_id">Time:</label>
+                <form:input cssStyle="width:250px" id="_time_id" maxlength="30" path="time" size="0"/>
+                <br/>
+                <form:errors cssClass="errors" id="_time_error_id" path="time"/>
+                <spring:message arguments="Time" code="field.invalid" var="field_invalid"/>
+                <spring:message code="field.required" var="field_required"/>
+                <spring:message argumentSeparator="," arguments="Time," code="field.simple.validation" var="field_validation"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_time_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : false}})); </script>
+            </div>
+            <br/>
+            <div id="roo_bizLog_details">
+                <label for="_details_id">Details:</label>
+                <form:input cssStyle="width:250px" id="_details_id" maxlength="30" path="details" size="0"/>
+                <br/>
+                <form:errors cssClass="errors" id="_details_error_id" path="details"/>
+                <spring:message arguments="Details" code="field.invalid" var="field_invalid"/>
+                <spring:message code="field.required" var="field_required"/>
+                <spring:message argumentSeparator="," arguments="Details," code="field.simple.validation" var="field_validation"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_details_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : false}})); </script>
+            </div>
+            <br/>
+            <div id="roo_bizLog_username">
+                <label for="_username_id">Username:</label>
+                <form:input cssStyle="width:250px" id="_username_id" maxlength="30" path="username" size="0"/>
+                <br/>
+                <form:errors cssClass="errors" id="_username_error_id" path="username"/>
+                <spring:message arguments="Username" code="field.invalid" var="field_invalid"/>
+                <spring:message code="field.required" var="field_required"/>
+                <spring:message argumentSeparator="," arguments="Username," code="field.simple.validation" var="field_validation"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_username_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : false}})); </script>
+            </div>
+            <br/>
+            <div id="roo_bizLog_user">
+                <c:if test="${not empty users}">
+                    <label for="_user_id">User:</label>
+                    <form:select cssStyle="width:250px" id="_user_id" path="user">
+                        <form:options itemValue="id" items="${users}"/>
+                    </form:select>
+                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_user_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+                </c:if>
+            </div>
+            <br/>
+            <div id="roo_bizLog_employee">
+                <c:if test="${not empty employees}">
+                    <label for="_employee_id">Employee:</label>
+                    <form:select cssStyle="width:250px" id="_employee_id" path="employee">
+                        <form:options itemValue="id" items="${employees}"/>
+                    </form:select>
+                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_employee_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+                </c:if>
+            </div>
+            <br/>
+            <div id="roo_bizLog_timesheet">
+                <c:if test="${not empty timesheets}">
+                    <label for="_timesheet_id">Timesheet:</label>
+                    <form:select cssStyle="width:250px" id="_timesheet_id" path="timesheet">
+                        <form:options itemValue="id" items="${timesheets}"/>
+                    </form:select>
+                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_timesheet_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+                </c:if>
+            </div>
+            <br/>
+            <div class="submit" id="roo_bizLog_submit">
+                <spring:message code="button.save" var="save_button"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
+                <input id="proceed" type="submit" value="${save_button}"/>
+            </div>
+        </form:form>
+    </div>
+</div>
