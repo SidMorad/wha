@@ -158,6 +158,7 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 		return false;
 	}
 
+	/*
 	public Float cacluateSubtotalForInvocieReport(List<DailyTimesheet> dts, Float hourlyWage) {
 		Float totalDuration = 0f;
 		for (DailyTimesheet dailyTimesheet : dts) {
@@ -170,13 +171,16 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 		Float subtotal = totalDuration * hourlyWage;
 		return subtotal;
 	}
+	*/
 
+	/*
 	public Float calcuateTotalTax(Float amount) {
-		Constants vatRatioCons = constantsService.findByKey(ConstantsService.CONST_KEY_SALARY_TAX_RATIO);
+		Constants vatRatioCons = constantsService.findByKey(ConstantsService.CONST_KEY_EXPENSE_VAT);
 		Float vatRatio = Float.valueOf(vatRatioCons.getValue());
 		Float total = amount * vatRatio;
 		return total;
 	}
+	*/
 
 	@Override
 	public boolean deleteDailyTimesheetByTimesheet(Timesheet timesheet) {

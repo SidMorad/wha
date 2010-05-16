@@ -56,13 +56,13 @@ public class AdminTimesheetController extends AbstractController {
 
 	@Autowired
 	protected InvoiceService invoiceService;
-	
+
 	@Autowired
 	protected DailyTravelService dailyTravelService;
 
 	@Autowired
 	protected ConstantsService constantsService;
-	
+
 	@RequestMapping(value = "/admin/timesheet", method = RequestMethod.GET)
 	public String listTimesheetAll(@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "size", required = false) Integer size, ModelMap modelMap) {
@@ -77,7 +77,8 @@ public class AdminTimesheetController extends AbstractController {
 		} else {
 			// -1 will ignore pagination and null will replace with current Year
 			// and Month
-			modelMap.addAttribute("timesheets", Timesheet.findTimesheetEntriesByYearAndMonth(-1, -1, null, null, false));
+			modelMap
+					.addAttribute("timesheets", Timesheet.findTimesheetEntriesByYearAndMonth(-1, -1, null, null, false));
 		}
 		modelMap.addAttribute("timesheetYearMonthFormBean", new TimesheetYearMonthFormBean(DateUtils.getCurrentYear(),
 				DateUtils.getCurrentMonth()));
@@ -88,15 +89,16 @@ public class AdminTimesheetController extends AbstractController {
 		return "admin/timesheet/list";
 	}
 
-	@RequestMapping(value = "/admin/timesheet/refresh", method = {RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value = "/admin/timesheet/refresh", method = { RequestMethod.POST, RequestMethod.GET })
 	public String listTimesheetByYearAndMonth(TimesheetYearMonthFormBean yearMonthFormBean,
 			@RequestParam(value = "page", required = false) Integer page,
-			@RequestParam(value = "size", required = false) Integer size,ModelMap modelMap) {
+			@RequestParam(value = "size", required = false) Integer size, ModelMap modelMap) {
 		if (page != null || size != null) {
 			int sizeNo = size == null ? 10 : size.intValue();
 			modelMap.addAttribute("timesheets", Timesheet.findTimesheetEntriesByYearAndMonth(page == null ? 0 : (page
 					.intValue() - 1)
-					* sizeNo, sizeNo, yearMonthFormBean.getYear(), yearMonthFormBean.getMonth(), yearMonthFormBean.isArchived()));
+					* sizeNo, sizeNo, yearMonthFormBean.getYear(), yearMonthFormBean.getMonth(), yearMonthFormBean
+					.isArchived()));
 			float nrOfPages = (float) Timesheet.countTimesheets() / sizeNo;
 			modelMap.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1
 					: nrOfPages));
@@ -111,40 +113,46 @@ public class AdminTimesheetController extends AbstractController {
 				timesheetPossibleYearsOptionsProvider.getOptions());
 		return "admin/timesheet/list";
 	}
-	
+
 	@RequestMapping(value = "/admin/timesheet/redirect", method = RequestMethod.GET)
 	public String listTimesheetByYearAndMonth(ModelMap modelMap,
 			@RequestParam(value = "year", required = true) Integer year,
 			@RequestParam(value = "month", required = true) Integer month,
 			@RequestParam(value = "archived", required = false) boolean archived) {
-		modelMap.addAttribute("timesheets", Timesheet.findTimesheetEntriesByYearAndMonth(-1, -1, year, month, archived));
-		modelMap.addAttribute(LocaleAwareCalendarOptionsProvider.POSSIBLE_TIMESHEET_MONTHS_KEY, calendarOptionsProvider.getOptions());
-		modelMap.addAttribute(TimesheetPossibleYearsOptionsProvider.TIMESHEET_POSSIBLE_YEARS_KEY,timesheetPossibleYearsOptionsProvider.getOptions());
-		modelMap.addAttribute("timesheetYearMonthFormBean", new TimesheetYearMonthFormBean(year,month, archived));
+		modelMap
+				.addAttribute("timesheets", Timesheet.findTimesheetEntriesByYearAndMonth(-1, -1, year, month, archived));
+		modelMap.addAttribute(LocaleAwareCalendarOptionsProvider.POSSIBLE_TIMESHEET_MONTHS_KEY, calendarOptionsProvider
+				.getOptions());
+		modelMap.addAttribute(TimesheetPossibleYearsOptionsProvider.TIMESHEET_POSSIBLE_YEARS_KEY,
+				timesheetPossibleYearsOptionsProvider.getOptions());
+		modelMap.addAttribute("timesheetYearMonthFormBean", new TimesheetYearMonthFormBean(year, month, archived));
 		return "admin/timesheet/list";
 	}
-	
+
 	@RequestMapping(value = "/admin/timesheet/delete/{id}")
 	public String deleteTimesheet(@PathVariable("id") Long id) {
 		Timesheet timesheet = timesheetService.load(id);
 		timesheetService.delete(id);
-		return "redirect:/admin/timesheet/redirect?year="+timesheet.getSheetYear()+"&month="+timesheet.getSheetMonth()+"&archived="+timesheet.isArchived();
+		return "redirect:/admin/timesheet/redirect?year=" + timesheet.getSheetYear() + "&month="
+				+ timesheet.getSheetMonth() + "&archived=" + timesheet.isArchived();
 	}
 
 	@RequestMapping(value = "/admin/timesheet/archive/{id}")
 	public String archiveTimesheet(@PathVariable("id") Long id) {
 		Timesheet timesheet = timesheetService.load(id);
 		timesheetService.archive(id);
-		return "redirect:/admin/timesheet/redirect?year="+timesheet.getSheetYear()+"&month="+timesheet.getSheetMonth()+"&archived="+false;
+		return "redirect:/admin/timesheet/redirect?year=" + timesheet.getSheetYear() + "&month="
+				+ timesheet.getSheetMonth() + "&archived=" + false;
 	}
-	
-	@RequestMapping(value = "/admin/timesheet/archive/undo/{id}") 
-	public String archiveUndoTimesheet (@PathVariable("id") Long id){
+
+	@RequestMapping(value = "/admin/timesheet/archive/undo/{id}")
+	public String archiveUndoTimesheet(@PathVariable("id") Long id) {
 		Timesheet timesheet = timesheetService.load(id);
 		timesheetService.archiveUndo(id);
-		return "redirect:/admin/timesheet/redirect?year="+timesheet.getSheetYear()+"&month="+timesheet.getSheetMonth() +"&archived="+true;
+		return "redirect:/admin/timesheet/redirect?year=" + timesheet.getSheetYear() + "&month="
+				+ timesheet.getSheetMonth() + "&archived=" + true;
 	}
-	
+
 	@RequestMapping(value = "/admin/timesheet/daily/{id}", method = RequestMethod.GET)
 	public String showTimesheetDaily(@PathVariable("id") Long id, ModelMap modelMap) {
 		if (id == null)
@@ -205,7 +213,7 @@ public class AdminTimesheetController extends AbstractController {
 		invoice.setTimesheet(timesheet);
 		modelMap.addAttribute("timesheet", timesheet);
 		modelMap.addAttribute("invoice", invoice);
-        modelMap.addAttribute("invoicetype_enum", InvoiceType.class.getEnumConstants());  
+		modelMap.addAttribute("invoicetype_enum", InvoiceType.class.getEnumConstants());
 		return "admin/timesheet/invoice";
 	}
 
@@ -218,15 +226,16 @@ public class AdminTimesheetController extends AbstractController {
 		if (result.hasErrors()) {
 			modelMap.addAttribute("timesheet", timesheet);
 			modelMap.addAttribute("invoice", invoice);
-			modelMap.addAttribute("invoicetype_enum", InvoiceType.class.getEnumConstants());  
+			modelMap.addAttribute("invoicetype_enum", InvoiceType.class.getEnumConstants());
 			return "admin/timesheet/invoice";
-		}	
+		}
 
 		if (invoice.getInvoiceType().equals(InvoiceType.timesheet)) {
 			return generateTimesheetInvoiceForTimesheet(invoice, modelMap,
 					result, request);
 		} else {
-			// If InvoiceType is not InvoiceType.timesheet then it only can be InvoiceType.expense .
+			// If InvoiceType is not InvoiceType.timesheet then it only can be
+			// InvoiceType.expense .
 			return generateTimesheetInvoiceForExpense(invoice, modelMap,
 					result, request);
 		}
@@ -243,6 +252,7 @@ public class AdminTimesheetController extends AbstractController {
 
 		// Persist Invoice entity
 		invoice = invoiceService.saveOrUpdate(invoice);
+		Timesheet timesheet = timesheetService.load(invoice.getTimesheet().getId());
 
 		List<Invoice> invoices = new ArrayList<Invoice>();
 		invoices.add(invoice);
@@ -254,47 +264,48 @@ public class AdminTimesheetController extends AbstractController {
 		modelMap.put("timesheetInvoiceList", jrDataSource);
 		modelMap.put("format", "pdf");
 		modelMap.put(Constants.IMAGE_HM_LOGO, getFileFullPath(request, Constants.imageHMlogoAddress));
-		modelMap.put("reportFileName", "FAK-" + invoiceId );
+		modelMap.put("reportFileName", "FAK-" + invoiceId);
 
 		// Fill ProjectSubReport
 		List<DailyTimesheet> dts = dailyTimesheetService.getDailyTimesheetListForReportPerProject(invoice
 				.getTimesheet().getId());
 		modelMap.put("ProjectSubReportData", new JRBeanCollectionDataSource(dts, false));
-		
+
 		// Calacuate subtotal
-		Float subTotal = dailyTimesheetService.cacluateSubtotalForInvocieReport(dts,invoice.getTimesheet().getEmployee().getHourlyWage());
+		Double subTotal = timesheetService.calculateTotalWorkingAmountPayable(timesheet);
 		modelMap.put("subTotal", MathUtils.roundToTwoDecimalPlaces(subTotal));
-		Float timesheetTotalTax = dailyTimesheetService.calcuateTotalTax(subTotal);
+
+		// VAT Tax
+		Double timesheetTotalTax = timesheetService.calculateVatTax(subTotal);
 		modelMap.put("timesheetTotalTax", MathUtils.roundToTwoDecimalPlaces(timesheetTotalTax));
-		
-		// Double totalAmount = timesheetService.calculateTotalAmountInvoice(timesheet);
-		// Let's use calculated values from top !
-		Float totalAmount = subTotal + timesheetTotalTax; 
+
+		Double totalAmount = subTotal + timesheetTotalTax;
 		modelMap.put("totalAmount", MathUtils.roundToTwoDecimalPlaces(totalAmount));
 
 		return "timesheetInvoiceList";
 	}
-	
+
 	private String generateTimesheetInvoiceForExpense(Invoice invoice,
 			ModelMap modelMap, BindingResult result, HttpServletRequest request) {
-		Long timesheetId = invoice.getTimesheet().getId();		
-		
+		Long timesheetId = invoice.getTimesheet().getId();
+
 		String invoicePrefixId = DateUtils.getMonthAndYearString(invoice.getInvoiceDate());
 		String invoiceId = invoicePrefixId + "-" + invoice.getSerialNumber();
 		invoice.setInvoiceId(invoiceId);
 		String invoiceDate = DateUtils.formatDate(invoice.getInvoiceDate(), getMessage(Constants.DATE_PATTERN_KEY));
 
-
 		// Persist Invoice entity
 		invoice = invoiceService.saveOrUpdate(invoice);
+		Timesheet timesheet = timesheetService.load(timesheetId);
 
 		List<Invoice> invoices = new ArrayList<Invoice>();
 		invoices.add(invoice);
 		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(invoices, false);
 
-		Float travelTotalDistance = dailyTravelService.calculateTravelTotalDistance(timesheetId) ;
-		Float timesheetTotalExpense = dailyExpenseService.calculateDailyExpenseTotalForHajari(timesheetId);
-		Float ratioPerKilometer = constantsService.findFloatValueByKey(ConstantsService.CONST_KEY_EXPENSE_GAS_SUBSIDY_PER_KILOMETER);
+		Float travelTotalDistance = timesheet.getTotalTravelDistance().floatValue();
+		Float timesheetTotalExpense = timesheet.getTotalExpense().floatValue();
+		Float ratioPerKilometer = constantsService
+				.findFloatValueByKey(ConstantsService.CONST_KEY_EXPENSE_GAS_SUBSIDY_PER_KILOMETER);
 
 		modelMap.put("invoiceDate", invoiceDate);
 		modelMap.put("onkosten", 0.0);
@@ -304,17 +315,16 @@ public class AdminTimesheetController extends AbstractController {
 		modelMap.put("timesheetInvoiceExpenseList", jrDataSource);
 		modelMap.put("format", "pdf");
 		modelMap.put(Constants.IMAGE_HM_LOGO, getFileFullPath(request, Constants.imageHMlogoAddress));
-		modelMap.put("reportFileName", "FAK-" + invoiceId );
+		modelMap.put("reportFileName", "FAK-" + invoiceId);
 
 		// Calacuate subtotal
-		Float subTotal = travelTotalDistance * ratioPerKilometer + timesheetTotalExpense;
+		Double subTotal = timesheetService.calculateTotalExpenseAmountPayable(timesheet);
 		modelMap.put("subTotal", MathUtils.roundToTwoDecimalPlaces(subTotal));
-		Float timesheetTravelTax = dailyTimesheetService.calcuateTotalTax(travelTotalDistance * ratioPerKilometer);
+
+		Double timesheetTravelTax = timesheetService.calculateVatTax(travelTotalDistance.doubleValue() * ratioPerKilometer);
 		modelMap.put("timesheetTravelTax", MathUtils.roundToTwoDecimalPlaces(timesheetTravelTax));
-		
-		// Double totalAmount = timesheetService.calculateTotalAmountInvoice(timesheet);
-		// Let's use calculated values from top !
-		Float totalAmount = subTotal + timesheetTravelTax ; 
+
+		Double totalAmount = subTotal + timesheetTravelTax;
 		modelMap.put("totalAmount", MathUtils.roundToTwoDecimalPlaces(totalAmount));
 
 		return "timesheetInvoiceExpenseList";
@@ -325,13 +335,13 @@ public class AdminTimesheetController extends AbstractController {
 		return appServerHome + filePath;
 	}
 
-	// This method exist only for solve Javascript relative path issue 
+	// This method exist only for solve Javascript relative path issue
 	@RequestMapping(value = "/admin/admin/timesheet/delete/{id}")
 	public String deleteTimesheet2(@PathVariable("id") Long id) {
 		return deleteTimesheet(id);
 	}
-	
-	// This method exist only for solve Javascript relative path issue 
+
+	// This method exist only for solve Javascript relative path issue
 	@RequestMapping(value = "/admin/admin/timesheet/archive/{id}")
 	public String archiveTimesheet2(@PathVariable("id") Long id) {
 		return archiveTimesheet(id);

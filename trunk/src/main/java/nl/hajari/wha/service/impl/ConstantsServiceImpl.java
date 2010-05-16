@@ -26,7 +26,7 @@ public class ConstantsServiceImpl extends AbstractService implements ConstantsSe
 	static {
 		defaults.put(CONST_KEY_SALARY_BONUS_RATIO_PER_HOUR, "1.5");
 		defaults.put(CONST_KEY_SALARY_TAX_RATIO, "0.6");
-		defaults.put(CONST_KEY_EXPENSE_GAS_SUBSIDY_PER_KILOMETER, "0.1");
+		defaults.put(CONST_KEY_EXPENSE_GAS_SUBSIDY_PER_KILOMETER, "0.19");
 		defaults.put(CONST_KEY_EXPENSE_VAT, "0.19");
 	}
 

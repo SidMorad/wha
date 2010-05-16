@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.Query;
 
 import nl.hajari.wha.domain.Timesheet;
+import nl.hajari.wha.service.ConstantsService;
 import nl.hajari.wha.service.DailyExpenseService;
 import nl.hajari.wha.service.DailyTimesheetService;
 import nl.hajari.wha.service.DailyTravelService;
@@ -38,6 +39,9 @@ public class TimesheetServiceImpl extends AbstractService implements TimesheetSe
 	@Autowired
 	protected InvoiceService invoiceService;
 
+	@Autowired
+	protected ConstantsService constantsService;
+
 	@Override
 	public Timesheet load(Long id) {
 		return Timesheet.findTimesheet(id);
@@ -58,17 +62,6 @@ public class TimesheetServiceImpl extends AbstractService implements TimesheetSe
 			e.printStackTrace();
 		}
 		return null;
-	}
-
-	@Override
-	public Double calculateTotalAmountInvoice(Timesheet timesheet) {
-		// TODO::
-		// 1. Each employee should have an hourly wage
-		// 2. Compute Total expense for others
-		// 3. total travels of the month ratio
-		// 4. tax rate
-		// 5. bonus rate
-		return 100.0;
 	}
 
 	@Override
@@ -96,6 +89,48 @@ public class TimesheetServiceImpl extends AbstractService implements TimesheetSe
 		Timesheet timesheet = load(id);
 		timesheet.setArchived(false);
 		timesheet.merge();
+	}
+
+	@Override
+	public Double getTotalPayableAmount(Timesheet timesheet) {
+		return calculateTotalWorkingAmountPayable(timesheet) + calculateTotalExpenseAmountPayable(timesheet);
+	}
+
+	/**
+	 * @see {@link TimesheetService#calculateTotalWorkingAmountPayable(Timesheet)}
+	 */
+	@Override
+	public Double calculateTotalWorkingAmountPayable(Timesheet timesheet) {
+		Double thm = timesheet.getMonthlyTotalWorkingHours().doubleValue();
+		Float hwe = timesheet.getEmployee().getHourlyWage();
+		Float cmc = 0f;
+		Double total = thm * hwe + cmc;
+		return total;
+	}
+
+	/**
+	 * @see {@link TimesheetService#calculateTotalExpenseAmountPayable(Timesheet)}
+	 */
+	@Override
+	public Double calculateTotalExpenseAmountPayable(Timesheet timesheet) {
+		Double tkm = timesheet.getTotalTravelDistance();
+		Float perKilometerRatio = getPerKilometerRatio();
+		Double tem = timesheet.getTotalExpense();
+		Double total = tkm * perKilometerRatio + tem;
+		return total;
+	}
+
+	@Override
+	public Double calculateVatTax(Double amount) {
+		return amount.doubleValue() * getVatRatio();
+	}
+
+	private Float getVatRatio() {
+		return Float.valueOf(constantsService.findValue(ConstantsService.CONST_KEY_EXPENSE_VAT));
+	}
+
+	private Float getPerKilometerRatio() {
+		return Float.valueOf(constantsService.findValue(ConstantsService.CONST_KEY_EXPENSE_GAS_SUBSIDY_PER_KILOMETER));
 	}
 
 }

@@ -26,7 +26,7 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 
 @Entity
 @RooJavaBean
-@RooEntity(finders = { "findTimesheetsByEmployeeAndSheetMonthAndSheetYearEquals", "findTimesheetsByEmployee"})
+@RooEntity(finders = { "findTimesheetsByEmployeeAndSheetMonthAndSheetYearEquals", "findTimesheetsByEmployee" })
 @UniqueConstraint(columnNames = "sheetYear,sheetMonth,employee")
 public class Timesheet {
 
@@ -61,9 +61,9 @@ public class Timesheet {
 
 	private String poNumber;
 
-	@Column(nullable= false)
+	@Column(nullable = false)
 	private boolean archived;
-	
+
 	public String toString() {
 		return sheetYear + ", " + sheetMonth + ", " + monthlyTotal;
 	}
@@ -139,6 +139,24 @@ public class Timesheet {
 		}
 		for (DailyTravel dt : getDailyTravels()) {
 			total += dt.getWithReturn() ? dt.getDistance() * 2 : dt.getDistance();
+		}
+		return total;
+	}
+
+	/**
+	 * TODO: This is a redundant method at the moment, as the update on the
+	 * timesheet should work properly.
+	 * 
+	 * @return
+	 */
+	@Transient
+	public Double getMonthlyTotalWorkingHours() {
+		double total = 0.0;
+		if (null == getDailyTimesheets() || getDailyTimesheets().isEmpty()) {
+			return total;
+		}
+		for (DailyTimesheet dt : getDailyTimesheets()) {
+			total += dt.getDuration();
 		}
 		return total;
 	}

@@ -26,10 +26,66 @@ public interface TimesheetService {
 	void update(Timesheet timesheet);
 
 	/**
+	 * The formula is:
+	 * 
+	 * total = THM * HWE + THM * HWE * VAT_RATIO + CMC
+	 * 
+	 * in which:
+	 * 
+	 * <p>
+	 * THM = Total hours of work in a month for the employee
+	 * <p>
+	 * WHE = Hourly wage for the employee
+	 * <p>
+	 * VAT_RATIO = is the VAT ration which is defined in the constants table of
+	 * WHA
+	 * <p>
+	 * CMC = is some constant costs (IGNORE THIS AT THE MOMENT)
+	 * 
 	 * @param timesheet
+	 * @return the total payable amount computed with above formula
+	 */
+	Double calculateTotalWorkingAmountPayable(Timesheet timesheet);
+
+	/**
+	 * The formula is:
+	 * 
+	 * total = (TKM * KM_RATIO + TEM) * (1 + VAT_RATIO)
+	 * 
+	 * in which:
+	 * 
+	 * <p>
+	 * TKM = Total kilometers in for the timesheet that has a PO Number
+	 * <p>
+	 * KM_RATIO = the ratio of euros per kilometer which is defined in the
+	 * constant section of WHA
+	 * <p>
+	 * TEM = total expesnes in a month for the timesheet
+	 * <p>
+	 * VAT_RATIO = the same as
+	 * {@link #calculateTotalExpenseAmountPayable(Timesheet)}
+	 * 
+	 * @param timesheet
+	 * @return the total payable amount computed with above formula
+	 */
+	Double calculateTotalExpenseAmountPayable(Timesheet timesheet);
+
+	/**
+	 * 
+	 * 
+	 * @param timesheet
+	 * @return the sum of {@link #calculateTotalWorkingAmountPayable(Timesheet)}
+	 *         and {@link #calculateTotalExpenseAmountPayable(Timesheet)}
+	 */
+	Double getTotalPayableAmount(Timesheet timesheet);
+	
+	/**
+	 * It is a simple calculation based on {@link ConstantsService#CONST_KEY_EXPENSE_VAT}
+	 * 
+	 * @param amount
 	 * @return
 	 */
-	Double calculateTotalAmountInvoice(Timesheet timesheet);
+	Double calculateVatTax(Double amount);
 
 	/**
 	 * @return

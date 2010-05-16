@@ -57,23 +57,6 @@ public interface DailyTimesheetService {
 
 	/**
 	 * 
-	 * @param dts
-	 *            is result of getDailyTimesheetListForReportPerProject(Long
-	 *            timesheetId)
-	 * @param hourlyWage
-	 * @return subtotal for Invoice report
-	 */
-	Float cacluateSubtotalForInvocieReport(List<DailyTimesheet> dts, Float hourlyWage);
-
-	/**
-	 * 
-	 * @param amount
-	 * @return amount * VAT_RATIO
-	 */
-	Float calcuateTotalTax(Float amount);
-
-	/**
-	 * 
 	 * @param timesheet
 	 * @return true if succeed
 	 */
