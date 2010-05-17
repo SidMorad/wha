@@ -12,15 +12,11 @@
 	<field name="durationOffs" class="java.lang.Float"/>
 	<field name="durationTraining" class="java.lang.Float"/>
 	<field name="durationSickness" class="java.lang.Float"/>
-	<field name="dailyTotalDuration" class="java.lang.Float"/>
 	<field name="timesheet.employee.firstName" class="java.lang.String"/>
 	<field name="timesheet.employee.lastName" class="java.lang.String"/>
 	<field name="timesheet.employee.empId" class="java.lang.String"/>
 	<field name="timesheet.monthlyTotal" class="java.lang.Float"/>
 	<field name="timesheet.description" class="java.lang.String"/>
-	<variable name="timesheet.monthlyTotal_1" class="java.lang.Float" resetType="Column" calculation="Sum">
-		<variableExpression><![CDATA[$F{timesheet.monthlyTotal}]]></variableExpression>
-	</variable>
 	<variable name="duration_1" class="java.lang.Float" resetType="Column" calculation="Sum">
 		<variableExpression><![CDATA[$F{duration}]]></variableExpression>
 	</variable>
@@ -153,7 +149,7 @@
 			<textField>
 				<reportElement x="509" y="0" width="63" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.Float"><![CDATA[$F{dailyTotalDuration}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{duration}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -191,7 +187,7 @@
 			<textField>
 				<reportElement x="509" y="9" width="54" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.Float"><![CDATA[$F{timesheet.monthlyTotal}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$V{duration_1}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

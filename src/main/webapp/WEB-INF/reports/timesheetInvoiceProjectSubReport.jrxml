@@ -6,7 +6,7 @@
 			  bottomMargin="60" resourceBundle="reportlabels" >
 	<field name="project.customer.name" class="java.lang.String"/>
 	<field name="project.name" class="java.lang.String"/>
-	<field name="dailyTotalDuration" class="java.lang.Float"/>
+	<field name="duration" class="java.lang.Float"/>
 	<field name="timesheet.employee.hourlyWage" class="java.lang.Float"/>
 
 	<columnHeader>
@@ -49,7 +49,7 @@
 			<textField>
 				<reportElement x="120" y="0" width="100" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.Float"><![CDATA[$F{dailyTotalDuration}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{duration}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement width="100" y="0" x="300" height="20"/>
@@ -59,7 +59,7 @@
 			<textField>
 				<reportElement x="472" y="0" width="100" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA["€ " + $F{dailyTotalDuration} * $F{timesheet.employee.hourlyWage}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["€ " + $F{duration} * $F{timesheet.employee.hourlyWage}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
