@@ -16,7 +16,6 @@
 	<field name="durationOffs" class="java.lang.Float"/>
 	<field name="durationTraining" class="java.lang.Float"/>
 	<field name="durationSickness" class="java.lang.Float"/>
-	<field name="dailyTotalDuration" class="java.lang.Float"/>
 	<field name="timesheet.employee.firstName" class="java.lang.String"/>
 	<field name="timesheet.employee.lastName" class="java.lang.String"/>
 	<field name="timesheet.employee.empId" class="java.lang.String"/>
@@ -33,9 +32,6 @@
 	</variable>
 	<variable name="durationSickness_1" class="java.lang.Float" calculation="Sum">
 		<variableExpression><![CDATA[$F{durationSickness}]]></variableExpression>
-	</variable>
-	<variable name="dailyTotalDuration_1" class="java.lang.Float" calculation="Sum">
-		<variableExpression><![CDATA[$F{dailyTotalDuration}]]></variableExpression>
 	</variable>
 	<background>
 		<band splitType="Stretch"/>
@@ -177,7 +173,7 @@
 			<textField>
 				<reportElement x="509" y="0" width="63" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.Float"><![CDATA[$F{dailyTotalDuration}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{duration}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -209,7 +205,7 @@
 			<textField>
 				<reportElement x="509" y="9" width="54" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.Float"><![CDATA[$V{dailyTotalDuration_1}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$V{duration_1}]]></textFieldExpression>
 			</textField>
 			<subreport>
 				<reportElement isPrintRepeatedValues="false" x="0" y="0" width="325" height="20" isRemoveLineWhenBlank="true"/>
