@@ -10,6 +10,7 @@
 	<parameter name="totalAmount" class="java.lang.Double"/>
 	<parameter name="invoiceDate" class="java.lang.String"/>
 	<parameter name="onkosten" class="java.lang.Double"/>
+	<parameter name="reportHeadered" class="java.lang.Boolean"/>
 
 	<field name="invoiceId" class="java.lang.String"/>
 	<field name="opdracht" class="java.lang.String"/>
@@ -23,6 +24,7 @@
 	</background>
 	<title>
 		<band height="82" splitType="Stretch">
+			<printWhenExpression>$P{reportHeadered}</printWhenExpression>
 			<image>
 				<reportElement x="0" y="0" width="100" height="70"/>
 				<imageExpression class="java.lang.String"><![CDATA[$P{IMAGE_HM_LOGO}]]></imageExpression>
@@ -41,6 +43,7 @@
 	</title>
 	<pageHeader>
 		<band height="130" splitType="Stretch">
+			<printWhenExpression>$P{reportHeadered}</printWhenExpression>
 			<textField>
 				<reportElement x="0" y="109" width="252" height="20"/>
 				<textElement/>

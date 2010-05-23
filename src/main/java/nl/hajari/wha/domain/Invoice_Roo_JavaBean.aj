@@ -56,4 +56,12 @@ privileged aspect Invoice_Roo_JavaBean {
         this.invoiceType = invoiceType;        
     }    
     
+    public boolean Invoice.getReportHeadered() {    
+    	return this.reportHeadered;        
+    }    
+    
+    public void Invoice.setReportHeadered(boolean reportHeadered) {    
+    	this.reportHeadered = reportHeadered;        
+    }    
+    
 }
