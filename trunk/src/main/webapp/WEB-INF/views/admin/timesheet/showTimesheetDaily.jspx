@@ -60,7 +60,7 @@
 		                    <th/>
 		                </tr>
 		            </thead>
-		            <c:set var="totalMonthly" value="0" />	
+		            <c:set var="totalDuration" value="0" />	
 		            <c:set var="totalOff" value="0" />	
 		            <c:set var="totalTraining" value="0" />	
 		            <c:set var="totalSickness" value="0" />	
@@ -102,7 +102,7 @@
 	                            </form:form>
 	                        </td>
 		                </tr>
-		                <c:set var="totalMonthly" value="${totalMonthly + dailytimesheet.duration}"/>
+		                <c:set var="totalDuration" value="${totalDuration + dailytimesheet.duration}"/>
 		                <c:set var="totalOff" value="${totalOff + dailytimesheet.durationOffs}"/>
 		                <c:set var="totalTraining" value="${totalTraining + dailytimesheet.durationTraining}"/>
 		                <c:set var="totalSickness" value="${totalSickness + dailytimesheet.durationSickness}"/>
@@ -110,13 +110,10 @@
 		            <tr>
 		            	<th />
 		            	<th><span style="font-size: 13px;">${label_total}:</span></th>
-		            	<th><span style="font-size: 13px;"><b>${totalMonthly}</b></span></th>
-		            	<th><span style="font-size: 13px;"><b>${totalOff}</b></span></th>
-		            	<th><span style="font-size: 13px;"><b>${totalTraining}</b></span></th>
-		            	<th><span style="font-size: 13px;"><b>${totalSickness}</b></span></th>
-		            	<!-- 
-		            	<td><b>${totalMonthly}</b></td>
-		            	-->
+	            		<th><span style="font-size: 13px;"><b><fmt:formatNumber value="${totalDuration}" maxFractionDigits="2"></fmt:formatNumber></b></span></th>
+	            		<th><span style="font-size: 13px;"><b><fmt:formatNumber value="${totalOff}" maxFractionDigits="2"></fmt:formatNumber></b></span></th>
+	            		<th><span style="font-size: 13px;"><b><fmt:formatNumber value="${totalTraining}" maxFractionDigits="2"></fmt:formatNumber></b></span></th>
+	            		<th><span style="font-size: 13px;"><b><fmt:formatNumber value="${totalSickness}" maxFractionDigits="2"></fmt:formatNumber></b></span></th>
 		            	<th/>
 		            	<th/>
 		            	<th/>

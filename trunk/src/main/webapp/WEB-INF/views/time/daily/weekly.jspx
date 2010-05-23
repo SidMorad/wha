@@ -133,6 +133,7 @@
 	                <th width="20px"></th>
 	            </tr>
             </thead>
+            <c:set var="totalDuration" value="0" />
             <c:set var="totalOff" value="0" />
             <c:set var="totalSickness" value="0" />
             <c:set var="totalTraining" value="0" />
@@ -159,6 +160,7 @@
                         </form:form>
             		</td>
            		</tr>
+	       		<c:set var="totalDuration" value="${totalDuration + dt.duration}" />
 	       		<c:set var="totalOff" value="${totalOff + dt.durationOffs}" />
 	       		<c:set var="totalTraining" value="${totalTraining + dt.durationTraining}" />
 	       		<c:set var="totalSickness" value="${totalSickness + dt.durationSickness}" />
@@ -166,10 +168,10 @@
             <tr align="right"> 
             		<th>-</th>
             		<th><span style="font-size: 13px;">${label_total}:</span></th>
-            		<th><span style="font-size: 13px;"><b>${timesheet.monthlyTotal}</b></span></th>
-            		<th><span style="font-size: 13px;"><b>${totalOff}</b></span></th>
-            		<th><span style="font-size: 13px;"><b>${totalTraining}</b></span></th>
-            		<th><span style="font-size: 13px;"><b>${totalSickness}</b></span></th>
+            		<th><span style="font-size: 13px;"><b><fmt:formatNumber value="${totalDuration}" maxFractionDigits="2"></fmt:formatNumber></b></span></th>
+            		<th><span style="font-size: 13px;"><b><fmt:formatNumber value="${totalOff}" maxFractionDigits="2"></fmt:formatNumber></b></span></th>
+            		<th><span style="font-size: 13px;"><b><fmt:formatNumber value="${totalTraining}" maxFractionDigits="2"></fmt:formatNumber></b></span></th>
+            		<th><span style="font-size: 13px;"><b><fmt:formatNumber value="${totalSickness}" maxFractionDigits="2"></fmt:formatNumber></b></span></th>
             		<!-- 
             		<th></th>
             		-->

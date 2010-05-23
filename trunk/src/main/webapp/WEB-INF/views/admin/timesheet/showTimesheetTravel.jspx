@@ -111,7 +111,7 @@
 	            		<td></td>
 	            		<td></td>
 	            		<td></td>
-	            		<td><b>${totalDistance}</b></td>
+	            		<td><b><fmt:formatNumber value="${totalDistance}" maxFractionDigits="2"/></b></td>
 		           		<td></td>
 		           		<td></td>
 		           		<td></td>

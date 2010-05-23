@@ -66,7 +66,7 @@
 		            		<td></td>
 		            		<td></td>
 		            		<td></td>
-		            		<td><b>${totalAmount}</b></td>
+		            		<td><b><fmt:formatNumber value="${totalAmount}" maxFractionDigits="2"/></b></td>
 		            </tr>
 		            <tr class="footer">
 		            	<td colspan="5">

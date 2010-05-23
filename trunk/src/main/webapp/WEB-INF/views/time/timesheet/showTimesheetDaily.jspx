@@ -72,7 +72,7 @@
 		            	<td></td>
 		            	<td></td>
 		            	<td></td>
-		            	<td><b>${totalMonthly}</b></td>
+		            	<td><b><fmt:formatNumber value="${totalMonthly}" maxFractionDigits="2"/></b></td>
 		            </tr> 
 	                <tr class="footer">
 	                    <td colspan="6">

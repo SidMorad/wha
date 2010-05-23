@@ -1,7 +1,6 @@
 package nl.hajari.wha.web.controller;
 
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -122,19 +121,12 @@ privileged aspect TimeController_DailyTravelController {
 			throw new IllegalArgumentException("An Identifier is required");
 		authorizeAccessTimesheet(timesheetId, request, response);
 		Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
-		Set<DailyTravel> dailyTravels = timesheet.getDailyTravels();
-		double totalDistance = 0.0;
-		for (DailyTravel dt : dailyTravels) {
-			totalDistance += dt.getWithReturn() ? dt.getDistance() * 2 : dt.getDistance(); 
-		}
 		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(
 				timesheet.getDailyTravelsSortedList(), false);
-
 		
 		modelMap.put("timesheetTravelReportList", jrDataSource);
 		modelMap.put("format", format);
 		modelMap.put(Constants.IMAGE_HM_LOGO, getFileFullPath(request, Constants.imageHMlogoAddress));
-		modelMap.put("total_distance", totalDistance + "");
 		return "timesheetTravelReportList";
 	}
 }
