@@ -138,20 +138,20 @@
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.travels}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="###0.00">
 				<reportElement x="120" y="0" width="100" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.Float"><![CDATA[$P{travelTotalDistance}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="€ #,##0.00">
 				<reportElement x="250" y="0" width="170"  height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA["€ " + $P{ratioPerKilometer}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$P{ratioPerKilometer}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="€ #,##0.00">
 				<reportElement x="472" y="0" width="100" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA["€ " + $P{travelTotalDistance} * $P{ratioPerKilometer}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$P{travelTotalDistance} * $P{ratioPerKilometer}]]></textFieldExpression>
 			</textField>
 
 			<textField>
@@ -159,10 +159,10 @@
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.expenses}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="€ #,##0.00">
 				<reportElement x="472" y="20" width="100" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA["€ " + $P{timesheetTotalExpense}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$P{timesheetTotalExpense}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -182,7 +182,7 @@
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.distance}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="###0.00">
 				<reportElement x="120" y="29" width="71" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.Float"><![CDATA[$P{travelTotalDistance}]]></textFieldExpression>
@@ -192,40 +192,40 @@
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.subTotal}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="€ #,##0.00">
 				<reportElement x="197" y="27" width="71" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA["€ " + $P{subTotal}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$P{subTotal}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="279" y="7" width="79" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.timesheetTax}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="€ #,##0.00">
 				<reportElement x="279" y="29" width="80" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA["€ " + $P{timesheetTravelTax}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$P{timesheetTravelTax}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="363" y="7" width="73" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.timesheetExpense}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="€ #,##0.00">
 				<reportElement x="363" y="29" width="73" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA["€ " + $P{onkosten}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$P{onkosten}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="472" y="7" width="92" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.totalAmount} + ":"]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="€ #,##0.00">
 				<reportElement x="472" y="29" width="92" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA["€ " + $P{totalAmount}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$P{totalAmount}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

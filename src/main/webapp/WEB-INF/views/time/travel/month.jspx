@@ -92,7 +92,7 @@
 	                <form:errors cssClass="errors-in-table" id="_distance_error_id" path="distance"/>
 	                <spring:message code="field.invalid.decimal" var="field_invalid"/>
 	                <spring:message argumentSeparator="," arguments="${label_distance},(${field_required})" code="field.simple.validation" var="field_validation"/>
-	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_distance_id', widgetType : 'dijit.form.NumberTextBox', widgetAttrs : {constraints:{min:1}, promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
+	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_distance_id', widgetType : 'dijit.form.NumberTextBox', widgetAttrs : { promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
 				</td>
 				<td></td>
 				<td></td>
@@ -160,7 +160,7 @@
             		<th>-</th>
             		<th>-</th>
             		<th>-</th>
-            		<th><b>${totalDistance}</b></th>
+            		<th><b><fmt:formatNumber value="${totalDistance}" maxFractionDigits="2"></fmt:formatNumber></b></th>
             		<th>-</th>
             		<th></th>
             </tr>

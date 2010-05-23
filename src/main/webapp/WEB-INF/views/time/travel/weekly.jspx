@@ -109,7 +109,7 @@
         	<tr>
         		<td>${label_distance}:</td>
 				<td>
-	                <form:input cssStyle="width:95%" id="day1" maxlength="2" path="day1" size="0"/>
+	                <form:input cssStyle="width:95%" id="day1" path="day1" size="0"/>
 	                <form:errors cssClass="errors-in-table" id="_duration_error" path="day1"/>
 	                <spring:message arguments="${label_working}" code="field.invalid" var="field_invalid"/>
 	                <spring:message argumentSeparator="," arguments="${label_working},(${field_required})" code="field.simple.validation" var="field_validation"/>
@@ -205,7 +205,7 @@
             		<th>-</th>
             		<th>-</th>
             		<th>-</th>
-            		<th><b>${totalDistance}</b></th>
+            		<th><b><fmt:formatNumber value="${totalDistance}" maxFractionDigits="2"></fmt:formatNumber></b></th>
             		<th>-</th>
             		<th></th>
             </tr>

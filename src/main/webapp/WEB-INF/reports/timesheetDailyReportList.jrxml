@@ -182,27 +182,27 @@
 			<line>
 				<reportElement x="0" y="5" width="572" height="1"/>
 			</line>
-			<textField>
+			<textField pattern="###0.00">
 				<reportElement x="290" y="9" width="50" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.Float"><![CDATA[$V{duration_1}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="###0.00">
 				<reportElement x="340" y="9" width="50" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.Float"><![CDATA[$V{durationOffs_1}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="###0.00">
 				<reportElement x="390" y="9" width="50" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.Float"><![CDATA[$V{durationTraining_1}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="###0.00">
 				<reportElement x="440" y="9" width="50" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.Float"><![CDATA[$V{durationSickness_1}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="###0.00">
 				<reportElement x="509" y="9" width="54" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.Float"><![CDATA[$V{duration_1}]]></textFieldExpression>

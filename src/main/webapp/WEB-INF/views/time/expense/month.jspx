@@ -145,7 +145,7 @@
             		<th>-</th>
             		<th>-</th>
             		<th>-</th>
-            		<th><b>${totalAmount}</b></th>
+            		<th><b><fmt:formatNumber value="${totalAmount}" maxFractionDigits="2"></fmt:formatNumber></b></th>
             		<th>-</th>
             		<th></th>
             </tr>

@@ -22,7 +22,7 @@
                         <td>${timesheet.id}</td>
                         <td>${timesheet.sheetYear}</td>
                         <td>${timesheet.sheetMonthShortName}</td>
-                        <td>${timesheet.monthlyTotal}</td>
+                        <td><fmt:formatNumber value="${timesheet.monthlyTotal}" maxFractionDigits="2"/></td>
                         <td>${fn:length(timesheet.dailyTimesheets)}</td>
                         <td>
                             <spring:url value="/time/timesheet/daily/${timesheet.id}" var="show_form_url"/>

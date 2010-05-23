@@ -144,7 +144,7 @@
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[ $R{label.total.amount} + ":"]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="€ #,##0.00">
 				<reportElement x="500" y="9" width="63" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.Float"><![CDATA[$V{totalAmount}]]></textFieldExpression>

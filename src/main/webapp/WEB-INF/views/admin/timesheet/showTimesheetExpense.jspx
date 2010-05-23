@@ -93,7 +93,7 @@
 		            		<td></td>
 		            		<td></td>
 		            		<td></td>
-		            		<td><b>${totalAmount}</b></td>
+		            		<td><b><fmt:formatNumber value="${totalAmount}" maxFractionDigits="2"/></b></td>
 		            		<td></td>
 		            		<td></td>
 		            		<td></td>
