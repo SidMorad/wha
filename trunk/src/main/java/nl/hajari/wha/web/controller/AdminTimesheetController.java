@@ -229,7 +229,7 @@ public class AdminTimesheetController extends AbstractController {
 			modelMap.addAttribute("invoicetype_enum", InvoiceType.class.getEnumConstants());
 			return "admin/timesheet/invoice";
 		}
-
+		modelMap.put("reportHeadered", invoice.getReportHeadered());
 		if (invoice.getInvoiceType().equals(InvoiceType.timesheet)) {
 			return generateTimesheetInvoiceForTimesheet(invoice, modelMap,
 					result, request);

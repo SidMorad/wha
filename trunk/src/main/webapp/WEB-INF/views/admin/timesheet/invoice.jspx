@@ -71,6 +71,10 @@
                 <br/>
                 <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_invoiceType_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true, required: true}})); </script>
             </div>
+            <div id="roo_invoice_reportHeadered">
+            	<label for="_reportHeadered_id"><spring:message code="label.reportHeadered"/></label>
+            	<form:checkbox path="reportHeadered" id="_reportHeadered_id"/>
+            </div>
             <div class="submit" id="roo_invoice_submit">
                 <spring:message code="button.report" var="report_button"/>
                 <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
