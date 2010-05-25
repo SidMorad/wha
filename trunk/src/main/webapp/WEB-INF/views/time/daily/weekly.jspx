@@ -100,7 +100,7 @@
 				<c:forEach items="${weekLabels}" var="w">
 				<td>
 					<c:if test="${w.value ne '---'}">
-	                <form:input cssStyle="width:95%" id="${w.key}" maxlength="2" path="${w.key}" size="0"/>
+	                <form:input cssStyle="width:95%" id="${w.key}" path="${w.key}" size="0"/>
 	                <form:errors cssClass="errors-in-table" id="_duration_error" path="${w.key}"/>
 	                <spring:message arguments="${label_working}" code="field.invalid" var="field_invalid"/>
 	                <spring:message argumentSeparator="," arguments="${label_working},(${field_required})" code="field.simple.validation" var="field_validation"/>
