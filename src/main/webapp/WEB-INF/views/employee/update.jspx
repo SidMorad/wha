@@ -72,9 +72,11 @@
                 <c:if test="${not empty techroles}">
                     <label for="_techRoles_id">${label_techRoles}:</label>
                     <form:select cssStyle="width:250px" id="_techRoles_id" path="techRoles">
-                        <form:options itemValue="id" items="${techroles}"/>
+                        <form:options itemValue="id" items="${techroles}" />
                     </form:select>
+                    <!-- 
                     <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_techRoles_id', widgetType: 'dijit.form.MultiSelect', widgetAttrs: {}})); </script>
+                    -->
                 </c:if>
             </div>
             <br/>
