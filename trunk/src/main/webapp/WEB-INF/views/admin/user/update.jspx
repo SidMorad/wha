@@ -45,11 +45,11 @@
                 <c:if test="${not empty roles}">
                     <label for="_roles"><spring:message code="label.roles"/>:</label>
                     <form:select cssStyle="width:250px" id="_roles" path="roles">
-                    	<c:forEach var="role" items="${roles}">
-                        	<form:option value="${role.id}" label="${role.name}"  />
-                    	</c:forEach>
+                       	<form:options items="${roles}" itemValue="id" itemLabel="name" />
                     </form:select>
+                    <!-- 
                     <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_roles', widgetType: 'dijit.form.MultiSelect', widgetAttrs: {}})); </script>
+                    -->
                 </c:if>
             </div>
             <br/>
