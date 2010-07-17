@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
  * 
  * 
  * @author <a href="mailto:saeid3@gmail.com">Saeid Moradi</a>
+ * @author Behrooz Nobakht
  */
 @Service
 public class TimesheetPossibleWeeksOptionsProvider implements OptionsProvider<Integer, String> {
@@ -38,6 +39,8 @@ public class TimesheetPossibleWeeksOptionsProvider implements OptionsProvider<In
 	public Map<Integer, String> getOptions() {
 		if (null == possibleWeeks) {
 			possibleWeeks = new HashMap<Integer, String>();
+		} else {
+			possibleWeeks.clear();
 		}
 		fillOptions(possibleWeeks);
 		logger.debug(possibleWeeks);
@@ -60,6 +63,8 @@ public class TimesheetPossibleWeeksOptionsProvider implements OptionsProvider<In
 	public Map<Integer, String> buildWeeks(String datePattern) {
 		if (null == possibleWeeks) {
 			possibleWeeks = new ListOrderedMap();
+		} else {
+			possibleWeeks.clear();
 		}
 		this.datePattern = datePattern;
 		fillOptions(possibleWeeks);
