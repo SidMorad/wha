@@ -190,7 +190,7 @@
 			and update your monthly work log at WHA available at 
 			http://hajari.webfactional.com
 			
-			After 23:59:59 of the last day of the month, you have only a read-only access
+			After 12:00 PM of the last day of the month, you have only a read-only access
 			to your previous time sheets, and further changes would require you to contact
 			HM Solutions officials.
 			
@@ -211,7 +211,7 @@
 		-->
 		<!-- For test:  0 */2 * * * * -->
 		<task:scheduled ref="employeeService"
-			method="sendMonthlyTimesheetUpdateNotification" cron="0 30 10 28 * *" />
+			method="sendMonthlyTimesheetUpdateNotification" cron="0 30 10 30 * *" />
 	</task:scheduled-tasks>
 
 	<!-- Jasperreports configuration -->
