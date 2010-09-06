@@ -26,7 +26,7 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 
 @Entity
 @RooJavaBean
-@RooEntity(finders = { "findTimesheetsByEmployeeAndSheetMonthAndSheetYearEquals", "findTimesheetsByEmployee" })
+@RooEntity(finders = { "findTimesheetsByEmployeeAndSheetMonthAndSheetYearEquals", "findTimesheetsByEmployee", "findEditableTimesheetsByEmployee" })
 @UniqueConstraint(columnNames = "sheetYear,sheetMonth,employee")
 public class Timesheet {
 
@@ -63,6 +63,9 @@ public class Timesheet {
 
 	@Column(nullable = false)
 	private boolean archived;
+	
+	@Column(nullable = true)
+	private Boolean editable;
 
 	public String toString() {
 		return sheetYear + ", " + sheetMonth + ", " + monthlyTotal;

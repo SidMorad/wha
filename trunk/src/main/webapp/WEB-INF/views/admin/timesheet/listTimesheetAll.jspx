@@ -45,51 +45,30 @@
         <table style="width:98%">
             <thead>
                 <tr>
-                    <th><spring:message code="label.id"/></th>
+                    <!-- <th><spring:message code="label.id"/></th> -->
                     <th><spring:message code="label.year"/></th>
                     <th><spring:message code="label.month"/></th>
-                    <th><spring:message code="label.total"/></th>
-                    <th>Del</th>
-                    <th>Arc</th>
                     <th><spring:message code="label.employee"/></th>
+                    <th><spring:message code="label.total"/></th>
                     <th><spring:message code="label.dailytimesheets"/></th>
                     <th><spring:message code="label.dailytravels"/></th>
                     <th><spring:message code="label.dailyexpenses"/></th>
                     <th><spring:message code="label.ponumber" var="label_poNumber"/>${label_poNumber}</th>
+                    <th></th>
+                    <!-- 
+                    <th>Del</th>
+                    <th>Arc</th>
                     <th><spring:message code="label.invoice" var="label_invoice" />${label_invoice}</th>
+                    -->
                 </tr>
             </thead>
             <c:forEach items="${timesheets}" var="timesheet">
                 <tr>
-                    <td>${timesheet.id}</td>
+                    <!-- <td>${timesheet.id}</td> -->
                     <td>${timesheet.sheetYear}</td>
                     <td>${timesheet.sheetMonthShortName}</td>
-                    <td>${timesheet.monthlyTotal}</td>
-                    <td>
-	                    <spring:url value="/static/images/delete.png" var="delete_image_url"/>
-                        <spring:message arguments="${entity_label}" code="entity.delete" var="delete_label"/>
-                    	<a href="javascript:deleteObjectByAdmin(${timesheet.id},'timesheet')">
-                    		<img alt="${delete_label}" src="${delete_image_url}"/>
-                    	</a> 	
-                    </td>
-                    <td>
-                    	<c:if test="${!timesheet.archived}">
-	                    <spring:url value="/static/images/archive.png" var="archive_image_url"/>
-                        <spring:message arguments="${entity_label}" code="entity.archive" var="archive_label"/>
-                    	<a href="javascript:archiveObjectByAdmin(${timesheet.id},'timesheet')">
-                    		<img alt="${archive_label}" src="${archive_image_url}"/>
-                    	</a> 	
-                    	</c:if>
-                    	<c:if test="${timesheet.archived}">
-                        <spring:url value="/admin/timesheet/archive/undo/${timesheet.id}" var="archive_undo_form_url"/>
-	                    <spring:url value="/static/images/archive-undo.png" var="archive_undo_image_url"/>
-                        <form:form action="${archive_undo_form_url}" method="GET">
-                            <spring:message arguments="${entity_label}" code="entity.archive.undo" var="undo_label"/>
-                            <input alt="${undo_label}" class="image" src="${archive_undo_image_url}" title="${undo_label}" type="image" value="${show_label}"/>
-                        </form:form>
-                    	</c:if>
-                    </td>
                     <td>${timesheet.employee}</td>
+                    <td>${timesheet.monthlyTotal}</td>
                     <td align="center">
                        	<span style="float: left;">
                        		<c:out value="${fn:length(timesheet.dailyTimesheets)}"/>
@@ -133,8 +112,6 @@
                             <input alt="${label_poNumber}" class="image" src="${ponumber_image_url}" title="${label_poNumber}" 
                             	   type="image" value="${show_label}"/>
                         </form:form>
-                    </td>
-                    <td>
                     	<c:if test="${timesheet.poNumber != null}">
                    		<spring:url value="/admin/timesheet/invoice/${timesheet.id}" var="show_invoice_form_url" />
                    		<spring:url value="/static/images/invoice.png" var="invoice_image_url"/>
@@ -145,6 +122,42 @@
                         </c:if>
                     	<c:if test="${timesheet.poNumber == null}">
                     	<c:out value="   " />
+                    	</c:if>
+                    </td>
+                    <td>
+	                    <spring:url value="/static/images/delete.png" var="delete_image_url"/>
+                        <spring:message arguments="${entity_label}" code="entity.delete" var="delete_label"/>
+                    	<a href="javascript:deleteObjectByAdmin(${timesheet.id},'timesheet')">
+                    		<img alt="${delete_label}" src="${delete_image_url}"/>
+                    	</a>	
+                    	<c:if test="${!timesheet.archived}">
+	                    <spring:url value="/static/images/archive.png" var="archive_image_url"/>
+                        <spring:message arguments="${entity_label}" code="entity.archive" var="archive_label"/>
+                    	<a href="javascript:archiveObjectByAdmin(${timesheet.id},'timesheet')">
+                    		<img alt="${archive_label}" src="${archive_image_url}"/>
+                    	</a> 	
+                    	</c:if>
+                    	<c:if test="${timesheet.archived}">
+                        <spring:url value="/admin/timesheet/archive/undo/${timesheet.id}" var="archive_undo_form_url"/>
+	                    <spring:url value="/static/images/archive-undo.png" var="archive_undo_image_url"/>
+                        <form:form action="${archive_undo_form_url}" method="GET">
+                            <spring:message arguments="${entity_label}" code="entity.archive.undo" var="undo_label"/>
+                            <input alt="${undo_label}" class="image" src="${archive_undo_image_url}" title="${undo_label}" type="image" value="${show_label}"/>
+                        </form:form>
+                    	</c:if>
+                    	<spring:url value="/admin/timesheet/close/${timesheet.id}" var="timesheet_close_url" />
+                    	<c:if test="${timesheet.editable != null and timesheet.editable}">
+                    		<form:form action="${timesheet_close_url}" method="GET">
+                    			<spring:message  code="label.close" var="timesheet_close" />
+                    			<input alt="${timesheet_close}" class="image" src="${image_yes_url}" title="${timesheet_close}" type="image" value="${show_label}" />
+                    		</form:form>
+                    	</c:if>
+                    	<spring:url value="/admin/timesheet/open/${timesheet.id}" var="timesheet_open_url" />
+                    	<c:if test="${timesheet.editable == null or !timesheet.editable}">
+                    		<form:form action="${timesheet_open_url}" method="GET">
+                    			<spring:message  code="label.open" var="timesheet_open" />
+                    			<input alt="${timesheet_open}" class="image" src="${image_no_url}" title="${timesheet_open}" type="image" value="${show_label}" />
+                    		</form:form>
                     	</c:if>
                     </td>
                 </tr>

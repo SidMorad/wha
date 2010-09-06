@@ -90,12 +90,15 @@ privileged aspect TimeController_DailyTimesheetController {
 
 	@RequestMapping(value = "/time/view/month", method = RequestMethod.GET)
 	public String TimeController.prepareTimesheetMonthView(HttpServletRequest request, ModelMap modelMap) {
-		Long employeeId = getEmployeeId(request);
-		logger.debug("Employee on the session: " + employeeId);
-		if (employeeId == null) {
-			throw new IllegalStateException("Month time sheet view requires registered emplpee. Employee ID is null.");
-		}
-		Timesheet timesheet = (Timesheet) Timesheet.findEmployeeCurrentTimesheet(employeeId).getSingleResult();
+		// Long employeeId = getEmployeeId(request);
+		// logger.debug("Employee on the session: " + employeeId);
+		// if (employeeId == null) {
+		// throw new
+		// IllegalStateException("Month time sheet view requires registered emplpee. Employee ID is null.");
+		// }
+		// Timesheet timesheet = (Timesheet)
+		// Timesheet.findEmployeeCurrentTimesheet(employeeId).getSingleResult();
+		Timesheet timesheet = loadWorkingTimesheet(request);
 		logger.debug("Employee Timesheet found: " + timesheet);
 		List<DailyTimesheet> dailyTimesheets = timesheet.getDailyTimesheetsSortedList();
 
@@ -104,6 +107,7 @@ privileged aspect TimeController_DailyTimesheetController {
 		dailyTimesheet.setDurationTraining(0f);
 		dailyTimesheet.setDurationSickness(0f);
 		dailyTimesheet.setDuration(0f);
+		dailyTimesheet.setTimesheet(timesheet);
 		if (modelMap.containsAttribute(WORKING_DAILY_TIMESHEET_KEY)) {
 			DailyTimesheet current = (DailyTimesheet) modelMap.get(WORKING_DAILY_TIMESHEET_KEY);
 			dailyTimesheet.setDayDate(current.getDayDate());
@@ -113,7 +117,7 @@ privileged aspect TimeController_DailyTimesheetController {
 		modelMap.put("dailyTimesheet", dailyTimesheet);
 		modelMap.put("dailyTimesheets", dailyTimesheets);
 		modelMap.put("timesheet", timesheet);
-		modelMap.put("employee", Employee.findEmployee(employeeId));
+		modelMap.put("employee", Employee.findEmployee(getEmployeeId(request)));
 		return "time/daily/month";
 	}
 
@@ -124,9 +128,14 @@ privileged aspect TimeController_DailyTimesheetController {
 		if (dailyTimesheet == null) {
 			throw new IllegalArgumentException("DailyTimesheet is null.");
 		}
-		if (!DateUtils.getCurrentMonth().equals(DateUtils.getMonthInteger(dailyTimesheet.getDayDate()))) {
+		Timesheet timesheet = Timesheet.findTimesheet(dailyTimesheet.getTimesheet().getId());
+		
+		Integer timesheetMonth = timesheet.getSheetMonth();
+		Integer dailyTimesheetMonth = DateUtils.getMonthInteger(dailyTimesheet.getDayDate());
+		if (!timesheetMonth.equals(dailyTimesheetMonth)) {
 			result.rejectValue("dayDate", "error.time.day.date.not.avaiable");
 		}
+		
 		if (StringUtils.hasText(dailyTimesheet.getProjectName())) {
 			logger.debug("Recieved project name: " + dailyTimesheet.getProjectName());
 			try {
@@ -143,55 +152,43 @@ privileged aspect TimeController_DailyTimesheetController {
 			result.rejectValue("duration", "error.time.duration.more.than.24");
 		}
 		if (result.hasErrors()) {
-			// Fill modelMap
-			Long employeeId = getEmployeeId(request);
-			Timesheet timesheet = (Timesheet) Timesheet.findEmployeeCurrentTimesheet(employeeId).getSingleResult();
-			modelMap.put("employee", Employee.findEmployee(employeeId));
+			modelMap.put("employee", Employee.findEmployee(getEmployeeId(request)));
 			modelMap.put("timesheet", timesheet);
 			modelMap.put("dailyTimesheets", timesheet.getDailyTimesheetsSortedList());
-
 			return "time/daily/month";
 		}
-		Long employeeId = getEmployeeId(request);
-		Timesheet timesheet = (Timesheet) Timesheet.findEmployeeCurrentTimesheet(employeeId).getSingleResult();
-		logger.debug("Resolving existent daily timesheet for: [" + timesheet + "] on [" + dailyTimesheet.getDayDate()
+		// Long employeeId = getEmployeeId(request);
+		// Timesheet timesheet = (Timesheet)
+		// Timesheet.findEmployeeCurrentTimesheet(employeeId).getSingleResult();
+		// Timesheet timesheet = loadWorkingTimesheet(request);
+		logger.debug("Resolving existent timesheet for: [" + timesheet + "] on [" + dailyTimesheet.getDayDate()
 				+ "]");
 
-		Long timesheetId = getTimesheetId(request);
-		dailyTimesheet = dailyTimesheetService.createDailyTimesheet(dailyTimesheet, timesheetId);
-
-		/**
-		 * This was for updating an already existing daily time sheet!
-		 */
-		// DailyTimesheet dailyTimesheet2 = null;
-		// try {
-		// dailyTimesheet2 = (DailyTimesheet)
-		// DailyTimesheet.findDailyTimesheetsByDayDateAndTimesheet(
-		// dailyTimesheet.getDayDate(), timesheet).getSingleResult();
-		// } catch (Exception e) {
-		// logger.debug("No daily timesheet found for such criteria.");
-		// }
-		// if (dailyTimesheet2 == null) {
-		// } else {
-		// dailyTimesheet2.setDuration(dailyTimesheet.getDuration());
-		// dailyTimesheet2.setDurationOffs(dailyTimesheet.getDurationOffs());
-		// dailyTimesheet2.setDurationTraining(dailyTimesheet.getDurationTraining());
-		// dailyTimesheet2.setProject(dailyTimesheet.getProject());
-		// updateDailyTimesheet(dailyTimesheet2, result, modelMap);
-		// }
+		// Long timesheetId = getTimesheetId(request);
+		dailyTimesheet = dailyTimesheetService.createDailyTimesheet(dailyTimesheet, timesheet.getId());
 
 		// see #prepareTimeseetMonthView to see why
+		request.setAttribute(Timesheet.TIMESHEET_ID, timesheet.getId());
 		modelMap.addAttribute(WORKING_DAILY_TIMESHEET_KEY, dailyTimesheet);
 		return prepareTimesheetMonthView(request, modelMap);
 	}
 
 	@RequestMapping(value = "/time/view/month/delete/{id}", method = RequestMethod.DELETE)
-	public String TimeController.deleteTimesheetMonthView(@PathVariable("id") Long id) {
+	public String TimeController.deleteTimesheetMonthView(@PathVariable("id") Long id, HttpServletRequest request, ModelMap mm) {
 		if (id == null)
 			throw new IllegalArgumentException("An Identifier is required");
 		DailyTimesheet dailyTimesheet = DailyTimesheet.findDailyTimesheet(id);
+		Long timesheetId = dailyTimesheet.getTimesheet().getId();
 		dailyTimesheetService.deleteDailyTimesheet(dailyTimesheet);
-		return "redirect:/time/view/month";
+		request.setAttribute(Timesheet.TIMESHEET_ID, timesheetId);
+		return prepareTimesheetMonthView(request, mm);
+	}
+
+	@RequestMapping(value = "/time/view/month/{id}", method = RequestMethod.GET)
+	public String TimeController.prepareOpenTimesheetMonthView(@PathVariable("id") Long id, HttpServletRequest request,
+			ModelMap mm) {
+		request.setAttribute(Timesheet.TIMESHEET_ID, id);
+		return prepareTimesheetMonthView(request, mm);
 	}
 
 	@RequestMapping(value = "/time/timesheet/dailytimesheet/{timesheetId}/report/{format}", method = RequestMethod.GET)

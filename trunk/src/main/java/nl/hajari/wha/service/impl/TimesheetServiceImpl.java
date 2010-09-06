@@ -3,10 +3,12 @@
  */
 package nl.hajari.wha.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Query;
 
+import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.Timesheet;
 import nl.hajari.wha.service.ConstantsService;
 import nl.hajari.wha.service.DailyExpenseService;
@@ -89,6 +91,30 @@ public class TimesheetServiceImpl extends AbstractService implements TimesheetSe
 		Timesheet timesheet = load(id);
 		timesheet.setArchived(false);
 		timesheet.merge();
+	}
+
+	@Override
+	public void openTimesheetForEmployee(Long id) {
+		Timesheet timesheet = load(id);
+		timesheet.setEditable(true);
+		timesheet.merge();
+	}
+
+	@Override
+	public void closeTimesheetForEmployee(Long id) {
+		Timesheet timesheet = load(id);
+		timesheet.setEditable(false);
+		timesheet.merge();
+	}
+	
+	@Override
+	public List<Timesheet> findEditableTimesheets(Long employeeId) {
+		Employee employee = Employee.findEmployee(employeeId);
+		List timesheets = Timesheet.findEditableTimesheetsByEmployee(employee).getResultList();
+		if (timesheets == null) {
+			return new ArrayList<Timesheet>();
+		}
+		return timesheets;
 	}
 
 	@Override

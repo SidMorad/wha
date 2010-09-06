@@ -13,11 +13,12 @@ function addDateDecoration(eid, pm, im, isRequired, dp) {
 		elementId : eid,
 		widgetType : 'dijit.form.DateTextBox',
 		widgetAttrs : {
-			constraints: {min: new Date().setDate(0), max: new Date().setDate(31), datePattern: dp},
+			//constraints: {min: new Date().setDate(0), max: new Date().setDate(31), datePattern: dp},
+			constraints: {datePattern: dp},
 			promptMessage : pm,
 			invalidMessage : im,
 			required : isRequired,
-			datePattern : dp
+			datePattern : dp,
 			//value : dojo.date.locale.parse(dojo.byId(eid).value, {selector : 'date', datePattern : dp, locale: djConfig.locale}),
 		}
 	}));

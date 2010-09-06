@@ -19,4 +19,7 @@
     <definition extends="default" name="time/timesheet/expense/show">
         <put-attribute name="body" value="/WEB-INF/views/time/timesheet/showTimesheetExpense.jspx"/>
     </definition>
+    <definition extends="default" name="time/timesheet/openTimesheets">
+        <put-attribute name="body" value="/WEB-INF/views/time/timesheet/listOpenTimesheets.jspx"/>
+    </definition>
 </tiles-definitions>

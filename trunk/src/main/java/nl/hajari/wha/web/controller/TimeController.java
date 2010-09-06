@@ -1,5 +1,7 @@
 package nl.hajari.wha.web.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -7,6 +9,7 @@ import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.Timesheet;
 import nl.hajari.wha.domain.User;
 import nl.hajari.wha.service.DailyTravelService;
+import nl.hajari.wha.service.TimesheetService;
 import nl.hajari.wha.service.impl.CustomerServiceImpl;
 import nl.hajari.wha.service.impl.DailyExpenseServiceImpl;
 import nl.hajari.wha.service.impl.DailyTimesheetServiceImpl;
@@ -18,7 +21,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @RequestMapping("/time/**")
 @Controller
@@ -31,10 +37,10 @@ public class TimeController extends AbstractController {
 
 	@Autowired
 	protected DailyExpenseServiceImpl dailyExpenseService;
-	
+
 	@Autowired
 	protected DailyTravelService dailyTravelService;
-	
+
 	@Autowired
 	protected ProjectServiceImpl projectService;
 
@@ -42,7 +48,23 @@ public class TimeController extends AbstractController {
 	protected CustomerServiceImpl customerService;
 
 	@Autowired
+	protected TimesheetService timesheetService;
+
+	@Autowired
 	protected TimesheetPossibleWeeksOptionsProvider timesheetPossibleWeeksOptionsProvider;
+
+	@RequestMapping(value = "/time/timesheet/opentimesheets", method = RequestMethod.GET)
+	public String listOpenTimesheets(HttpServletRequest request, ModelMap mm) {
+		List timesheets = timesheetService.findEditableTimesheets(getEmployeeId(request));
+		mm.put("timesheets", timesheets);
+		return "time/timesheet/openTimesheets";
+	}
+
+	@RequestMapping(value = "/time/timesheet/opentimesheets/close/{id}", method = RequestMethod.GET)
+	public String closeOpenTimesheet(@PathVariable("id") Long id, HttpServletRequest request, ModelMap mm) {
+		timesheetService.closeTimesheetForEmployee(id);
+		return "redirect:/time/timesheet/opentimesheets";
+	}
 
 	public boolean authorizeAccessTimesheet(Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
@@ -100,5 +122,21 @@ public class TimeController extends AbstractController {
 		modelMap.put("dailyTravels", timesheet.getDailyTravelsSortedList());
 		modelMap.put("employee", Employee.findEmployee(employeeId));
 	}
-	
+
+	protected Timesheet loadWorkingTimesheet(HttpServletRequest request) {
+		String timesheetId = request.getParameter(Timesheet.TIMESHEET_ID);
+		if (StringUtils.hasText(timesheetId)) {
+			return Timesheet.findTimesheet(Long.valueOf(timesheetId));
+		}
+		Long id = (Long) request.getAttribute(Timesheet.TIMESHEET_ID);
+		if (id != null) {
+			return Timesheet.findTimesheet(id);
+		}
+		Long employeeId = getEmployeeId(request);
+		if (employeeId == null) {
+			throw new IllegalStateException("Month time sheet view requires registered emplpee. Employee ID is null.");
+		}
+		return (Timesheet) Timesheet.findEmployeeCurrentTimesheet(employeeId).getSingleResult();
+	}
+
 }
