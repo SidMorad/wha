@@ -145,6 +145,12 @@
                 	<spring:message code="label.profile"/>
                 </a>
             </li>
+            <li id="web_mvc_jsp_employee_open_timesheets_menu_item">
+                <c:url value="/time/timesheet/opentimesheets" var="web_mvc_jsp_employee_open_timesheets_item_url"/>
+                <a href="${web_mvc_jsp_employee_open_timesheets_item_url}">
+                	<spring:message code="label.opentimesheets"/>
+                </a>
+            </li>
         </ul>
     </li>
 	</security:authorize>

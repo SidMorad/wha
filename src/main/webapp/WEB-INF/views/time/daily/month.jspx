@@ -38,6 +38,7 @@
         <c:url var="action_url" value="/time/view/month/update"/>
         <form:form action="${action_url}" modelAttribute="dailyTimesheet" method="POST">
         <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
+        <form:hidden path="timesheet.id" />
         <div>
         	<table style="width:98%" border="0">
 	        	<tr>

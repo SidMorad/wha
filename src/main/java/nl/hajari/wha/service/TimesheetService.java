@@ -78,9 +78,10 @@ public interface TimesheetService {
 	 *         and {@link #calculateTotalExpenseAmountPayable(Timesheet)}
 	 */
 	Double getTotalPayableAmount(Timesheet timesheet);
-	
+
 	/**
-	 * It is a simple calculation based on {@link ConstantsService#CONST_KEY_EXPENSE_VAT}
+	 * It is a simple calculation based on
+	 * {@link ConstantsService#CONST_KEY_EXPENSE_VAT}
 	 * 
 	 * @param amount
 	 * @return
@@ -110,5 +111,28 @@ public interface TimesheetService {
 	 * @param id
 	 */
 	void archiveUndo(Long id);
+
+	/**
+	 * Makes the timesheet editable for the employee even if it is not the
+	 * month.
+	 * 
+	 * @param id
+	 */
+	void openTimesheetForEmployee(Long id);
+
+	/**
+	 * Closes a timesheet not to be editable for employee.
+	 * 
+	 * @param id
+	 */
+	void closeTimesheetForEmployee(Long id);
+
+	/**
+	 * Finds the open (editable) time sheets for some employee.
+	 * 
+	 * @param employeeId
+	 * @return
+	 */
+	List<Timesheet> findEditableTimesheets(Long employeeId);
 
 }

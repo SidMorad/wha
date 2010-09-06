@@ -153,6 +153,22 @@ public class AdminTimesheetController extends AbstractController {
 				+ timesheet.getSheetMonth() + "&archived=" + true;
 	}
 
+	@RequestMapping(value = "/admin/timesheet/open/{id}", method = RequestMethod.GET)
+	public String openTimesheet(@PathVariable("id") Long id) {
+		timesheetService.openTimesheetForEmployee(id);
+		Timesheet timesheet = timesheetService.load(id);
+		return "redirect:/admin/timesheet/redirect?year=" + timesheet.getSheetYear() + "&month="
+				+ timesheet.getSheetMonth() + "&archived=false";
+	}
+
+	@RequestMapping(value = "/admin/timesheet/close/{id}", method = RequestMethod.GET)
+	public String closeTimesheet(@PathVariable("id") Long id) {
+		timesheetService.closeTimesheetForEmployee(id);
+		Timesheet timesheet = timesheetService.load(id);
+		return "redirect:/admin/timesheet/redirect?year=" + timesheet.getSheetYear() + "&month="
+				+ timesheet.getSheetMonth() + "&archived=false";
+	}
+
 	@RequestMapping(value = "/admin/timesheet/daily/{id}", method = RequestMethod.GET)
 	public String showTimesheetDaily(@PathVariable("id") Long id, ModelMap modelMap) {
 		if (id == null)
@@ -321,7 +337,8 @@ public class AdminTimesheetController extends AbstractController {
 		Double subTotal = timesheetService.calculateTotalExpenseAmountPayable(timesheet);
 		modelMap.put("subTotal", MathUtils.roundToTwoDecimalPlaces(subTotal));
 
-		Double timesheetTravelTax = timesheetService.calculateVatTax(travelTotalDistance.doubleValue() * ratioPerKilometer);
+		Double timesheetTravelTax = timesheetService.calculateVatTax(travelTotalDistance.doubleValue()
+				* ratioPerKilometer);
 		modelMap.put("timesheetTravelTax", MathUtils.roundToTwoDecimalPlaces(timesheetTravelTax));
 
 		Double totalAmount = subTotal + timesheetTravelTax;

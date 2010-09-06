@@ -108,7 +108,6 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 	public Long deleteDailyTimesheet(DailyTimesheet dailyTimesheet) {
 		Long tsId = dailyTimesheet.getTimesheet().getId();
 		dailyTimesheet.remove();
-
 		// now we update monthlyTotal in Timesheet table
 		Timesheet.updateTimesheetTotalMonthly(tsId, DailyTimesheet.findTimesheetTotalMonthly(tsId));
 		return tsId;

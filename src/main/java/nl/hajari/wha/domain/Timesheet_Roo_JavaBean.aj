@@ -81,6 +81,14 @@ privileged aspect Timesheet_Roo_JavaBean {
     
     public void Timesheet.setArchived(boolean archived) {    
         this.archived = archived;        
-    }    
+    }
+    
+    public Boolean Timesheet.getEditable() {
+    	return this.editable;
+    }
+    
+    public void Timesheet.setEditable(Boolean editable) {
+    	this.editable = editable;
+    }
     
 }

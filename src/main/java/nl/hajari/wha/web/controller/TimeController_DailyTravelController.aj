@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author <a href="mailto:saeid3@gmail.com">Saeid Moradi</a>
  **/
 privileged aspect TimeController_DailyTravelController {
-	
+
 	@RequestMapping(value = "/time/travel/weekly", method = RequestMethod.GET)
 	public String TimeController.prepareTravelWeeklyView(HttpServletRequest request, ModelMap modelMap) {
 		prepareOrInitializeCommonTimesheetTravelsInformation(request, modelMap);
@@ -36,7 +36,7 @@ privileged aspect TimeController_DailyTravelController {
 				timesheetPossibleWeeksOptionsProvider.buildWeeks(getFullDatePattern()));
 		return "time/travel/weekly";
 	}
-	
+
 	@RequestMapping(value = "/time/travel/weekly/refresh", method = RequestMethod.POST)
 	public String TimeController.refreshTravelWeeklyView(TimesheetWeeklyFormBean bean, HttpServletRequest request,
 			ModelMap modelMap) {
@@ -50,7 +50,7 @@ privileged aspect TimeController_DailyTravelController {
 		modelMap.put("weekLabels", labels);
 		return "time/travel/weekly";
 	}
-	
+
 	@RequestMapping(value = "/time/travel/weekly/update", method = RequestMethod.POST)
 	public String TimeController.updateTravelWeekly(TimesheetWeeklyFormBean bean, BindingResult result,
 			HttpServletRequest request, ModelMap modelMap) {
@@ -67,28 +67,42 @@ privileged aspect TimeController_DailyTravelController {
 
 	@RequestMapping(value = "/time/travel", method = RequestMethod.GET)
 	public String TimeController.prepareTravelMonthView(HttpServletRequest request, ModelMap modelMap) {
-		Long timesheetId = (Long) request.getSession().getAttribute(Timesheet.TIMESHEET_ID);
-		if (timesheetId == null) {
-			throw new IllegalStateException("Month Travel view requires current Timesheet. Timesheet ID is null.");
-		}
-		Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
+		// Long timesheetId = (Long)
+		// request.getSession().getAttribute(Timesheet.TIMESHEET_ID);
+		// if (timesheetId == null) {
+		// throw new
+		// IllegalStateException("Month Travel view requires current Timesheet. Timesheet ID is null.");
+		// }
+		// Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
+		Timesheet timesheet = loadWorkingTimesheet(request);
 		logger.debug("Timesheet Founded: [" + timesheet + "] for Travel Month View");
-		
-		modelMap.put("dailyTravel", new DailyTravel());
+		DailyTravel dt = new DailyTravel();
+		dt.setTimesheet(timesheet);
+		modelMap.put("dailyTravel", dt);
 		modelMap.put("dailyTravels", timesheet.getDailyTravelsSortedList());
 		modelMap.put("timesheet", timesheet);
 		modelMap.put("employee", timesheet.getEmployee());
 		return "time/travel/month";
 	}
-	
+
 	@RequestMapping(value = "/time/travel/update", method = RequestMethod.POST)
 	public String TimeController.updateTravelMonthView(@Valid DailyTravel dailyTravel,
 			BindingResult result, HttpServletRequest request, ModelMap modelMap) {
 		if (dailyTravel == null) {
 			throw new IllegalArgumentException("DailyTravel is null.");
 		}
-		Long timesheetId = (Long) request.getSession().getAttribute(Timesheet.TIMESHEET_ID);
-		Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
+
+		Timesheet timesheet = Timesheet.findTimesheet(dailyTravel.getTimesheet().getId());
+
+		// Long timesheetId = (Long)
+		// request.getSession().getAttribute(Timesheet.TIMESHEET_ID);
+		// Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
+
+		Integer timesheetMonth = timesheet.getSheetMonth();
+		Integer dailyTimesheetMonth = DateUtils.getMonthInteger(dailyTravel.getDayDate());
+		if (!timesheetMonth.equals(dailyTimesheetMonth)) {
+			result.rejectValue("dayDate", "error.time.day.date.not.avaiable");
+		}
 		
 		if (result.hasErrors()) {
 			// Fill modelMap and return
@@ -97,19 +111,31 @@ privileged aspect TimeController_DailyTravelController {
 			modelMap.put("employee", timesheet.getEmployee());
 			return "time/travel/month";
 		}
-		
 		dailyTravel.setTimesheet(timesheet);
 		dailyTravel.persist();
-		
+		request.setAttribute(Timesheet.TIMESHEET_ID, timesheet.getId());
 		return prepareTravelMonthView(request, modelMap);
 	}
 
-    @RequestMapping(value = "/time/travel/delete/{id}", method = RequestMethod.DELETE)    
-    public String TimeController.deleteDailyTravel(@PathVariable("id") Long id) {    
-        if (id == null) throw new IllegalArgumentException("An Identifier is required");        
-        DailyTravel.findDailyTravel(id).remove();        
-        return "redirect:/time/travel";
-    }    
+	@RequestMapping(value = "/time/travel/{id}", method = RequestMethod.GET)
+	public String TimeController.prepareOpenTimesheetTravelMonthView(@PathVariable("id") Long id,
+			HttpServletRequest request,
+			ModelMap mm) {
+		request.setAttribute(Timesheet.TIMESHEET_ID, id);
+		return prepareTravelMonthView(request, mm);
+	}
+
+	@RequestMapping(value = "/time/travel/delete/{id}", method = RequestMethod.DELETE)
+	public String TimeController.deleteDailyTravel(@PathVariable("id") Long id, HttpServletRequest request, ModelMap mm) {
+		if (id == null)
+			throw new IllegalArgumentException("An Identifier is required");
+		DailyTravel dt = DailyTravel.findDailyTravel(id);
+		Long timesheetId = dt.getTimesheet().getId();
+		dt.remove();
+		dt.flush();
+		request.setAttribute(Timesheet.TIMESHEET_ID, timesheetId);
+		return prepareTravelMonthView(request, mm);
+	}
 
 	@RequestMapping(value = "/time/timesheet/dailytravel/{timesheetId}/report/{format}", method = RequestMethod.GET)
 	public String TimeController.reportDailyTravel(
@@ -123,7 +149,7 @@ privileged aspect TimeController_DailyTravelController {
 		Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
 		JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(
 				timesheet.getDailyTravelsSortedList(), false);
-		
+
 		modelMap.put("timesheetTravelReportList", jrDataSource);
 		modelMap.put("format", format);
 		modelMap.put(Constants.IMAGE_HM_LOGO, getFileFullPath(request, Constants.imageHMlogoAddress));
