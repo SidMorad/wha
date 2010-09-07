@@ -174,5 +174,13 @@
         <c:if test="${empty timesheets}">
             <spring:message arguments="${entity_label_plural}" code="entity.not.found"/>
         </c:if>
+        <div class="new">
+            <spring:url value="/admin/timesheet/form" var="create_url"/>
+            <a href="${create_url}">
+                <spring:url value="/static/images/add.png" var="create_img_url"/>
+                <spring:message arguments="${entity_label}" code="global.menu.new" var="add_message"/>
+                <img alt="${add_message}" src="${create_img_url}" title="${add_message}"/>
+            </a>
+        </div>
     </div>
 </div>

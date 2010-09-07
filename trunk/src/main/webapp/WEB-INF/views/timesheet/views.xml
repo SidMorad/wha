@@ -4,6 +4,9 @@
     <definition extends="default" name="timesheet/list">
         <put-attribute name="body" value="/WEB-INF/views/timesheet/list.jspx"/>
     </definition>
+    <definition extends="default" name="timesheet/create">
+        <put-attribute name="body" value="/WEB-INF/views/timesheet/create.jspx"/>
+    </definition>
     <definition extends="default" name="timesheet/show">
         <put-attribute name="body" value="/WEB-INF/views/timesheet/show.jspx"/>
     </definition>
