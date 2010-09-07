@@ -9,6 +9,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import nl.hajari.wha.Constants;
 import nl.hajari.wha.domain.Customer;
 import nl.hajari.wha.domain.DailyTimesheet;
+import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.Invoice;
 import nl.hajari.wha.domain.InvoiceType;
 import nl.hajari.wha.domain.Timesheet;
@@ -62,6 +63,35 @@ public class AdminTimesheetController extends AbstractController {
 
 	@Autowired
 	protected ConstantsService constantsService;
+
+	@RequestMapping(value = "/admin/timesheet/form", method = RequestMethod.GET)
+	public String createForm(ModelMap mm) {
+		Timesheet timesheet = new Timesheet();
+		mm.put("timesheet", timesheet);
+		mm.put("employees", Employee.findAllEmployees());
+		mm.addAttribute(TimesheetPossibleYearsOptionsProvider.TIMESHEET_POSSIBLE_YEARS_KEY,
+				timesheetPossibleYearsOptionsProvider.getOptions());
+		mm.addAttribute(LocaleAwareCalendarOptionsProvider.POSSIBLE_TIMESHEET_MONTHS_KEY, calendarOptionsProvider
+				.getOptions());
+		return "timesheet/create";
+	}
+
+	@RequestMapping(value = "/admin/timesheet/create", method = RequestMethod.POST)
+	public String create(Timesheet timesheet, BindingResult result, ModelMap mm) {
+		List exist = Timesheet.findTimesheetsByEmployeeAndSheetMonthAndSheetYearEquals(timesheet.getEmployee(),
+				timesheet.getSheetMonth(), timesheet.getSheetYear()).getResultList();
+		if (exist != null && exist.size() > 0) {
+			return "redirect:/admin/timesheet/redirect?year=" + timesheet.getSheetYear() + "&month="
+					+ timesheet.getSheetMonth() + "&archived=" + false;
+		}
+		timesheet.setMonthlyTotal(0f);
+		timesheet.setArchived(false);
+		timesheet.setEditable(false);
+		timesheet.persist();
+		timesheet.flush();
+		return "redirect:/admin/timesheet/redirect?year=" + timesheet.getSheetYear() + "&month="
+				+ timesheet.getSheetMonth() + "&archived=" + false;
+	}
 
 	@RequestMapping(value = "/admin/timesheet", method = RequestMethod.GET)
 	public String listTimesheetAll(@RequestParam(value = "page", required = false) Integer page,
