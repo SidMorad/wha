@@ -90,15 +90,7 @@ privileged aspect TimeController_DailyTimesheetController {
 
 	@RequestMapping(value = "/time/view/month", method = RequestMethod.GET)
 	public String TimeController.prepareTimesheetMonthView(HttpServletRequest request, ModelMap modelMap) {
-		// Long employeeId = getEmployeeId(request);
-		// logger.debug("Employee on the session: " + employeeId);
-		// if (employeeId == null) {
-		// throw new
-		// IllegalStateException("Month time sheet view requires registered emplpee. Employee ID is null.");
-		// }
-		// Timesheet timesheet = (Timesheet)
-		// Timesheet.findEmployeeCurrentTimesheet(employeeId).getSingleResult();
-		Timesheet timesheet = loadWorkingTimesheet(request);
+		Timesheet timesheet = loadTimesheet(request);
 		logger.debug("Employee Timesheet found: " + timesheet);
 		List<DailyTimesheet> dailyTimesheets = timesheet.getDailyTimesheetsSortedList();
 
@@ -128,7 +120,9 @@ privileged aspect TimeController_DailyTimesheetController {
 		if (dailyTimesheet == null) {
 			throw new IllegalArgumentException("DailyTimesheet is null.");
 		}
-		Timesheet timesheet = Timesheet.findTimesheet(dailyTimesheet.getTimesheet().getId());
+
+//		Timesheet timesheet = Timesheet.findTimesheet(dailyTimesheet.getTimesheet().getId(););
+		Timesheet timesheet = loadTimesheet(request);
 		
 		Integer timesheetMonth = timesheet.getSheetMonth();
 		Integer dailyTimesheetMonth = DateUtils.getMonthInteger(dailyTimesheet.getDayDate());
@@ -157,14 +151,9 @@ privileged aspect TimeController_DailyTimesheetController {
 			modelMap.put("dailyTimesheets", timesheet.getDailyTimesheetsSortedList());
 			return "time/daily/month";
 		}
-		// Long employeeId = getEmployeeId(request);
-		// Timesheet timesheet = (Timesheet)
-		// Timesheet.findEmployeeCurrentTimesheet(employeeId).getSingleResult();
-		// Timesheet timesheet = loadWorkingTimesheet(request);
 		logger.debug("Resolving existent timesheet for: [" + timesheet + "] on [" + dailyTimesheet.getDayDate()
 				+ "]");
 
-		// Long timesheetId = getTimesheetId(request);
 		dailyTimesheet = dailyTimesheetService.createDailyTimesheet(dailyTimesheet, timesheet.getId());
 
 		// see #prepareTimeseetMonthView to see why
@@ -188,6 +177,7 @@ privileged aspect TimeController_DailyTimesheetController {
 	public String TimeController.prepareOpenTimesheetMonthView(@PathVariable("id") Long id, HttpServletRequest request,
 			ModelMap mm) {
 		request.setAttribute(Timesheet.TIMESHEET_ID, id);
+		request.getSession().setAttribute("OPEN_TIMESHEET_ID", id);
 		return prepareTimesheetMonthView(request, mm);
 	}
 

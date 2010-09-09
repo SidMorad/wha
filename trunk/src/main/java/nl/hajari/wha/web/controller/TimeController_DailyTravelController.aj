@@ -67,14 +67,7 @@ privileged aspect TimeController_DailyTravelController {
 
 	@RequestMapping(value = "/time/travel", method = RequestMethod.GET)
 	public String TimeController.prepareTravelMonthView(HttpServletRequest request, ModelMap modelMap) {
-		// Long timesheetId = (Long)
-		// request.getSession().getAttribute(Timesheet.TIMESHEET_ID);
-		// if (timesheetId == null) {
-		// throw new
-		// IllegalStateException("Month Travel view requires current Timesheet. Timesheet ID is null.");
-		// }
-		// Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
-		Timesheet timesheet = loadWorkingTimesheet(request);
+		Timesheet timesheet = loadTimesheet(request);
 		logger.debug("Timesheet Founded: [" + timesheet + "] for Travel Month View");
 		DailyTravel dt = new DailyTravel();
 		dt.setTimesheet(timesheet);
@@ -92,11 +85,8 @@ privileged aspect TimeController_DailyTravelController {
 			throw new IllegalArgumentException("DailyTravel is null.");
 		}
 
-		Timesheet timesheet = Timesheet.findTimesheet(dailyTravel.getTimesheet().getId());
-
-		// Long timesheetId = (Long)
-		// request.getSession().getAttribute(Timesheet.TIMESHEET_ID);
-		// Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
+		// Timesheet timesheet = Timesheet.findTimesheet(dailyTravel.getTimesheet().getId());
+		Timesheet timesheet = loadTimesheet(request);
 
 		Integer timesheetMonth = timesheet.getSheetMonth();
 		Integer dailyTimesheetMonth = DateUtils.getMonthInteger(dailyTravel.getDayDate());
@@ -122,6 +112,7 @@ privileged aspect TimeController_DailyTravelController {
 			HttpServletRequest request,
 			ModelMap mm) {
 		request.setAttribute(Timesheet.TIMESHEET_ID, id);
+		request.getSession().setAttribute("OPEN_TIMESHEET_ID", id);
 		return prepareTravelMonthView(request, mm);
 	}
 
