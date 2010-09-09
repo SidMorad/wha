@@ -28,14 +28,7 @@ privileged aspect TimeController_DailyExpenseController {
 	@RequestMapping(value = "/time/expense", method = RequestMethod.GET)
 	public String TimeController.prepareExpenseMonthView(
 			HttpServletRequest request, ModelMap modelMap) {
-		// Long timesheetId = (Long) request.getSession().getAttribute(
-		// Timesheet.TIMESHEET_ID);
-		// if (timesheetId == null) {
-		// throw new IllegalStateException(
-		// "Month Expense view requires current Timesheet. Timesheet ID is null.");
-		// }
-		// Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
-		Timesheet timesheet = loadWorkingTimesheet(request);
+		Timesheet timesheet = loadTimesheet(request);
 		logger.debug("Timesheet Founded: [" + timesheet
 				+ "] for Expense Month View");
 
@@ -57,14 +50,8 @@ privileged aspect TimeController_DailyExpenseController {
 	public String TimeController.updateExpenseMonthView(
 			@Valid DailyExpense dailyExpense, BindingResult result,
 			HttpServletRequest request, ModelMap modelMap) {
-		// Long timesheetId = (Long) request.getSession().getAttribute(
-		// Timesheet.TIMESHEET_ID);
-		// if (timesheetId == null) {
-		// throw new IllegalStateException(
-		// "Month Expense view requires current Timesheet. Timesheet ID is null.");
-		// }
-		// Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
-		Timesheet timesheet = Timesheet.findTimesheet(dailyExpense.getTimesheet().getId());
+//		Timesheet timesheet = Timesheet.findTimesheet(dailyExpense.getTimesheet().getId());
+		Timesheet timesheet = loadTimesheet(request);
 		logger.debug("Timesheet Founded: [" + timesheet
 				+ "] for Expense Month View (Update)");
 		Integer timesheetMonth = timesheet.getSheetMonth();
@@ -93,6 +80,7 @@ privileged aspect TimeController_DailyExpenseController {
 			HttpServletRequest request,
 			ModelMap mm) {
 		request.setAttribute(Timesheet.TIMESHEET_ID, id);
+		request.getSession().setAttribute("OPEN_TIMESHEET_ID", id);
 		return prepareExpenseMonthView(request, mm);
 	}
 

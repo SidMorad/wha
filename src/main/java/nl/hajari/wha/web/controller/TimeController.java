@@ -63,6 +63,7 @@ public class TimeController extends AbstractController {
 	@RequestMapping(value = "/time/timesheet/opentimesheets/close/{id}", method = RequestMethod.GET)
 	public String closeOpenTimesheet(@PathVariable("id") Long id, HttpServletRequest request, ModelMap mm) {
 		timesheetService.closeTimesheetForEmployee(id);
+		request.getSession().removeAttribute("OPEN_TIMESHEET_ID");
 		return "redirect:/time/timesheet/opentimesheets";
 	}
 
@@ -123,7 +124,15 @@ public class TimeController extends AbstractController {
 		modelMap.put("employee", Employee.findEmployee(employeeId));
 	}
 
-	protected Timesheet loadWorkingTimesheet(HttpServletRequest request) {
+	protected Timesheet loadTimesheet(HttpServletRequest request) {
+		Timesheet timesheet = loadOpenTimesheet(request);
+		if (timesheet != null) {
+			return timesheet;
+		}
+		return loadCurrentMonthTimesheet(request);
+	}
+
+	protected Timesheet loadOpenTimesheet(HttpServletRequest request) {
 		String timesheetId = request.getParameter(Timesheet.TIMESHEET_ID);
 		if (StringUtils.hasText(timesheetId)) {
 			return Timesheet.findTimesheet(Long.valueOf(timesheetId));
@@ -132,6 +141,14 @@ public class TimeController extends AbstractController {
 		if (id != null) {
 			return Timesheet.findTimesheet(id);
 		}
+		id = (Long) request.getSession().getAttribute("OPEN_TIMESHEET_ID");
+		if (id != null) {
+			return Timesheet.findTimesheet(id);
+		}
+		return null;
+	}
+
+	protected Timesheet loadCurrentMonthTimesheet(HttpServletRequest request) {
 		Long employeeId = getEmployeeId(request);
 		if (employeeId == null) {
 			throw new IllegalStateException("Month time sheet view requires registered emplpee. Employee ID is null.");
