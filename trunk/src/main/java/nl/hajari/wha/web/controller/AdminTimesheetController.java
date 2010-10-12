@@ -81,16 +81,10 @@ public class AdminTimesheetController extends AbstractController {
 		List exist = Timesheet.findTimesheetsByEmployeeAndSheetMonthAndSheetYearEquals(timesheet.getEmployee(),
 				timesheet.getSheetMonth(), timesheet.getSheetYear()).getResultList();
 		if (exist != null && exist.size() > 0) {
-			return "redirect:/admin/timesheet/redirect?year=" + timesheet.getSheetYear() + "&month="
-					+ timesheet.getSheetMonth() + "&archived=" + false;
+			return "redirect:" + getListPath(timesheet, false);
 		}
-		timesheet.setMonthlyTotal(0f);
-		timesheet.setArchived(false);
-		timesheet.setEditable(false);
-		timesheet.persist();
-		timesheet.flush();
-		return "redirect:/admin/timesheet/redirect?year=" + timesheet.getSheetYear() + "&month="
-				+ timesheet.getSheetMonth() + "&archived=" + false;
+		timesheetService.saveNewTimesheet(timesheet);
+		return "redirect:" + getListPath(timesheet, false);
 	}
 
 	@RequestMapping(value = "/admin/timesheet", method = RequestMethod.GET)
@@ -163,40 +157,35 @@ public class AdminTimesheetController extends AbstractController {
 	public String deleteTimesheet(@PathVariable("id") Long id) {
 		Timesheet timesheet = timesheetService.load(id);
 		timesheetService.delete(id);
-		return "redirect:/admin/timesheet/redirect?year=" + timesheet.getSheetYear() + "&month="
-				+ timesheet.getSheetMonth() + "&archived=" + timesheet.isArchived();
+		return "redirect:" + getListPath(timesheet, timesheet.isArchived());
 	}
 
 	@RequestMapping(value = "/admin/timesheet/archive/{id}")
 	public String archiveTimesheet(@PathVariable("id") Long id) {
 		Timesheet timesheet = timesheetService.load(id);
 		timesheetService.archive(id);
-		return "redirect:/admin/timesheet/redirect?year=" + timesheet.getSheetYear() + "&month="
-				+ timesheet.getSheetMonth() + "&archived=" + false;
+		return "redirect:" + getListPath(timesheet, false);
 	}
 
 	@RequestMapping(value = "/admin/timesheet/archive/undo/{id}")
 	public String archiveUndoTimesheet(@PathVariable("id") Long id) {
 		Timesheet timesheet = timesheetService.load(id);
 		timesheetService.archiveUndo(id);
-		return "redirect:/admin/timesheet/redirect?year=" + timesheet.getSheetYear() + "&month="
-				+ timesheet.getSheetMonth() + "&archived=" + true;
+		return "redirect:" + getListPath(timesheet, true);
 	}
 
 	@RequestMapping(value = "/admin/timesheet/open/{id}", method = RequestMethod.GET)
 	public String openTimesheet(@PathVariable("id") Long id) {
 		timesheetService.openTimesheetForEmployee(id);
 		Timesheet timesheet = timesheetService.load(id);
-		return "redirect:/admin/timesheet/redirect?year=" + timesheet.getSheetYear() + "&month="
-				+ timesheet.getSheetMonth() + "&archived=false";
+		return "redirect:" + getListPath(timesheet, false);
 	}
 
 	@RequestMapping(value = "/admin/timesheet/close/{id}", method = RequestMethod.GET)
 	public String closeTimesheet(@PathVariable("id") Long id) {
 		timesheetService.closeTimesheetForEmployee(id);
 		Timesheet timesheet = timesheetService.load(id);
-		return "redirect:/admin/timesheet/redirect?year=" + timesheet.getSheetYear() + "&month="
-				+ timesheet.getSheetMonth() + "&archived=false";
+		return "redirect:" + getListPath(timesheet, false);
 	}
 
 	@RequestMapping(value = "/admin/timesheet/daily/{id}", method = RequestMethod.GET)
@@ -243,7 +232,7 @@ public class AdminTimesheetController extends AbstractController {
 		Timesheet updatedTimesheet = timesheetService.load(timesheet.getId());
 		updatedTimesheet.setPoNumber(timesheet.getPoNumber());
 		timesheetService.update(updatedTimesheet);
-		return "redirect:/admin/timesheet?page=1&size=25";
+		return "redirect:" + getListPath(updatedTimesheet, false);
 	}
 
 	@RequestMapping(value = "/admin/timesheet/invoice/{id}", method = RequestMethod.GET)
@@ -392,5 +381,10 @@ public class AdminTimesheetController extends AbstractController {
 	@RequestMapping(value = "/admin/admin/timesheet/archive/{id}")
 	public String archiveTimesheet2(@PathVariable("id") Long id) {
 		return archiveTimesheet(id);
+	}
+
+	private String getListPath(Timesheet timesheet, boolean archived) {
+		return "/admin/timesheet/redirect?year=" + timesheet.getSheetYear() + "&month="
+				+ timesheet.getSheetMonth() + "&archived=" + archived;
 	}
 }
