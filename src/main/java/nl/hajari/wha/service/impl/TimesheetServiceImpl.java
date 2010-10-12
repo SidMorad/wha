@@ -150,6 +150,16 @@ public class TimesheetServiceImpl extends AbstractService implements TimesheetSe
 	public Double calculateVatTax(Double amount) {
 		return amount.doubleValue() * getVatRatio();
 	}
+	
+	@Override
+	public Timesheet saveNewTimesheet(Timesheet timesheet) {
+		timesheet.setMonthlyTotal(0f);
+		timesheet.setArchived(false);
+		timesheet.setEditable(false);
+		timesheet.persist();
+		timesheet.flush();
+		return timesheet;
+	}
 
 	private Float getVatRatio() {
 		return Float.valueOf(constantsService.findValue(ConstantsService.CONST_KEY_EXPENSE_VAT));

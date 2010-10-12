@@ -134,5 +134,11 @@ public interface TimesheetService {
 	 * @return
 	 */
 	List<Timesheet> findEditableTimesheets(Long employeeId);
+	
+	/**
+	 * @param timesheet
+	 * @return
+	 */
+	Timesheet saveNewTimesheet(Timesheet timesheet);
 
 }
