@@ -116,13 +116,16 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 	public List<DailyTimesheet> getDailyTimesheetListForReportPerProject(Long timesheetId) {
 		Timesheet timesheet = Timesheet.findTimesheet(timesheetId);
 		List<DailyTimesheet> dailies = timesheet.getDailyTimesheetsSortedList();
-
+		return getDailyTimesheetListForReportPerProject(dailies);
+	}
+	
+	public List<DailyTimesheet> getDailyTimesheetListForReportPerProject(List<DailyTimesheet> dailies) {
 		List<DailyTimesheet> finalTimesheetList = new ArrayList<DailyTimesheet>();
 
 		// listOfTheOnes is a list of 'project' that we already 'group by' them
 		List<Project> listOfTheOnes = new ArrayList<Project>();
 		for (DailyTimesheet dt : dailies) {
-			DailyTimesheet newDt = new DailyTimesheet(timesheet, 0f, 0f, 0f, 0f, 0f);
+			DailyTimesheet newDt = new DailyTimesheet(dt.getTimesheet(), 0f, 0f, 0f, 0f, 0f);
 			// check if theOne is not in the list
 			Project theOne = dt.getProject();
 			if (!listOfTheOnes.contains(theOne)) {
