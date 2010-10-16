@@ -1,4 +1,4 @@
-package nl.hajari.wha.domain;
+/*package nl.hajari.wha.domain;
 
 import nl.hajari.wha.domain.EmployeeDataOnDemand;
 import org.junit.Test;
@@ -108,3 +108,4 @@ privileged aspect EmployeeIntegrationTest_Roo_IntegrationTest {
     }    
     
 }
+*/

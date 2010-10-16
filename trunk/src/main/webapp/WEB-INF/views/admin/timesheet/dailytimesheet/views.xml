@@ -10,4 +10,7 @@
     <definition extends="default" name="admin/timesheet/dailytimesheet/update">
         <put-attribute name="body" value="/WEB-INF/views/admin/timesheet/dailytimesheet/update.jspx"/>
     </definition>
+    <definition extends="default" name="admin/timesheet/dailytimesheet/search">
+        <put-attribute name="body" value="/WEB-INF/views/admin/timesheet/dailytimesheet/search.jspx"/>
+    </definition>
 </tiles-definitions>

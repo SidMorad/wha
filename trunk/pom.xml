@@ -838,6 +838,32 @@
 				</plugins>
 			</build>
 		</profile>
+		<profile>
+			<id>test</id>
+			<properties>
+				<jdbc.url><![CDATA[jdbc:mysql://localhost/test_wha?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8]]></jdbc.url>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>dbunit-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>test-compile</phase>
+								<goals>
+									<goal>operation</goal>
+								</goals>
+								<configuration>
+									<type>CLEAN_INSERT</type>
+									<src>src/test/resources/test-data.xml</src>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 	</profiles>
 
 	<properties>

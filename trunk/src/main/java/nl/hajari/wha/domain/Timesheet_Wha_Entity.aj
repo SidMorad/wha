@@ -19,6 +19,22 @@ privileged aspect Timesheet_Wha_Entity {
 		return 0;
 	}
 	
+	public static Query Timesheet.findAllTimesheetsByEmployeeAndSheetMonthAndSheetYearBetween(Employee employee, Integer fromYear, Integer fromMonth , Integer toYear, Integer toMonth) {
+		Query query;
+		if (fromYear < toYear) {
+			// TODO figure it a way to limit the result with fromMonth and toMonth
+			query = entityManager().createQuery("select o from Timesheet o where o.employee.id= :employeeId and o.sheetYear >= :fromYear and o.sheetYear <= :toYear");
+		} else {
+			query = entityManager().createQuery("select o from Timesheet o where o.employee.id= :employeeId and o.sheetYear >= :fromYear and o.sheetMonth >= :fromMonth and o.sheetYear <= :toYear and o.sheetMonth <= :toMonth");
+			query.setParameter("fromMonth", fromMonth);
+			query.setParameter("toMonth", toMonth);
+		}
+		query.setParameter("employeeId", employee.getId());
+		query.setParameter("fromYear", fromYear);
+		query.setParameter("toYear", toYear);
+		return query; 	
+	}
+	
 	public static Query Timesheet.findEmployeeCurrentTimesheet(Long employeeId) {
 		Employee employee = Employee.findEmployee(employeeId);
 		Query query = Timesheet.findTimesheetsByEmployeeAndSheetMonthAndSheetYearEquals(employee, DateUtils

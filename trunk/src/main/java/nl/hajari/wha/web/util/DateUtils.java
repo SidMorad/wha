@@ -44,6 +44,25 @@ public class DateUtils {
 		return calendar.get(Calendar.MONTH);
 	}
 
+	public static Integer getYearInteger(Date dayDate) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(dayDate);
+		return calendar.get(Calendar.YEAR);
+	}
+	
+	public static Integer getDayInteger(Date dayDate) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(dayDate);
+		return calendar.get(Calendar.DAY_OF_MONTH);
+	}
+	
+	public static Date getDateObject(Integer year, Integer month, Integer day) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(year, month, day);
+		return calendar.getTime();
+	}
+	
+
 	public static String getMonthAndYearString(Date date) {
 		SimpleDateFormat format = new SimpleDateFormat("MMyy");
 		return format.format(date);

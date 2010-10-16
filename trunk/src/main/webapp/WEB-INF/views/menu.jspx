@@ -40,6 +40,13 @@
                     <spring:message arguments="${label_timesheets}" code="global.menu.list"/>
                 </a>
             </li>
+        	<li id="admin_timesheet_daily_search_menu_item">
+                <spring:url value="/admin/timesheet/dailytimesheet/search/form" var="admin_timesheet_daily_search_menu_item_url"/>
+                <a href="${admin_timesheet_daily_search_menu_item_url}">
+                    <spring:message code="label.timesheets" var="label_timesheets"/>
+                    <spring:message arguments="${label_timesheets}" code="global.menu.search"/>
+                </a>
+            </li>
 	        <li id="web_mvc_jsp_list_project_menu_item">
                 <spring:url value="/project?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 25 : param.size}" var="web_mvc_jsp_list_project_menu_item_url"/>
                 <a href="${web_mvc_jsp_list_project_menu_item_url}">
