@@ -12,13 +12,15 @@
 	<parameter name="toDate" class="java.lang.String"/>
 	
 	<field name="id" class="java.lang.Long"/>
+	<field name="timesheet.sheetYear" class="java.lang.Integer"/>
 	<field name="dayDate" class="java.util.Date"/>
-	<field name="duration" class="java.lang.Float"/>
 	<field name="project.customer.name" class="java.lang.String"/>
 	<field name="project.name" class="java.lang.String"/>
+	<field name="duration" class="java.lang.Float"/>
 	<field name="durationOffs" class="java.lang.Float"/>
 	<field name="durationTraining" class="java.lang.Float"/>
 	<field name="durationSickness" class="java.lang.Float"/>
+	<field name="dailyTotalDuration" class="java.lang.Float"/>
 	<field name="timesheet.employee.firstName" class="java.lang.String"/>
 	<field name="timesheet.employee.lastName" class="java.lang.String"/>
 	<field name="timesheet.employee.empId" class="java.lang.String"/>
@@ -35,6 +37,9 @@
 	</variable>
 	<variable name="durationSickness_1" class="java.lang.Float" calculation="Sum">
 		<variableExpression><![CDATA[$F{durationSickness}]]></variableExpression>
+	</variable>
+	<variable name="dailyTotalDuration_1" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{dailyTotalDuration}]]></variableExpression>
 	</variable>
 	<background>
 		<band splitType="Stretch"/>
@@ -72,7 +77,7 @@
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{timesheet.employee.firstName} + " " + $F{timesheet.employee.lastName} + " [" + $F{timesheet.employee.empId} + "]"]]></textFieldExpression>
 			</textField>
-			<textField>
+			<!--<textField>
 				<reportElement x="202" y="6" width="52" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.customer} + ":"]]></textFieldExpression>
@@ -81,12 +86,7 @@
 				<reportElement x="254" y="6" width="139" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{project.customer.name}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="444" y="6" width="50" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.billing.id} + ":"]]></textFieldExpression>
-			</textField>
+			</textField>-->
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -97,17 +97,12 @@
 			<textField>
 				<reportElement x="0" y="0" width="70" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.date}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.year}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="71" y="0" width="29" height="20"/>
+				<reportElement x="50" y="0" width="50" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.day}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="110" y="0" width="180" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.project}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.month}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="290" y="0" width="50" height="20"/>
@@ -138,20 +133,15 @@
 	</columnHeader>
 	<detail>
 		<band height="22" splitType="Stretch">
-			<textField pattern="dd/MM/yyyy">
+			<textField>
 				<reportElement x="0" y="0" width="70" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.util.Date"><![CDATA[$F{dayDate}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{timesheet.sheetYear}]]></textFieldExpression>
 			</textField>
-			<textField pattern="EEE">
-				<reportElement x="70" y="0" width="30" height="20"/>
+			<textField pattern="MMM">
+				<reportElement x="50" y="0" width="30" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{dayDate}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="110" y="0" width="180" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{project.name}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="290" y="0" width="50" height="20"/>
@@ -176,7 +166,7 @@
 			<textField>
 				<reportElement x="509" y="0" width="63" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.Float"><![CDATA[$F{duration}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{dailyTotalDuration}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -208,7 +198,7 @@
 			<textField pattern="###0.00">
 				<reportElement x="509" y="9" width="54" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.Float"><![CDATA[$V{duration_1}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$V{dailyTotalDuration_1}]]></textFieldExpression>
 			</textField>
 			<subreport>
 				<reportElement isPrintRepeatedValues="false" x="0" y="0" width="325" height="20" isRemoveLineWhenBlank="true"/>

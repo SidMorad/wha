@@ -15,7 +15,7 @@ import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.Project;
 import nl.hajari.wha.domain.Timesheet;
 import nl.hajari.wha.web.controller.formbean.TimesheetDailyReportFormBean;
-import nl.hajari.wha.web.controller.formbean.TimesheetDailySearchFormBean;
+import nl.hajari.wha.web.controller.formbean.TimesheetSearchFormBean;
 import nl.hajari.wha.web.util.DateUtils;
 
 import org.springframework.ui.ModelMap;
@@ -151,83 +151,9 @@ privileged aspect AdminTimesheetController_DailyTimesheetController {
     	return "timesheetDailyReportList";
     }
     
-    @RequestMapping(value = "/admin/timesheet/dailytimesheet/search", method = RequestMethod.POST)
-    public String AdminTimesheetController.searchDailyTimesheetForm(@Valid TimesheetDailySearchFormBean formBean, ModelMap modelMap) {
-    	Employee employee = formBean.getEmployee();
-    	Integer fromYear = DateUtils.getYearInteger(formBean.getFrom());
-    	Integer fromMonth = DateUtils.getMonthInteger(formBean.getFrom());
-    	Integer fromDay = DateUtils.getDayInteger(formBean.getFrom());
-    	Integer toYear = DateUtils.getYearInteger(formBean.getTo());
-    	Integer toMonth = DateUtils.getMonthInteger(formBean.getTo());
-    	Integer toDay = DateUtils.getDayInteger(formBean.getTo());
-    	List<Timesheet> timesheets = Timesheet.findAllTimesheetsByEmployeeAndSheetMonthAndSheetYearBetween(employee, fromYear, fromMonth, toYear, toMonth).getResultList();
-    	List<DailyTimesheet> dailyTimesheets = new ArrayList<DailyTimesheet>();
-    	for (Timesheet timesheet : timesheets) {
-    		dailyTimesheets.addAll(timesheet.getDailyTimesheetsSortedList());
-    	}
-    	dailyTimesheets = getDailyTimesheetsBetweenDates(dailyTimesheets, formBean.getFrom(), formBean.getTo());
-    	
-    	modelMap.addAttribute("dailyTimesheets", dailyTimesheets);
-    	modelMap.addAttribute("employees", Employee.findAllEmployees());
-    	modelMap.addAttribute("employeeId", employee.getId());
-    	modelMap.addAttribute("fromYear", fromYear);
-    	modelMap.addAttribute("fromMonth", fromMonth);
-    	modelMap.addAttribute("fromDay", fromDay);
-    	modelMap.addAttribute("toYear", toYear);
-    	modelMap.addAttribute("toMonth", toMonth);
-    	modelMap.addAttribute("toDay", toDay);
-    	return "admin/timesheet/dailytimesheet/search";
-    }
-
-    @RequestMapping(value = "/admin/timesheet/dailytimesheet/search/{employeeId}/{fromYear}/{fromMonth}/{fromDay}/{toYear}/{toMonth}/{toDay}/report/{format}" , method = RequestMethod.GET)
-    public String AdminTimesheetController.reportSearchedDailyTimesheet(@PathVariable("employeeId")Long employeeId, @PathVariable("format") String format,
-    		@PathVariable("fromYear")Integer fromYear, @PathVariable("fromMonth")Integer fromMonth,@PathVariable("fromDay")Integer fromDay, 
-    		@PathVariable("toYear")Integer toYear, @PathVariable("toMonth")Integer toMonth,@PathVariable("toDay")Integer toDay, ModelMap modelMap, HttpServletRequest request) {
-    	List<Timesheet> timesheets = Timesheet.findAllTimesheetsByEmployeeAndSheetMonthAndSheetYearBetween(Employee.findEmployee(employeeId), fromYear, fromMonth, toYear, toMonth).getResultList();
-    	List<DailyTimesheet> dailyTimesheets = new ArrayList<DailyTimesheet>();
-    	for (Timesheet timesheet : timesheets) {
-    		dailyTimesheets.addAll(timesheet.getDailyTimesheetsSortedList());
-    	}
-    	Date fromDate = DateUtils.getDateObject(fromYear, fromMonth, fromDay);
-    	Date toDate = DateUtils.getDateObject(toYear, toMonth, toDay);
-    	dailyTimesheets = getDailyTimesheetsBetweenDates(dailyTimesheets, fromDate, toDate);
-    	
-    	JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(dailyTimesheets,false);
-    	modelMap.put("timesheetDailySearchReportList", jrDataSource);
-    	
-    	// Fill ProjectSubReport
-    	List<DailyTimesheet> dts = dailyTimesheetService.getDailyTimesheetListForReportPerProject(dailyTimesheets);
-    	modelMap.put("ProjectSubReportData", new JRBeanCollectionDataSource(dts, false));
-    	
-    	modelMap.put("format", format);
-    	modelMap.put(Constants.IMAGE_HM_LOGO, getFileFullPath(request, Constants.imageHMlogoAddress));
-    	modelMap.put("fromDate", fromYear + " " + DateUtils.getSheetMonthShortName(fromMonth) + " " + fromDay);
-    	modelMap.put("toDate", toYear + " " + DateUtils.getSheetMonthShortName(toMonth) + " " + toDay);
-    	return "timesheetDailySearchReportList";
-    }
-    
-    @RequestMapping(value = "/admin/timesheet/dailytimesheet/search/form", method = RequestMethod.GET)
-    public String AdminTimesheetController.searchDailyTimesheet(ModelMap modelMap) {
-    	modelMap.addAttribute("timesheetDailySearchFormBean", new TimesheetDailySearchFormBean());
-    	modelMap.addAttribute("employees", Employee.findAllEmployees());
-    	return "admin/timesheet/dailytimesheet/search";
-    }
-    
     private List<Timesheet> AdminTimesheetController.getListByOnlyOneTimesheet(Timesheet timesheet) {
     	List<Timesheet> timesheets = new ArrayList<Timesheet>();
     	timesheets.add(timesheet);
     	return timesheets;
     }
-    
-    private static List<DailyTimesheet> getDailyTimesheetsBetweenDates(List<DailyTimesheet> dailyTimesheets, Date from, Date to) {
-    	List<DailyTimesheet> list = new ArrayList<DailyTimesheet>();
-    	for (DailyTimesheet dailyTimesheet : dailyTimesheets) {
-    		Date date = dailyTimesheet.getDayDate();
-    		if (date.after(from) && date.before(to)) {
-    			list.add(dailyTimesheet);
-    		}
-		}
-    	return list;
-    }
-    
 }

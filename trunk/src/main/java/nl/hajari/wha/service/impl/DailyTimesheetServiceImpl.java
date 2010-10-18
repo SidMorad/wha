@@ -146,6 +146,25 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 
 		return finalTimesheetList;
 	}
+	
+	public DailyTimesheet getTotalDailyTimesheetPerMonthBetweenTwoDates(List<DailyTimesheet> dailes, Date from, Date to) {
+		dailes = getDailyTimesheetsBetweenDates(dailes, from, to);
+		if (dailes.size() > 0) {
+			DailyTimesheet newDt = new DailyTimesheet(null, 0f, 0f, 0f, 0f, 0f);
+			for (DailyTimesheet dt : dailes) {
+				newDt.setTimesheet(dt.getTimesheet());
+				newDt.setProject(dt.getProject());
+				newDt.setDayDate(dt.getDayDate());
+				newDt.setDuration(newDt.getDuration() + dt.getDuration());
+				newDt.setDurationOffs(newDt.getDurationOffs() + dt.getDurationOffs());
+				newDt.setDurationTraining(newDt.getDurationTraining() + dt.getDurationTraining());
+				newDt.setDurationSickness(newDt.getDurationSickness() + dt.getDurationSickness());
+				newDt.setDailyTotalDuration(newDt.getDailyTotalDuration() + dt.getDailyTotalDuration());
+			}
+			return newDt;
+		}
+		return null;
+	}
 
 	public boolean validateDailyHours(DailyTimesheet dailyTimesheet, Long timesheetId) {
 		Float twentyFour = new Float(24f);
@@ -316,4 +335,14 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 		}
 	}
 
+	private List<DailyTimesheet> getDailyTimesheetsBetweenDates(List<DailyTimesheet> dailyTimesheets, Date from, Date to) {
+    	List<DailyTimesheet> list = new ArrayList<DailyTimesheet>();
+    	for (DailyTimesheet dailyTimesheet : dailyTimesheets) {
+    		Date date = dailyTimesheet.getDayDate();
+    		if ((date.after(from) || date.equals(from)) && (date.before(to) || date.equals(to)) ) {
+    			list.add(dailyTimesheet);
+    		}
+		}
+    	return list;
+    }
 }

@@ -18,5 +18,8 @@
     </definition>    
     <definition extends="default" name="admin/timesheet/invoice">
         <put-attribute name="body" value="/WEB-INF/views/admin/timesheet/invoice.jspx"/>
-    </definition>    
+    </definition>
+    <definition extends="default" name="admin/timesheet/search">
+        <put-attribute name="body" value="/WEB-INF/views/admin/timesheet/search.jspx"/>
+    </definition>
 </tiles-definitions>

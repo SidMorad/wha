@@ -10,12 +10,12 @@ import javax.validation.constraints.NotNull;
 import nl.hajari.wha.domain.Employee;
 
 /**
- * This class is 'form backing bean' for searching daily timesheets 
- * base on Employee, Start and End time. 
+ * This class is 'form backing bean' for searching timesheets 
+ * base on Employee, Start and End dates. 
  *
  * @author <a href="mailto:saeid3@gmail.com">Saeid Moradi</a>	
  */
-public class TimesheetDailySearchFormBean {
+public class TimesheetSearchFormBean {
 
 	@NotNull
 	private Employee employee;
@@ -26,9 +26,9 @@ public class TimesheetDailySearchFormBean {
 	@NotNull
 	private Date to;
 
-	public TimesheetDailySearchFormBean() {}
+	public TimesheetSearchFormBean() {}
 	
-	public TimesheetDailySearchFormBean(Employee employee, Date from, Date to) {
+	public TimesheetSearchFormBean(Employee employee, Date from, Date to) {
 		this.employee = employee;
 		this.from = from;
 		this.to = to;

@@ -1,9 +1,11 @@
 package nl.hajari.wha.web.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import nl.hajari.wha.Constants;
@@ -23,6 +25,7 @@ import nl.hajari.wha.service.impl.LocaleAwareCalendarOptionsProvider;
 import nl.hajari.wha.service.impl.ProjectServiceImpl;
 import nl.hajari.wha.service.impl.TimesheetPossibleYearsOptionsProvider;
 import nl.hajari.wha.web.controller.formbean.TimesheetDailyReportFormBean;
+import nl.hajari.wha.web.controller.formbean.TimesheetSearchFormBean;
 import nl.hajari.wha.web.controller.formbean.TimesheetYearMonthFormBean;
 import nl.hajari.wha.web.util.DateUtils;
 import nl.hajari.wha.web.util.MathUtils;
@@ -153,6 +156,70 @@ public class AdminTimesheetController extends AbstractController {
 		return "admin/timesheet/list";
 	}
 
+    @RequestMapping(value = "/admin/timesheet/search", method = RequestMethod.POST)
+    public String searchTimesheetForm(@Valid TimesheetSearchFormBean formBean, ModelMap modelMap) {
+    	Employee employee = formBean.getEmployee();
+    	Integer fromYear = DateUtils.getYearInteger(formBean.getFrom());
+    	Integer fromMonth = DateUtils.getMonthInteger(formBean.getFrom());
+    	Integer toYear = DateUtils.getYearInteger(formBean.getTo());
+    	Integer toMonth = DateUtils.getMonthInteger(formBean.getTo());
+    	List<Timesheet> timesheets = Timesheet.findAllTimesheetsByEmployeeAndSheetMonthAndSheetYearBetween(employee, fromYear, fromMonth, toYear, toMonth).getResultList();
+    	List<DailyTimesheet> dailyTimesheets = new ArrayList<DailyTimesheet>();
+    	for (Timesheet timesheet : timesheets) {
+    		DailyTimesheet totalDt = dailyTimesheetService.getTotalDailyTimesheetPerMonthBetweenTwoDates(timesheet.getDailyTimesheetsSortedList(), formBean.getFrom(), formBean.getTo());
+    		if (totalDt != null) {
+    			dailyTimesheets.add(totalDt);
+    		}
+    	}
+    	
+    	modelMap.addAttribute("dailyTimesheets", dailyTimesheets);
+    	modelMap.addAttribute("employees", Employee.findAllEmployees());
+    	modelMap.addAttribute("employeeId", employee.getId());
+    	return "admin/timesheet/search";
+    }
+
+    @RequestMapping(value = "/admin/timesheet/search/{employeeId}/{fromDate}/{toDate}/report/{format}" , method = RequestMethod.GET)
+    public String reportSearchedTimesheet(@PathVariable("employeeId")Long employeeId, @PathVariable("format") String format,
+    		@PathVariable("fromDate")String fromDateString, 
+    		@PathVariable("toDate")String toDateString, ModelMap modelMap, HttpServletRequest request) {
+    	Date fromDate = DateUtils.getDateObject(fromDateString, "dd-MM-yyyy");
+    	Date toDate = DateUtils.getDateObject(toDateString, "dd-MM-yyyy");
+    	Integer fromYear = DateUtils.getYearInteger(fromDate);
+    	Integer fromMonth = DateUtils.getMonthInteger(fromDate);
+    	Integer fromDay = DateUtils.getDayInteger(fromDate);
+    	Integer toYear = DateUtils.getYearInteger(toDate);
+    	Integer toMonth = DateUtils.getMonthInteger(toDate);
+    	Integer toDay = DateUtils.getDayInteger(toDate);
+    	List<Timesheet> timesheets = Timesheet.findAllTimesheetsByEmployeeAndSheetMonthAndSheetYearBetween(Employee.findEmployee(employeeId), fromYear, fromMonth, toYear, toMonth).getResultList();
+    	List<DailyTimesheet> dailyTimesheets = new ArrayList<DailyTimesheet>();
+    	for (Timesheet timesheet : timesheets) {
+    		DailyTimesheet totalDt = dailyTimesheetService.getTotalDailyTimesheetPerMonthBetweenTwoDates(timesheet.getDailyTimesheetsSortedList(), fromDate, toDate);
+    		if (totalDt != null) {
+    			dailyTimesheets.add(totalDt);
+    		}
+    	}
+    	
+    	JRBeanCollectionDataSource jrDataSource = new JRBeanCollectionDataSource(dailyTimesheets,false);
+    	modelMap.put("timesheetDailySearchReportList", jrDataSource);
+    	
+    	// Fill ProjectSubReport
+    	List<DailyTimesheet> dts = dailyTimesheetService.getDailyTimesheetListForReportPerProject(dailyTimesheets);
+    	modelMap.put("ProjectSubReportData", new JRBeanCollectionDataSource(dts, false));
+    	
+    	modelMap.put("format", format);
+    	modelMap.put(Constants.IMAGE_HM_LOGO, getFileFullPath(request, Constants.imageHMlogoAddress));
+    	modelMap.put("fromDate", fromYear + " " + DateUtils.getSheetMonthShortName(fromMonth) + " " + fromDay);
+    	modelMap.put("toDate", toYear + " " + DateUtils.getSheetMonthShortName(toMonth) + " " + toDay);
+    	return "timesheetDailySearchReportList";
+    }
+    
+    @RequestMapping(value = "/admin/timesheet/search/form", method = RequestMethod.GET)
+    public String searchTimesheetForm(ModelMap modelMap) {
+    	modelMap.addAttribute("timesheetSearchFormBean", new TimesheetSearchFormBean());
+    	modelMap.addAttribute("employees", Employee.findAllEmployees());
+    	return "admin/timesheet/search";
+    }
+	
 	@RequestMapping(value = "/admin/timesheet/delete/{id}")
 	public String deleteTimesheet(@PathVariable("id") Long id) {
 		Timesheet timesheet = timesheetService.load(id);
@@ -387,4 +454,5 @@ public class AdminTimesheetController extends AbstractController {
 		return "/admin/timesheet/redirect?year=" + timesheet.getSheetYear() + "&month="
 				+ timesheet.getSheetMonth() + "&archived=" + archived;
 	}
+
 }

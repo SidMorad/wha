@@ -1,5 +1,7 @@
 package nl.hajari.wha.web.util;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -56,10 +58,15 @@ public class DateUtils {
 		return calendar.get(Calendar.DAY_OF_MONTH);
 	}
 	
-	public static Date getDateObject(Integer year, Integer month, Integer day) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(year, month, day);
-		return calendar.getTime();
+	public static Date getDateObject(String dateString, String pattern) {
+		DateFormat df = new SimpleDateFormat(pattern);
+		try {
+			Date date = df.parse(dateString);
+			return date;
+		} catch(ParseException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 
