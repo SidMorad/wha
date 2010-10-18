@@ -190,7 +190,8 @@ public class AdminTimesheetController extends AbstractController {
     	Integer toYear = DateUtils.getYearInteger(toDate);
     	Integer toMonth = DateUtils.getMonthInteger(toDate);
     	Integer toDay = DateUtils.getDayInteger(toDate);
-    	List<Timesheet> timesheets = Timesheet.findAllTimesheetsByEmployeeAndSheetMonthAndSheetYearBetween(Employee.findEmployee(employeeId), fromYear, fromMonth, toYear, toMonth).getResultList();
+    	Employee employee = Employee.findEmployee(employeeId);
+    	List<Timesheet> timesheets = Timesheet.findAllTimesheetsByEmployeeAndSheetMonthAndSheetYearBetween(employee, fromYear, fromMonth, toYear, toMonth).getResultList();
     	List<DailyTimesheet> dailyTimesheets = new ArrayList<DailyTimesheet>();
     	for (Timesheet timesheet : timesheets) {
     		DailyTimesheet totalDt = dailyTimesheetService.getTotalDailyTimesheetPerMonthBetweenTwoDates(timesheet.getDailyTimesheetsSortedList(), fromDate, toDate);
@@ -210,6 +211,7 @@ public class AdminTimesheetController extends AbstractController {
     	modelMap.put(Constants.IMAGE_HM_LOGO, getFileFullPath(request, Constants.imageHMlogoAddress));
     	modelMap.put("fromDate", fromYear + " " + DateUtils.getSheetMonthShortName(fromMonth) + " " + fromDay);
     	modelMap.put("toDate", toYear + " " + DateUtils.getSheetMonthShortName(toMonth) + " " + toDay);
+    	modelMap.put("reportFileName", employee.getFirstName() + "_" + employee.getLastName() + "_" + fromYear + "-" + fromMonth + "-" + toYear + "-" + toMonth);
     	return "timesheetDailySearchReportList";
     }
     

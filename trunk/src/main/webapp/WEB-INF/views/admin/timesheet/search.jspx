@@ -152,7 +152,7 @@
 				            </form:form>	
 		              	</span>
                         <span style="float: right;padding-left: 5px;">
-		              		<spring:url value="/admin/timesheet/search/${employeeId}/${fromYear}/${fromMonth}/${fromDay}/${toYear}/${toMonth}/${toDay}/report/xls" var="report_xls_url"/>
+		              		<spring:url value="/admin/timesheet/search/${employeeId}/${fromDate}/${toDate}/report/xls" var="report_xls_url"/>
 	              			<spring:url value="/static/images/xls.png" var="report_xls_img_url"/>
 				            <form:form action="${report_xls_url}" method="GET">
                                 <spring:message arguments="${entity_label}" code="report.xls" var="report_xls_message"/>
@@ -160,7 +160,7 @@
 				            </form:form>	
 		              	</span>
                         <span style="float: right;padding-left: 5px;">
-		              		<spring:url value="/admin/timesheet/search/${employeeId}/${fromYear}/${fromMonth}/${fromDay}/${toYear}/${toMonth}/${toDay}/report/html" var="report_html_url"/>
+		              		<spring:url value="/admin/timesheet/search/${employeeId}/${fromDate}/${toDate}/report/html" var="report_html_url"/>
 	              			<spring:url value="/static/images/html.png" var="report_html_img_url"/>
 				            <form:form action="${report_html_url}" method="GET">
                                 <spring:message arguments="${entity_label}" code="report.html" var="report_html_message"/>
@@ -168,7 +168,7 @@
 				            </form:form>	
 		              	</span>
                         <span style="float: right;padding-left: 5px;">
-		              		<spring:url value="/admin/timesheet/search/${employeeId}/${fromYear}/${fromMonth}/${fromDay}/${toYear}/${toMonth}/${toDay}/report/csv" var="report_csv_url"/>
+		              		<spring:url value="/admin/timesheet/search/${employeeId}/${fromDate}/${toDate}/report/csv" var="report_csv_url"/>
 	              			<spring:url value="/static/images/csv.png" var="report_csv_img_url"/>
 				            <form:form action="${report_csv_url}" method="GET">
                                 <spring:message arguments="${entity_label}" code="report.csv" var="report_csv_message"/>
