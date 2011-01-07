@@ -830,7 +830,7 @@
 								</goals>
 								<configuration>
 									<format>xml</format>
-									<dest>src/test/resources/export-data.xml</dest>
+									<dest>export-data-${buildNumber}-${timestamp}.xml</dest>
 								</configuration>
 							</execution>
 						</executions>

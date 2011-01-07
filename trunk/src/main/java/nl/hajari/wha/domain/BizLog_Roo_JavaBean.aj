@@ -8,52 +8,52 @@ import nl.hajari.wha.domain.User;
 
 privileged aspect BizLog_Roo_JavaBean {
     
-    public Date BizLog.getTime() {    
-        return this.time;        
-    }    
+    public Date BizLog.getTime() {
+        return this.time;
+    }
     
-    public void BizLog.setTime(Date time) {    
-        this.time = time;        
-    }    
+    public void BizLog.setTime(Date time) {
+        this.time = time;
+    }
     
-    public String BizLog.getDetails() {    
-        return this.details;        
-    }    
+    public String BizLog.getDetails() {
+        return this.details;
+    }
     
-    public void BizLog.setDetails(String details) {    
-        this.details = details;        
-    }    
+    public void BizLog.setDetails(String details) {
+        this.details = details;
+    }
     
-    public String BizLog.getUsername() {    
-        return this.username;        
-    }    
+    public String BizLog.getUsername() {
+        return this.username;
+    }
     
-    public void BizLog.setUsername(String username) {    
-        this.username = username;        
-    }    
+    public void BizLog.setUsername(String username) {
+        this.username = username;
+    }
     
-    public User BizLog.getUser() {    
-        return this.user;        
-    }    
+    public User BizLog.getUser() {
+        return this.user;
+    }
     
-    public void BizLog.setUser(User user) {    
-        this.user = user;        
-    }    
+    public void BizLog.setUser(User user) {
+        this.user = user;
+    }
     
-    public Employee BizLog.getEmployee() {    
-        return this.employee;        
-    }    
+    public Employee BizLog.getEmployee() {
+        return this.employee;
+    }
     
-    public void BizLog.setEmployee(Employee employee) {    
-        this.employee = employee;        
-    }    
+    public void BizLog.setEmployee(Employee employee) {
+        this.employee = employee;
+    }
     
-    public Timesheet BizLog.getTimesheet() {    
-        return this.timesheet;        
-    }    
+    public Timesheet BizLog.getTimesheet() {
+        return this.timesheet;
+    }
     
-    public void BizLog.setTimesheet(Timesheet timesheet) {    
-        this.timesheet = timesheet;        
-    }    
+    public void BizLog.setTimesheet(Timesheet timesheet) {
+        this.timesheet = timesheet;
+    }
     
 }
