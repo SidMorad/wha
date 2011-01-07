@@ -13,78 +13,78 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 privileged aspect ConstantsController_Roo_Controller {
     
-    @RequestMapping(value = "/constants", method = RequestMethod.POST)    
-    public String ConstantsController.create(@Valid Constants constants, BindingResult result, ModelMap modelMap) {    
-        if (constants == null) throw new IllegalArgumentException("A constants is required");        
-        if (result.hasErrors()) {        
-            modelMap.addAttribute("constants", constants);            
-            return "constants/create";            
-        }        
-        constants.persist();        
-        return "redirect:/constants/" + constants.getId();        
-    }    
+    @RequestMapping(value = "/constants", method = RequestMethod.POST)
+    public String ConstantsController.create(@Valid Constants constants, BindingResult result, ModelMap modelMap) {
+        if (constants == null) throw new IllegalArgumentException("A constants is required");
+        if (result.hasErrors()) {
+            modelMap.addAttribute("constants", constants);
+            return "constants/create";
+        }
+        constants.persist();
+        return "redirect:/constants/" + constants.getId();
+    }
     
-    @RequestMapping(value = "/constants/form", method = RequestMethod.GET)    
-    public String ConstantsController.createForm(ModelMap modelMap) {    
-        modelMap.addAttribute("constants", new Constants());        
-        return "constants/create";        
-    }    
+    @RequestMapping(value = "/constants/form", method = RequestMethod.GET)
+    public String ConstantsController.createForm(ModelMap modelMap) {
+        modelMap.addAttribute("constants", new Constants());
+        return "constants/create";
+    }
     
-    @RequestMapping(value = "/constants/{id}", method = RequestMethod.GET)    
-    public String ConstantsController.show(@PathVariable("id") Long id, ModelMap modelMap) {    
-        if (id == null) throw new IllegalArgumentException("An Identifier is required");        
-        modelMap.addAttribute("constants", Constants.findConstants(id));        
-        return "constants/show";        
-    }    
+    @RequestMapping(value = "/constants/{id}", method = RequestMethod.GET)
+    public String ConstantsController.show(@PathVariable("id") Long id, ModelMap modelMap) {
+        if (id == null) throw new IllegalArgumentException("An Identifier is required");
+        modelMap.addAttribute("constants", Constants.findConstants(id));
+        return "constants/show";
+    }
     
-    @RequestMapping(value = "/constants", method = RequestMethod.GET)    
-    public String ConstantsController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, ModelMap modelMap) {    
-        if (page != null || size != null) {        
-            int sizeNo = size == null ? 10 : size.intValue();            
-            modelMap.addAttribute("constantses", Constants.findConstantsEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo));            
-            float nrOfPages = (float) Constants.countConstantses() / sizeNo;            
-            modelMap.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));            
-        } else {        
-            modelMap.addAttribute("constantses", Constants.findAllConstantses());            
-        }        
-        return "constants/list";        
-    }    
+    @RequestMapping(value = "/constants", method = RequestMethod.GET)
+    public String ConstantsController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, ModelMap modelMap) {
+        if (page != null || size != null) {
+            int sizeNo = size == null ? 10 : size.intValue();
+            modelMap.addAttribute("constantses", Constants.findConstantsEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo));
+            float nrOfPages = (float) Constants.countConstantses() / sizeNo;
+            modelMap.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+        } else {
+            modelMap.addAttribute("constantses", Constants.findAllConstantses());
+        }
+        return "constants/list";
+    }
     
-    @RequestMapping(method = RequestMethod.PUT)    
-    public String ConstantsController.update(@Valid Constants constants, BindingResult result, ModelMap modelMap) {    
-        if (constants == null) throw new IllegalArgumentException("A constants is required");        
-        if (result.hasErrors()) {        
-            modelMap.addAttribute("constants", constants);            
-            return "constants/update";            
-        }        
-        constants.merge();        
-        return "redirect:/constants/" + constants.getId();        
-    }    
+    @RequestMapping(method = RequestMethod.PUT)
+    public String ConstantsController.update(@Valid Constants constants, BindingResult result, ModelMap modelMap) {
+        if (constants == null) throw new IllegalArgumentException("A constants is required");
+        if (result.hasErrors()) {
+            modelMap.addAttribute("constants", constants);
+            return "constants/update";
+        }
+        constants.merge();
+        return "redirect:/constants/" + constants.getId();
+    }
     
-    @RequestMapping(value = "/constants/{id}/form", method = RequestMethod.GET)    
-    public String ConstantsController.updateForm(@PathVariable("id") Long id, ModelMap modelMap) {    
-        if (id == null) throw new IllegalArgumentException("An Identifier is required");        
-        modelMap.addAttribute("constants", Constants.findConstants(id));        
-        return "constants/update";        
-    }    
+    @RequestMapping(value = "/constants/{id}/form", method = RequestMethod.GET)
+    public String ConstantsController.updateForm(@PathVariable("id") Long id, ModelMap modelMap) {
+        if (id == null) throw new IllegalArgumentException("An Identifier is required");
+        modelMap.addAttribute("constants", Constants.findConstants(id));
+        return "constants/update";
+    }
     
-    @RequestMapping(value = "/constants/{id}", method = RequestMethod.DELETE)    
-    public String ConstantsController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size) {    
-        if (id == null) throw new IllegalArgumentException("An Identifier is required");        
-        Constants.findConstants(id).remove();        
-        return "redirect:/constants?page=" + ((page == null) ? "1" : page.toString()) + "&size=" + ((size == null) ? "10" : size.toString());        
-    }    
+    @RequestMapping(value = "/constants/{id}", method = RequestMethod.DELETE)
+    public String ConstantsController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size) {
+        if (id == null) throw new IllegalArgumentException("An Identifier is required");
+        Constants.findConstants(id).remove();
+        return "redirect:/constants?page=" + ((page == null) ? "1" : page.toString()) + "&size=" + ((size == null) ? "10" : size.toString());
+    }
     
-    @RequestMapping(value = "find/ByKeyEquals/form", method = RequestMethod.GET)    
-    public String ConstantsController.findConstantsesByKeyEqualsForm(ModelMap modelMap) {    
-        return "constants/findConstantsesByKeyEquals";        
-    }    
+    @RequestMapping(value = "find/ByKeyEquals/form", method = RequestMethod.GET)
+    public String ConstantsController.findConstantsesByKeyEqualsForm(ModelMap modelMap) {
+        return "constants/findConstantsesByKeyEquals";
+    }
     
-    @RequestMapping(value = "find/ByKeyEquals", method = RequestMethod.GET)    
-    public String ConstantsController.findConstantsesByKeyEquals(@RequestParam("key") String key, ModelMap modelMap) {    
-        if (key == null || key.length() == 0) throw new IllegalArgumentException("A Key is required.");        
-        modelMap.addAttribute("constantses", Constants.findConstantsesByKeyEquals(key).getResultList());        
-        return "constants/list";        
-    }    
+    @RequestMapping(value = "find/ByKeyEquals", method = RequestMethod.GET)
+    public String ConstantsController.findConstantsesByKeyEquals(@RequestParam("key") String key, ModelMap modelMap) {
+        if (key == null || key.length() == 0) throw new IllegalArgumentException("A Key is required.");
+        modelMap.addAttribute("constantses", Constants.findConstantsesByKeyEquals(key).getResultList());
+        return "constants/list";
+    }
     
 }

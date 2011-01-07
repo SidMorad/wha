@@ -4,6 +4,6 @@ import org.springframework.beans.factory.annotation.Configurable;
 
 privileged aspect DailyExpense_Roo_Configurable {
     
-    declare @type: DailyExpense: @Configurable;    
+    declare @type: DailyExpense: @Configurable;
     
 }

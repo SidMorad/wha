@@ -7,68 +7,68 @@ import nl.hajari.wha.domain.Timesheet;
 
 privileged aspect DailyTimesheet_Roo_JavaBean {
     
-    public Date DailyTimesheet.getDayDate() {    
-        return this.dayDate;        
-    }    
+    public Date DailyTimesheet.getDayDate() {
+        return this.dayDate;
+    }
     
-    public void DailyTimesheet.setDayDate(Date dayDate) {    
-        this.dayDate = dayDate;        
-    }    
+    public void DailyTimesheet.setDayDate(Date dayDate) {
+        this.dayDate = dayDate;
+    }
     
-    public Float DailyTimesheet.getDuration() {    
-        return this.duration;        
-    }    
+    public Float DailyTimesheet.getDuration() {
+        return this.duration;
+    }
     
-    public void DailyTimesheet.setDuration(Float duration) {    
-        this.duration = duration;        
-    }    
+    public void DailyTimesheet.setDuration(Float duration) {
+        this.duration = duration;
+    }
     
-    public Float DailyTimesheet.getDurationOffs() {    
-        return this.durationOffs;        
-    }    
+    public Float DailyTimesheet.getDurationOffs() {
+        return this.durationOffs;
+    }
     
-    public void DailyTimesheet.setDurationOffs(Float durationOffs) {    
-        this.durationOffs = durationOffs;        
-    }    
+    public void DailyTimesheet.setDurationOffs(Float durationOffs) {
+        this.durationOffs = durationOffs;
+    }
     
-    public Float DailyTimesheet.getDurationTraining() {    
-        return this.durationTraining;        
-    }    
+    public Float DailyTimesheet.getDurationTraining() {
+        return this.durationTraining;
+    }
     
-    public void DailyTimesheet.setDurationTraining(Float durationTraining) {    
-        this.durationTraining = durationTraining;        
-    }    
+    public void DailyTimesheet.setDurationTraining(Float durationTraining) {
+        this.durationTraining = durationTraining;
+    }
     
-    public Float DailyTimesheet.getDailyTotalDuration() {    
-        return this.dailyTotalDuration;        
-    }    
+    public Float DailyTimesheet.getDailyTotalDuration() {
+        return this.dailyTotalDuration;
+    }
     
-    public void DailyTimesheet.setDailyTotalDuration(Float dailyTotalDuration) {    
-        this.dailyTotalDuration = dailyTotalDuration;        
-    }    
+    public void DailyTimesheet.setDailyTotalDuration(Float dailyTotalDuration) {
+        this.dailyTotalDuration = dailyTotalDuration;
+    }
     
-    public Float DailyTimesheet.getDurationSickness() {    
-        return this.durationSickness;        
-    }    
+    public Float DailyTimesheet.getDurationSickness() {
+        return this.durationSickness;
+    }
     
-    public void DailyTimesheet.setDurationSickness(Float durationSickness) {    
-        this.durationSickness = durationSickness;        
-    }    
+    public void DailyTimesheet.setDurationSickness(Float durationSickness) {
+        this.durationSickness = durationSickness;
+    }
     
-    public Timesheet DailyTimesheet.getTimesheet() {    
-        return this.timesheet;        
-    }    
+    public Timesheet DailyTimesheet.getTimesheet() {
+        return this.timesheet;
+    }
     
-    public void DailyTimesheet.setTimesheet(Timesheet timesheet) {    
-        this.timesheet = timesheet;        
-    }    
+    public void DailyTimesheet.setTimesheet(Timesheet timesheet) {
+        this.timesheet = timesheet;
+    }
     
-    public Project DailyTimesheet.getProject() {    
-        return this.project;        
-    }    
+    public Project DailyTimesheet.getProject() {
+        return this.project;
+    }
     
-    public void DailyTimesheet.setProject(Project project) {    
-        this.project = project;        
-    }    
+    public void DailyTimesheet.setProject(Project project) {
+        this.project = project;
+    }
     
 }

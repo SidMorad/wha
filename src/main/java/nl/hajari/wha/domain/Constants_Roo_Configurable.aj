@@ -4,6 +4,6 @@ import org.springframework.beans.factory.annotation.Configurable;
 
 privileged aspect Constants_Roo_Configurable {
     
-    declare @type: Constants: @Configurable;    
+    declare @type: Constants: @Configurable;
     
 }

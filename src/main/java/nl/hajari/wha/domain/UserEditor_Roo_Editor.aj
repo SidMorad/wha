@@ -8,31 +8,31 @@ import org.springframework.beans.SimpleTypeConverter;
 
 privileged aspect UserEditor_Roo_Editor {
     
-    declare parents: UserEditor implements PropertyEditorSupport;    
+    declare parents: UserEditor implements PropertyEditorSupport;
     
-    private SimpleTypeConverter UserEditor.typeConverter = new SimpleTypeConverter();    
+    private SimpleTypeConverter UserEditor.typeConverter = new SimpleTypeConverter();
     
-    public String UserEditor.getAsText() {    
-        Object obj = getValue();        
-        if (obj == null) {        
-            return null;            
-        }        
-        return (String) typeConverter.convertIfNecessary(((User) obj).getId(), String.class);        
-    }    
+    public String UserEditor.getAsText() {
+        Object obj = getValue();
+        if (obj == null) {
+            return null;
+        }
+        return (String) typeConverter.convertIfNecessary(((User) obj).getId(), String.class);
+    }
     
-    public void UserEditor.setAsText(String text) {    
-        if (text == null || 0 == text.length()) {        
-            setValue(null);            
-            return;            
-        }        
+    public void UserEditor.setAsText(String text) {
+        if (text == null || 0 == text.length()) {
+            setValue(null);
+            return;
+        }
         
-        Long identifier = (Long) typeConverter.convertIfNecessary(text, Long.class);        
-        if (identifier == null) {        
-            setValue(null);            
-            return;            
-        }        
+        Long identifier = (Long) typeConverter.convertIfNecessary(text, Long.class);
+        if (identifier == null) {
+            setValue(null);
+            return;
+        }
         
-        setValue(User.findUser(identifier));        
-    }    
+        setValue(User.findUser(identifier));
+    }
     
 }

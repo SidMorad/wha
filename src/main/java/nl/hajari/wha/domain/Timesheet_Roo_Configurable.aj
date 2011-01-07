@@ -4,6 +4,6 @@ import org.springframework.beans.factory.annotation.Configurable;
 
 privileged aspect Timesheet_Roo_Configurable {
     
-    declare @type: Timesheet: @Configurable;    
+    declare @type: Timesheet: @Configurable;
     
 }
