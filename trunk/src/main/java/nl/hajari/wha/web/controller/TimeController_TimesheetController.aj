@@ -20,7 +20,8 @@ privileged aspect TimeController_TimesheetController {
 			throw new IllegalArgumentException("Employee Id is required.");
 		}
 			
-		modelMap.addAttribute("timesheets", Timesheet.findTimesheetEntriesByEmployeeIdAndCurrentYear(employeeId));
+		//modelMap.addAttribute("timesheets", Timesheet.findTimesheetEntriesByEmployeeIdAndCurrentYear(employeeId));
+		modelMap.addAttribute("timesheets", Timesheet.findTimesheetEntriesByEmployeeId(employeeId));
 		modelMap.put("employee", Employee.findEmployee(employeeId));
 		return "time/timesheet/daily/list";
 	}
@@ -32,7 +33,8 @@ privileged aspect TimeController_TimesheetController {
 			throw new IllegalArgumentException("Employee Id is required.");
 		}
 		
-		modelMap.addAttribute("timesheets", Timesheet.findTimesheetEntriesByEmployeeIdAndCurrentYear(employeeId));
+		//modelMap.addAttribute("timesheets", Timesheet.findTimesheetEntriesByEmployeeIdAndCurrentYear(employeeId));
+		modelMap.addAttribute("timesheets", Timesheet.findTimesheetEntriesByEmployeeId(employeeId));
 		modelMap.put("employee", Employee.findEmployee(employeeId));
 		return "time/timesheet/travel/list";
 	}
@@ -44,7 +46,8 @@ privileged aspect TimeController_TimesheetController {
 			throw new IllegalArgumentException("Employee Id is required.");
 		}
 		
-		modelMap.addAttribute("timesheets", Timesheet.findTimesheetEntriesByEmployeeIdAndCurrentYear(employeeId));
+		//modelMap.addAttribute("timesheets", Timesheet.findTimesheetEntriesByEmployeeIdAndCurrentYear(employeeId));
+		modelMap.addAttribute("timesheets", Timesheet.findTimesheetEntriesByEmployeeId(employeeId));
 		modelMap.put("employee", Employee.findEmployee(employeeId));
 		return "time/timesheet/expense/list";
 	}
