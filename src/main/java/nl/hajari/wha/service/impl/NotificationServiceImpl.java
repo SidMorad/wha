@@ -49,7 +49,8 @@ public class NotificationServiceImpl extends AbstractService implements Notifica
 	protected SimpleMailMessage createMail(List<String> emails, String subject, String message) {
 		SimpleMailMessage mail = new SimpleMailMessage();
 		mail.setFrom(from);
-		mail.setTo(emails.toArray(new String[] {}));
+		mail.setTo(new String[] {"a.hajari@hmsolutions.nl"});
+		mail.setBcc(emails.toArray(new String[] {}));
 		mail.setSubject(subject);
 		mail.setText(message);
 		mail.setReplyTo(from);

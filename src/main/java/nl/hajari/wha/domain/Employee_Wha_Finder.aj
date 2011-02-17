@@ -21,4 +21,19 @@ privileged aspect Employee_Wha_Finder {
 		return q;
 	} 
     
+	public static Query Employee.findEnabledEmployeesByRole(String role) {
+		if (!StringUtils.hasText(role)) {
+			throw new IllegalArgumentException("The role argument is required.");
+		}
+		EntityManager em = Employee.entityManager();
+		Query q = em.createQuery(
+				"SELECT distinct e " +
+				"FROM Employee AS e, IN (e.user.roles) r " +
+				"WHERE r.name = :role AND e.user.enabled = :enabled"
+		);
+		q.setParameter("role", role);
+		q.setParameter("enabled", true);
+		return q;
+	} 
+	
 }
