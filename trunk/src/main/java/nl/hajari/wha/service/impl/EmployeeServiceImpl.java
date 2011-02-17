@@ -47,12 +47,25 @@ public class EmployeeServiceImpl extends AbstractService implements EmployeeServ
 
 	@Override
 	public void sendMonthlyTimesheetUpdateNotification() {
-		// TODO
-		// OR SUPRISINGLY: employees = Employee.findAll() ?!!!! I am confused!
-		List<Employee> employees = findEmployeeByRole(Constants.ROLE_EMPLOYEE);
+		List<Employee> employees = findEnabledEmployees(Constants.ROLE_EMPLOYEE);
 		List<String> emails = extractEmails(employees);
 		notificationService.sendEmail(emails, monthlyTimesheetUpdateSubject, monthlyTimesheetUpdateMessage);
 		logger.info("A request of monthly timesheet update notification initiated.");
+	}
+
+	private List<Employee> findEnabledEmployees(String roleEmployee) {
+		Query q = Employee.findEnabledEmployeesByRole(Constants.ROLE_EMPLOYEE);
+		try {
+			List<Employee> employees = q.getResultList();
+			if (null == employees) {
+				return new ArrayList<Employee>();
+			}
+			return employees;
+		} catch (Exception e) {
+			logger.error("Failed to load all enabled employees with role[" + Constants.ROLE_EMPLOYEE + "]: "
+					+ e.getMessage());
+		}
+		return new ArrayList<Employee>();
 	}
 
 	protected List<String> extractEmails(List<Employee> employees) {
