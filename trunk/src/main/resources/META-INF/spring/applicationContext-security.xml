@@ -40,7 +40,9 @@
     
 	<beans:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder"/>
     
-    <beans:bean id="userService" class="nl.hajari.wha.service.impl.UserServiceImpl" />
+    <beans:bean id="userService" class="nl.hajari.wha.service.impl.UserServiceImpl">
+		<beans:property name="passwordEncoder" ref="passwordEncoder"/>    
+    </beans:bean>
     
     <beans:bean id="sessionSecurityFilter" class="nl.hajari.wha.web.security.UserEmployeeSecurityFilter"/>
     

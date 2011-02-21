@@ -21,7 +21,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl extends AbstractService implements UserService {
 
-	@Autowired
 	private PasswordEncoder passwordEncoder;
 
 	@Override

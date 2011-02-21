@@ -1,4 +1,4 @@
-/*package nl.hajari.wha.domain;
+package nl.hajari.wha.domain;
 
 import org.springframework.roo.addon.test.RooIntegrationTest;
 import nl.hajari.wha.domain.Employee;
@@ -11,4 +11,3 @@ public class EmployeeIntegrationTest {
     public void testMarkerMethod() {
     }
 }
-*/
