@@ -57,19 +57,19 @@ div#nav a.current
 	}
 	
 /*DROP DOWN MENU*/
-ul#primary-nav, ul#primary-nav ul
+ul#roo_menu, ul#roo_menu ul
 	{
 	margin: 0;
 	padding: 0;
 	background: #fff; /*IE6 Bug*/
 	font-size: 100%;
 	}
-ul#primary-nav li
+ul#roo_menu li
 	{
 	position: relative;
 	list-style: none;
 	}	 
-ul#primary-nav li a 
+ul#roo_menu li a 
 	{
 	display: block;
 	text-decoration: none;
@@ -79,36 +79,36 @@ ul#primary-nav li a
 	}
 /* Fix IE. Hide from IE Mac */
 /*
-* html ul#primary-nav li {float: left; height: 1%; }
-* html ul#primary-nav li {height: 1%;}
-* html ul#primary-nav ul {width: 149px;}
-* html ul#primary-nav ul li {width: 149px;}
+* html ul#roo_menu li {float: left; height: 1%; }
+* html ul#roo_menu li {height: 1%;}
+* html ul#roo_menu ul {width: 149px;}
+* html ul#roo_menu ul li {width: 149px;}
 */
 
-ul#primary-nav ul
+ul#roo_menu ul
 	{
 	position: absolute;
 	display: none;
 	left: 0px;
 	top: 33px;
 	}
-ul#primary-nav ul li 
+ul#roo_menu ul li 
 	{
 	border: 1px solid silver;
 	border-bottom: 0;
 	font-size: 1em;
 	}
-ul#primary-nav ul li ul 
+ul#roo_menu ul li ul 
 	{
 	margin-left: 149px;
 	margin-top: -23px;
 	}		
-ul#primary-nav ul li.last
+ul#roo_menu ul li.last
 	{
 	border-bottom: 1px solid silver;
 	border-right: 1px solid silver;
 	}
-ul#primary-nav li ul li /* Sub Menu Styles */	  
+ul#roo_menu li ul li /* Sub Menu Styles */	  
 	{
 	width : 100%;
 	font-weight: bold;	
@@ -116,42 +116,42 @@ ul#primary-nav li ul li /* Sub Menu Styles */
 	padding-top: 1px;
 	background: #f0f0f0 url("images/menubg.jpg") top left repeat-x;
 	}
-ul#primary-nav li ul li a
+ul#roo_menu li ul li a
 	{
 	text-align: left;
 	padding: 10px 10px 10px;
 	}
-ul#primary-nav li:hover ul ul,
-ul#primary-nav li:hover ul ul ul,
-ul#primary-nav li.over ul ul,
-ul#primary-nav li.over ul ul ul 
+ul#roo_menu li:hover ul ul,
+ul#roo_menu li:hover ul ul ul,
+ul#roo_menu li.over ul ul,
+ul#roo_menu li.over ul ul ul 
 	{ 
 	display: none; /* Hide sub-menus initially */ 
 	} 
-ul#primary-nav li:hover ul,
-ul#primary-nav li li:hover ul,
-ul#primary-nav li li li:hover ul,
-ul#primary-nav li.over ul,
-ul#primary-nav li li.over ul,
-ul#primary-nav li li li.over ul 
+ul#roo_menu li:hover ul,
+ul#roo_menu li li:hover ul,
+ul#roo_menu li li li:hover ul,
+ul#roo_menu li.over ul,
+ul#roo_menu li li.over ul,
+ul#roo_menu li li li.over ul 
 	{ 
 	display: block;  /* The magic */ 
 	}
-ul#primary-nav li.menubar a.menupanel
+ul#roo_menu li.menubar a.menupanel
 	{
 	background: transparent url("images/arrow.gif") right center no-repeat;
 	}
-ul#primary-nav li.menubar a.menupanel:hover
+ul#roo_menu li.menubar a.menupanel:hover
 	{
 	background: transparent url("images/arrow-down.gif") right center no-repeat;
 	}
-ul#primary-nav li ul li a:hover,
-ul#primary-nav li ul li a.over 
+ul#roo_menu li ul li a:hover,
+ul#roo_menu li ul li a.over 
 	{ 
 	color: #333333;
 	background: #f0f0f0 url("images/menuhover.jpg") top left repeat-x;
 	}
-ul#primary-nav li a:hover 
+ul#roo_menu li a:hover 
 	{ 
 	color: #333333; 
 	}	

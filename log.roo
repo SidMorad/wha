@@ -1,0 +1,9 @@
+// Spring Roo 1.0.2.RELEASE [rev 638] log opened at 2011-02-23 23:09:50
+entity --class ~.domain.EmployeeConstants --testAutomatically true
+field string --class ~.domain.EmployeeConstants --fieldName key --column key_cons --notNull --permitReservedWords 
+field string --class ~.domain.EmployeeConstants --fieldName value --column value_cons --notNull --permitReservedWords 
+field reference --class ~.domain.EmployeeConstants --fieldName employee --type ~.domain.Employee --notNull
+test mock --entity nl.hajari.wha.domain.EmployeeConstants
+controller scaffold --class ~.web.controller.EmployeeConstantsController --entity ~.domain.EmployeeConstants --path admin/emp_cons
+exit
+// Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2011-02-23 23:18:35

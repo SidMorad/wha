@@ -1,9 +1,11 @@
 <div class="wrapper">
 	<h2 class="accessibility">Navigation</h2>
 
-<ul id="primary-nav" class="menuList" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:security="http://www.springframework.org/security/tags" xmlns:spring="http://www.springframework.org/tags">
+<ul xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:security="http://www.springframework.org/security/tags" xmlns:spring="http://www.springframework.org/tags" class="menuList" id="roo_menu">
     <security:authorize ifAllGranted="ROLE_ADMIN">
-	<li class="menubar"><a class="menupanel" href="#"><spring:message code="global.menu.admin.panel"/> </a>
+	<li class="menubar">
+                <a class="menupanel" href="#">
+                    <spring:message code="global.menu.admin.panel"/> </a>
         <ul>
             <li id="web_mvc_jsp_create_adminstration_menu_item">
                 <c:url value="/admin/signup" var="web_mvc_jsp_create_admin_signup_menu_item_url"/>
@@ -82,6 +84,13 @@
                     <spring:message arguments="${label_constantses}" code="global.menu.list"/>
                 </a>
             </li>
+			<li id="web_mvc_jsp_list_admin_emp_cons_menu_item">
+                <spring:url value="/admin/emp_cons?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 10 : param.size}" var="web_mvc_jsp_list_admin_emp_cons_menu_item_url"/>
+                <a href="${web_mvc_jsp_list_admin_emp_cons_menu_item_url}">
+                    <spring:message code="label.employeeconstantses" var="label_employeeconstantses"/>
+                    <spring:message arguments="${label_employeeconstantses}" code="global.menu.list"/>
+                </a>
+            </li>
         	<li id="web_mvc_jsp_list_bizlog_menu_item">
                 <spring:url value="/bizlog?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 25 : param.size}" var="web_mvc_jsp_list_bizlog_menu_item_url"/>
                 <a href="${web_mvc_jsp_list_bizlog_menu_item_url}">
@@ -93,7 +102,10 @@
     </li>
 	</security:authorize>
 	<security:authorize ifAllGranted="ROLE_EMPLOYEE">
-	<li class="menubar"><a class="menupanel" href="#"><spring:message code="global.menu.employee.panel"/></a>
+	<li class="menubar">
+                <a class="menupanel" href="#">
+                    <spring:message code="global.menu.employee.panel"/>
+                </a>
         <ul>
             <li id="web_mvc_jsp_list_timesheet_month_view_menu_item">
                 <c:url value="/time/view/month" var="web_mvc_jsp_time_list_timesheet_month_view_menu_item_url"/>
@@ -161,6 +173,6 @@
         </ul>
     </li>
 	</security:authorize>
-</ul>
+    </ul>
 
 </div>
