@@ -8,6 +8,16 @@
         <spring:url value="/admin/emp_cons/${employeeConstants.id}" var="form_url"/>
         <form:form action="${form_url}" method="PUT" modelAttribute="employeeConstants">
             <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
+            <div id="roo_employeeConstants_employee">
+                <c:if test="${not empty employees}">
+                    <label for="_employee_id">Employee:</label>
+                    <form:select cssStyle="width:250px" id="_employee_id" path="employee">
+                        <form:options itemValue="id" items="${employees}"/>
+                    </form:select>
+                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_employee_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+                </c:if>
+            </div>
+            <br/>
             <div id="roo_employeeConstants_key">
                 <label for="_key_id">Key:</label>
                 <form:input cssStyle="width:250px" id="_key_id" maxlength="30" path="key" size="0"/>
@@ -28,16 +38,6 @@
                 <spring:message code="field.required" var="field_required"/>
                 <spring:message argumentSeparator="," arguments="Value,(${field_required})" code="field.simple.validation" var="field_validation"/>
                 <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_value_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
-            </div>
-            <br/>
-            <div id="roo_employeeConstants_employee">
-                <c:if test="${not empty employees}">
-                    <label for="_employee_id">Employee:</label>
-                    <form:select cssStyle="width:250px" id="_employee_id" path="employee">
-                        <form:options itemValue="id" items="${employees}"/>
-                    </form:select>
-                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_employee_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
-                </c:if>
             </div>
             <br/>
             <div class="submit" id="roo_employeeConstants_submit">

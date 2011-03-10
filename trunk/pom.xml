@@ -790,6 +790,8 @@
 				<jdbc.password>hajari_wha</jdbc.password>
 				<skipTests>true</skipTests>
 				<dbunit.skip>false</dbunit.skip>
+				<log4j.logger.nl.hajari>WARN</log4j.logger.nl.hajari>
+				<log4j.logger.org.springframework>WARN</log4j.logger.org.springframework>
 			</properties>
 			<build>
 				<plugins>
@@ -874,6 +876,9 @@
 		<cargo.host>localhost</cargo.host>
 		<cargo.port>8081</cargo.port>
 		<cargo.wait>false</cargo.wait>
+
+		<log4j.logger.nl.hajari>DEBUG</log4j.logger.nl.hajari>
+		<log4j.logger.org.springframework>INFO</log4j.logger.org.springframework>
 	</properties>
 
 </project>

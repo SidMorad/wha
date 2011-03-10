@@ -6,6 +6,13 @@
         <spring:message arguments="${entity_label}" code="entity.show" var="title_msg"/>
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
         <c:if test="${not empty employeeConstants}">
+            <div id="roo_employeeConstants_employee">
+                <label for="_employee_id">Employee:</label>
+                <div class="box" id="_employee_id">
+                    <c:out value="${employeeConstants.employee}"/>
+                </div>
+            </div>
+            <br/>
             <div id="roo_employeeConstants_key">
                 <label for="_key_id">Key:</label>
                 <div class="box" id="_key_id">
@@ -17,13 +24,6 @@
                 <label for="_value_id">Value:</label>
                 <div class="box" id="_value_id">
                     <c:out value="${employeeConstants.value}"/>
-                </div>
-            </div>
-            <br/>
-            <div id="roo_employeeConstants_employee">
-                <label for="_employee_id">Employee:</label>
-                <div class="box" id="_employee_id">
-                    <c:out value="${employeeConstants.employee}"/>
                 </div>
             </div>
             <br/>

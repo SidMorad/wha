@@ -40,19 +40,6 @@ privileged aspect EmployeeConstantsController_Roo_Controller {
         return "admin/emp_cons/show";
     }
     
-    @RequestMapping(value = "/admin/emp_cons", method = RequestMethod.GET)
-    public String EmployeeConstantsController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, ModelMap modelMap) {
-        if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            modelMap.addAttribute("employeeconstantses", EmployeeConstants.findEmployeeConstantsEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo));
-            float nrOfPages = (float) EmployeeConstants.countEmployeeConstantses() / sizeNo;
-            modelMap.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-        } else {
-            modelMap.addAttribute("employeeconstantses", EmployeeConstants.findAllEmployeeConstantses());
-        }
-        return "admin/emp_cons/list";
-    }
-    
     @RequestMapping(method = RequestMethod.PUT)
     public String EmployeeConstantsController.update(@Valid EmployeeConstants employeeConstants, BindingResult result, ModelMap modelMap) {
         if (employeeConstants == null) throw new IllegalArgumentException("A employeeConstants is required");
@@ -78,6 +65,19 @@ privileged aspect EmployeeConstantsController_Roo_Controller {
         if (id == null) throw new IllegalArgumentException("An Identifier is required");
         EmployeeConstants.findEmployeeConstants(id).remove();
         return "redirect:/admin/emp_cons?page=" + ((page == null) ? "1" : page.toString()) + "&size=" + ((size == null) ? "10" : size.toString());
+    }
+    
+    @RequestMapping(value = "find/ByEmployee/form", method = RequestMethod.GET)
+    public String EmployeeConstantsController.findEmployeeConstantsesByEmployeeForm(ModelMap modelMap) {
+        modelMap.addAttribute("employees", Employee.findAllEmployees());
+        return "admin/emp_cons/findEmployeeConstantsesByEmployee";
+    }
+    
+    @RequestMapping(value = "find/ByEmployee", method = RequestMethod.GET)
+    public String EmployeeConstantsController.findEmployeeConstantsesByEmployee(@RequestParam("employee") Employee employee, ModelMap modelMap) {
+        if (employee == null) throw new IllegalArgumentException("A Employee is required.");
+        modelMap.addAttribute("employeeconstantses", EmployeeConstants.findEmployeeConstantsesByEmployee(employee).getResultList());
+        return "admin/emp_cons/list";
     }
     
 }
