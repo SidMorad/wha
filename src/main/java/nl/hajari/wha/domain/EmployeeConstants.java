@@ -13,7 +13,7 @@ import javax.persistence.JoinColumn;
 @Entity
 @RooJavaBean
 @RooToString
-@RooEntity
+@RooEntity(finders = { "findEmployeeConstantsesByEmployee" })
 public class EmployeeConstants {
 
     @NotNull
@@ -26,6 +26,6 @@ public class EmployeeConstants {
 
     @NotNull
     @ManyToOne(targetEntity = Employee.class)
-    @JoinColumn
+    @JoinColumn(name = "employee_id", nullable = false)
     private Employee employee;
 }

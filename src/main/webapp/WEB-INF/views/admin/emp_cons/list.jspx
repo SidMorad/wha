@@ -6,6 +6,31 @@
         <spring:message code="label.employeeconstantses" var="entity_label_plural"/>
         <spring:message arguments="${entity_label_plural}" code="entity.list.all" var="title_msg"/>
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
+        <table style="width: 98%">
+        	<tr>
+        		<td colspan="10">
+		   			<spring:url value="/admin/emp_cons/filter" var="form_url"/>
+		   			<form:form action="${form_url}" method="POST" modelAttribute="employeeConstantsFilterFormBean">
+	  					<div id="employee_constants_employee" style="float: left;"> 
+	  						<c:if test="${not empty employees}">
+		                    <label for="_employee" style="width: 70px;">Employee:</label>
+		                    <form:select cssStyle="width:150px" id="_employee" path="employee">
+		                        <form:options itemValue="id" items="${employees}"/>
+		                    </form:select>
+		                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_employee', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+			                </c:if>
+			            </div>
+			            <p></p>
+	       				<div class="submit" id="roo_submit" >
+	       					<spring:message code="button.filter" var="filter_button"/>
+	       					<script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
+	       					<input id="proceed" type="submit" value="${filter_button}" style="margin-left: 5px;"/>
+	       				</div>
+		    		</form:form>
+	    		</td>
+        	</tr>
+        </table>
+        
         <c:if test="${not empty employeeconstantses}">
             <table width="300px">
                 <thead>

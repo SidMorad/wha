@@ -307,4 +307,18 @@
 			<value description="daily_total_duration">5</value>
 		</row>
 	</table>
+	<table name="employee_constants">
+		<column>id</column>
+		<column>version</column>
+		<column>employee_id</column>
+		<column>key_cons</column>
+		<column>value_cons</column>
+		<row>
+			<value>1</value>
+			<value>1</value>
+			<value>1</value>
+			<value>key1</value>
+			<value>value1</value>
+		</row>
+	</table>
 </dataset>
