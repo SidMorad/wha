@@ -1,0 +1,26 @@
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:spring="http://www.springframework.org/tags" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+
+            <div id="wha_key_value_widget" style="border: black 1px solid; width: 70%;">
+            	<c:if test="${empty counter}">
+            		<c:set value="1" var="counter"/>
+            	</c:if>
+	            <input type="hidden" id="counter" name="counter" value="${counter}"/>
+	           	<div class="submit"><spring:message code="label.employeeconstants"/> Widget: <button type="button" onclick="addFields()"><spring:message code="label.addKeyValue" /></button></div>
+	            <br/>
+	            <ul id="wha_key_value_list">
+	            <c:set value="1" var="num"/>
+	            <c:if test="${not empty employeeconstantses}">
+	            	<c:forEach items="${employeeconstantses}" var="employeeConstants">
+       		        <li>
+	       		        <input id="key${num}" name="key${num}" maxlength="30" size="0" value="${employeeConstants.key}"/>
+	        			<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "key${num}", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : { required : true}})); </script>
+	       		        <input id="value${num}" name="value${num}" maxlength="30" size="0" value="${employeeConstants.value}"/>
+	        			<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "value${num}", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : { required : true}})); </script>
+	        			<c:set var="num" value="${num+1}"/>
+       		        </li>
+	            	</c:forEach>
+	            </c:if>
+	            </ul>
+            </div>
+            
+</jsp:root>

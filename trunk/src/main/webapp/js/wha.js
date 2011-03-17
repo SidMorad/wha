@@ -35,3 +35,44 @@ function archiveObjectByAdmin(id, name) {
 		window.location = "../admin/"+ name +"/archive/" + id;
 	}
 }
+
+/** Dojo Key-Value-Widget */
+function addFields(){
+	var list = dojo.byId("wha_key_value_list");
+	var num = eval(dojo.byId("counter").value);
+	var keyTextField = createTextField("key", num);
+	var valueTextField = createTextField("value", num);
+	dojo.create("li",{
+		id: "li"+num,
+		innerHTML: "",
+		className: "wha_key_value_li",
+		style: {
+			textDecoration: "none"
+		}
+	}, list, "first");
+	valueTextField.placeAt("li"+num, "first");
+	keyTextField.placeAt("li"+num, "first");
+/*	TODO:: fix the delete button behaviour.
+ * dojo.require('dijit.form.Button');
+	var deleteButton = new dijit.form.Button({
+		label: "X",
+		style: { fontColor: 'red', fontWieght: 'bold' },
+		onClick: function(){
+			alert("li"+num);
+			dojo.destroy("li"+num);
+		}
+	});
+	deleteButton.placeAt("li"+num, "last");*/	
+	
+	num++;
+	document.getElementById("counter").value = num;
+}
+
+function createTextField(prefix, num) {
+	return new dijit.form.TextBox({
+		name: prefix+num,
+		value: "",
+		id: prefix+num,
+		placeHolder: "type in the " + prefix,
+	}, prefix+num);
+}

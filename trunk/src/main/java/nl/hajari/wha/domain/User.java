@@ -48,7 +48,7 @@ public class User implements UserDetails {
 
 	@Pattern(regexp = ".+@.+\\.[a-z]+")
 	@Size(max = 30)
-	@Column(unique = true)
+	@Column
 	private String email;
 
 	@OneToOne(targetEntity = Employee.class, cascade = CascadeType.ALL)
