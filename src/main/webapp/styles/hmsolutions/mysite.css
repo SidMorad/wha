@@ -3,7 +3,6 @@
 body,div,td {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
-	color: #666;
 }
 
 .formContainer {
@@ -341,7 +340,8 @@ fieldset th {
 	border:none;
 }
 
-.submit input {
+.submit input, 
+.submit button {
 	border: 1px solid #BBBBBB;
 	color:#777777;
 	padding:2px 7px;
@@ -371,4 +371,8 @@ fieldset th {
 	background: #c00101;
 	font-weight: bold;
 	font-size: 13px;
+}
+
+.wha_key_value_li {
+	text-decoration: none;
 }

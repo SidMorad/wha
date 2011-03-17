@@ -17,15 +17,23 @@ import javax.persistence.JoinColumn;
 public class EmployeeConstants {
 
     @NotNull
-    @Column(name = "key_cons")
+    @Column(name = "key_cons", nullable = false)
     private String key;
 
     @NotNull
-    @Column(name = "value_cons")
+    @Column(name = "value_cons", nullable = false)
     private String value;
 
     @NotNull
     @ManyToOne(targetEntity = Employee.class)
     @JoinColumn(name = "employee_id", nullable = false)
     private Employee employee;
+    
+    public EmployeeConstants() {}
+
+    public EmployeeConstants(Employee employee, String key, String value) {
+    	this.employee = employee;
+    	this.key = key;
+    	this.value = value;
+    }
 }

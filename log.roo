@@ -12,3 +12,7 @@ finder list --class ~.domain.EmployeeConstants
 finder add --finderName findEmployeeConstantsesByEmployee
 exit
 // Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2011-02-28 02:12:06
+// Spring Roo 1.0.2.RELEASE [rev 638] log opened at 2011-03-18 00:07:57
+finder add --finderName findEmployeesByEmpId
+exit
+// Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2011-03-18 00:10:00
