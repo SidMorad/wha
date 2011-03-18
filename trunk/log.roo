@@ -16,3 +16,7 @@ exit
 finder add --finderName findEmployeesByEmpId
 exit
 // Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2011-03-18 00:10:00
+// Spring Roo 1.0.2.RELEASE [rev 638] log opened at 2011-03-18 20:16:35
+finder add --finderName findEmployeeConstantsesByEmployeeAndKeyEquals
+exit
+// Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2011-03-18 20:20:44

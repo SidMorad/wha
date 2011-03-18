@@ -19,5 +19,7 @@ public interface EmployeeConstantsService {
 	
 	List<EmployeeConstants> getEmployeeConstantsListFromRequest(HttpServletRequest request);
 	
-	boolean persistEmployeeConstantsListWithEmployee(List<EmployeeConstants> ecList, Employee employee);
+	List<EmployeeConstants> persistEmployeeConstantsListWithEmployee(List<EmployeeConstants> ecList, Employee employee);
+
+	EmployeeConstants persistOrUpdate(EmployeeConstants employeeConstants);
 }

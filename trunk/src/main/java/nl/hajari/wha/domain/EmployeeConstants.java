@@ -9,11 +9,13 @@ import javax.persistence.Column;
 import nl.hajari.wha.domain.Employee;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
+import javax.persistence.UniqueConstraint;
 
 @Entity
 @RooJavaBean
 @RooToString
-@RooEntity(finders = { "findEmployeeConstantsesByEmployee" })
+@UniqueConstraint(columnNames = "employee,key")
+@RooEntity(finders = { "findEmployeeConstantsesByEmployee", "findEmployeeConstantsesByEmployeeAndKeyEquals" })
 public class EmployeeConstants {
 
     @NotNull
@@ -28,12 +30,13 @@ public class EmployeeConstants {
     @ManyToOne(targetEntity = Employee.class)
     @JoinColumn(name = "employee_id", nullable = false)
     private Employee employee;
-    
-    public EmployeeConstants() {}
+
+    public EmployeeConstants() {
+    }
 
     public EmployeeConstants(Employee employee, String key, String value) {
-    	this.employee = employee;
-    	this.key = key;
-    	this.value = value;
+        this.employee = employee;
+        this.key = key;
+        this.value = value;
     }
 }

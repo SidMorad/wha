@@ -80,4 +80,18 @@ privileged aspect EmployeeConstantsController_Roo_Controller {
         return "admin/emp_cons/list";
     }
     
+    @RequestMapping(value = "find/ByEmployeeAndKeyEquals/form", method = RequestMethod.GET)
+    public String EmployeeConstantsController.findEmployeeConstantsesByEmployeeAndKeyEqualsForm(ModelMap modelMap) {
+        modelMap.addAttribute("employees", Employee.findAllEmployees());
+        return "admin/emp_cons/findEmployeeConstantsesByEmployeeAndKeyEquals";
+    }
+    
+    @RequestMapping(value = "find/ByEmployeeAndKeyEquals", method = RequestMethod.GET)
+    public String EmployeeConstantsController.findEmployeeConstantsesByEmployeeAndKeyEquals(@RequestParam("employee") Employee employee, @RequestParam("key") String key, ModelMap modelMap) {
+        if (employee == null) throw new IllegalArgumentException("A Employee is required.");
+        if (key == null || key.length() == 0) throw new IllegalArgumentException("A Key is required.");
+        modelMap.addAttribute("employeeconstantses", EmployeeConstants.findEmployeeConstantsesByEmployeeAndKeyEquals(employee, key).getResultList());
+        return "admin/emp_cons/list";
+    }
+    
 }

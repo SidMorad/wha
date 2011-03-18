@@ -84,7 +84,6 @@ public class SignupController extends AbstractController {
 			modelMap.put("newuser", newuser);
 			modelMap.put("techroles", TechRole.findAllTechRoles());
 			modelMap.put("employeeconstantses", ecList);
-			modelMap.put("counter", request.getParameter("counter"));
 			return "admin/signup";
 		}
 	}
