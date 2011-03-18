@@ -91,6 +91,26 @@
             </div>
             <br/>
         </c:if>
+		<c:if test="${not empty employeeconstantses}" >
+	    <br/>
+		<p><spring:message code="label.employeeconstants"/>:</p>
+      	<c:forEach items="${employeeconstantses}" var="employeeConstants">
+            <div id="roo_employeeConstants_key">
+                <label for="_key_id">Key:</label>
+                <div class="box" id="_key_id">
+                    <c:out value="${employeeConstants.key}"/>
+                </div>
+            </div>
+            <div id="roo_employeeConstants_value">
+                <label for="_value_id">Value:</label>
+                <div class="box" id="_value_id">
+                    <c:out value="${employeeConstants.value}"/>
+                </div>
+            </div>
+            <br/>
+        </c:forEach>    
+        </c:if>
+        
         <c:if test="${empty employee}">
             <spring:message arguments="${entity_label}" code="entity.not.found.single"/>
         </c:if>

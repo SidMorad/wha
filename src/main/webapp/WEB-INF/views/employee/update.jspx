@@ -1,4 +1,4 @@
-<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:wha="urn:jsptagdir:/WEB-INF/tags" version="2.0">
     <jsp:output omit-xml-declaration="yes"/>
     <script type="text/javascript">dojo.require('dijit.TitlePane');dojo.require('dijit.form.SimpleTextarea');dojo.require('dijit.form.FilteringSelect');dojo.require('dijit.form.MultiSelect');</script>
     <div id="_title_div">
@@ -196,6 +196,8 @@
                 <spring:message argumentSeparator="," arguments="${label_managementName}," code="field.simple.validation" var="field_validation"/>
                 <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_managementName_id', widgetType: 'dijit.form.ValidationTextBox', widgetAttrs: {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : false}})); </script>
             </div>
+            <br/>
+            <wha:keyValueWidget/>
             <br/>
             <div class="submit" id="roo_employee_submit">
                 <spring:message code="button.update" var="update_button"/>

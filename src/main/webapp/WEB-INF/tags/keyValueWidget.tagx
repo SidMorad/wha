@@ -1,10 +1,6 @@
 <jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:spring="http://www.springframework.org/tags" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
 
             <div id="wha_key_value_widget" style="border: black 1px solid; width: 70%;">
-            	<c:if test="${empty counter}">
-            		<c:set value="1" var="counter"/>
-            	</c:if>
-	            <input type="hidden" id="counter" name="counter" value="${counter}"/>
 	           	<div class="submit"><spring:message code="label.employeeconstants"/> Widget: <button type="button" onclick="addFields()"><spring:message code="label.addKeyValue" /></button></div>
 	            <br/>
 	            <ul id="wha_key_value_list">
@@ -20,6 +16,7 @@
        		        </li>
 	            	</c:forEach>
 	            </c:if>
+	            <input type="hidden" id="counter" name="counter" value="${num}"/>
 	            </ul>
             </div>
             

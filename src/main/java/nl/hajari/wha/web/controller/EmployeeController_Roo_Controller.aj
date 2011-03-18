@@ -36,13 +36,6 @@ privileged aspect EmployeeController_Roo_Controller {
         return "employee/create";
     }
     
-    @RequestMapping(value = "/employee/{id}", method = RequestMethod.GET)
-    public String EmployeeController.show(@PathVariable("id") Long id, ModelMap modelMap) {
-        if (id == null) throw new IllegalArgumentException("An Identifier is required");
-        modelMap.addAttribute("employee", Employee.findEmployee(id));
-        return "employee/show";
-    }
-    
     @RequestMapping(value = "/employee", method = RequestMethod.GET)
     public String EmployeeController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, ModelMap modelMap) {
         if (page != null || size != null) {
@@ -54,28 +47,6 @@ privileged aspect EmployeeController_Roo_Controller {
             modelMap.addAttribute("employees", Employee.findAllEmployees());
         }
         return "employee/list";
-    }
-    
-    @RequestMapping(method = RequestMethod.PUT)
-    public String EmployeeController.update(@Valid Employee employee, BindingResult result, ModelMap modelMap) {
-        if (employee == null) throw new IllegalArgumentException("A employee is required");
-        if (result.hasErrors()) {
-            modelMap.addAttribute("employee", employee);
-            modelMap.addAttribute("techroles", TechRole.findAllTechRoles());
-            modelMap.addAttribute("users", User.findAllUsers());
-            return "employee/update";
-        }
-        employee.merge();
-        return "redirect:/employee/" + employee.getId();
-    }
-    
-    @RequestMapping(value = "/employee/{id}/form", method = RequestMethod.GET)
-    public String EmployeeController.updateForm(@PathVariable("id") Long id, ModelMap modelMap) {
-        if (id == null) throw new IllegalArgumentException("An Identifier is required");
-        modelMap.addAttribute("employee", Employee.findEmployee(id));
-        modelMap.addAttribute("techroles", TechRole.findAllTechRoles());
-        modelMap.addAttribute("users", User.findAllUsers());
-        return "employee/update";
     }
     
     @RequestMapping(value = "/employee/{id}", method = RequestMethod.DELETE)
