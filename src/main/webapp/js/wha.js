@@ -73,6 +73,6 @@ function createTextField(prefix, num) {
 		name: prefix+num,
 		value: "",
 		id: prefix+num,
-		placeHolder: "type in the " + prefix,
+		placeHolder: "type in the " + prefix
 	}, prefix+num);
 }
