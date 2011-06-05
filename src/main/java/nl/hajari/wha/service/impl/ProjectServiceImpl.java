@@ -116,6 +116,14 @@ public class ProjectServiceImpl extends AbstractService implements ProjectServic
 		this.defaultSicknessProject = loadOrCreateProject(sicknessTimeProjectCompleteName);
 		return defaultSicknessProject;
 	}
+	
+	@Override
+	public Boolean isNonPayableProject(Project project) {
+		if (null == project) {
+			return true;
+		}
+		return defaultOffTimeProject.equals(project) || defaultSicknessProject.equals(project);
+	}
 
 	public void setOffTimeKeywords(String offTimeKeywords) {
 		this.offTimeKeywords = offTimeKeywords;

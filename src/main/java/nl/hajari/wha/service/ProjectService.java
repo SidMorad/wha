@@ -40,5 +40,11 @@ public interface ProjectService {
 	 * @return
 	 */
 	Project getDefaultSicknessProject();
+	
+	/**
+	 * @param project
+	 * @return
+	 */
+	Boolean isNonPayableProject(Project project);
 
 }
