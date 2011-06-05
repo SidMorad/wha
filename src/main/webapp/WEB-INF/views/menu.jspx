@@ -170,6 +170,13 @@
                 	<spring:message code="label.opentimesheets"/>
                 </a>
             </li>
+        	<li id="timesheet_search_menu_item">
+                <spring:url value="/time/timesheet/search/form" var="timesheet_search_menu_item_url"/>
+                <a href="${timesheet_search_menu_item_url}">
+                    <spring:message code="label.timesheets" var="label_timesheets"/>
+                    <spring:message arguments="${label_timesheets}" code="global.menu.search"/>
+                </a>
+            </li>
         </ul>
     </li>
 	</security:authorize>

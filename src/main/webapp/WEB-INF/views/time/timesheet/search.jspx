@@ -1,0 +1,178 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:roo="urn:jsptagdir:/WEB-INF/tags" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
+    <script type="text/javascript">dojo.require('dijit.TitlePane');</script>
+    <div id="_title_div">
+        <spring:message code="label.dailytimesheet" var="entity_label"/>
+        <spring:message code="label.dailytimesheets" var="entity_label_plural"/>
+        <spring:message arguments="${entity_label_plural}" code="entity.list.all" var="title_msg"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
+        <table style="width:98%">
+         	<tr>
+         		<td colspan="10">
+         			<spring:url value="/time/timesheet/search" var="form_url"/>
+         			<form:form action="${form_url}" method="POST" modelAttribute="timesheetSearchFormBean">
+         				<form:hidden path="employee.id" />
+                        <div id="roo_timesheet_from" style="float:left;">
+                        	<spring:message code="label.from" var="label_from"/>
+			                <label for="_from_id" style="width: 70px;">${label_from}:</label>
+			                <form:input cssStyle="width:150px" id="_from_id" maxlength="30" path="from" size="0"/>
+			                <br/>
+			                <form:errors cssClass="errors" id="_from_error_id" path="from"/>
+			                <spring:message arguments="label_from" code="field.invalid" var="field_invalid"/>
+			                <spring:message code="field.required" var="field_required"/>
+			                <spring:message argumentSeparator="," arguments="${label_from} ,(${field_required})" code="field.simple.validation" var="field_validation"/>
+			               	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_from_id', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true,datePattern : '${datePattern}'}})); </script>
+			            </div>
+                        <div id="roo_timesheet_to">
+                        	<spring:message code="label.to" var="label_to"/>
+			                <label for="_to_id" style="width: 50px;">${label_to}:</label>
+			                <form:input cssStyle="width:150px" id="_to_id" maxlength="30" path="to" size="0"/>
+			                <br/>
+			                <form:errors cssClass="errors" id="_to_error_id" path="to"/>
+			                <spring:message arguments="label_to" code="field.invalid" var="field_invalid"/>
+			                <spring:message code="field.required" var="field_required"/>
+			                <spring:message argumentSeparator="," arguments="${label_to} ,(${field_required})" code="field.simple.validation" var="field_validation"/>
+			               	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_to_id', widgetType : 'dijit.form.DateTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true,datePattern : '${datePattern}'}})); </script>
+			            </div>
+			            <br/>
+						<div class="submit" id="roo_submit" style="padding-left: 72px;">
+			                <spring:message code="button.search" var="search_button"/>
+			                <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
+			                <input id="proceed" type="submit" value="${search_button}" style="margin-left: 5px;"/>
+			            </div>			            	
+			            <br/>
+         			</form:form>	
+         		</td>
+         	</tr>
+        </table>
+	<c:if test="${not empty dailyTimesheets}">
+		<div id="_title_daily_div" style="width: 100%">
+		    <spring:message arguments="${entity_label_plural}" code="entity.list.all" var="title_daily_msg"/>
+		    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_daily_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_daily_msg}'}})); </script>
+	        <table style="width:98%">
+	            <thead>
+	                <tr>
+	                    <th><spring:message code="label.year"/></th>
+	                    <th><spring:message code="label.month"/></th>
+	                    <th><spring:message code="label.working"/></th>
+	                    <th><spring:message code="label.off"/></th>
+	                    <th><spring:message code="label.training"/></th>
+	                    <th><spring:message code="label.sickness"/></th>
+	                    <th><spring:message code="label.total"/></th>
+	                    <th/>
+	                    <th/>
+	                    <th/>
+	                </tr>
+	            </thead>
+	            <c:set var="totalDuration" value="0" />	
+	            <c:set var="totalOff" value="0" />	
+	            <c:set var="totalTraining" value="0" />	
+	            <c:set var="totalSickness" value="0" />	
+	            <c:set var="totalDailyTotalDuration" value="0" />	
+	            <c:forEach items="${dailyTimesheets}" var="dailytimesheet">
+	                <tr>
+	                    <td>${dailytimesheet.timesheet.sheetYear}</td>
+	                    <td>${dailytimesheet.timesheet.sheetMonthShortName}</td>
+	                    <td>${dailytimesheet.duration}</td>
+	                    <td>${dailytimesheet.durationOffs}</td>
+	                    <td>${dailytimesheet.durationTraining}</td>
+	                    <td>${dailytimesheet.durationSickness}</td>
+	                    <td>${dailytimesheet.dailyTotalDuration}</td>
+	                    <td align="center">
+	                       	<span style="float: left;">
+	                       		<c:out value="${fn:length(dailytimesheet.timesheet.dailyTimesheets)}"/>
+	                       	</span>
+	                        <spring:url value="/time/timesheet/daily/${dailytimesheet.timesheet.id}" var="show_form_url"/>
+	                        <spring:url value="/static/images/show.png" var="show_image_url"/>
+	                        <form:form action="${show_form_url}" method="GET">
+	                            <spring:message arguments="${entity_label}" code="entity.show" var="show_label"/>
+	                            <input alt="${show_label}" class="image" src="${show_image_url}" title="${show_label}" type="image" value="${show_label}"/>
+	                        </form:form>
+	                    </td>
+	                    <td align="center">
+	                       	<span style="float: left;">
+	                        	<c:out value="${fn:length(dailytimesheet.timesheet.dailyTravels)}"/>
+	                       	</span>
+	                        <spring:url value="/time/timesheet/travel/${dailytimesheet.timesheet.id}" var="show_form_url"/>
+	                        <spring:url value="/static/images/show.png" var="show_image_url"/>
+	                        <form:form action="${show_form_url}" method="GET">
+	                            <spring:message arguments="${entity_label}" code="entity.show" var="show_label"/>
+	                            <input alt="${show_label}" class="image" src="${show_image_url}" title="${show_label}" type="image" value="${show_label}"/>
+	                        </form:form>
+	                    </td>
+	                    <td align="center">
+	                       	<span style="float: left;">
+	                        	<c:out value="${fn:length(dailytimesheet.timesheet.dailyExpenses)}"/>
+	                       	</span>
+	                        <spring:url value="/time/timesheet/expense/${dailytimesheet.timesheet.id}" var="show_form_url"/>
+	                        <spring:url value="/static/images/show.png" var="show_image_url"/>
+	                        <form:form action="${show_form_url}" method="GET">
+	                            <spring:message arguments="${entity_label}" code="entity.show" var="show_label"/>
+	                            <input alt="${show_label}" class="image" src="${show_image_url}" title="${show_label}" type="image" value="${show_label}"/>
+	                        </form:form>
+	                    </td>
+	                </tr>
+	                <c:set var="totalDuration" value="${totalDuration + dailytimesheet.duration}"/>
+	                <c:set var="totalOff" value="${totalOff + dailytimesheet.durationOffs}"/>
+	                <c:set var="totalTraining" value="${totalTraining + dailytimesheet.durationTraining}"/>
+	                <c:set var="totalSickness" value="${totalSickness + dailytimesheet.durationSickness}"/>
+	                <c:set var="totalDailyTotalDuration" value="${totalDailyTotalDuration + dailytimesheet.dailyTotalDuration}"/>
+	            </c:forEach>
+	            <tr>
+	            	<th />
+	            	<th><span style="font-size: 13px;"><spring:message code="label.total" />:</span></th>
+            		<th><span style="font-size: 13px;"><b><fmt:formatNumber value="${totalDuration}" maxFractionDigits="2"></fmt:formatNumber></b></span></th>
+            		<th><span style="font-size: 13px;"><b><fmt:formatNumber value="${totalOff}" maxFractionDigits="2"></fmt:formatNumber></b></span></th>
+            		<th><span style="font-size: 13px;"><b><fmt:formatNumber value="${totalTraining}" maxFractionDigits="2"></fmt:formatNumber></b></span></th>
+            		<th><span style="font-size: 13px;"><b><fmt:formatNumber value="${totalSickness}" maxFractionDigits="2"></fmt:formatNumber></b></span></th>
+            		<th><span style="font-size: 13px;"><b><fmt:formatNumber value="${totalDailyDuration}" maxFractionDigits="2"></fmt:formatNumber></b></span></th>
+	            	<th/>
+	            	<th/>
+	            	<th/>
+	            </tr>
+                <tr class="footer">
+                	<fmt:formatDate pattern="dd-MM-yyyy" type="DATE" value="${timesheetSearchFormBean.from}" var="fromDate"/>
+                	<fmt:formatDate pattern="dd-MM-yyyy" type="DATE" value="${timesheetSearchFormBean.to}" var="toDate"/>
+                    <td colspan="10">
+                        <span style="float: right;padding-left: 5px;">
+		              		<spring:url value="/time/timesheet/search/${fromDate}/${toDate}/report/pdf" var="report_pdf_url"/>
+	              			<spring:url value="/static/images/pdf.png" var="report_pdf_img_url"/>
+				            <form:form action="${report_pdf_url}" method="GET">
+                                <spring:message arguments="${entity_label}" code="report.pdf" var="report_pdf_message"/>
+				                <input alt="${report_pdf_message}" class="image" src="${report_pdf_img_url}" title="${report_pdf_message}" type="image" value="${report_pdf_message}"/>
+				            </form:form>	
+		              	</span>
+                        <span style="float: right;padding-left: 5px;">
+		              		<spring:url value="/time/timesheet/search/${fromDate}/${toDate}/report/xls" var="report_xls_url"/>
+	              			<spring:url value="/static/images/xls.png" var="report_xls_img_url"/>
+				            <form:form action="${report_xls_url}" method="GET">
+                                <spring:message arguments="${entity_label}" code="report.xls" var="report_xls_message"/>
+				                <input alt="${report_xls_message}" class="image" src="${report_xls_img_url}" title="${report_xls_message}" type="image" value="${report_xls_message}"/>
+				            </form:form>	
+		              	</span>
+                        <span style="float: right;padding-left: 5px;">
+		              		<spring:url value="/time/timesheet/search/${fromDate}/${toDate}/report/html" var="report_html_url"/>
+	              			<spring:url value="/static/images/html.png" var="report_html_img_url"/>
+				            <form:form action="${report_html_url}" method="GET">
+                                <spring:message arguments="${entity_label}" code="report.html" var="report_html_message"/>
+				                <input alt="${report_html_message}" class="image" src="${report_html_img_url}" title="${report_html_message}" type="image" value="${report_html_message}"/>
+				            </form:form>	
+		              	</span>
+                        <span style="float: right;padding-left: 5px;">
+		              		<spring:url value="/time/timesheet/search/${fromDate}/${toDate}/report/csv" var="report_csv_url"/>
+	              			<spring:url value="/static/images/csv.png" var="report_csv_img_url"/>
+				            <form:form action="${report_csv_url}" method="GET">
+                                <spring:message arguments="${entity_label}" code="report.csv" var="report_csv_message"/>
+				                <input alt="${report_csv_message}" class="image" src="${report_csv_img_url}" title="${report_csv_message}" type="image" value="${report_csv_message}"/>
+				            </form:form>	
+		              	</span>		              	
+                    </td>
+                </tr>
+        	</table>
+		</div>
+	</c:if>
+    <c:if test="${empty dailyTimesheets}">
+       	<spring:message arguments="${entity_label_plural}" code="entity.not.found"/>
+	</c:if>
+	</div>
+</div>
