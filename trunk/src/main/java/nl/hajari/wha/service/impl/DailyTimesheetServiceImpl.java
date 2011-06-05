@@ -128,7 +128,7 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 			DailyTimesheet newDt = new DailyTimesheet(dt.getTimesheet(), 0f, 0f, 0f, 0f, 0f);
 			// check if theOne is not in the list
 			Project theOne = dt.getProject();
-			if (!listOfTheOnes.contains(theOne)) {
+			if (!projectService.isNonPayableProject(theOne) && !listOfTheOnes.contains(theOne)) {
 				for (DailyTimesheet dt2 : dailies) {
 					if (theOne.equals(dt2.getProject())) {
 						newDt.setProject(theOne);
