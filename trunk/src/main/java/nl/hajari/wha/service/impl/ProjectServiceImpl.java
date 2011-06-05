@@ -122,7 +122,7 @@ public class ProjectServiceImpl extends AbstractService implements ProjectServic
 		if (null == project) {
 			return true;
 		}
-		return defaultOffTimeProject.equals(project) || defaultSicknessProject.equals(project);
+		return getDefaultOffTimeProject().equals(project) || getDefaultSicknessProject().equals(project);
 	}
 
 	public void setOffTimeKeywords(String offTimeKeywords) {
