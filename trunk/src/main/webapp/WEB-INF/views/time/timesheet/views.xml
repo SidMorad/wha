@@ -22,4 +22,7 @@
     <definition extends="default" name="time/timesheet/openTimesheets">
         <put-attribute name="body" value="/WEB-INF/views/time/timesheet/listOpenTimesheets.jspx"/>
     </definition>
+    <definition extends="default" name="time/timesheet/search">
+        <put-attribute name="body" value="/WEB-INF/views/time/timesheet/search.jspx"/>
+    </definition>
 </tiles-definitions>
