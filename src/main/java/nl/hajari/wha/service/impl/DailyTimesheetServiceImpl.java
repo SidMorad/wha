@@ -143,7 +143,7 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 				listOfTheOnes.add(theOne);
 			}
 		}
-
+		System.err.println(listOfTheOnes);
 		return finalTimesheetList;
 	}
 	
