@@ -123,50 +123,31 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 	
 	public List<DailyTimesheet> getDailyTimesheetListForReportPerProject(List<DailyTimesheet> dailies) {
 		List<DailyTimesheet> finalTimesheetList = new ArrayList<DailyTimesheet>();
-		Map<Project, DailyTimesheet> totals = new HashMap<Project, DailyTimesheet>();
-		for (DailyTimesheet dt : dailies) {
+		// listOfTheOnes is a list of 'project' that we already 'group by' them
+		List<Project> listOfTheOnes = new ArrayList<Project>();
+		for (int i = 0; i < dailies.size(); ++i) {
+			DailyTimesheet dt = dailies.get(i);
+			DailyTimesheet newDt = new DailyTimesheet(dt.getTimesheet(), 0f, 0f, 0f, 0f, 0f);
+			// check if theOne is not in the list
 			Project p = dt.getProject();
-			if (projectService.isNonPayableProject(p)) {
-				continue;
-			}
-			DailyTimesheet tdt = totals.get(p);
-			if (tdt == null) {
-				totals.put(p, dt);
-			} else {
-				tdt.setDuration(tdt.getDuration() + dt.getDuration());
-				tdt.setDurationOffs(tdt.getDurationOffs() + dt.getDurationOffs());
-				tdt.setDurationTraining(tdt.getDurationTraining() + dt.getDurationTraining());
-				tdt.setDurationSickness(tdt.getDurationSickness() + dt.getDurationSickness());
-				tdt.setDailyTotalDuration(tdt.getDailyTotalDuration() + dt.getDailyTotalDuration());
+			if (!projectService.isNonPayableProject(p) && !listOfTheOnes.contains(p)) {
+				for (int j = i + 1; j < dailies.size(); ++j) {
+					DailyTimesheet dt2 = dailies.get(j);
+					if (p.equals(dt2.getProject())) {
+						newDt.setProject(p);
+						newDt.setDuration(newDt.getDuration() + dt2.getDuration());
+						newDt.setDurationOffs(newDt.getDurationOffs() + dt2.getDurationOffs());
+						newDt.setDurationTraining(newDt.getDurationTraining() + dt2.getDurationTraining());
+						newDt.setDurationSickness(newDt.getDurationSickness() + dt2.getDurationSickness());
+						newDt.setDailyTotalDuration(newDt.getDailyTotalDuration() + dt2.getDailyTotalDuration());
+					}
+				}
+				finalTimesheetList.add(newDt);
+				listOfTheOnes.add(p);
 			}
 		}
-		List<DailyTimesheet> perProject =  new ArrayList<DailyTimesheet>(totals.values());
-		System.err.println(perProject);
-		return perProject;
-		
-//		// listOfTheOnes is a list of 'project' that we already 'group by' them
-//		List<Project> listOfTheOnes = new ArrayList<Project>();
-//		for (DailyTimesheet dt : dailies) {
-//			DailyTimesheet newDt = new DailyTimesheet(dt.getTimesheet(), 0f, 0f, 0f, 0f, 0f);
-//			// check if theOne is not in the list
-//			Project theOne = dt.getProject();
-//			if (!projectService.isNonPayableProject(theOne) && !listOfTheOnes.contains(theOne)) {
-//				for (DailyTimesheet dt2 : dailies) {
-//					if (theOne.equals(dt2.getProject())) {
-//						newDt.setProject(theOne);
-//						newDt.setDuration(newDt.getDuration() + dt2.getDuration());
-//						newDt.setDurationOffs(newDt.getDurationOffs() + dt2.getDurationOffs());
-//						newDt.setDurationTraining(newDt.getDurationTraining() + dt2.getDurationTraining());
-//						newDt.setDurationSickness(newDt.getDurationSickness() + dt2.getDurationSickness());
-//						newDt.setDailyTotalDuration(newDt.getDailyTotalDuration() + dt2.getDailyTotalDuration());
-//					}
-//				}
-//				finalTimesheetList.add(newDt);
-//				listOfTheOnes.add(theOne);
-//			}
-//		}
-//		System.err.println(listOfTheOnes);
-//		return finalTimesheetList;
+		System.err.println(listOfTheOnes);
+		return finalTimesheetList;
 	}
 	
 	public DailyTimesheet getTotalDailyTimesheetPerMonthBetweenTwoDates(List<DailyTimesheet> dailes, Date from, Date to) {
