@@ -171,7 +171,7 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 	}
 	
 	public DailyTimesheet getTotalDailyTimesheetPerMonthBetweenTwoDates(List<DailyTimesheet> dailes, Date from, Date to) {
-		dailes = getDailyTimesheetsBetweenDates(dailes, from, to);
+		//dailes = getDailyTimesheetsBetweenDates(dailes, from, to);
 		if (dailes.size() > 0) {
 			DailyTimesheet newDt = new DailyTimesheet(null, 0f, 0f, 0f, 0f, 0f);
 			for (DailyTimesheet dt : dailes) {
