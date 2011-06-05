@@ -191,7 +191,8 @@ public class AdminTimesheetController extends AbstractController {
     	Integer toMonth = DateUtils.getMonthInteger(toDate);
     	Integer toDay = DateUtils.getDayInteger(toDate);
     	Employee employee = Employee.findEmployee(employeeId);
-    	List<Timesheet> timesheets = Timesheet.findAllTimesheetsByEmployeeAndSheetMonthAndSheetYearBetween(employee, fromYear, fromMonth, toYear, toMonth).getResultList();
+    	List<Timesheet> timesheets = Timesheet.findAllTimesheetsByEmployeeAndSheetMonthAndSheetYearBetween(
+    			employee, fromYear, fromMonth+1, toYear, toMonth+1).getResultList();
     	List<DailyTimesheet> dailyTimesheets = new ArrayList<DailyTimesheet>();
     	for (Timesheet timesheet : timesheets) {
     		DailyTimesheet totalDt = dailyTimesheetService.getTotalDailyTimesheetPerMonthBetweenTwoDates(timesheet.getDailyTimesheetsSortedList(), fromDate, toDate);
