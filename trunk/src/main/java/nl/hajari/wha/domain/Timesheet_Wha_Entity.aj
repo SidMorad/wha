@@ -1,5 +1,6 @@
 package nl.hajari.wha.domain;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -33,6 +34,19 @@ privileged aspect Timesheet_Wha_Entity {
 		query.setParameter("fromYear", fromYear);
 		query.setParameter("toYear", toYear);
 		return query; 	
+	}
+	
+	public static Query Timesheet.findTimesheetsByEmployeeWithDateRange(Employee employee, Date from, Date to) {
+		Query q = null;
+		String query = "select dt.project, sum(dt.dailyTotalDuration), sum(dt.durationOffs), sum(dt.durationSickness), sum(dt.durationTraining) " +
+				"from DailyTimesheet dt, Timesheet t, Employee e, Project p " +
+				"where e.id = :employeeId and dt.timesheet.id = t.id and t.employee.id = e.id and dt.project.id = p.id and " +
+				"dt.dayDate between :fromDate and :toDate group by dt.project";
+		q = entityManager().createQuery(query);
+		q.setParameter("fromDate", from);
+		q.setParameter("toDate", to);
+		q.setParameter("employeeId", employee.getId());
+		return q;
 	}
 	
 	public static Query Timesheet.findEmployeeCurrentTimesheet(Long employeeId) {

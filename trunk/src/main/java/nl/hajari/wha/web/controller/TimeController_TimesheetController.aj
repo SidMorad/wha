@@ -156,7 +156,8 @@ privileged aspect TimeController_TimesheetController {
     	modelMap.put("timesheetDailySearchReportList", jrDataSource);
     	
     	// Fill ProjectSubReport
-    	List<DailyTimesheet> dts = dailyTimesheetService.getDailyTimesheetListForReportPerProject(dailyTimesheets);
+    	//List<DailyTimesheet> dts = dailyTimesheetService.getDailyTimesheetListForReportPerProject(dailyTimesheets);
+    	List<DailyTimesheet> dts = dailyTimesheetService.getDailyTimesheetListPerProject(employee, fromDate, toDate);
     	modelMap.put("ProjectSubReportData", new JRBeanCollectionDataSource(dts, false));
     	
     	modelMap.put("format", format);

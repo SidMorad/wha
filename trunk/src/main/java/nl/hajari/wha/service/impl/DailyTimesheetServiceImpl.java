@@ -8,8 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Query;
+
 import nl.hajari.wha.domain.Constants;
 import nl.hajari.wha.domain.DailyTimesheet;
+import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.Project;
 import nl.hajari.wha.domain.Timesheet;
 import nl.hajari.wha.service.ConstantsService;
@@ -120,30 +123,30 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 		return getDailyTimesheetListForReportPerProject(dailies);
 	}
 	
+	@Override
+	public List<DailyTimesheet> getDailyTimesheetListPerProject(
+			Employee employee, Date from, Date to) {
+		Query result = Timesheet.findTimesheetsByEmployeeWithDateRange(employee, from, to);
+		List<Object[]> resultList = result.getResultList();
+		List<DailyTimesheet> dts = new ArrayList<DailyTimesheet>();
+		for (Object[] r : resultList) {
+			Project p = (Project) r[0];
+			if (projectService.isNonPayableProject(p)) {
+				continue;
+			}
+			Float totalDuration = ((Double) r[1]).floatValue();
+			Float off = ((Double) r[2]).floatValue();
+			Float sickness = ((Double) r[3]).floatValue();
+			Float training = ((Double) r[4]).floatValue();
+			DailyTimesheet dt = new DailyTimesheet(null, totalDuration, off, training, sickness, totalDuration);
+			dt.setProject(p);
+			dts.add(dt);
+		}
+		return dts;
+	}
+	
+	@Deprecated
 	public List<DailyTimesheet> getDailyTimesheetListForReportPerProject(List<DailyTimesheet> dailies) {
-//		Map<Project, DailyTimesheet> perProjectTotals = new HashMap<Project, DailyTimesheet>();
-//		for (DailyTimesheet dt : dailies) {
-//			Project p = dt.getProject();
-//			if (projectService.isNonPayableProject(p)) {
-//				continue;
-//			}
-//			DailyTimesheet newDt = perProjectTotals.get(p);
-//			if (null == newDt) {
-//				newDt = new DailyTimesheet(dt.getTimesheet(), 0f, 0f, 0f, 0f, 0f);
-//				newDt.setProject(p);
-//			} else {
-//				newDt.setDuration(newDt.getDuration() + dt.getDuration());
-//				newDt.setDurationOffs(newDt.getDurationOffs() + dt.getDurationOffs());
-//				newDt.setDurationTraining(newDt.getDurationTraining() + dt.getDurationTraining());
-//				newDt.setDurationSickness(newDt.getDurationSickness() + dt.getDurationSickness());
-//				newDt.setDailyTotalDuration(newDt.getDailyTotalDuration() + dt.getDailyTotalDuration());
-//			}
-//			perProjectTotals.put(p, newDt);
-//		}
-//		List<DailyTimesheet> perProjectList = new ArrayList<DailyTimesheet>(perProjectTotals.values());
-//		System.err.println(perProjectTotals.keySet());
-//		return perProjectList;
-
 		List<DailyTimesheet> finalTimesheetList = new ArrayList<DailyTimesheet>();
 		// listOfTheOnes is a list of 'project' that we already 'group by' them
 		List<Project> listOfTheOnes = new ArrayList<Project>();

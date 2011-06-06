@@ -1,9 +1,11 @@
 package nl.hajari.wha.web.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -205,7 +207,8 @@ public class AdminTimesheetController extends AbstractController {
     	modelMap.put("timesheetDailySearchReportList", jrDataSource);
     	
     	// Fill ProjectSubReport
-    	List<DailyTimesheet> dts = dailyTimesheetService.getDailyTimesheetListForReportPerProject(dailyTimesheets);
+    	//List<DailyTimesheet> dts = dailyTimesheetService.getDailyTimesheetListForReportPerProject(dailyTimesheets);
+    	List<DailyTimesheet> dts = dailyTimesheetService.getDailyTimesheetListPerProject(employee, fromDate, toDate);
     	modelMap.put("ProjectSubReportData", new JRBeanCollectionDataSource(dts, false));
     	
     	modelMap.put("format", format);
