@@ -131,9 +131,6 @@ public class DailyTimesheetServiceImpl extends AbstractService implements DailyT
 		List<DailyTimesheet> dts = new ArrayList<DailyTimesheet>();
 		for (Object[] r : resultList) {
 			Project p = (Project) r[0];
-			if (projectService.isNonPayableProject(p)) {
-				continue;
-			}
 			Float totalDuration = ((Double) r[1]).floatValue();
 			Float off = ((Double) r[2]).floatValue();
 			Float sickness = ((Double) r[3]).floatValue();
