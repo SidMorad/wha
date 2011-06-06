@@ -3,9 +3,11 @@
  */
 package nl.hajari.wha.service;
 
+import java.util.Date;
 import java.util.List;
 
 import nl.hajari.wha.domain.DailyTimesheet;
+import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.Project;
 import nl.hajari.wha.domain.Timesheet;
 import nl.hajari.wha.web.controller.formbean.TimesheetWeeklyFormBean;
@@ -47,6 +49,14 @@ public interface DailyTimesheetService {
 	 * @return
 	 */
 	List<DailyTimesheet> getDailyTimesheetListForReportPerProject(Long timesheetId);
+	
+	/**
+	 * @param employee
+	 * @param from
+	 * @param to
+	 * @return
+	 */
+	List<DailyTimesheet> getDailyTimesheetListPerProject(Employee employee, Date from, Date to);
 
 	/**
 	 * @param dailyTimesheet
