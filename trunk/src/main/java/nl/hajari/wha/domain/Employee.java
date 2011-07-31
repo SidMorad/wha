@@ -18,7 +18,7 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 
 @Entity
 @RooJavaBean
-@RooEntity(finders = { "findEmployeesByUser", "findEmployeesByEmpId" })
+@RooEntity(finders = { "findEmployeesByUser", "findEmployeesByEmpId", "findEmployeesByArchived" })
 public class Employee {
 
     public static final String EMPLOYEE_ID = "employeeId";
@@ -35,7 +35,7 @@ public class Employee {
 
     @NotNull
     @Size(max = 45)
-    @Column(name = "emp_id", length = 45, unique = true)
+    @Column(name = "emp_id", length = 45, unique = true, nullable = false)
     private String empId;
 
     private Float hourlyWage;
@@ -77,6 +77,8 @@ public class Employee {
 
     @Column(name = "management_name", length = 50)
     private String managementName;
+
+    private boolean archived;
 
     @Override
     public String toString() {

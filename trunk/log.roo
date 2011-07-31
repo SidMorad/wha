@@ -20,3 +20,8 @@ exit
 finder add --finderName findEmployeeConstantsesByEmployeeAndKeyEquals
 exit
 // Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2011-03-18 20:20:44
+// Spring Roo 1.0.2.RELEASE [rev 638] log opened at 2011-07-30 21:12:14
+finder list --class ~domain.Employee --filter archived
+finder add --finderName findEmployeesByArchived
+exit
+// Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2011-07-30 21:15:07

@@ -103,6 +103,7 @@
         <column>last_name</column>
         <column>emp_id</column>
         <column>hourly_wage</column>
+        <column>archived</column>
 		<row>
 			<value description="id">1</value>
 			<value description="version">0</value>
@@ -111,6 +112,7 @@
 			<value description="last_name">Moradi</value>
 			<value description="emp_id">33</value>
 			<value description="hourly_wage">60.0</value>
+			<value description="archived">0</value>
 		</row>	
 		<row>
 			<value description="id">2</value>
@@ -120,6 +122,7 @@
 			<value description="last_name">Nobakht</value>
 			<value description="emp_id">44</value>
 			<value description="hourly_wage">7</value>
+			<value description="archived">0</value>
 		</row>	
 		<row>
 			<value description="id">3</value>
@@ -129,6 +132,7 @@
 			<value description="last_name">Hajari</value>
 			<value description="emp_id">100</value>
 			<value description="hourly_wage">100.0</value>
+			<value description="archived">1</value>
 		</row>	
 	</table>
 	<table name="tech_role">
