@@ -26,4 +26,12 @@ privileged aspect Employee_Roo_Finder {
         return q;
     }
     
+    @SuppressWarnings("unchecked")
+    public static Query Employee.findEmployeesByArchived(boolean archived) {
+        EntityManager em = Employee.entityManager();
+        Query q = em.createQuery("SELECT Employee FROM Employee AS employee WHERE employee.archived = :archived");
+        q.setParameter("archived", archived);
+        return q;
+    }
+    
 }

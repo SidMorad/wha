@@ -138,4 +138,12 @@ privileged aspect Employee_Roo_JavaBean {
         this.managementName = managementName;
     }
     
+    public boolean Employee.isArchived() {
+        return this.archived;
+    }
+    
+    public void Employee.setArchived(boolean archived) {
+        this.archived = archived;
+    }
+    
 }
