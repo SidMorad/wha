@@ -5,6 +5,27 @@
         <spring:message code="label.employees" var="entity_label_plural"/>
         <spring:message arguments="${entity_label_plural}" code="entity.list.all" var="title_msg"/>
         <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
+        <table style="width:98%">
+         	<tr>
+         		<td colspan="10">
+         			<spring:url value="/employee/refresh" var="form_url"/>
+         			<form:form action="${form_url}" method="POST" modelAttribute="employeeArchivedFormBean">
+	         			<div style="float: left;">
+	            			<form:checkbox path="archived" id="_archived"/>
+	            		</div>
+	            		<div style="float: left;">
+	            			<spring:message code="label.archived" var="label_archived"/>
+	            			<label>${label_archived}</label>
+	            		</div>
+						<div class="submit" id="roo_submit" >
+			                <spring:message code="button.submit" var="submit_button"/>
+			                <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
+			                <input id="proceed" type="submit" value="${submit_button}" style="margin-left: 5px;"/>
+			            </div>			            	
+         			</form:form>	
+         		</td>
+         	</tr>
+        </table>
         <c:if test="${not empty employees}">
             <table style="width:98%">
                 <thead>
@@ -59,6 +80,23 @@
                                     <input name="size" type="hidden" value="${param.size}"/>
                                 </c:if>
                             </form:form>
+		                    <c:choose>
+		                    	<c:when test="${employee.archived}">
+			                        <spring:url value="/admin/employee/archive/undo/${employee.id}" var="archive_undo_form_url"/>
+				                    <spring:url value="/static/images/archive-undo.png" var="archive_undo_image_url"/>
+			                        <form:form action="${archive_undo_form_url}" method="GET">
+			                            <spring:message arguments="${entity_label}" code="entity.archive.undo" var="undo_label"/>
+			                            <input alt="${undo_label}" class="image" src="${archive_undo_image_url}" title="${undo_label}" type="image" value="${show_label}"/>
+			                        </form:form>
+		                    	</c:when>
+		                    	<c:otherwise>
+				                    <spring:url value="/static/images/archive.png" var="archive_image_url"/>
+			                        <spring:message arguments="${entity_label}" code="entity.archive" var="archive_label"/>
+			                    	<a href="javascript:archiveObjectByAdmin(${employee.id},'employee')">
+			                    		<img alt="${archive_label}" src="${archive_image_url}"/>
+			                    	</a> 	
+		                    	</c:otherwise>
+                            </c:choose>
                         </td>
                     </tr>
                 </c:forEach>

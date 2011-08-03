@@ -10,6 +10,7 @@ import javax.persistence.Query;
 
 import nl.hajari.wha.Constants;
 import nl.hajari.wha.domain.Employee;
+import nl.hajari.wha.domain.Timesheet;
 import nl.hajari.wha.service.EmployeeService;
 import nl.hajari.wha.service.NotificationService;
 
@@ -68,6 +69,26 @@ public class EmployeeServiceImpl extends AbstractService implements EmployeeServ
 		return new ArrayList<Employee>();
 	}
 
+
+	public Employee archive(Employee employee) {
+		employee.setArchived(true);
+		employee.merge();
+		// Archive his timesheets too
+		List<Timesheet> fTimesheets= Timesheet.findTimesheetsByEmployee(employee).getResultList();
+		for (Timesheet timesheet : fTimesheets) {
+			timesheet.setArchived(true);
+			timesheet.merge();
+		}
+		return employee;
+	}
+
+	@Override
+	public Employee archiveUndo(Employee employee) {
+		employee.setArchived(false);
+		employee.merge();
+		return employee;
+	}
+	
 	protected List<String> extractEmails(List<Employee> employees) {
 		List<String> emails = new ArrayList<String>();
 		for (Employee employee : employees) {

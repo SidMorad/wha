@@ -32,7 +32,7 @@ function deleteObjectByAdmin(id, name) {
 
 function archiveObjectByAdmin(id, name) {
 	if (confirm("Are you sure for archive ["+ name +"] with id ["+ id +"] ?")) {
-		window.location = "../admin/"+ name +"/archive/" + id;
+		window.location = "/wha/admin/"+ name +"/archive/" + id;
 	}
 }
 
