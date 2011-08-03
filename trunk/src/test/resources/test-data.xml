@@ -267,7 +267,7 @@
 			<value description="version">0</value>
 			<value description="timesheet_id">1</value>
 			<value description="project_id">1</value>
-			<value description="day_date">2009-2-2</value>
+			<value description="day_date">2009-02-02</value>
 			<value description="duration">3</value>
 			<value description="duration_offs">0</value>
 			<value description="duration_sickness">0</value>
@@ -279,7 +279,7 @@
 			<value description="version">0</value>
 			<value description="timesheet_id">2</value>
 			<value description="project_id">1</value>
-			<value description="day_date">2009-6-6</value>
+			<value description="day_date">2009-06-06</value>
 			<value description="duration">5</value>
 			<value description="duration_offs">0</value>
 			<value description="duration_sickness">0</value>
@@ -291,7 +291,7 @@
 			<value description="version">0</value>
 			<value description="timesheet_id">3</value>
 			<value description="project_id">1</value>
-			<value description="day_date">2010-1-1</value>
+			<value description="day_date">2010-01-01</value>
 			<value description="duration">3</value>
 			<value description="duration_offs">0</value>
 			<value description="duration_sickness">0</value>
@@ -303,7 +303,7 @@
 			<value description="version">0</value>
 			<value description="timesheet_id">4</value>
 			<value description="project_id">1</value>
-			<value description="day_date">2010-5-5</value>
+			<value description="day_date">2010-05-05</value>
 			<value description="duration">5</value>
 			<value description="duration_offs">0</value>
 			<value description="duration_sickness">0</value>

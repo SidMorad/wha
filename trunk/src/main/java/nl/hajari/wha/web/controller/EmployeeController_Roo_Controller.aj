@@ -36,19 +36,6 @@ privileged aspect EmployeeController_Roo_Controller {
         return "employee/create";
     }
     
-    @RequestMapping(value = "/employee", method = RequestMethod.GET)
-    public String EmployeeController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, ModelMap modelMap) {
-        if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            modelMap.addAttribute("employees", Employee.findEmployeeEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo));
-            float nrOfPages = (float) Employee.countEmployees() / sizeNo;
-            modelMap.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-        } else {
-            modelMap.addAttribute("employees", Employee.findAllEmployees());
-        }
-        return "employee/list";
-    }
-    
     @RequestMapping(value = "/employee/{id}", method = RequestMethod.DELETE)
     public String EmployeeController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size) {
         if (id == null) throw new IllegalArgumentException("An Identifier is required");

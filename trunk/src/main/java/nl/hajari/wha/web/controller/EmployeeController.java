@@ -8,6 +8,8 @@ import nl.hajari.wha.domain.EmployeeConstants;
 import nl.hajari.wha.domain.TechRole;
 import nl.hajari.wha.domain.User;
 import nl.hajari.wha.service.impl.EmployeeConstantsServiceImpl;
+import nl.hajari.wha.service.impl.EmployeeServiceImpl;
+import nl.hajari.wha.web.controller.formbean.EmployeeArchivedFormBean;
 import nl.hajari.wha.web.controller.formbean.ProfileFormBean;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +21,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RooWebScaffold(path = "employee", automaticallyMaintainView = false, formBackingObject = Employee.class, exposeFinders = false)
-@RequestMapping("/employee/**")
 @Controller
 public class EmployeeController extends AbstractController{
 	
@@ -30,6 +32,57 @@ public class EmployeeController extends AbstractController{
 	
 	@Autowired
 	protected EmployeeConstantsServiceImpl employeeConstantsService;
+
+	@Autowired
+	protected EmployeeServiceImpl employeeService;
+	
+    @RequestMapping(value = "/employee", method = RequestMethod.GET)
+    public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, ModelMap modelMap) {
+        if (page != null || size != null) {
+            int sizeNo = size == null ? 10 : size.intValue();
+            modelMap.addAttribute("employees", Employee.findEmployeeEntriesByArchived(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo, false));
+            float nrOfPages = (float) Employee.countEmployees() / sizeNo;
+            modelMap.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+        } else {
+            modelMap.addAttribute("employees", Employee.findEmployeeEntriesByArchived(-1, -1, false));
+        }
+        modelMap.addAttribute("employeeArchivedFormBean", new EmployeeArchivedFormBean());
+        return "employee/list";
+    }
+	
+    @RequestMapping(value= "/employee/refresh", method= { RequestMethod.POST, RequestMethod.GET })
+    public String listEmployeeByArchived(EmployeeArchivedFormBean eaFormBean,
+    		@RequestParam(value= "page", required= false) Integer page,
+    		@RequestParam(value= "size", required= false) Integer size, ModelMap modelMap) {
+    	if (page != null || size != null) {
+    		int sizeNo = size == null ? 10 : size.intValue();
+    		modelMap.addAttribute("employees", Employee.findEmployeeEntriesByArchived(page == null ? 0 : (page.intValue() - 1)* sizeNo, 
+    				sizeNo, eaFormBean.isArchived()));
+    		float nrOfPages= Employee.countEmployees() / sizeNo;
+    		modelMap.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+    	} else {
+    		modelMap.addAttribute("employees", Employee.findEmployeeEntriesByArchived(-1, -1, eaFormBean.isArchived()));
+    	}
+    	return "employee/list";
+    }
+
+    @RequestMapping(value= "/employee/redirect", method= RequestMethod.GET )
+	public String listEmployeeByArchivedRedirect( ModelMap modelMap,
+			@RequestParam(value= "page", required= false) Integer page,
+			@RequestParam(value= "size", required= false) Integer size, 
+			@RequestParam(value= "archived", required= true) Boolean archived) {
+		if (page != null || size != null) {
+			int sizeNo = size == null ? 10 : size.intValue();
+			modelMap.addAttribute("employees", Employee.findEmployeeEntriesByArchived(page == null ? 0 : (page.intValue() - 1)* sizeNo, 
+					sizeNo, archived));
+			float nrOfPages= Employee.countEmployees() / sizeNo;
+			modelMap.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+		} else {
+			modelMap.addAttribute("employees", Employee.findEmployeeEntriesByArchived(-1, -1, archived));
+		}
+		modelMap.addAttribute("employeeArchivedFormBean", new EmployeeArchivedFormBean(archived));
+		return "employee/list";
+    }
 
     @RequestMapping(value = "/employee/{id}/form", method = RequestMethod.GET)
     public String updateForm(@PathVariable("id") Long id, ModelMap modelMap) {
@@ -110,6 +163,18 @@ public class EmployeeController extends AbstractController{
         modelMap.addAttribute("employee", Employee.findEmployee(employeeId));  
         return "employee/profile/show";        
     }   
+    
+    @RequestMapping(value= "/admin/employee/archive/{id}")
+    public String archiveEmployee(@PathVariable("id") Long id) {
+    	employeeService.archive(Employee.findEmployee(id));
+    	return "redirect:/employee/redirect?archived="+false;
+    }
+    
+    @RequestMapping(value= "/admin/employee/archive/undo/{id}")
+    public String archiveUndoEmployee(@PathVariable("id") Long id) {
+    	employeeService.archiveUndo(Employee.findEmployee(id));
+    	return "redirect:/employee/redirect?archived="+true;
+    }
 
 	private ProfileFormBean putEmployeeToProfileFormBean(Employee employee, ProfileFormBean profileFormBean) {
 		profileFormBean.setId(employee.getId());

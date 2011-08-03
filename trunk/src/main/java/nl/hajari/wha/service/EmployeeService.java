@@ -25,4 +25,8 @@ public interface EmployeeService {
 	 */
 	void sendMonthlyTimesheetUpdateNotification();
 
+	Employee archive(Employee employee);
+
+	Employee archiveUndo(Employee employee);
+
 }
