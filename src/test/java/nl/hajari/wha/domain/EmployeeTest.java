@@ -40,28 +40,26 @@ public class EmployeeTest {
 	public void testArchiveEmployeeSave() {
 		EmployeeService employeeService= new EmployeeServiceImpl();
 		Employee employee= Employee.findEmployee(1L);
-		Assert.assertEquals(false, employee.isArchived());
-		List<Timesheet> timesheets = Timesheet.findTimesheetsByEmployee(employee).getResultList();
-		for (Timesheet timesheet : timesheets) {
-			Assert.assertEquals(false, timesheet.isArchived());
-		}
 		employeeService.archive(employee);
 		Employee aEmployee= Employee.findEmployee(1L);
 		Assert.assertEquals(true, aEmployee.isArchived());
+
 		List<Timesheet> atimesheets= Timesheet.findTimesheetsByEmployee(aEmployee).getResultList();
 		for (Timesheet timesheet : atimesheets) {
 			Assert.assertEquals(true, timesheet.isArchived());
 		}
+		Assert.assertEquals(false, aEmployee.getUser().isEnabled());
+		
 	}
 	
 	@Test 
 	public void testArchiveUndoEmployeeSave() {
 		EmployeeService employeeService= new EmployeeServiceImpl();
 		Employee employee= Employee.findEmployee(3L);
-		Assert.assertEquals(true, employee.isArchived());
 		employeeService.archiveUndo(employee);
 		Employee aEmployee= Employee.findEmployee(3L);
 		Assert.assertEquals(false, aEmployee.isArchived());
+		Assert.assertEquals(true, aEmployee.getUser().isEnabled());
 	}
 	
 }

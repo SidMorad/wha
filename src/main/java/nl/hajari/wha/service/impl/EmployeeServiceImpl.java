@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import nl.hajari.wha.Constants;
 import nl.hajari.wha.domain.Employee;
 import nl.hajari.wha.domain.Timesheet;
+import nl.hajari.wha.domain.User;
 import nl.hajari.wha.service.EmployeeService;
 import nl.hajari.wha.service.NotificationService;
 
@@ -79,6 +80,10 @@ public class EmployeeServiceImpl extends AbstractService implements EmployeeServ
 			timesheet.setArchived(true);
 			timesheet.merge();
 		}
+		// Disable related user account too
+		User aUser= employee.getUser();
+		aUser.setEnabled(false);
+		aUser.merge();
 		return employee;
 	}
 
@@ -86,6 +91,10 @@ public class EmployeeServiceImpl extends AbstractService implements EmployeeServ
 	public Employee archiveUndo(Employee employee) {
 		employee.setArchived(false);
 		employee.merge();
+		// Enable related user account
+		User aUser= employee.getUser();
+		aUser.setEnabled(true);
+		aUser.merge();
 		return employee;
 	}
 	
