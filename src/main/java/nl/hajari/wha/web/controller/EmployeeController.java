@@ -36,7 +36,7 @@ public class EmployeeController extends AbstractController{
 	@Autowired
 	protected EmployeeServiceImpl employeeService;
 	
-    @RequestMapping(value = "/employee", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/employee", method = RequestMethod.GET)
     public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, ModelMap modelMap) {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
@@ -50,7 +50,7 @@ public class EmployeeController extends AbstractController{
         return "employee/list";
     }
 	
-    @RequestMapping(value= "/employee/refresh", method= { RequestMethod.POST, RequestMethod.GET })
+    @RequestMapping(value= "/admin/employee/refresh", method= { RequestMethod.POST, RequestMethod.GET })
     public String listEmployeeByArchived(EmployeeArchivedFormBean eaFormBean,
     		@RequestParam(value= "page", required= false) Integer page,
     		@RequestParam(value= "size", required= false) Integer size, ModelMap modelMap) {
@@ -66,7 +66,7 @@ public class EmployeeController extends AbstractController{
     	return "employee/list";
     }
 
-    @RequestMapping(value= "/employee/redirect", method= RequestMethod.GET )
+    @RequestMapping(value= "/admin/employee/redirect", method= RequestMethod.GET )
 	public String listEmployeeByArchivedRedirect( ModelMap modelMap,
 			@RequestParam(value= "page", required= false) Integer page,
 			@RequestParam(value= "size", required= false) Integer size, 
@@ -167,15 +167,21 @@ public class EmployeeController extends AbstractController{
     @RequestMapping(value= "/admin/employee/archive/{id}")
     public String archiveEmployee(@PathVariable("id") Long id) {
     	employeeService.archive(Employee.findEmployee(id));
-    	return "redirect:/employee/redirect?archived="+false;
+    	return "redirect:/admin/employee/redirect?archived="+false;
     }
     
     @RequestMapping(value= "/admin/employee/archive/undo/{id}")
     public String archiveUndoEmployee(@PathVariable("id") Long id) {
     	employeeService.archiveUndo(Employee.findEmployee(id));
-    	return "redirect:/employee/redirect?archived="+true;
+    	return "redirect:/admin/employee/redirect?archived="+true;
     }
 
+    // This method exist only for solve Javascript relative path issue
+    @RequestMapping(value= "/admin/admin/employee/archive/{id}")
+    public String archiveEmployee2(@PathVariable("id") Long id) {
+    	return archiveEmployee(id);
+    }
+    
 	private ProfileFormBean putEmployeeToProfileFormBean(Employee employee, ProfileFormBean profileFormBean) {
 		profileFormBean.setId(employee.getId());
 		profileFormBean.setVersion(employee.getVersion());
