@@ -8,7 +8,7 @@
         <table style="width:98%">
          	<tr>
          		<td colspan="10">
-         			<spring:url value="/employee/refresh" var="form_url"/>
+         			<spring:url value="/admin/employee/refresh" var="form_url"/>
          			<form:form action="${form_url}" method="POST" modelAttribute="employeeArchivedFormBean">
 	         			<div style="float: left;">
 	            			<form:checkbox path="archived" id="_archived"/>

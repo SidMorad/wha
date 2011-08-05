@@ -29,7 +29,7 @@
                 </a>
             </li>
         	<li id="web_mvc_jsp_list_employee_menu_item">
-                <c:url value="/employee?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 25 : param.size}" var="web_mvc_jsp_list_employee_menu_item_url"/>
+                <c:url value="/admin/employee?page=${empty param.page ? 1 : param.page}&amp;amp;size=${empty param.size ? 25 : param.size}" var="web_mvc_jsp_list_employee_menu_item_url"/>
                 <a href="${web_mvc_jsp_list_employee_menu_item_url}">
                     <spring:message code="label.employees" var="label_employees"/>
                     <spring:message arguments="${label_employees}" code="global.menu.list"/>
